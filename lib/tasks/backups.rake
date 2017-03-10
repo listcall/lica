@@ -15,10 +15,12 @@ namespace :data do
   def backup_params
     {
       'sysdir' => {
-        :targets => ['public/system'],
+        :trans   => ''             ,
+        :target  => 'public/system',
         :copies  => 5 },
       'db' => {
-        :targets => ['db/backups/data.psql'],
+        :trans   => 'db/data.psql'        ,
+        :target  => 'db/backups/data.psql',
         :copies  => 30 }
     }
   end
@@ -32,8 +34,9 @@ namespace :data do
     opt.time_stamp    = Time.now.strftime('%y%m%d_%H%M%S')
     opt.lbl_dir       = [opt.base_dir, opt.app, opt.host, dataset].join('/')
     opt.tgt_dir       = [opt.base_dir, opt.app, opt.host, dataset, opt.time_stamp].join('/')
-    opt.targets       = backup_params[dataset][:targets]
+    opt.target        = backup_params[dataset][:target]
     opt.copies        = backup_params[dataset][:copies]
+    opt.trans         = backup_params[dataset][:trans]
     opt.backup_cp_cmd = Proc.new {|data_path| "cp -rL #{data_path} #{opt.tgt_dir}"}
     opt.backup_cp_cmd = Proc.new do |data_path|
       base = data_path.split('/').last
@@ -80,7 +83,7 @@ namespace :data do
       puts "importing from 'db/data.psql'"
       verbose(false) do
         sh "mkdir -p db/backups"
-        cmd = "psql -U #{dbenv("username")} -d list_call_#{Rails.env.to_s} -f db/backups/data.psql > /dev/null"
+        cmd = "psql -U #{dbenv("username")} -d lica_#{Rails.env.to_s} -f db/backups/data.psql > /dev/null"
         puts cmd
         sh cmd
       end
@@ -130,15 +133,17 @@ namespace :data do
     puts "Restoring #{target} from #{server}/#{msg}"
 
     # ----- restore each target -----
-    restore_opts.targets.each do |path|
-      restore_cmd = restore_opts.restore_cp_cmd.call(path)
-      prevent_overwrite_cmd = "mv #{path} #{path}.#{restore_opts.time_stamp}"
-      puts prevent_overwrite_cmd    if File.exist? path
-      system prevent_overwrite_cmd  if File.exist? path
-      puts restore_cmd
-      system restore_cmd
-    end
-
+    trans = restore_opts.trans
+    path  = restore_opts.target
+    restore_cmd = restore_opts.restore_cp_cmd.call(path)
+    prevent_overwrite_cmd = "mv #{path} #{path}.#{restore_opts.time_stamp}"
+    trans_cmd = "mv #{trans} #{path}"
+    puts   prevent_overwrite_cmd    if File.exist? path
+    system prevent_overwrite_cmd  if File.exist? path
+    puts restore_cmd
+    system restore_cmd
+    puts trans_cmd   if File.exist?(trans)
+    system trans_cmd if File.exist?(trans)
   end
 
   # restore just copies the data files into place

@@ -2,14 +2,14 @@
 
 drop() {
 echo ----- drop the old database on the local machine
-rails db:create:all
+rails db:create
 rails db:environment:set RAILS_ENV=development
 rails db:drop 
 }
 
 create() {
 echo ----- create a new database on the local machine
-rails db:create:all
+rails db:create
 }
 
 import() {

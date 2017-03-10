@@ -1,4 +1,4 @@
-class PositionsMigration < ActiveRecord::Migration
+class PositionsMigration < ActiveRecord::Migration[5.1]
 
   def change
     create_table 'positions' do |t|

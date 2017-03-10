@@ -8,19 +8,19 @@ common: &common
 
 development:
   <<: *common
-  database: list_call_development
+  database: lica_development
 
 test:
   <<: *common
-  database: list_call_test
+  database: lica_test
 
 staging:
  <<: *common
- database: list_call_staging
+ database: lica_staging
 
 production:
   <<: *common
-  database: list_call_production
+  database: lica_production
 
 travis:
   adapter:  postgresql

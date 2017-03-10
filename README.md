@@ -16,7 +16,7 @@ Ubuntu Virtual machine.
 
 2. Run `vagrant init` to create a vagrant file
 
-3. Edit `Vagrantfile` - change `base` box to `ubuntu/wily64`.
+3. Edit `Vagrantfile` - change `base` box to `ubuntu/xenial64`.
 
 4. Run `vagrant up` to create a virtual machine.
 
@@ -24,7 +24,7 @@ Ubuntu Virtual machine.
 
 6. Login to your virtual machine using `vagrant ssh`
 
-7. Clone the repo `mkdir lr; cd lr; git clone https://github.com/andyl/Lica.git`
+7. Clone the repo `mkdir lr; cd lr; git clone https://github.com/listcall/list_call.git`
 
 8. CD to the repo directory `cd ~/lr/Lica`
 

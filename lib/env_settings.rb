@@ -45,7 +45,7 @@ DNSIMPLE_UNAME
 DNSIMPLE_TOKEN
 EOF
 
-unless ENV["RAILS_ENV"] == "TRAVIS"
+unless ENV["RAILS_ENV"] == "travis"
   env_settings.each_line do |val|
     constant = val.chomp.strip
     tmp = nil

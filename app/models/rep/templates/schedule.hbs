@@ -1,0 +1,68 @@
+---
+_context_type: "Rep::Ctx::Service"
+---
+<script>
+
+</script>
+
+<style>
+  table { border-collapse: collapse; }
+  table td {
+    border : thin solid black;
+    font-size: 8pt;
+    padding: 2px;
+  }
+  .dayCell { width: 62px; }
+
+  @media print {
+    table { border-collapse: collapse; }
+    table td {
+      border: 1px solid black;
+      font-size: 6pt;
+      padding: 1px;
+    }
+    .dayCell { width: 44px; }
+    img      { width: 16px; }
+  }
+</style>
+
+<script id='template' type="text/x-handlebars-template">
+
+  {{#each months}}
+    {{../team.acronym}} Master Schedule for {{this.name}} {{this.year}}
+    <table class="tbl" style="margin-top: 4px;">
+      {{#each this.splits}}
+        <tr style="background: #eeeeee;">
+          <td></td>
+          {{#each this.days}}
+            <td>
+              <b>{{{dayLbl this}}}</b>
+            </td>
+          {{/each}}
+        </tr>
+        {{#memberLoop member_ids}}
+          <tr>
+            <td>{{{memberLbl this}}}</td>
+            {{#each ../days}}
+              <td class="dayCell">{{{dayCell this ../this}}}</td>
+            {{/each}}
+          </tr>
+        {{/memberLoop}}
+      {{/each}}
+    </table>
+  {{/each}}
+
+  <table class="tbl" style="margin-top: 4px;">
+    {{#each services}}
+      <tr style="background: #{{this.color}};">
+        <td>{{this.name}}</td>
+        <td>
+          Participations: {{this.participations}} ({{this.participant_hours}} hours)
+        </td>
+      </tr>
+    {{/each}}
+  </table>
+
+</script>
+
+<div id='target'></div>

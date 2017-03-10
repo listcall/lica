@@ -1,0 +1,25 @@
+.container
+  .row
+    .col-md-12
+      table width="100%"
+        tr
+          td align="left"
+            b
+              = current_team.rname
+              |  Wiki
+          td align="right"
+            | SEARCH BOX TBD
+      table style=("background: #c2cfd3;") width="100%"
+        tr
+          td align="left"
+            = raw wiki_nav_path
+          td align="right"
+            = raw nav
+      table style=("background: #e6c0c1;") width="100%"
+        tr
+          td style=("width: 200px;; padding-right: 5px;") valign="top"
+            div style=("font-size: 8pt;")
+              = raw wiki_repos
+              = raw wiki_pages
+          td style=("background: white;") valign="top"
+            = raw content

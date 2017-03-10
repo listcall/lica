@@ -1,0 +1,55 @@
+- content_for :page_js do
+  javascript:
+    window.lclData  = {};
+    lclData.team    = #{raw @perbot.team_data};
+    lclData.member  = #{raw @perbot.member_data};
+    lclData.period  = #{raw @perbot.period_data};
+    lclData.participants = #{raw @perbot.participant_list};
+    lclData.memberships  = #{raw @perbot.membership_list};
+    lclData.memlist = #{raw @perbot.memlist};
+  = javascript_include_tag 'event_periods/all_event_period_show'
+
+css:
+  .tt-dropdown-menu { text-align: left;}
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = raw link_to "#{current_team.acronym} Events", "/events"
+            '  >
+            = raw link_to @event.event_ref, "/events/#{@event.event_ref}"
+            '  > Period #{@period.position}
+        .col-xs-6.text-right
+          = member_help_button('event_period')
+
+.container
+  .row
+    .col-ms-4 style=("height: 35px;")
+      small
+        b style=("display: inline-block; padding-top: 8px;") = truncate @period.event.title, length: 45
+    .col-ms-4.ac
+      #timeRadio.btn-group.btn-group-sm data-toggle="buttons"
+        label.btn.btn-default
+          input#transit.timeBtn name="options" type="radio" Transit
+        label.btn.btn-default
+          input#signin.timeBtn name="options" type="radio"  SignIn
+        label.btn.btn-default
+          input#none.timeBtn name="options" type="radio"    None
+    .col-ms-4.ar
+      input#addUser.form-control.input-sm placeholder="add user..." style="width: 250px; float: right;" type="text"
+  .row
+    #participantTable.col-xs-12 style=("border: 1px solid gray;")
+      = render 'participant_table'
+  - if @period.has_children?
+    .row
+      #childTable.col-xs-12 style=("border: 1px solid gray; margin-top: 10px;")
+        = render 'child_table'
+  .row style=("margin-top: 5px; ")
+    small
+     .col-xs-4    = raw aar_link_for(@period)
+     .col-xs-4.ac #{@period.event.typ_name} - OP #{@period.position}
+     .col-xs-4.ar participant stats
+  p

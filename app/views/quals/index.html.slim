@@ -1,0 +1,27 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = current_team.acronym
+            |  Qualifications
+        .col-xs-6.text-right
+          = member_help_button('certs')
+
+.container
+  .row
+    div
+      table#teamBoardsTable.table.table-condensed.table-bordered.table-hover
+        thead
+          th Qualification
+          th Participants
+          th Cert Types
+        tbody
+          - cache ['qualTeam', current_team] do
+            - @quals.each do |qual|
+              - cache ['qual', qual] do
+                tr
+                  td = link_to "#{qual.name} (#{qual.acronym})", "/quals/#{qual.id}/certs"
+                  td = qual.post_members.count
+                  td = qual.qual_ctypes.map {|typ| typ.rname }.join(', ')

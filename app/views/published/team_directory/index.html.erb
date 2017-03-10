@@ -1,0 +1,44 @@
+<%= style_helper(@style_src) %>
+
+<div id="team-container">
+  <div id="team-header">
+    <a class='header-link' href='#Teams'>Teams</a> |
+    <a class='header-link' href='#Events'>Events</a>
+  </div>
+  <div id="team-content">
+    <div class='team-section'>
+      <a class='anchor' name='Teams'></a>
+      <h3><%= current_org.name %> Team Directory</h3>
+      <table id='team-directory' class="directory-table">
+        <% @teams.all.each do |team| %>
+          <tr>
+            <td><%= team.acronym %></td>
+            <td><%= team.name %></td>
+            <td><%= link_to "login", NavBarSvc.team_url(team, request.env), target: '_blank' %><td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
+    <div class='team-section'>
+      <a class='anchor' name='Events'></a>
+      <h3>Upcoming Event Directory</h3>
+      <table id="event-directory" class="directory-table">
+        <% @events.each do |event| %>
+          <tr>
+            <td><%= event.team.acronym %></td>
+            <td><a class='event-link' href='#<%= event.event_ref %>'><%= event.typ_name %></a></td>
+            <td><%= event.start.strftime("%b-%d") %></td>
+            <td><%= event.location_name %></td>
+          </tr>
+        <% end %>
+      </table>
+      <div class="divider">Event Detail</div>
+        <% @events.each do |event| %>
+        <a class='anchor' name='<%= event.event_ref %>'></a>
+        <div class="event-detail">
+          <%= event.event_ref %> / <%= event.title %>
+        </div>
+        <% end %>
+    </div>
+  </div>
+</div>

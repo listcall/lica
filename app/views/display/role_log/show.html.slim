@@ -1,0 +1,27 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            ' #{current_team.acronym} Role Assignments for #{@role.name} (#{@role.acronym}) >
+            => link_to "all roles", "/display/role_log"
+        .col-xs-6.text-right
+          = member_help_button('certs')
+
+.container
+  .row
+    div
+      table.table.table-condensed.table-bordered.table-hover
+        thead
+          th Member
+          th Start
+          th Finish
+        tbody
+          - @role.assignments.includes(:membership => :user).each do |assig|
+            tr
+              td #{assig.membership.full_name} (#{assig.membership.user_name})
+              td = assig.started_at.try(:strftime, "%Y-%m-%d %H:%M")
+              td = assig.finished_at.try(:strftime, "%Y-%m-%d %H:%M")
+    small Note: Role Assignments which are active for less than ten minutes are not recorded
+

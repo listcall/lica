@@ -1,0 +1,36 @@
+- content_for :page_js do
+  = javascript_include_tag 'ztst/all_react3'
+
+.container
+  = render :partial => 'shared_nav'
+
+css:
+  .box {
+    background: lightgray;
+    border:     1px solid black;
+    cursor:     pointer;
+  }
+  .over {
+    background: yellow;
+  }
+
+.container
+  .row
+    .col-md-12
+      table.table.table-condensed.table-bordered
+        tr#containRow
+          td.drop
+            .box a
+          td.drop
+            .box b
+          td.drop
+            .box c
+        tr
+          td 3
+          td 2
+          td 1
+        tr
+          td d
+          td e
+          td f
+      .drop style='height: 50px; width: 50px; border: 1px solid black;'

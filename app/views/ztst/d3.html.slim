@@ -1,0 +1,78 @@
+= stylesheet_link_tag "service_rep"
+
+div.container
+  = render :partial => 'shared_nav'
+  |A D3 test
+  p
+  svg#test1
+
+- content_for :page_js do
+  = javascript_include_tag 'ztst/all_d3'
+
+  javascript:
+    var testdata = [
+      {
+        color: "red",
+        label: "One",
+        value: 5
+      },
+      {
+        color: "#8c564b",
+        label: "Two",
+        value: 2
+      },
+      {
+        color: "green",
+        label: "Three",
+        value: 9
+      },
+      {
+        color: "blue",
+        label: "Four",
+        value: 7
+      },
+      {
+        color: "purple",
+        label: "Five",
+        value: 4
+      },
+      {
+        color: "orange",
+        label: "Six",
+        value: 3
+      },
+      {
+        color: "black",
+        label: "Seven",
+        value: .5
+      }
+    ];
+
+    nv.addGraph(function () {
+      var width = 500, height = 500;
+
+      var chart = nv.models.pieChart()
+              .x(function (d) { return d.label })
+              .y(function (d) { return d.value })
+              .color(function(d) { return d.data.color })
+              .width(width)
+              .height(height);
+
+      d3.select("#test1")
+              .datum(testdata)
+              .transition().duration(1200)
+              .attr('width', width)
+              .attr('height', height)
+              .call(chart);
+
+              chart.color(function (d) {
+                return d.data.color
+              });
+
+      chart.dispatch.on('stateChange', function (e) {
+        nv.log('New State:', JSON.stringify(e));
+      });
+
+      return chart;
+    });
+

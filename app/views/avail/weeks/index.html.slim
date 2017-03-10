@@ -1,0 +1,29 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-4
+          b #{current_team.acronym} Weekly Availability
+        .col-xs-4.text-center
+          small
+            a href='/avail/weeks/#{current_membership.user_name}'
+              | update your availability
+        .col-xs-4.text-right
+          = member_help_button('avail_days')
+
+.container
+  css:
+    #dodata {
+      text-align: center;
+      font-size:  12px;
+    }
+
+  .row style='text-align: center;'
+    table#dodata border=1
+      - @members.in_groups_of(7) do |group|
+        tr
+          - group.each do |mem|
+            td
+              a href='/avail/weeks/#{mem.try(:user_name)}' #{mem.try(:full_name)}
+
+

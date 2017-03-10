@@ -1,0 +1,30 @@
+<tr id='<%= mem.id %>'>
+  <td><%= avatar_path(mem.user) %></td>
+  <td data-sort='<%= mem.last_name %>'>
+    <col-md- style='width: 180px; display: inline-block;'>
+    <a href='/members/<%= mem.user.user_name %>' target='_blank'>
+      <%= mem.user.full_name %>
+    </a>
+    </col-md->
+    @<%= mem.user.user_name %>
+  </td>
+  <td data-sort='<%= raw mem.rank_score %>'>
+    <a class='rankX xEdit' href='#' data-value='<%= mem.rank %>' data-pk='<%= mem.id %>' data-url='/admin/member_registry/<%= mem.id %>' data-name='rank'>
+      <%= mem.rank %>
+    </a>
+  </td>
+  <td data-sort='<%= raw mem.role_score %>'>
+    <a class='roleX xEdit' href='#' data-value='<%= mem.ordered_roles.join(',') %>' data-pk='<%= mem.id %>' data-url='/admin/member_registry/<%= mem.id %>' data-name='roles'>
+      <%= mem.ordered_roles.join(', ') %>
+    </a>
+  </td>
+  <td data-sort='<%= raw mem.rights_score %>'>
+    <%= mem.rights %><%= '+' if mem.owner_plus == 'true' %>
+  </td>
+  <td>
+    <%= mem.created_at.strftime("%b %Y") %>
+    <a class='hLink' href="/display/cred_log/<%= mem.user_name %>" target="_blank">
+      <i class="fa fa-history"></i>
+    </a>
+  </td>
+</tr>

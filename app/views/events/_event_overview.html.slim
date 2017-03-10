@@ -1,0 +1,80 @@
+css:
+  .textInput {
+    width : 300px;
+  }
+
+table#attrTable.table.table-condensed.table-bordered
+  tr
+    td.ar
+      b Event Type:
+    td
+      a#event_typ.inline.selectEditable data-name="typ" data-type="select" data-value = @event.typ href="#"
+        = @event.event.typ_name
+  tr
+    td.ar
+      b Title:
+    td
+      a.inline.textEditable data-name="title" data-type="text" href="#"
+        = @event .title
+  tr
+    td.ar
+      b Leaders:
+    td
+      a#leaders.inline.textEditable data-name="leaders" data-type="text" href="#"
+        = @event.leaders
+      i#clearLeaders.fa.fa-times-circle.clearpick.editAlign
+  tr
+    td.ar
+      b Published?:
+    td
+      = published_helper(@event , "show")
+  tr
+    td.ar
+      b
+        nobr Location Name:
+    td
+      a#location_name.inline.textEditable data-name="location_name" data-type="text" href="#"
+        = @event.location_name
+      i#geoPick.fa.fa-map-marker.geopick.editAlign
+  tr
+    td.ar
+      b
+        nobr Location Address:
+    td
+      a#location_address.inline.textEditable data-name="location_address" data-type="text" href="#"
+        = @event.location_address
+      i#clearLocAdr.fa.fa-times-circle.clearpick.editAlign
+  tr
+    td.ar
+      b Lat / Lon:
+    td
+      a#lat.inline.textEditable data-name="lat" data-type="text" href="#"
+        = @event.lat
+      '  /
+      a#lon.inline.textEditable data-name="lon" data-type="text" href="#"
+        = @event.lon
+      i#clearLatLon.fa.fa-times-circle.clearpick.editAlign
+  tr
+    td.ar
+      b Start / Finish:
+    td
+      input#startDate.inline_date value=@event.start_date
+      span.time-field.rpix
+        a#startTime.inline.textEditable data-name="start_time" data-type="text" href="#"
+          = @event.start_time
+      '  /
+      input#finishDate.inline_date value=@event.finish_date
+      span.time-field.rpix
+        a#finishTime.inline.textEditable data-name="finish_time" data-type="text" href="#"
+          = @event.finish_time
+  tr
+    td.ar
+      b All Day?:
+    td
+      = all_day_helper(@event , "show")
+  tr
+    td.ar
+      b Tags:
+    td
+      a#tagList.inline.select2Editable val="#{@event.tag_list}" data-name="tag_list" data-type="select2" href='#'
+        = @event.tag_list

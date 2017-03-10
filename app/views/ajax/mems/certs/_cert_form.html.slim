@@ -1,0 +1,44 @@
+javascript:
+  evType  = '#{@cert.ev_type}';
+  hasLink = #{@ctype.has_link?};
+  hasFile = #{@ctype.has_file?};
+  hasAttendance = #{@ctype.has_attendance?};
+
+css:
+  .hide { display: none; }
+
+= bs_horiz_single_form_for @cert, url: '/a/b/c', html: {role: 'form', id: 'certForm'} do |f|
+
+  - if @cert.errors.any?
+    div class='row'
+      div class="col-xs-12"
+        div class="form-error"
+          small
+            b
+              =' pluralize(@cert.errors.count, "error")
+              | prevented this cert from being created:
+            = @cert.errors.full_messages.map.with_index {|msg, i| " #{i+1}) #{msg}"}.join(',')
+
+  input name="authenticity_token" type="hidden" value=form_authenticity_token
+  input name="mem_cert_form[membership_id]" type="hidden" value=@member.id
+  input#typField name="mem_cert_form[qual_ctype_id]" type="hidden" value=@ctype_id
+
+  = f.text_field :title , placeholder: @ctype.title_placeholder         if @ctype.title_select_method == "free_text"
+  = f.select     :title , @ctype.distinct_titles                        if @ctype.title_select_method == "distinct_list"
+  = f.select     :title , @ctype.title_fixed_options.try(:split, "\n")  if @ctype.title_select_method == "fixed_list" && @ctype.title_fixed_options.present?
+  .form-group#newTitle.hide
+    .col-ms-3
+    .col-ms-9
+      input.form-control#newTitleInput type='text' name='new_title' placeholder='new title...'
+  .form-group#typeSelect.hide
+    .col-ms-3.control-label
+      b Evidence
+    .col-ms-9
+      label.radio-inline
+        input#linkBtn type='radio' name='mem_cert_form[ev_type]' value='link' link
+      label.radio-inline
+        input#fileBtn type='radio' name='mem_cert_form[ev_type]' value='file' file
+  = f.text_field :link        , placeholder: "http://...", gid: 'fLink', gclass: 'hide'
+  = f.file_field :attachment  , label: 'File'            , gid: 'fFile', gclass: 'hide'
+  = f.text_field :expire_date , placeholder: "YYYY-MM-DD"        if @cert.has_expires?
+  = f.text_field :comment     , placeholder: "Comment here..."   if @cert.has_comment?

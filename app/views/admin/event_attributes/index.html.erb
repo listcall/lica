@@ -1,0 +1,50 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'admin/event_attributes/all_event_attributes' %>
+<% end %>
+
+<% content_for :admin_header do %>
+  <%= admin_header :Lica_Events, :attributes %>
+<% end %>
+
+<% content_for :admin_body do %>
+  <table class='table table-condensed table-hover'>
+    <thead>
+    <tr>
+      <th>Attribute Name</th>
+      <th>Label</th>
+      <th><button id='attributeCreateBtn' class='btn btn-xs btn-primary'>Create</button></th>
+    </tr>
+    </thead>
+    <tbody id='attributeBody'>
+    <% @attributes.each do |attr| %>
+      <tr id='attribute_<%= attr.label %> '>
+
+        <td>
+          <i class="fa fa-arrows-v sortIcon"></i>
+          <a class='inlineEd' href='#' data-url='/admin/event_attributes/<%= attr.label %>' data-name='name' data-type='text' data-pk='<%= attr.label %>' >
+            <%= attr.name %>
+          </a>
+        </td>
+
+        <td>
+          <a class='labelEd' href='#' data-url='/admin/event_attributes/<%= attr.label %>' data-name='label' data-type='text' data-pk='<%= attr.label %>' >
+            <%= attr.label %>
+          </a>
+        </td>
+
+        <td width=50 align=center>
+          <%= raw event_attribute_delete_button(attr) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <form id='createAttributeForm' method='post' action='/admin/event_attributes'>
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+  </form>
+
+  </div>
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

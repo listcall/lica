@@ -1,0 +1,56 @@
+- content_for :page_js do
+  = javascript_include_tag "pgr/all_show"
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = render :partial => 'pgr/team_title'
+            | > #{ truncate(@assig.short_body, length: 20) }
+        .col-xs-4.text-center
+          small = Time.now.strftime("%a %b %d %H:%M")
+        .col-xs-2.text-right
+          small= link_to "Index", "/paging"
+          = member_help_button('paging')
+
+.container
+  .row
+    .col-md-12
+      b> Fm:
+      => pgr_mem_link @assig.sender
+      b> To:
+      => @assig.recip_people
+      = @assig.via
+      br
+      = @assig.message_text
+      br
+      = raw @assig.action_header
+      table.table.table-condensed
+        thead
+          th Recpient
+          th Status
+          th Replies
+          th Answers
+          th Updated
+        tbody
+          - @dialogs.each do |dialog|
+            tr
+              td
+                => avatar_path dialog.recipient.user
+                - if dialog.recipient.team == current_team
+                  => link_to "#{dialog.recipient.full_name} @#{dialog.recipient.user_name}", "/members/#{dialog.recipient.id}", target: "_blank"
+                - else
+                  => dialog.recipient.full_name
+                  | @#{dialog.recipient.user_name}
+                => team_icon_path(dialog.recipient)
+              td
+                = dialog.recipient_read_label
+              td
+                => raw dialog.posts_link(@assig)
+                => raw dialog.comment_icon_for(current_membership.id)
+              td
+                = raw dialog.action_status(@assig)
+              td
+                = raw dialog.updated_disp

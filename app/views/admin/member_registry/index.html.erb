@@ -1,0 +1,52 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'admin/member_registry/all_member_registry' %>
+<% end %>
+
+<% content_for :admin_header do %>
+  <%= admin_header :Lica_Members, :registry %>
+<% end %>
+
+<% content_for :admin_body do %>
+
+  <div class="row" style="margin-bottom: 4px;">
+    <div class="col-sm-6">
+      <small>
+        filter: <%= @query.to_s %>
+        (<%= @members.count %> members)
+      </small>
+    </div>
+    <div class="col-sm-6 text-right">
+      <a href="/admin/member_registry" type="button" class="btn btn-default btn-xs">clear filter</a>
+      <button id='clearSort' type="button" class="btn btn-default btn-xs">reset sort/search</button>
+    </div>
+  </div>
+
+  <table id='tablesort' class='table table-condensed tablesorter-bootstrap'>
+    <thead>
+    <th class='filter-false'></th>
+    <th>Name</th>
+    <th>Rank</th>
+    <th>Roles</th>
+    <th>Rights</th>
+    <th>Created</th>
+    </thead>
+    <tbody>
+    <% @members.each do |mem| %>
+      <% cache ['mem_reg_row', mem] do %>
+        <%= render :partial => 'registry_row', locals: {mem: mem} %>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+
+  <div>
+    <small>
+      by rank > <%= rank_counts %><br/>
+      by role > <%= role_counts %> (<a href="/display/role_log" target="_blank">history <i class="fa fa-history"></i></a>)<br/>
+      by rights > <%= rights_counts %>
+    </small>
+  </div>
+
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

@@ -1,0 +1,61 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/wiki_index/all_wiki_index'
+- content_for :admin_header do
+  = admin_header :Lica_Wikis, :index
+- content_for :admin_body do
+  table.table.table-condensed.table-hover
+    thead
+      tr
+        th Wiki
+        th Who Can View
+        th Who Can Post
+        th
+          button#wikiCreateBtn.btn.btn-xs.btn-primary Create
+    tbody#wikiBody
+      - @wikis.each do |wiki|
+        tr id=("wiki_#{wiki.id} ")
+          td
+            i.fa.fa-arrows-v.sortIcon
+            a.updateName data-name="name" data-pk=wiki.id data-url="/admin/wiki_index/#{wiki.id}" href="#"
+              = wiki.display_title
+          td
+            .btn-group style=("margin-bottom: 4px;")
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='view_owner'    class='#{wiki.perm_class('view_owner')} btn btn-xs btnRights'>OWN
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='view_manager'  class='#{wiki.perm_class('view_manager')} btn btn-xs btnRights'>MGR
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='view_active'   class='#{wiki.perm_class('view_active')} btn btn-xs btnRights'>ACT
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='view_reserve'  class='#{wiki.perm_class('view_reserve')} btn btn-xs btnRights'>RES
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='view_guest'    class='#{wiki.perm_class('view_guest')} btn btn-xs btnRights'>GST
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='view_alum'     class='#{wiki.perm_class('view_alum')} btn btn-xs btnRights'>ALM
+            br/
+            small
+              a.roleX.xEdit data-name="view_roles_array" data-pk=wiki.id data-url="/admin/wiki_index/#{wiki.id}" data-value=wiki.view_roles.values href="#"
+                = wiki.view_roles.values
+          td
+            .btn-group style=("margin-bottom: 4px;")
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='post_owner'    class='#{wiki.perm_class('post_owner')} btn btn-xs btnRights'>OWN
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='post_manager'  class='#{wiki.perm_class('post_manager')} btn btn-xs btnRights'>MGR
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='post_active'   class='#{wiki.perm_class('post_active')} btn btn-xs btnRights'>ACT
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='post_reserve'  class='#{wiki.perm_class('post_reserve')} btn btn-xs btnRights'>RES
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='post_guest'    class='#{wiki.perm_class('post_guest')} btn btn-xs btnRights'>GST
+              | <button type='button' data-wiki_id='#{wiki.id}' data-name='post_alum'     class='#{wiki.perm_class('post_alum')} btn btn-xs btnRights'>ALM
+            br/
+            small
+              a.roleX.xEdit data-name="post_roles_array" data-pk=wiki.id data-url="/admin/wiki_index/#{wiki.id}" data-value=wiki.post_roles.values href="#"
+                = wiki.post_roles.values
+          td align="center" width="50"
+            = raw wiki.delete_button(wiki)
+  form#createwikiForm action="/admin/member_wikis" method="post"
+    input name="authenticity_token" type="hidden" value=form_authenticity_token /
+  = modal 'myModal', 'Create a New Wiki' do
+    .modal-body
+      form#wikiCreateForm action="/admin/wiki_index" method="POST"
+        input name="authenticity_token" type="hidden" value=form_authenticity_token /
+        input name="wiki[team_id]" type="hidden" value=current_team.id /
+        .form-group
+          label for="wikiName"  Wiki Name
+          input#wikiName.form-control name="wiki[name]" placeholder=("Enter name") type="text"
+    .modal-footer
+      button#wikiSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Create
+      button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close
+
+= render :partial => 'admin/admin_layout'

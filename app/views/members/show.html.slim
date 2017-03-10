@@ -1,0 +1,288 @@
+- content_for :page_js do
+  javascript:
+    window.curId = #{current_membership.id};
+    window.memId = #{@memid};
+    window.memFirstName = '#{@member.first_name}';
+    window.editable = #{@editable};
+    window.ownerEditable = #{@ownerEditable};
+  - if @editable || @ownerEditable
+    = javascript_include_tag('members/all_show_edit')
+  - else
+    = javascript_include_tag('members/all_show_view')
+
+css:
+  .memberTableHeader { background: #c2cfd3; };
+
+.container style=("margin-top: 15px;")
+  .row
+  .row
+    .col-sm-8.col-sm-push-2
+      .row.memContent
+        .col-sm-9.col-xs-8
+          h2 style=("display: inline-block; margin-top: 0; padding-top: 0;")
+            a.inline.fullName#fullEdit data-pk=@member.id data-placement="bottom" data-type="uname" data-url="/ajax/memberships/#{@memid}/user" data-value=name_json_helper(@member.user) href="#"
+              = @member.user.full_name
+          br
+          .visible-xs-and-below
+            = @member.rank
+            = " / #{@member.ordered_roles.join(', ')}" unless @member.roles.blank?
+          .visible-ms-and-above
+            = rank_name(@member)
+            = raw "<br/>#{role_names(@member)}" unless @member.roles.blank?
+          p
+          | @
+          a.inline.userName data-name="user_name" data-pk=@member.id data-type="text" data-url="/ajax/memberships/#{@memid}/user" href="#" = @member.user.user_name
+        .col-sm-3.col-xs-4
+          = image_tag(@member.user.avatar.url(:medium), style: 'max-height: 125px;', id: 'userAvatar', class: 'img-responsive header-img pull-right')
+          .text-center
+
+      .row.memContent#Phones
+        div
+          table.table.table-striped.table-condensed.table-hover.memberTable width="100%"
+            thead
+              tr.memberTableHeader width="100%"
+                - if @editable
+                  td colspan="4"
+                    b Phones
+                  td align="right"
+                    a#phoneCreate.btn.btn-xs.btn-primary href="#"  Create
+                - else
+                  td colspan="3"
+                    b Phones
+            tbody#phoneBody
+              - @phones.each do |phone|
+                - if visible phone
+                  tr id="phone_#{phone.id}"
+                    - if @editable
+                      td width="50%"
+                        - unless touch_device?
+                          span.visible-sm-and-above
+                            i.fa.fa-arrows-v.sortIcon
+                        a.inline.phoneNumber href='tel:#{phone.number.gsub('-','')}' data-url='/ajax/memberships/#{@memid}/phones/#{phone.id}' data-name='number' data-type='text' data-pk='#{phone.id}'
+                          = phone.number
+                      td.ac width="15%"
+                        a.inline.phoneTyp data-name="typ" data-pk=phone.id data-type="select" data-url="/ajax/memberships/#{@memid}/phones/#{phone.id}" data-value=phone.typ href="#"
+                          = phone.typ
+                      td.ac width="13%" = pagable_phone_helper phone
+                      td.ac width="12%" = visible_phone_helper phone
+                      td.ar width="10%"
+                       a.phoneDel.btn.btn-xs.btn-danger href="#" id="delphone_#{phone.id}"  Delete
+                    - else
+                      td    width="60%" = phone.number
+                      td.ac width="20%" = phone.typ
+                      td.ac width="20%" = pagable_phone_helper phone
+
+      .row.memContent#Emails
+        div
+          table.table.table-hover.table-striped.table-condensed.memberTable width="100%"
+            thead.memberTableHeader
+              tr.memberTableHeader width="100%"
+                - if @editable
+                  td colspan="4"
+                    b Emails
+                  td align="right"
+                    a#emailCreate.btn.btn-xs.btn-primary href="#" Create
+                - else
+                  td colspan="3"
+                    b Emails
+            tbody#emailBody
+              - @emails.each do |email|
+                - if visible email
+                  tr id="email_#{email.id}"
+                    - if @editable
+                      td width="50%"
+                        - if @editable
+                          - unless touch_device?
+                            span.visible-sm-and-above
+                              i.fa.fa-arrows-v.sortIcon
+                        a.inline.emailAddress data-name="address" data-pk=email.id data-type="text" data-url="/ajax/memberships/#{@memid}/emails/#{email.id}" href="mailto:#{email.address}"
+                          = email.address
+                      td.ac width="15%"
+                        a.inline.emailTyp data-name="typ" data-pk=email.id data-type="select" data-url="/ajax/memberships/#{@memid}/emails/#{email.id}" data-value=email.typ href="#"
+                          = email.typ
+                      td.ac width="13%" = pagable_email_helper email
+                      td.ac width="12%" = visible_email_helper email
+                      td.ar width="10%"
+                        a.btn.emailDel.btn-xs.btn-danger href="#" id="delmail_#{email.id}"  Delete
+                    - else
+                      td    width="60%" = email.address
+                      td.ac width="20%" = email.typ
+                      td.ac width="20%" = pagable_email_helper email
+
+      .row.memContent#Addresses
+        div
+          table.table.table-striped.table-condensed.table-hover.memberTable width="100%"
+            thead
+              tr.memberTableHeader width="100%"
+                - if @editable
+                  td colspan="3"
+                    b Addresses
+                  td align="right"
+                    a#addressCreate.btn.btn-xs.btn-primary href="#"  Create
+                - else
+                  td colspan="2"
+                    b Addresses
+            tbody#addressBody
+              - @addresses.each do |address|
+                - if visible address
+                  tr id="address_#{address.id}"
+                    - if @editable
+                      td width="65%"
+                        - unless touch_device?
+                          span.visible-sm-and-above
+                            i.fa.fa-arrows-v.sortIcon
+                        a.inline.addressVal data-type="address" data-url="/ajax/memberships/#{@memid}/addresses/#{address.id}" data-value=address_json_helper(address) href="#"
+                          = address.display
+                      td.ac width="13%"
+                        a.inline.addressTyp data-name="typ" data-pk=address.id data-type="select" data-url="/ajax/memberships/#{@memid}/addresses/#{address.id}" data-value=address.typ href="#"
+                          = address.typ
+                      td.ac width='12%' = visible_address_helper address
+                      td.ar width="10%"
+                        a.addressDel.btn.btn-xs.btn-danger href="#" id="deladdress_#{address.id}"  Delete
+                    - else
+                      td width="80%" = address.full_address
+                      td.ac width="20%" = address.typ
+
+      .row.memContent#Contacts
+        div
+          table.table.table-striped.table-condensed.table-hover.memberTable width="100%"
+            thead
+              tr.memberTableHeader width="100%"
+                - if @editable
+                  td colspan="4"
+                    b Emergency Contacts
+                  td align="right"
+                    a#contactCreate.btn.btn-xs.btn-primary href="#"  Create
+                - else
+                  td colspan="3"
+                    b Emergency Contacts
+            tbody#contactBody
+              - @contacts.each do |contact|
+                - if visible contact
+                  tr id="contact_#{contact.id}"
+                    - if @editable
+                      td width="45%"
+                        - unless touch_device?
+                          span.visible-sm-and-above
+                            i.fa.fa-arrows-v.sortIcon
+                        a.inline.contact data-type="contact" data-url="/ajax/memberships/#{@memid}/contacts/#{contact.id}" data-value=contact_json_helper(contact) href="#"
+                          = contact.full_contact
+                      td.ac width="20%"
+                        a.inline.contactTyp data-name="phone_number" data-pk=contact.id data-type="text" data-url="/ajax/memberships/#{@memid}/contacts/#{contact.id}" data-value=contact.phone_number href="#"
+                          = contact.phone_number
+                      td.ac width="13%"
+                        a.inline.contactTyp data-name="phone_type" data-pk=contact.id data-type="select" data-url="/ajax/memberships/#{@memid}/contacts/#{contact.id}" data-value=contact.phone_type href="#"
+                          = contact.phone_type
+                      td.ac width="12%" = visible_contact_helper contact
+                      td.ar width="10%"
+                        a.contactDel.btn.btn-xs.btn-danger href="#" id="delcontact_#{contact.id}"  Delete
+                    - else
+                      td = contact.full_contact
+                      td = contact.phone_number
+                      td.ac width="20%" = contact.phone_type
+
+      .row.memContent#OtherAttributes
+        - unless current_team.member_attributes.keys.blank?
+          table.table.table-hover.table-condensed.memberTable width="100%"
+            thead.memberTableHeader width="100%"
+              tr.memberTableHeader width="100%"
+                td colspan="2"
+                  b Other Attributes
+            tbody
+              - current_team.member_attributes.keys.each do |key|
+                tr
+                  td.pr= current_team.member_attributes[key].name
+                  td
+                    a.inline.contactTyp data-name="#{key}" data-pk='#{key}' data-type="text" data-url="/ajax/memberships/#{@memid}/others/#{key}" data-value='#{@member.xfields.try(:[], key)}' href="#"
+                      = @member.xfields.try(:[], key)
+
+      - if can_see(current_membership, @member)
+        .row.memContent
+          table.table.table-hover.table-condensed.memberTable width="100%"
+            thead.memberTableHeader width="100%"
+              tr.memberTableHeader width="100%"
+                td
+                  b Activities
+                  a name='activities'
+                  div style=("display: inline-block; float: right;")
+                    small
+                      a#showAllActivities href="#"  show all
+                      '  |
+                      a#hideAllActivities href="#"  hide all
+            tbody
+              tr
+                td
+                  | Last Login: #{@member.user.last_sign_in_at.try(:strftime, "%Y-%m-%d %H:%M")}
+              - current_team.event_types.keys.each do |key|
+                tr
+                  td
+                    b
+                      = current_team.event_types[key].name
+                      '  Participations (#{events_for(@member, key).count})
+                    small
+                      a.eventClick href="#" id="click_#{key}" show
+                    .eventRecords id="event_#{key}" style=("display: none;")
+                      - events_for(@member, key).each do |participation|
+                        a href="/events/#{participation.event.event_ref}/periods/#{participation.period.position}" target="_blank"
+                          = "#{participation.event.start.strftime("%Y-%m-%d")} "
+                          b = participation.event.title
+                          |  @ #{participation.event.location_name}
+                          br
+      - if can_delete(current_membership, @member)
+        .row.memContent
+          = delete_button_for(@member)
+      - if current_membership == @member
+        .row.memContent
+          a.btn.btn-xs.btn-info href="/users/#{@member.user.id}/edit" style=("width: 100%")
+            ' Update Password for
+            b = @member.full_name
+          p
+      - if current_membership != @member && manager_rights?
+        .row.memContent
+          a.btn.btn-xs.btn-info href="/password/forgot_for?user=#{@member.user.user_name}" style=("width: 100%")
+            ' Reset Password for
+            b= @member.full_name
+          p
+
+= modal 'myModal', "New avatar for @#{@member.user_name}" do
+  .modal-body
+    div style=("position: absolute; top: -200px;")
+      form#avatarForm action="/ajax/memberships/#{@member.id}/user_avatar" enctype="multipart/form-data" method="POST"
+        input name="authenticity_token" type="hidden" value=form_authenticity_token /
+        input#avatarPhoto name="avatarPhoto" type="file" /
+        input#photoTop name="photoTop" type="hidden" /
+        input#photoLeft name="photoLeft" type="hidden" /
+        input#photoHeight name="photoHeight" type="hidden" /
+        input#photoWidth name="photoWidth" type="hidden" /
+        input#avatarUploadButton type="submit" /
+    table#actionTable style=("margin-left: auto; margin-right: auto;") width="100%"
+      tr
+        td align="center"
+          small current
+          div style=("height: 40px; width: 40px; margin-bottom: 20px;")
+            = image_tag(@member.user.avatar.url(:medium), id: 'primShow', class: 'img-responsive')
+          .btn-group-vertical
+            a#addNew.btn.btn-default.btn-sm Select
+        td.avEdit align="right"
+          #editContainer style=("height: 150px; width: 150px; overflow: hidden;")
+        td.avEdit align="center" width="80"
+          a#cropExpand href="#"
+            i.fa.fa-arrow-circle-up.resizeIcon
+          .resizeSpacer
+          a#cropShrink href="#"
+            i.fa.fa-arrow-circle-down.resizeIcon
+  .modal-footer
+    small.pull-left.vmid.text-left style=("padding-top: 3px;")
+      img.smAvatar.greenGlow src="/img/sample_headshot.jpg" /
+      .greenMsg like this!
+      img.smAvatar.redGlow src="/img/sample_climber.jpg" /
+      .redMsg no
+    button#avatarSaveBtn.btn.btn-primary.btn-sm.avEdit style=("display: none;") type="button"  Save
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close
+
+= modal 'createModal', "Create New <span id='createType'></span> for <span id='createName'></span>" do
+  #createBody.modal-body
+    | this is the body
+  .modal-footer
+    button#SaveBtn.btn.btn-primary.btn-sm type="button"  Save
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close

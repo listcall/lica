@@ -1,0 +1,24 @@
+<div class='container'>
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h2>Please reset your password</h2>
+
+      <%= form_for(@member, :url => '/password/update') do |f| %>
+        <%= render "shared/error_messages", :target => @member %>
+        <div id=password>
+          Password:<br/>
+          <%= f.hidden_field :id %>
+          <%= f.password_field :password, :size => 13 %>
+          <p></p>
+          Confirmation:<br/>
+          <%= f.password_field :password_confirmation, :size => 13 %>
+          <p></p>
+          <%= f.submit "Reset Password" %>
+        </div>
+      <% end %>
+      <p></p> <br/>
+
+    </div>
+  </div>
+</div>

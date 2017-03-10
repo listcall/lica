@@ -1,0 +1,62 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/member_ranks/all_member_ranks'
+
+- content_for :admin_header do
+  = admin_header :Lica_Members, :ranks
+
+- content_for :admin_body do
+  table.table.table-condensed.table-hover
+    thead
+      tr
+        th Rank Name
+        th Acronym
+        th
+        th : button#rankCreateBtn.btn.btn-xs.btn-primary Create
+      tr#rank_owner.rankHeader
+        td colspan="5" : small
+          i.fa.fa-unlock
+          | OWNER RIGHTS - can change site configuration
+    tbody#rankBody
+      - @ranks.select {|rank| rank.rights =='owner'}.each do |rank|
+        = render :partial => 'rank_row', locals: {rank: rank}
+      tr#rank_manager.rankHeader
+        td colspan="5" : small
+          i.fa.fa-pencil
+          | MANAGER RIGHTS - can edit any info, assign member roles and ranks
+      - @ranks.select {|rank| rank.rights =='manager'}.each do |rank|
+        = render :partial => 'rank_row', locals: {rank: rank}
+      tr#rank_active.rankHeader
+        td colspan="5" : small
+          i.fa.fa-eye
+          | ACTIVE RIGHTS - can view any page and edit personal info
+      - @ranks.select {|rank| rank.rights =='active'}.each do |rank|
+        = render :partial => 'rank_row', locals: {rank: rank}
+      tr#rank_reserve.rankHeader
+        td colspan="5" : small
+          i.fa.fa-eye-slash
+          | RESERVE RIGHTS - can view any page and edit personal info
+      - @ranks.select {|rank| rank.rights =='reserve'}.each do |rank|
+        = render :partial => 'rank_row', locals: {rank: rank}
+      tr#rank_guest.rankHeader
+        td colspan="5" : small
+          i.fa.fa-filter
+          | GUEST RIGHTS - can only view the guest page
+      - @ranks.select {|rank| rank.rights =='guest'}.each do |rank|
+        = render :partial => 'rank_row', locals: {rank: rank}
+      tr#rank_alum.rankHeader
+        td colspan="5" : small
+          i.fa.fa-chain
+          | ALUM RIGHTS - can only view the guest page
+      - @ranks.select {|rank| rank.rights =='alum'}.each do |rank|
+        = render :partial => 'rank_row', locals: {rank: rank}
+      tr#rank_inactive.rankHeader
+        td colspan="5" : small
+          i.fa.fa-unlink
+          | INACTIVE RIGHTS - can not login or view any pages
+      - @ranks.select {|rank| rank.rights =='inactive'}.each do |rank|
+        = render :partial => 'rank_row', locals: {rank: rank}
+
+  form#createRankForm action="/admin/member_ranks" method="post"
+    input name="authenticity_token" type="hidden" value=("#{form_authenticity_token}")
+
+= render :partial => 'admin/admin_layout'

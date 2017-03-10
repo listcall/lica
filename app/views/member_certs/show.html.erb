@@ -1,0 +1,223 @@
+<% content_for :page_js do %>
+  <script>
+    window.curId         = <%= current_membership.id %>;
+    window.memId         = <%= @memid %>;
+    window.editable      = <%= @editable %>;
+    window.ownerEditable = <%= @ownerEditable %>;
+  </script>
+  <%= javascript_include_tag('members/all_show') if @editable || @ownerEditable %>
+<% end %>
+
+<div class='container' style='margin-top: 15px;'>
+
+  <div class='row'>
+    <div class="col-sm-8 col-sm-push-2">
+
+      <div class="row memContent">
+        <div class="col-sm-9 col-xs-8">
+          <h2 style='display: inline-block; margin-top: 0; padding-top: 0;'>
+            <a class='inline fullName' href='#' data-placement='bottom' data-url='/ajax/memberships/<%= @memid %>/user' data-name='full_name' data-type='text' data-pk='<%= @member.id %>' >
+              <%= @member.user.full_name %>
+            </a>
+          </h2>
+          <br/>
+          <div class='visible-xs-and-below'>
+            <%= @member.rank %><%= " / #{@member.ordered_roles.join(', ')}" unless @member.roles.blank? %>
+          </div>
+          <div class='visible-ms-and-above'>
+            <%= rank_name(@member) %><%= raw "<br/>#{@member.role_names}" unless @member.roles.blank? %>
+          </div>
+          <p></p>
+          @<a class='inline userName' href='#' data-url='/ajax/memberships/<%= @memid %>/user' data-name='user_name' data-type='text' data-pk='<%= @member.id %>' ><%= @member.user.user_name %></a>
+        </div>
+        <div class="col-sm-3 col-xs-4">
+          <%= image_tag(@member.user.avatar.url(:medium), style: 'max-height: 125px;', id: 'userAvatar', class: 'img-responsive header-img pull-right') %>
+          <div class="text-center">
+          </div>
+        </div>
+      </div>
+      <div class="row memContent">
+        <div>
+          <table class='table table-striped table-hover memberTable' width="100%">
+            <thead style='background: #c2cfd3;' >
+            <tr class="memberTableHeader" style='background: #c2cfd3;' width="100%">
+              <td colspan=3 style='background: #c2cfd3;' >
+                <b>Phones</b>
+              </td>
+              <td align=right style='background: #c2cfd3;' >
+                <% if @editable %>
+                  <a href='#' id='phoneCreate' class='btn btn-xs btn-primary'>Create</a>
+                <% end %>
+              </td>
+            </tr>
+            </thead>
+            <tbody id="phoneBody">
+            <% @phones.each do |phone|  %>
+              <tr id='phone_<%= phone.id %>'>
+                <% if @editable %>
+                  <td width=40%>
+                    <span class="visible-sm-and-above"><i class="fa fa-arrows-v sortIcon"></i></span>
+                    <a class='inline phoneNumber' href='tel:<%= phone.number.gsub('-','') %>' data-url='/ajax/memberships/<%= @memid %>/phones/<%= phone.id %>' data-name='number' data-type='text' data-pk='<%= phone.id %>' >
+                      <%= phone.number %>
+                    </a>
+                  </td>
+                  <td class='ac' width=20%>
+                    <a class='inline phoneTyp' href='#' data-value='<%= phone.typ %>' data-url='/ajax/memberships/<%= @memid %>/phones/<%= phone.id %>' data-name='typ' data-type='select' data-pk='<%= phone.id %>' >
+
+                    </a>
+                  </td>
+                  <td class='ac' width="30%">
+                    <%= pagable_phone_helper phone %>
+                  </td>
+                  <td class='ar' width="10%">
+                    <a href='#' id="delphone_<%= phone.id%>" class='phoneDel btn btn-xs btn-danger'>Delete</a>
+                  </td>
+                <% else %>
+                  <td>
+                    <a href='tel:<%= phone.number.gsub('-','') %>' >
+                      <%= phone.number %>
+                    </a>
+                  </td>
+                  <td></td>
+                  <td><%= phone.typ %></td>
+                  <td><%= pagable_phone_helper phone %></td>
+                <% end  %>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="row memContent">
+        <div>
+
+          <table class='table table-hover table-striped memberTable' width="100%">
+            <thead class='memberTableHeader' style='background: #c2cfd3;' >
+            <tr class="memberTableHeader" width="100%" style='background: #c2cfd3;' >
+              <td colspan=3 style='background: #c2cfd3;' >
+                <b>Emails</b>
+              </td>
+              <td align=right style='background: #c2cfd3;' >
+                <% if @editable %>
+                  <a href='#' id='emailCreate' class='btn btn-xs btn-primary'>Create</a>
+                <% end %>
+              </td>
+            </tr>
+            </thead>
+            <tbody id="emailBody">
+            <% @emails.each do |email|  %>
+              <tr id='email_<%= email.id %>'>
+                <% if @editable %>
+                  <td width="40%">
+                    <% if @editable %>
+                      <span class="visible-sm-and-above"><i class="fa fa-arrows-v sortIcon"></i></span>
+                    <% end %>
+                    <a class='inline emailAddress' href='mailto:<%= email.address %>' data-url='/ajax/memberships/<%= @memid %>/emails/<%= email.id %>' data-name='address' data-type='text' data-pk='<%= email.id %>' >
+                      <%= email.address %>
+                    </a>
+                  </td>
+                  <td class='ac' width="20%">
+                    <a class='inline emailTyp' href='#' data-value='<%= email.typ %>' data-url='/ajax/memberships/<%= @memid %>/emails/<%= email.id %>' data-name='typ' data-type='select' data-pk='<%= email.id %>' >
+                      <%= email.typ %>
+                    </a>
+                  </td>
+                  <td class='ac' width="30%">
+                    <%= pagable_email_helper email %>
+                  </td>
+                  <td width="10%" class='ar'>
+                    <a href='#' id='delmail_<%= email.id %>' class='btn emailDel btn-xs btn-danger'>Delete</a>
+                  </td>
+                <% else %>
+                  <td>
+                    <a href='mailto:<%= email.address %>' >
+                      <%= email.address %>
+                    </a>
+                  </td>
+                  <td></td>
+                  <td><%= email.typ %></td>
+                  <td>
+                    <%= pagable_email_helper email %>
+                  </td>
+                <% end %>
+              </tr>
+            <% end  %>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+      <div class="row memContent">
+
+        <% unless current_team.member_attributes.keys.blank? %>
+          <table class='table table-hover memberTable' width="100%">
+            <thead class='memberTableHeader' width="100%" style='background: #c2cfd3;' >
+            <tr class="memberTableHeader" width="100%" style='background: #c2cfd3;' >
+              <td colspan=2 style='background: #c2cfd3;'><b>Other Attributes</b></td>
+            </tr>
+            </thead>
+            <tbody>
+            <% current_team.member_attributes.keys.each do |key| %>
+              <tr>
+                <td class='pr'><%= current_team.member_attributes[key].name %></td>
+                <td><%= @member.xfields.try(:[], key) %></td>
+              </tr>
+            <% end %>
+            </tbody>
+          </table>
+        <% end %>
+
+
+      </div>
+
+    </div>
+  </div>
+
+</div>
+
+<%= modal 'myModal', "New avatar for @#{@member.user_name}" do %>
+  <div class="modal-body">
+    <div style="position: absolute; top: -200px;">
+      <form id="avatarForm" enctype='multipart/form-data' action="/ajax/memberships/<%= @member.id %>/user_avatar" method='POST'>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+        <input type="file"   id="avatarPhoto"  name="avatarPhoto" />
+        <input type="hidden" id="photoTop"     name="photoTop"    />
+        <input type="hidden" id="photoLeft"    name="photoLeft"   />
+        <input type="hidden" id="photoHeight"  name="photoHeight" />
+        <input type="hidden" id="photoWidth"   name="photoWidth"  />
+        <input type="submit" id="avatarUploadButton" />
+      </form>
+    </div>
+
+    <table width=100% id='actionTable' style="margin-left: auto; margin-right: auto;">
+      <tr>
+        <td align="center">
+          <small>current</small>
+          <div style="height: 40px; width: 40px; margin-bottom: 20px;">
+            <%= image_tag(@member.user.avatar.url(:medium), id: 'primShow', class: 'img-responsive') %>
+          </div>
+          <div class="btn-group-vertical">
+            <a id='addNew' class='btn btn-default btn-sm'>Select</a>
+          </div>
+        </td>
+        <td class='avEdit' align="right">
+          <div id='editContainer' style="height: 150px; width: 150px; overflow: hidden;">
+          </div>
+        </td>
+        <td class='avEdit' align="center" width="80">
+          <a href="#" id='cropExpand'><i class="fa fa-collapse-top resizeIcon"></i></a>
+          <div class="resizeSpacer"></div>
+          <a href="#" id='cropShrink'><i class="fa fa-collapse resizeIcon"></i></a>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+  <div class="modal-footer">
+    <small class="pull-left vmid text-left" style="padding-top: 3px;">
+      <img class='smAvatar greenGlow' src="/samples/headshot.jpg"/><div class="greenMsg">like this!</div>
+      <img class='smAvatar redGlow' src="/samples/climber.jpg"/><div class="redMsg">no</div>
+    </small>
+    <button type="button" class="btn btn-primary btn-sm avEdit" id="avatarSaveBtn" style="display: none;">Save</button>
+    <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+  </div>
+<% end %>

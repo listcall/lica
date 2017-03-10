@@ -1,0 +1,751 @@
+@import 'bootstrap-sprockets';
+@import 'bootstrap';
+@import 'bootstrap_ms';
+
+// ----- page layout -----
+
+body {
+  padding-top: 50px;
+}
+
+.hdrGap  { height: 6px; }
+.alert   { margin-top: 10px;  }
+.subhead {
+  background: #e7e7e7;
+  padding-top:    4px;
+  padding-bottom: 4px;
+}
+
+.alert-error {
+  background: lightyellow;
+}
+
+.ar { text-align: right;   }
+.ac { text-align: center;  }
+.al { text-align: left;    }
+
+
+// ----- visibility classes -----
+
+// screen-md = 928
+// screen-sm = 760
+// screen-xs = 480
+//
+// |---xs---|---ms---|---sm---|---md---|---lg---|
+// 0       480      760      928      1200     ...
+
+.visible-lg-and-above { @media (max-width:$screen-lg) { display: none; } }
+.visible-md-and-above { @media (max-width:$screen-md) { display: none; } }
+.visible-sm-and-above { @media (max-width:$screen-sm) { display: none; } }
+.visible-ms-and-above { @media (max-width:$screen-xs) { display: none; } }
+.visible-md-and-below { @media (min-width:$screen-lg) { display: none; } }
+.visible-sm-and-below { @media (min-width:$screen-md) { display: none; } }
+.visible-ms-and-below { @media (min-width:$screen-sm) { display: none; } }
+.visible-xs-and-below { @media (min-width:$screen-xs) { display: none; } }
+
+.vmid {
+  vertical-align: middle;
+}
+
+
+// ----- footer -----
+
+html, body { height: 100%; }
+
+#wrap {                         // Wrapper for page content to push down footer
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -30px;         // Negative indent footer by its height
+  padding: 0 0 30px;            // Pad bottom by footer height
+}
+
+#footer {
+  height: 30px;                 // fixed footer height
+  background-color: #f5f5f5;
+  border-top: 1px solid lightgrey;
+}
+#footer .container {
+  margin-top: 5px;
+}
+
+// ----- photo cropper -----
+
+.cropMask {
+  position:   absolute;
+  background: rgba(0,0,128,0.3);
+  border:     2px solid #3276B1;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.cropContainer {
+  border: 2px solid #333;
+}
+
+// ----- avatar upload page -----
+
+.greenGlow {
+  border: 1px solid green;
+  -webkit-box-shadow: 0px 0px 4px green;
+  -moz-box-shadow: 0px 0px 4px green;
+  box-shadow: 0px 0px 4px green;
+}
+
+.redGlow {
+  border: 1px solid red;
+  -webkit-box-shadow: 0px 0px 4px red;
+  -moz-box-shadow: 0px 0px 4px red;
+  box-shadow: 0px 0px 4px red;
+}
+
+.resizeIcon {
+  font-size: 30px;
+  color:  #3276B1;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.resizeSpacer {
+  height: 40px;
+}
+
+#cropExpand:hover, #cropShrink:hover {
+  text-decoration: none;
+}
+
+.greenMsg {
+  display: inline-block;
+  background: lightgreen;
+  padding-left: 3px;
+  padding-right: 3px;
+  margin-right: 3px;
+}
+
+.redMsg {
+  display: inline-block;
+  background: lightpink;
+  padding-left: 3px;
+  padding-right: 3px;
+}
+
+.avEdit {
+  display: none;
+}
+
+// ----- display elements -----
+
+.smAvatar {
+  max-height: 24px;
+  max-width:  24px;
+  vertical-align: middle;
+}
+
+.msAvatar {
+  max-height: 16px;
+  max-width:  16px;
+  vertical-align: middle;
+}
+
+.xsAvatar {
+  max-height: 12px;
+  max-width:  12px;
+  vertical-align: middle;
+}
+
+.brand.active_brand {
+  color: white;
+}
+
+// ----- members -----
+
+.memlink {
+  display: inline-block;
+  @media (min-width:$screen-md) {    // extra padding on md, lg
+    width: 140px;
+  }
+}
+
+.name-lbl {
+  @media (max-width: $screen-xs) {   // hide on xs
+    display: none;
+  }
+}
+
+.user-lbl {
+  @media (min-width: $screen-xs) {   // only show on xs
+    display: none;
+  }
+}
+
+.username {
+  @media (max-width:$screen-sm) {    // only show on md, lg
+    display: none;
+  }
+}
+
+// ----- search box -----
+
+.bbtn-r {
+  @extend .btn;
+  border-right: 1px solid #555555;
+}
+
+.bbtn-l {
+  @extend .btn;
+  border-left: 1px solid #555555;
+}
+
+.search-control {
+  margin:              0;
+  width:            100%;
+  height:           22px;
+  display:         block;
+  padding-top:       2px;
+  padding-left:     12px;
+  font-size:        10px;
+  line-height:       1.2;
+  border-radius:    12px 0 0 12px;
+  color:          #555555;
+  vertical-align: middle;
+  border: 1px solid #cccccc;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+  box-shadow:         inset 0 1px 1px rgba(0,0,0,0.075);
+  -webkit-transition: border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+  transition:         border-color ease-in-out 0.15s, box-shadow ease-in-out 0.15s;
+}
+
+.search-control:focus {
+  border-color: #66afe9;
+  outline:            0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+  box-shadow:         inset 0 1px 1px rgba(0,0,0,0.075), 0 0 8px rgba(102,175,233,0.6);
+}
+
+.search-clear {
+  margin:        0;
+  height:     22px;
+  font-size:  10px;
+  line-height: 1.2;
+  border-radius: 0 12px 12px 0;
+  color: #555555;
+  padding-right: 10px;
+  vertical-align: middle;
+  border: 1px solid #cccccc;
+}
+
+.search-clear:hover {
+  font-weight: bold;
+}
+
+.search-clear:active {
+  font-style:  italic;
+  font-size:   12px;
+  font-weight: bold;
+  color:       black;
+  text-decoration: underline;
+}
+
+// ----- this is for ?? -----
+
+.input-minn {
+  padding: 0;
+  margin: 0;
+  .search-query {
+    font-size: 10.5px;
+    padding: 0;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 10px;
+  }
+}
+
+input.disabled {
+  display: none;
+}
+
+// ----- wiki stuff -----
+
+.wiki-title {
+  border-bottom: 1px solid lightgray;
+  margin-bottom: 10px;
+}
+
+.icon {
+  position: relative;
+  bottom: 2px;
+  margin-right: 2px;
+  max-height: 16px;
+  max-width: 16px;
+}
+
+.wikiPage {
+  table {
+    margin-bottom: 10px;
+  }
+  th, td {
+    border:  1px solid black;
+    vertical-align: top;
+    padding: 5px;
+  }
+  h1 { font-size: 26px; }
+  h2 { font-size: 20px; }
+  h3 { font-size: 16px; }
+}
+
+.wikiPrintablePage {
+  a {
+    pointer-events: none;
+    cursor: default;
+    color: black;
+  }
+}
+
+.inline, .select-rights, .select-has, .select2-one, .select2-many, .xEdit, .inlineLbl {
+  color  : black;
+  cursor : pointer;
+  cursor : hand;
+}
+
+.table-hover tbody tr.rankHeader:hover > td {
+  background: lightcyan;
+}
+
+.wikiEdit {
+  font-family: "Courier New", "Lucida Console", courier, monospace;
+  font-size:   9pt;
+}
+
+.rankHeader {
+  background: lightcyan;
+  td {
+    line-height: 8px;
+    text-align: center;
+  }
+}
+
+.rankFormRow td {
+  vertical-align: middle;
+  input {
+    margin: 0;
+  }
+}
+
+.sortIcon {
+  margin-right: 15px;
+  &:hover {
+    cursor: move;
+  }
+}
+
+.rankBadge {
+  width: 55px;
+  text-align: center;
+  a {
+    color: black;
+  }
+}
+
+.periodBadge {
+  text-align : center;
+  i {
+    color      : black;
+  }
+}
+
+.periodCell {
+  border           : 1px solid black;
+  display          : inline-block;
+  background-color : lightyellow;
+  font-size        : 10pt;
+  border-radius    : 4px;
+  padding-left     : 3px;
+  padding-right    : 3px;
+}
+
+.parentCell, .clickableChild {
+  cursor: pointer;
+}
+
+.perAdd {
+  cursor   : pointer;
+  color    : lightgray;
+  font-size: 8pt;
+}
+
+.perAdd:hover {
+  color:     green;
+  font-size: 10pt;
+}
+
+.perDel {
+  cursor   : pointer;
+}
+
+.perDel:hover {
+  color: red;
+}
+
+.highlightCell {
+  background-color: orange;
+}
+
+.participantCell {
+  display      : inline-block;
+  margin-top   : 1px;
+  margin-bottom: 1px;
+}
+
+.parentRow {
+  background: #f0f0f0;
+}
+
+// ----- structured nav -----
+
+.adminHeader, .servicesHeader {
+  text-align: center;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  background: #dfdfdf;
+}
+
+.adminBodyHeader, .servicesBodyHeader {
+  padding-top:    4px;
+  padding-bottom: 4px;
+  padding-left:   6px;
+  background: #dfdfdf;
+}
+
+.adminBodyBody, .servicesBodyBody {
+  padding-top:  15px;
+  padding-left: 15px;
+}
+
+.adminBreak, .servicesBreak {
+  border: 1px #afafaf solid;
+  border-radius: 4px;
+  margin-top: 4px;
+  text-align: center;
+  background: #f0f0f0;
+}
+
+.clkToggle {
+  width: 100%;
+  color: blue;
+}
+
+.adminNav, .servicesNav {
+  background: #f0f0f0;
+  margin-bottom: 1px;
+}
+
+.adminNav > li > a {     // this isn't working...
+  padding-top:    4px;
+  padding-bottom: 4px;
+}
+
+.hdrButton {
+  line-height: 16px;
+  margin-right: 5px;
+}
+
+.editable-address {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.editable-address span {
+  width: 70px;
+  display: inline-block;
+}
+
+.editable-uname, .editable-contact {
+  display: block;
+  font-size: 9pt;
+  margin-bottom: 5px;
+}
+
+.editable-uname span {
+  width: 70px;
+  display: inline-block;
+}
+
+.intro {
+  @extend small;
+  display: block;
+  width: 100%;
+  padding-top: 5px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #bebebe;
+  margin-bottom: 20px;
+}
+
+.editable-img {
+  padding-bottom: 3px;
+  text-decoration: none;
+  border-bottom: dashed 1px #0088cc;
+  cursor: pointer;
+  cursor: hand;
+}
+
+.frameBox {
+  width: 100%;
+  height: 250px;
+  background: lightgray;
+  text-align: center;
+}
+.frameLabel {
+  padding-top: 60px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.memberTable {
+  margin-top: 10px;
+}
+
+.memberTableHeader {
+  background: #c2cfd3;
+}
+
+// ----- styling for date-input forms -----
+
+.inline-group {
+  .form-control {
+    display: inline-block;
+  }
+  .date-width {
+    width: 64%;
+  }
+  .time-width {
+    width: 34%;
+  }
+}
+
+// ----- form errors -----
+
+.form-error {
+  padding: 5px;
+  margin-bottom: 5px;
+  border: 1px solid #a94442;
+}
+
+// ----- icon styling for member#show -----
+
+.red_phone, .red_email, .red {
+  color: red;
+}
+
+.green_phone, .green_email, .green {
+  color: green;
+}
+
+.black_phone, .black_email, .black, .visible_phone, .visible_email, .visible_conta, .visible_addrs {
+  color: black;
+}
+
+.gray_phone, .gray_email, .gray, .obscure_phone, .obscure_email, .obscure_conta, .obscure_addrs {
+  color: gray;
+}
+
+.topic_header {
+  background:    lightgray;
+  padding-left:   6px;
+  padding-right:  6px;
+  padding-top:    2px;
+  padding-bottom: 2px;
+}
+
+// ----- table styles for member#show -----
+
+.pwide { width: 100%; }
+table .pr { padding-right: 30px; }
+table .ar { text-align: right;   }
+table .ac { text-align: center;  }
+.createButton {
+  margin-bottom: 4px;
+  margin-right:  6px;
+}
+
+// ----- help button -----
+
+.help-button {
+  @extend .btn;
+  @extend .btn-xs;
+  line-height: 16px;
+  margin-left: 15px;
+}
+
+.mr-5  { margin-right: 5px; }
+.ml-5  { margin-left:  5px; }
+.mr-15 { margin-right: 15px; }
+.ml-15 { margin-left:  15px; }
+
+// ----- anchor links -----
+
+.ankor {
+  padding-top:  70px;
+  margin-top:  -70px;
+  display: inline-block;
+}
+
+// ----- event editing -----
+
+.switch-mini {
+  z-index: 5;
+}
+
+.actLink {
+  color: black;
+}
+
+.inline_link {
+  border:  none;
+  outline: none;
+  padding: 0;
+  width:   74px;
+  border-bottom: dashed 1px #0088cc;
+  height: 19px;
+  cursor: pointer;
+}
+
+.inline_link:hover {
+  color: #2a6496;
+  text-decoration: none;
+}
+
+
+.inline_date {
+  border:  none;
+  outline: none;
+  padding: 0;
+  width:   74px;
+  border-bottom: dashed 1px #0088cc;
+  height: 19px;
+  cursor: pointer;
+}
+
+.inline_date:hover {
+  color: #2a6496;
+}
+
+.geopick {
+  color: rgba(255, 0, 0, 0.66);
+  cursor: pointer;
+  padding-right: 2px;
+}
+
+.clearpick {
+  color: lightgrey;
+  cursor: pointer;
+}
+
+.editAlign {
+  float: right;
+  padding-top: 4px;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.rpix {
+  margin-left: 5px;
+  margin-right: 3px;
+}
+
+.display_edit {
+  border-bottom: dashed 1px #0088cc;
+  cursor: pointer;
+}
+
+.display_edit:hover {
+  color: #2a6496;
+}
+
+textarea.text-area-input {
+  width: 500px;
+}
+
+// ----- event period -----
+
+.transitCell, .signinCell {
+  display: none;
+}
+
+.table-condensed .partCell {
+  padding-top: 8px;
+}
+
+.parDel {
+  cursor: pointer;
+  margin-top: 2px;
+}
+
+// ----- twitter typahead tweaks -----
+
+.twitter-typeahead .tt-hint {
+  color: white;
+  display: block;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.428571429;
+  border: 1px solid transparent;
+  border-radius:4px;
+}
+
+.tt-dropdown-menu {
+  font-size: 12px;
+}
+
+.faIcon {
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.table-small {
+  font-size: 8pt;
+}
+
+// ----- font-awesome letters and numbers -----
+
+.fa-p1:before {
+  content: "p1";
+  padding: 1px;
+  margin:  1px;
+  border-right
+  :  1px solid black;
+}
+
+.fa-2:before {
+  content: "p2";
+  border: 1px solid black;
+}
+
+.fa-letter-a:before {
+  content: "a";
+}
+
+.fa-letter-A:before {
+  content: "A";
+}
+
+.pageFilter:hover {
+  color: #428bca;
+}
+
+// ----- tag cells -----
+
+.tagInput {
+  @extend .form-control;
+  @extend .input-sm;
+  margin: 2px;
+}
+
+.tagCell {
+  @extend .btn;
+  @extend .btn-xs;
+  @extend .btn-default;
+  margin        : 2px;
+  vertical-align: top;
+}
+

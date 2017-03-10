@@ -1,0 +1,53 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/team_owners/all_team_owners'
+
+- content_for :admin_header do
+  = admin_header :Lica_Team, :owners
+
+css:
+  .sm tbody tr td {
+    font-size: 8pt;
+    padding:   1px;
+    margin:    1px;
+  }
+  .ocell:hover {
+    cursor: pointer;
+    border: 1px solid blue;
+  }
+  .hlg {
+    background: lightgreen;
+  }
+
+- content_for :admin_body do
+  small
+    ' Click a name to create an owner+ assignment, click again to un-assign.
+    ' Owner+ assignments are highlighted in <span class='hlg'>green</span>.
+  table.table.sm
+    - @members.all.in_groups_of(7).each do |row|
+      tr
+        - row.each do |mem|
+          - if mem.present?
+            = owner_plus_cell(mem)
+          - else
+            td
+  small
+    ' Member Rights include: <u>owner</u>, <u>manager</u>, <u>active</u>,
+    ' <u>reserve</u>, <u>guest</u>, <u>alum</u>, and <u>inactive</u>.
+    ' Each member is assigned one right at a time. Rights are
+    ' calculated from the Ranks and Roles that a member is given.
+    p
+    ' You have <u>owner</u> rights.  Without <u>owner</u> rights, you would
+    ' not be able to view this page.
+    p
+    ' While editing Ranks and Roles, it is possible to unintentionally remove
+    ' your own <u>owner</u> rights, or the <u>owner</u> rights from some other
+    ' member. Owner+ prevents this from happening. Members
+    ' with owner+ will always have <u>owner</u> rights, regardless of
+    ' Rank / Role settings.
+    p
+    ' <b>Update with care!</b> Best practice is to assign
+    ' owner+ to 2-4 long-term members who are technically savvy and responsive.
+
+
+= render :partial => 'admin/admin_layout'
+

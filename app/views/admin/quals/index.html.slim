@@ -1,0 +1,75 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/quals/all_quals'
+
+- content_for :admin_header do
+  = admin_header :Lica_Qualifications, :index
+
+- content_for :admin_body do
+  table.table.table-hover
+    thead
+      th Name
+      th Acronym
+      th Who Can View
+      th Who Participates
+      th.ar
+        button#certBoardCreateBtn.btn.btn-xs.btn-primary Create
+    tbody#qualBody
+      - @quals.each do |qual|
+        tr id="qual_#{qual.acronym}"
+          td
+            i.fa.fa-arrows-v.sortIcon
+            a.updateName data-name="name" data-pk=("#{qual.id} ") data-url="/admin/quals/#{qual.id}" data-value=qual.name href="#"
+              = qual.name
+          td
+            a.updateAcronym data-name="acronym" data-pk=("#{qual.id} ") data-url="/admin/quals/#{qual.id}" data-value=qual.acronym href="#"
+              = qual.acronym
+          td
+            .btn-group style=("margin-bottom: 4px;")
+              = qual.rights_permission_button qual, 'view_owner'
+              = qual.rights_permission_button qual, 'view_manager'
+              = qual.rights_permission_button qual, 'view_active'
+              = qual.rights_permission_button qual, 'view_reserve'
+              = qual.rights_permission_button qual, 'view_guest'
+              = qual.rights_permission_button qual, 'view_alum'
+            br
+            small
+              a.rankX.xEdit data-name="view_ranks_array" data-pk=qual.id data-url="/admin/quals/#{qual.id}" data-value=qual.view_ranks.values href="#"
+                = qual.view_ranks.values
+            '  |
+            small
+              a.roleX.xEdit data-name="view_roles_array" data-pk=qual.id data-url="/admin/quals/#{qual.id}" data-value=qual.view_roles.values href="#"
+                = qual.view_roles.values
+          td
+            .btn-group style=("margin-bottom: 4px;")
+              = qual.rights_permission_button qual, 'post_owner'
+              = qual.rights_permission_button qual, 'post_manager'
+              = qual.rights_permission_button qual, 'post_active'
+              = qual.rights_permission_button qual, 'post_reserve'
+              = qual.rights_permission_button qual, 'post_guest'
+              = qual.rights_permission_button qual, 'post_alum'
+            br
+            small
+              a.rankX.xEdit data-name="post_ranks_array" data-pk=qual.id data-url="/admin/quals/#{qual.id}" data-value=qual.post_ranks.values href="#"
+                = qual.post_ranks.values
+            '  |
+            small
+              a.roleX.xEdit data-name="post_roles_array" data-pk=qual.id data-url="/admin/quals/#{qual.id}" data-value=qual.post_roles.values href="#"
+                = qual.post_roles.values
+          td.ar
+            = raw delete_qual_button(qual.id)
+
+= modal 'myModal', 'Create a New Qualification' do
+  .modal-body
+    form#certBoardCreateForm action="/admin/quals" method="POST"
+      input name="authenticity_token" type="hidden" value=form_authenticity_token
+      .form-group
+        label for="certName" Qualification
+        input#certName.form-control name="cert[name]" placeholder=("Qualification") board="text"
+      .form-group
+        label for="certName" Acronym
+        input#certAcronym.form-control name="cert[acronym]" placeholder="Acronym" board="text"
+  .modal-footer
+    button#certBoardSaveBtn.btn.btn-primary.btn-sm.avEdit board="button" Create
+    button.btn.btn-default.btn-sm data-dismiss="modal" board="button" Close
+
+= render :partial => 'admin/admin_layout'

@@ -1,0 +1,22 @@
+.servicesHeader
+  b
+    = link_to_unless_current "Services", "/services"
+
+.servicesBreak #{current_team.acronym} Services
+ul.nav.nav-tabs.nav-stacked.servicesNav
+  - @services.each do |svc|
+    = service_nav svc, style: "padding: 4px;"
+
+- if @ser_pars.length > 0
+  .servicesBreak Partner Services
+  ul.nav.nav-tabs.nav-stacked.servicesNav
+    - @ser_pars.each do |svc|
+      = svc_par_nav svc, style: 'padding: 4px;'
+
+- if @reports.present?
+  .servicesBreak Reports
+  ul.nav.nav-tabs.nav-stacked.servicesNav
+    - @reports.each do |report|
+      = report_link_for(report)
+
+

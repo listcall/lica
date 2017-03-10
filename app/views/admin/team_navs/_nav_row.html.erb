@@ -1,0 +1,31 @@
+<tr id="<%= typ %>Navs_<%= nav.id %>">
+  <td class="typeCell">
+    <i class="fa fa-arrows-v sortIcon"></i>
+    <a class='navType xEdit' href='#' data-value='<%= nav.type %>' data-pk='<%= typ %> ' data-url='/admin/team_navs/<%= nav.id %>' data-name='type'>
+      <%= nav.type.split('_').last %>
+    </a>
+  </td>
+  <td class="pathCell">
+    <%= raw path_helper(nav, typ) %>
+  </td>
+  <td class="labelCell">
+    <a class='inline' href='#' data-pk='<%= typ %>' data-url='/admin/team_navs/<%= nav.id %>' data-name='label'>
+      <%= nav.label %>
+    </a>
+  </td>
+  <td>
+    <div class='btn-group'>
+      <button type='button' data-typ='<%= typ %>' data-status='<%= nav.owner %>'    data-nid='<%= nav.id %>' data-btyp='owner'    class='<%= bclas(nav, "owner") %>'    >Owner</button>
+      <button type='button' data-typ='<%= typ %>' data-status='<%= nav.manager %>'  data-nid='<%= nav.id %>' data-btyp='manager'  class='<%= bclas(nav, "manager") %>'  >Manager</button>
+      <button type='button' data-typ='<%= typ %>' data-status='<%= nav.active %>'   data-nid='<%= nav.id %>' data-btyp='active'   class='<%= bclas(nav, "active") %>'   >Active</button>
+      <button type='button' data-typ='<%= typ %>' data-status='<%= nav.reserve %>'  data-nid='<%= nav.id %>' data-btyp='reserve'  class='<%= bclas(nav, "reserve") %>'  >Reserve</button>
+      <button type='button' data-typ='<%= typ %>' data-status='<%= nav.guest %>'    data-nid='<%= nav.id %>' data-btyp='guest'    class='<%= bclas(nav, "guest") %>'    >Guest</button>
+      <button type='button' data-typ='<%= typ %>' data-status='<%= nav.alum %>'     data-nid='<%= nav.id %>' data-btyp='alum'     class='<%= bclas(nav, "alum") %>'     >Alum</button>
+    </div>
+  </td>
+  <td>
+    <button data-navid='<%= nav.id %>' type='button' class='btn btn-xs btn-danger btnDelete'>
+      Delete
+    </button>
+  </td>
+</tr>

@@ -1,0 +1,20 @@
+<%= modal 'geoPicker', "GeoPicker" do %>
+  <div class="modal-body" style="text-align: center;">
+    <div class="input-group" style="width: 300px; float: none; margin-left: auto; margin-right: auto; margin-bottom: 4px;">
+      <input id='searchBox' type="text" class="form-control input-sm" placeholder="search..." tabindex="1" />
+      <span class="input-group-addon"><a id='searchBtn' href="#" tabindex="-1"><i class="fa fa-search" tabindex="-1"></i></a></span>
+    </div>
+    <div id="map-canvas" style="height: 300px; width: 300px; float: none; margin-left: auto; margin-right: auto;"></div>
+  </div>
+
+  <div class="modal-footer" style="vertical-align: bottom;">
+    <div class="pull-left text-left dataUpdate" style="font-size: 70%; display: none;" >
+      <span id="locNam"></span><span id="locSep"></span><span id="locAdr"></span><br/>
+      lat <span id="locLat"></span> lon <span id="locLon"></span></b>
+    </div>
+    <nobr>
+      <button type="button" class="btn btn-primary btn-sm dataUpdate" style='vertical-align: bottom; display: none;' id="geoPickerSaveBtn" tabindex="2">Return Data</button>
+      <button type="button" class="btn btn-default btn-sm" style='vertical-align: bottom;' data-dismiss="modal" tabindex="3">Cancel</button>
+    </nobr>
+  </div>
+<% end %>

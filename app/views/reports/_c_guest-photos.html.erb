@@ -1,0 +1,51 @@
+<HTML>
+<head>
+<style>
+  body,td {
+    font-size: 8pt;
+  }
+  table {
+    background-color: lightgray;
+    border: 1px black solid;
+    border-collapse: collapse;
+  }
+  th {
+    border: 1px outset silver;
+    background-color: lightblue;
+    color: black;
+  }
+  tr {
+    background-color: white;
+    margin: 1px;
+  }
+  tr.striped {
+    background-color: lightgreen;
+  }
+  td {
+    padding: 1px 8px;
+  }
+</style>
+
+</head>
+<body>
+<table width = 740 align=center class=T>
+  <tr><td align=center><h1><%= current_team.acronym %> Guest Photos</h1></td></tr>
+</table>
+
+<table width=740 align=center class=T border=1>
+
+  <% @guests.in_groups_of(5, false) do |row_members| %>
+    <tr>
+      <% for mem in row_members %>
+        <td align="center">
+          <img height=75px src="<%= mem.user.avatar.url(:thumb) %>" /><br/>
+          <a href='/members/<%= mem.user_name %>' target="_blank"><%= mem.full_name %></a>
+        </td>
+      <% end %>
+    </tr>
+  <% end %>
+
+</table>
+<hr>
+</body>
+</HTML>

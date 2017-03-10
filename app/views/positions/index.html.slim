@@ -1,0 +1,60 @@
+- content_for :page_js do
+  = javascript_include_tag 'positions/all_index'
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            |  Positions
+        .col-xs-6.text-right
+          = member_help_button('positions')
+
+.container
+  .row
+    div
+      b #{current_team.acronym} Positions
+      table#teamBoardsTable.table.table-condensed.table-bordered.table-hover
+        thead
+          th Role
+          th Description
+          th Active
+          th Actions
+        tbody
+          - @positions.each do |position|
+            tr
+              td = "#{position.team_role.name} (#{position.team_role.acronym})"
+              td = position.team_role.description
+              td = member_links_in(position.team_role)
+              td
+                => link_to "View #{position.role.acronym} Schedule", "/positions/#{position.role.acronym}"
+                ' |
+                a.becomeLnk data-mid='#{current_membership.id}' data-role='#{position.role.acronym}' href='#' Become #{position.role.acronym}
+    - if @pos_parts.present?
+      div
+        b Partner Positions
+        table.table.table-condensed.table-bordered.table-hover
+          thead
+            th Team
+            th Role
+            th Description
+            th Active
+          tbody
+            - @pos_parts.each do |part|
+              tr
+                td = part.position.role.team.acronym
+                td = part.position.team_role.name
+                td = part.position.team_role.description
+                td = member_names_in(part.position.team_role, part.position.role.team)
+    div
+      = link_to "View all #{current_team.acronym} Members", "/members", target: "_blank"
+
+= modal "myModal", "Become <span class='lbl'></span>" do
+  .modal-body
+    ' If you click the "<b>Become <span class='lbl'></span></b>" button
+    ' YOU WILL ASSUME THE <span class='lbl'></span> ROLE!!!<p></p>
+    ' Please <b>Cancel</b> if you are unsure.
+  .modal-footer
+    button#becomeBtn.btn.btn-primary.btn-sm type="button" Become
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button" Cancel

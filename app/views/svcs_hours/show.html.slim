@@ -1,0 +1,53 @@
+- content_for :page_js do
+  = javascript_include_tag 'svc_hours/all_show'
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = current_team.acronym
+            |  Service Hours for #{@member.full_name}
+        .col-xs-6.text-right
+          /a.help-button href="/events/new" Create New Event
+          /= member_help_button('events')
+
+.container
+  .row
+    .col-md-12
+      p
+      | #{@member.first_name} has #{@participations.count} participations.
+      button.btn.btn-xs#createBtn<> Create New
+      p
+      - if @participations.count > 0
+        table.table.table-condensed
+          thead
+            tr
+              th Service
+              th Start
+              th Finish
+              th Hours
+              th Status
+              th Comment
+          tbody
+            - @participations.each do |part|
+              tr
+                td = part.period.service.name
+                td = part.period.start.strftime("%Y-%m-%d %H:%M")
+                td = part.period.finish.strftime("%Y-%m-%d %H:%M")
+                td = part.period.hours
+                td = part.status || "PENDING"
+                td = part.comment
+
+= modal 'myModal', "Service Participation for #{@member.full_name}" do
+  .modal-body
+    | UNDER CONSTRUCTION<br/>
+    | UNDER CONSTRUCTION<br/>
+    | UNDER CONSTRUCTION<br/>
+    | UNDER CONSTRUCTION<br/>
+    | UNDER CONSTRUCTION<br/>
+    | UNDER CONSTRUCTION<br/>
+  .modal-footer
+    button#driveSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Create
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close

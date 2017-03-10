@@ -1,0 +1,185 @@
+<meta http-equiv="Content-Type" content="text/html; charset=<%= encoding %>">
+<% if mail.subject %>
+  <title><%= h mail.subject %></title>
+<% end %>
+
+<style type="text/css">
+  .message_headers {
+    width: 100%;
+    padding: 10px 0 0 0;
+    margin: 0;
+    background: #fff;
+    font-size: 12px;
+    font-family: "Lucida Grande";
+    border-bottom: 1px solid #dedede;
+    overflow: auto;
+  }
+
+  .message_headers dl {
+    float: left;
+    width: 75%;
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+
+  .message_headers dt {
+    width: 92px;
+    padding: 1px;
+    margin: 0;
+    float: left;
+    text-align: right;
+    font-weight: bold;
+    color: #7f7f7f;
+  }
+
+  .message_headers dd {
+    width: 100%;
+    margin: 0 0 0 102px;
+    padding: 1px;
+  }
+
+  .message_headers p.alternate {
+    float: right;
+    margin: 0;
+  }
+
+  .message_headers p.alternate a {
+    color: #09c;
+  }
+
+  pre.message_body {
+    padding: 10px;
+    word-wrap: break-word;
+  }
+
+  .message_banner {
+    background: lightblue;
+    text-align: center;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    font-size: 10px;
+    padding: 2px;
+  }
+
+  input { width: 100% }
+
+  textarea {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+  }
+</style>
+
+<div id="message_display">
+
+  <div class="message_headers">
+    <dl>
+      <dt></dt>
+      <dd><b>LETTER_OPENER MESSAGE USING TEMPLATE ext/letter_opener/message</b></dd>
+
+      <dt>From:</dt>
+      <dd><%= h from %></dd>
+
+      <% unless sender.empty? %>
+        <dt>Sender:</dt>
+        <dd><%= h sender %></dd>
+      <% end %>
+
+      <% unless message_id.empty? %>
+        <dt>Message-ID:</dt>
+        <dd><%= h message_id %></dd>
+      <% end %>
+
+      <% if mail.subject %>
+        <dt>Subject:</dt>
+        <dd><strong><%= h mail.subject %></strong></dd>
+      <% end %>
+
+      <dt>Date:</dt>
+      <dd><%= Time.now.strftime("%b %e, %Y %I:%M:%S %p %Z") %></dd>
+
+      <% unless to.empty? %>
+        <dt>To:</dt>
+        <dd><%= h to %></dd>
+      <% end %>
+
+      <% unless cc.empty? %>
+        <dt>CC:</dt>
+        <dd><%= h cc %></dd>
+      <% end %>
+
+      <% unless bcc.empty? %>
+        <dt>BCC:</dt>
+        <dd><%= h bcc %></dd>
+      <% end %>
+
+      <% if @attachments.any? %>
+        <dt>Attachments:</dt>
+        <dd>
+          <% @attachments.each do |filename, path| %>
+            <a href="<%= path %>"><%= filename %></a>&nbsp;
+          <% end %>
+        </dd>
+      <% end %>
+    </dl>
+
+    <% if mail.multipart? %>
+      <p class="alternate">
+        <% if type == "plain" && mail.html_part %>
+          <a href="rich.html">View HTML version</a>
+        <% elsif type == "rich" && mail.text_part %>
+          <a href="plain.html">View plain text version</a>
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+
+  <% if type == "plain" %>
+    <pre class="message_body"><%= body %></pre>
+  <% else %>
+    <%= body %>
+  <% end %>
+
+</div>
+
+<div id="message_reply">
+
+  <div class="message_banner">REPLY</div>
+
+  <form action="http://<%= @team_name %>.smso.dev:3000/letter_opener_reply" method="POST">
+
+    <div class="message_headers">
+      <dl>
+
+        <dt>From:</dt>
+        <dd><input type='text' name='inbound[from]' value='<%= h to %>'/></dd>
+
+        <% unless message_id.empty? %>
+          <dt>In-Reply-To:</dt>
+          <dd><input type='text' name='In-Reply-To' value='<%= h message_id %>'/></dd>
+        <% end %>
+
+        <dt>Message-ID:</dt>
+        <dd><input type='text' name='Message-ID' value='<%= "<msg-#{Time.now.strftime("%H%M%S")}@opnletter.org>" %>'/></dd>
+
+        <dt>Subject:</dt>
+        <dd><input type='text' name='inbound[subject]' value='Re: <%= h mail.subject %>'/></dd>
+
+        <dt>To:</dt>
+        <dd><input type='text' name='inbound[to]' value='<%= h from %>'/></dd>
+
+        <dt>CC:</dt>
+        <dd><input type="text" name='inbound[cc]'/></dd>
+
+        <dt>BCC:</dt>
+        <dd><input type="text" name='inbound[bcc]'/></dd>
+
+      </dl>
+    </div>
+
+    <textarea name='inbound[text]'></textarea>
+    <input type="submit" value="Submit form data via HTTP POST to http://<%= @team_name %>.smso.dev:3000/letter_opener_reply"/>
+
+  </form>
+
+</div>

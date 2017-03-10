@@ -1,0 +1,9 @@
+//= require bootstrap-typeahead/bootstrap-typeahead
+//= require reflux
+//= require hogan
+//= require ./new_tablesorter
+//= require ./new_check_box
+//= require ./new_send_button
+//= require ./new_show_reserves
+//= require ./new_tag_manager
+//= require ./new_select_action

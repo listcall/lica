@@ -1,0 +1,75 @@
+- content_for :page_js do
+  javascript:
+    window.lclData    = {};
+    window.lclData["editable"] = #{@editable};
+    lclData.teamId   = #{current_team.id};
+    lclData.svcList  = #{raw @svc_bot.service_list};
+    lclData.memList  = #{raw @svc_bot.member_list};
+    lclData.busyList = #{raw @svc_bot.busy_list};
+  = javascript_include_tag 'svc_cals/all_index'
+
+- content_for :services_header do
+  b Service Calendar
+
+- content_for :services_body do
+  css:
+    #calHere     {padding-right: 4px;}
+    #memberTags  {margin-bottom: 4px; border: 1px solid gray; padding: 4px;}
+    .today       {background-color: #fcf8e3;}
+    .selected    {background-color: lightblue; }
+    .selectedHdr {background-color: #c4effd; }
+    .fc-toolbar .fc-state-active  {z-index: 1; }
+    .fc-toolbar button:focus      {z-index: 0; }
+    .tooltip-inner                {z-index: 10;}
+    .repeatBody  {width: 400px;}
+
+    table.res { border: 1px solid gray; }
+
+    table.res thead {
+      position: relative;
+      display:  block;
+      width:    100%;
+    }
+
+    table.res tbody {
+      width:      100%;
+      display:    block;
+      overflow-y: scroll;
+    }
+
+    table.res th:nth-child(1)                   {width: 110px; max-width: 110px; overflow: hidden; text-overflow: ellipsis;}
+    table.res td:nth-child(1)                   {width: 110px; max-width: 110px; overflow: hidden; text-overflow: ellipsis;}
+    table.res td:nth-child(n+2)                 {width: 78px;  max-width: 78px;  overflow: hidden; text-overflow: ellipsis;}
+    table.res th:nth-child(n+2):nth-child(-n+7) {width: 78px;  max-width: 78px;  overflow: hidden; text-overflow: ellipsis;}
+    table.res th:nth-child(8)                   {width: 94px;  max-width: 94px;  overflow: hidden; text-overflow: ellipsis;}
+
+    .redX { color: #ff8c82; }
+
+  #calHere
+
+= modal 'eventModal' do
+  .modal-body
+    #memberTags
+      input#memberTagInput.tagInput type='text'   placeholder='add member...'
+      input#memberTagNames          type='hidden' value=''
+    .row
+      .col-xs-4
+        div
+          p
+          b Service:
+          p
+          #serviceSelect
+      .col-xs-8
+        #timeSet
+        #recurSet
+
+  .modal-footer
+    .row
+      .col-xs-6.text-left
+        button.btn.btn-danger.btn-sm#deleteEvent type='button' Delete
+      .col-xs-6.text-right
+        button.btn.btn-primary.btn-sm#updateEvent type='button' Update
+        button.btn.btn-primary.btn-sm#createEvent type='button' Create
+        button.btn.btn-default.btn-sm type='button' data-dismiss='modal' Close
+
+= render :partial => "svcs/services_layout"

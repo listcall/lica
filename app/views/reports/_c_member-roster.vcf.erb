@@ -1,0 +1,17 @@
+<% @members.each do |mem| %>
+BEGIN:VCARD
+VERSION:3.0
+N:<%= mem.last_name %>;<%= mem.first_name %>
+ORG:<%= current_team.acronym %>
+TITLE:<%= mem.roles %>
+<% mem.addresses.visible_for(current_membership).each do |adr| %>
+ADR;TYPE=<%= adr.typ %>:;;<%= adr.address1 %>;<%= adr.address2 %>;<%= adr.city %>;<%= adr.state %>;<%= adr.zip %>;United States of America
+<% end %>
+<% mem.phones.visible_for(current_membership).each do |pho| %>
+TEL;TYPE=<%= pho.typ %>,VOICE:<%= pho.number %>
+<% end %>
+<% mem.emails.visible_for(current_membership).each do |ema| %>
+EMAIL;TYPE=<%= ema.typ %>:<%= ema.address %>
+<% end %>
+END:VCARD
+<% end %>

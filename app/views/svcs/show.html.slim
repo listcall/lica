@@ -1,0 +1,11 @@
+- content_for :services_header do
+  = svc_breadcrumb ["svc/#{@service.id}", "sched", @member.user_name], \
+                   [@service.name, "Schedule", @member.user_name]
+
+- content_for :services_body do
+  b Member Schedule Calendar for #{@service.name} - Under Construction
+  li list of scheduled activities
+  div style='margin-top: 15px; margin-bottom: 15px;'
+  | This page shows the service assighnments for one member: <b>#{current_user.user_name}</b>.<br/>
+
+= render :partial => "svcs/services_layout"

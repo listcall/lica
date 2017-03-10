@@ -1,0 +1,85 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/team_navs/all_team_navs'
+
+- content_for :admin_header do
+  = admin_header :Lica_Team, :navs
+
+- content_for :admin_body do
+  .content
+    .row#hdrSection
+      div style=("text-align: center; width: 100%; border: 1px solid lightgray; padding: 4px;")
+        b Header Nav
+      .col-sm-12 style=("border: 1px solid lightgray;")
+        table.table.table-hover style=("margin-bottom: 0;")
+          thead
+            th Type
+            th Path
+            th Label
+            th Visible To
+            th
+              button#hdrCreateBtn.btn.btn-xs.btn-primary Create
+          tbody#navHdrBody
+            - @hdr_navs.each do |nav|
+              = render :partial => 'nav_row', locals: {nav: nav, typ: 'hdr'}
+        div style=("display: hidden;")
+          form#createHdrNavForm action="/admin/team_navs" method="post"
+            input name="authenticity_token" type="hidden" value=form_authenticity_token /
+            input name="typ" type="hidden" value="hdr" /
+          - @hdr_navs.each do |nav|
+            form action=("/admin/team_navs/#{nav.id} ") id="form_#{nav.id}" method="post"
+              input name="authenticity_token" type="hidden" value=form_authenticity_token /
+              input name="typ" type="hidden" value="hdr" /
+              input name="_method" type="hidden" value="delete" /
+
+    .row#ftrSection style=("margin-top: 20px;")
+      div style=("text-align: center; width: 100%; border: 1px solid lightgray; padding: 4px;")
+        b Footer Nav
+      .col-sm-12 style=("border: 1px solid lightgray;")
+        table.table.table-hover   style=("margin-bottom: 0;")
+          thead
+            th Type
+            th Path
+            th Label
+            th Visible To
+            th
+              button#ftrCreateBtn.btn.btn-xs.btn-primary Create
+          tbody#navFtrBody
+            - @ftr_navs.each do |nav|
+              = render :partial => 'nav_row', locals: {nav: nav, typ: 'ftr'}
+        div style=("display: hidden;")
+          form#createFtrNavForm action="/admin/team_navs" method="post"
+            input name="authenticity_token" type="hidden" value=form_authenticity_token
+            input name="typ" type="hidden" value="ftr"
+          - @ftr_navs.each do |nav|
+            form action=("/admin/team_navs/#{nav.id} ") id="form_#{nav.id}" method="post"
+              input name="authenticity_token" type="hidden" value=form_authenticity_token
+              input name="typ" type="hidden" value="ftr"
+              input name="_method" type="hidden" value="delete"
+
+    .row#homeSection style=("margin-top: 20px;")
+      div style=("text-align: center; width: 100%; border: 1px solid lightgray; padding: 4px;")
+        b Home Page Nav
+      .col-sm-12 style=("border: 1px solid lightgray;")
+        table.table.table-hover style=("margin-bottom: 0;")
+          thead
+            th Type
+            th Path
+            th Label
+            th Visible To
+            th
+              button#homeCreateBtn.btn.btn-xs.btn-primary Create
+          tbody#navHomeBody
+            - @home_navs.each do |nav|
+              = render :partial => 'nav_row', locals: {nav: nav, typ: 'home'}
+        div style=("display: hidden;")
+          form#createHomeNavForm action="/admin/team_navs" method="post"
+            input name="authenticity_token" type="hidden" value=form_authenticity_token
+            input name="typ" type="hidden" value="home"
+          - @home_navs.each do |nav|
+            form action=("/admin/team_navs/#{nav.id} ") id="form_#{nav.id}" method="post"
+              input name="authenticity_token" type="hidden" value=form_authenticity_token
+              input name="typ" type="hidden" value="home"
+              input name="_method" type="hidden" value="delete"
+
+= render :partial => 'admin/admin_layout'
+

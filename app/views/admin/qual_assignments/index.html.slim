@@ -1,0 +1,29 @@
+css:
+  .iconSpan:hover {
+    cursor: pointer;
+  }
+
+- content_for :page_js do
+  = javascript_include_tag 'admin/qual_assignments/all_qual_assignments'
+
+- content_for :admin_header do
+  = admin_header :Lica_Qualifications, :assignments
+
+- content_for :admin_body do
+  table.table.table-hover
+    thead
+      tr
+        th
+        - @quals.each do |qual|
+          th
+            = qual.rid
+    tbody#certTypeBody
+      - @types.each do  |type|
+        tr id="type_#{type.id}"
+          td
+            = type.rid
+          - @quals.each do |qual|
+            td
+              = qual_check type, qual, @assigs
+
+= render :partial => 'admin/admin_layout'

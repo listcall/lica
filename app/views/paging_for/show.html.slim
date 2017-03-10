@@ -1,0 +1,47 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-8
+          b
+            = render :partial => 'paging/team_title'
+            | > #{link_to truncate(@bcst.short_body, length: 20), "/paging/#{@assig.sequential_id}"}
+            | > #{@member.user_name}
+        .col-xs-4.text-right
+          small= link_to "Index", "/paging"
+          = member_help_button('paging')
+
+.container
+  .row
+    .col-md-12
+      b Fm:
+      = pgr_mem_link(@bcst.sender)
+      b To:
+      = pgr_mem_link(@member)
+      = @bcst.other_count
+      = @bcst.via
+      br/
+      - @posts.each do |post|
+        .media
+          a.pull-left href="#"
+            = raw avatar_path(post.creator.try(:user), "media-object")
+          .media-body
+            h5.media-heading= post.headline
+            = post.parsed_body
+      p
+      - if @target.participant(current_membership)
+        .control-group
+          label.text.control-label
+            | Send a reply to #{@member.alt_name(@bcst.sender, current_membership)}#{@bcst.via}
+          br
+          form.form-horizontal action="/paging/#{@bcst_id}/paging_posts" method="post" role="form"
+            input name="authenticity_token" type="hidden" value=form_authenticity_token /
+            input name="pager_post[pager_target_id]" type="hidden" value=@target.id /
+            input name="pager_post[creator_id]" type="hidden" value=@post.creator_id /
+            input name="pager_post[long_body]" type="hidden" value="" /
+            .form-group
+              .col-lg-10
+                textarea#inputText.form-control name="pager_post[short_body]" type="email"
+            .form-group
+              .col-lg-offset-2.col-lg-10
+                button.btn.btn-default type="submit"  Send

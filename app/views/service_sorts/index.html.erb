@@ -1,0 +1,74 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'admin/service_sorts/all_indx' %>
+<% end %>
+
+<% content_for :admin_header do %>
+  <%= admin_header :Lica_Services, :types %>
+<% end %>
+
+<% content_for :admin_body do %>
+
+  <table class='table table-condensed table-hover'>
+    <thead>
+    <tr>
+      <th>Service Type</th>
+      <th>Description</th>
+      <th><button id='serviceCreateBtn' class='btn btn-xs btn-primary'>Create</button></th>
+    </tr>
+    </thead>
+    <tbody id='serviceBody'>
+    <% @services.each do |service| %>
+      <tr id='service_<%= service.id %> '>
+
+        <td>
+          <i class="fa fa-arrows-v sortIcon"></i>
+          <a href="/admin/service_sorts/<%= service.id %>">
+            <%= service.name %>
+          </a>
+        </td>
+
+        <td>
+          <%= service.description %>
+        </td>
+
+        <td width=50 align=center>
+          <%# raw service.edit_button(service) %>
+          <%= raw service.delete_button(service) %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+
+  <form id='createserviceForm' method='post' action='/admin/member_services'>
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>" />
+  </form>
+
+  <%= modal 'myModal', 'Create a New Service Type' do %>
+    <div class="modal-body">
+      <form id="serviceCreateForm" action="/admin/service_sorts" method='POST'>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+        <input type="hidden" name="service[team_id]" value="<%= current_team.id %>"             />
+
+        <div class="form-group">
+          <label for="serviceName">Service Name</label>
+          <input type="text" class="form-control" id="serviceName" placeholder="Enter name" name="service[name]">
+        </div>
+
+        <div class="form-group">
+          <label for="serviceDescription">Service Description</label>
+          <textarea class="form-control" id="serviceDescription" rows=3 placeholder="Description" name="service[description]"></textarea>
+        </div>
+
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary btn-sm avEdit" id="serviceSaveBtn">Create</button>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+    </div>
+  <% end %>
+
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

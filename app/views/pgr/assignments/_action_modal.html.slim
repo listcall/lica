@@ -1,0 +1,30 @@
+- # integration_test: features/pgr/new
+
+javascript:
+  optionLst = '#{raw Pgr::Action.option_list.to_json}';
+  periodLst = '#{raw period_list(@events).to_json}';
+  window.OptionList = JSON.parse(optionLst);
+  window.PeriodList = JSON.parse(periodLst);
+
+css:
+  .strikeout {
+    text-decoration: line-through;
+  }
+  .btn-ts {
+    padding: 0 3px 0 3px;
+    font-size: 10px;
+    margin-right: 3px;
+  }
+= modal 'actionModal', 'Select an Action' do
+  .modal-body
+    .row
+      .col-ms-4.ac
+        b Actions
+        p
+        = react_component 'VT.rc.OptionList'
+      .col-ms-8
+        = react_component "VT.rc.OptionDisplay"
+
+  .modal-footer
+    =<> react_component "VT.rc.SaveButton", {}, {:tag => :span}
+    =<> react_component "VT.rc.CloseButton", {}, {:tag => :span}

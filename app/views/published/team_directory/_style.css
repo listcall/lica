@@ -1,0 +1,62 @@
+
+body {
+margin: 0;
+}
+
+#team-container {
+width    : 600px;       /* adjust to fit container size            */
+position : absolute;
+}
+
+#team-header {
+background    : lightgray;  /* for development and testing                  */
+height        : 30px;       /* adjust as necessary                          */
+padding-top   : 10px;       /* adjust as necessary                          */
+width         : 600px;      /* should be the same as team-container(width)  */
+position      : fixed;
+text-align    : center;
+border-bottom : 1px solid gray;
+}
+
+#team-content {
+margin-top : 45px;       /* should be team-header(height + padding-top + 5)     */
+}
+
+.team-section {
+min-height : 350px;            /* adjust to fit container size   */
+margin     : 4px;              /* adjust to fit                  */
+background : #f0f0f0;          /* for development and testing    */
+border     : 1px solid black;  /* for development and testing    */
+}
+
+.team-section h3 {
+text-align: center;
+}
+
+.directory-table td {
+padding   : 4px;
+font-size : 12pt;
+}
+
+.event-detail {
+margin      : 20px;
+padding     : 5px;
+min-height  : 80px;
+border      : 1px solid black;
+background  : white;
+}
+
+.anchor {
+top        : -45px;      /* should be team-header(height + padding-top + 5)   */
+display    : block;
+position   : relative;
+visibility : hidden;
+}
+
+.divider {
+text-align  : center;
+font-weight : bold;
+margin      : 15px;
+}
+
+

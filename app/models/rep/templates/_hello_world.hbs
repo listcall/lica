@@ -1,0 +1,28 @@
+---
+_context_type: "Rep::Ctx::Hello"
+color:
+  sky:   blue
+  grass: green
+this_is: working
+---
+This is the hello world template.
+<p></p>
+
+<div id='template'>
+
+  This is: {{alt.this_is}}<p></p>
+
+  Sky is: {{alt.color.sky}}<br/>
+  Grass is: {{alt.color.grass}}<p></p>
+
+  <p></p>
+
+  <p><b>MEMBERS</b></p>
+  {{#each members}}
+    <li>{{id}} / {{first_name}} {{last_name}}</li>
+  {{/each}}
+
+</div>
+
+
+<div id='target'>loading...</div>

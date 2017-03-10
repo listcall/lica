@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title><%= @page_title || current_team.acronym %></title>
+  <link href='<%= current_team.icon_path %>' rel='shortcut icon' type='image/vnd.microsoft.icon'/>
+  <%= stylesheet_link_tag    "application" %>
+  <script src="https://use.fontawesome.com/5fb07bfd2c.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+<div id="wrap">
+  <div class='navbar navbar-default navbar-fixed-top' role="navigation">
+    <div class='container'>
+      <div class="navbar-header" width="100%">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <col-md- class='fa fa-bar'></col-md->
+          <col-md- class='fa fa-bar'></col-md->
+          <col-md- class='fa fa-bar'></col-md->
+        </button>
+        <%= raw team_logo %>
+      </div>
+      <div class="navbar-collapse collapse">
+        <% if user_signed_in? %>
+          <ul id='headerNav' class='nav navbar-nav navbar-right'>
+            <%= raw NavBarSvc.header_nav(current_user, current_team, request.path) %>
+            <li class="dropdown">
+              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown"><%= current_user.user_name %> <b class="fa fa-caret-down"></b></a>
+              <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
+                <li><a href="/members/<%= current_user.user_name %>"><i class="fa fa-cog"></i> settings</a></li>
+                <%= raw NavBarSvc.team_nav(current_user, current_team, request.env) %>
+                <li><a href="/logout"><i class='fa fa-off'></i> log out</a></li>
+              </ul>
+            </li>
+          </ul>
+        <% else %>
+          <% unless current_page?("/login") %>
+            <%= raw link_to("log in", "/login", style: 'margin-top: 15px;', class: "navbar-right") %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <%= yield :subhead %>
+
+  <div class="container">
+    <% flash.each do |name, msg| %>
+      <div class="alert alert-<%= name == :notice ? "success" : "error" %>">
+        <a class="close" data-dismiss="alert">x</a>
+        <%= msg %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class='hdrGap'></div>
+
+  <%= yield %>
+
+</div>
+
+<div id='footer'>
+  <div class='container'>
+    <small>
+      <table width=100%>
+        <tr>
+          <td align='left' width=20%><%= current_team.try(:acronym) %> Confidential</td>
+          <td id='footerNav' align='center' width=60% class="visible-sm-and-above">
+            <%= raw NavBarSvc.footer_nav(current_user, current_team) %>
+          </td>
+          <td align='right' width=20%>
+            <% if Rails.env.development? %>
+              <%= raw debug_text %>
+            <% else %>
+              Powered by Lica
+            <% end %>
+          </td>
+        </tr>
+      </table>
+    </small>
+  </div>
+</div>
+
+<%= javascript_include_tag "application" %>
+<%= yield :page_js %>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+doctype html
+html
+  head
+    title = @page_title || current_team.acronym
+    link href='#{current_team.icon_path}' rel='shortcut icon' type='image/vnd.microsoft.icon'
+    meta charset="utf-8"
+    meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    meta name="keywords" content="template language"
+    = stylesheet_link_tag    "report"
+    = javascript_include_tag "report"
+    javascript:
+      window.context = JSON.parse('#{raw @report.ctx_json}');
+      console.log("context:", context);
+      $(document).ready(function() {
+        if ($('#template').length) {  // if the #template element exists
+          if ($('#target').length) {  // if the #target element exists
+            tmpl = Handlebars.compile($('#template').html());
+            html = tmpl(context);
+            $('#target').html(html);
+          } else {
+            alert("there is a #template element, but no #target!!");
+          }
+        }
+      });
+  body
+    = yield

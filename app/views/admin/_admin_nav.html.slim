@@ -1,0 +1,22 @@
+.adminHeader
+  b
+    a href="/admin"
+      = current_team.acronym
+      |  Admin
+
+- AdminOpts.menus.each do |key, menus|
+  - if feature_enabled(current_team, key)
+    a.btn.btn-xs.btn-default.clkToggle href="##{label_for(key)}"
+      = label_for(key)
+    ul class=("nav nav-tabs nav-stacked adminNav collapse #{current_section(menus)}") id=(label_for key)
+      - menus.each do |_label, menu|
+        - if can_view_admin(menu)
+          li
+            - if current_page?(menu[:path])
+              div style=("padding-top: 4px; padding-bottom: 4px; margin-left: 15px;")
+                = navicon menu[:icon]
+                span style=("margin-left: 2px; font-size: 10pt;") = menu[:label].titleize
+            - else
+              a href=menu[:path] style=("padding-top: 4px; padding-bottom: 4px;")
+                = navicon menu[:icon]
+                span style=("margin-left: 2px; font-size: 10pt;") = menu[:label].titleize

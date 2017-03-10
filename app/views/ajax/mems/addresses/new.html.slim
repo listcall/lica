@@ -1,0 +1,26 @@
+= bs_vert_multi_form_for @address, url: '/a/b/c', html: {id: 'addressCreateForm'} do |f|
+
+  - if @address.errors.any?
+    div class='row'
+      div class="col-xs-12"
+        div class="form-error"
+          small
+            b
+              =' pluralize(@address.errors.count, "error")
+              | prevented this address from being created:
+            = @address.errors.full_messages.map.with_index {|msg, i| " #{i+1}) #{msg}"}.join(',')
+
+  .row
+    = f.text_field :address1, label: "Address 1"
+    = f.text_field :city,     label: "City"
+  .row
+    = f.text_field :address2, label: "Address 2"
+    = f.text_field :state,    label: "State"
+  .row
+    = f.select     :typ , %w(Work Home Other), label: "Address Type"
+    = f.text_field :zip,                       label: "Zip Code"
+  .row
+    = f.switch_box :visible, cols: 6, on_color: 'default', on_text: "yes <i class='fa fa-eye'/>", off_text: "no <i class='fa fa-eye-slash obscure_address'/>"
+    .col-sm-6
+      small
+        | If this address is visible, everyone on your team can see it.  Otherwise, only team administrators can see it.

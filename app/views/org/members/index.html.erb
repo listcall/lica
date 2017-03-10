@@ -1,0 +1,33 @@
+<div class='container'>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      Member List for <%= link_to @team.acronym, "/org/teams" %>
+
+      <table class="table table-compact">
+        <thead>
+        <th>Name</th>
+        <th>Username</th>
+        <th>Rank</th>
+        <th>Roles</th>
+        <th>Rights</th>
+        </thead>
+        <tbody>
+        <% @members.each do |mem| %>
+        <tr>
+          <td><%= mem.full_name %></td>
+          <td><%= mem.user_name %></td>
+          <td><%= mem.rank %></td>
+          <td><%= mem.roles.join(', ') %></td>
+          <td><%= mem.rights %></td>
+        </tr>
+        <% end %>
+        </tbody>
+
+      </table>
+
+    </div>
+  </div>
+
+</div>

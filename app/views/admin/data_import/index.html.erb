@@ -1,0 +1,62 @@
+<% content_for :admin_header do %>
+    <%= admin_header :Lica_Team, :import %>
+<% end %>
+
+<% content_for :admin_body do %>
+
+  <small>
+    Data Import provides tools for administrators to bulk-load team data records.  Data files may be in XLS or CSV format.
+    The import software can bulk-load many object types: Organizations, Teams, Users, Events, etc.<p></p>
+    Regarding the data file naming and input formats:
+    <ul>
+      <li>please make the names of your CSV viles and spreadsheet tabs exactly match the DataSet name shown below</li>
+      <li> put a header in the first for of each dataset with a column name that exactly matches the name shown below</li>
+      <li>column ordering doesn't matter</li>
+      <li>partial data / missing columns are OK (mostly)</li>
+      <li>extra columns will be ignored</li>
+      <li>multiple input files can be organized together into a single TAR or ZIP file</li>
+    </ul>
+    Send your data files via email to Andy Leak (andy@r210.com / 650-823-0836).  Andy will load your data into the system.
+  </small>
+
+  <div style="background-color: lightcyan; margin-top: 10px; padding-left: 4px;">
+    <small>
+    <%= raw @name_links %>
+    </small>
+  </div>
+
+  <% @doccos.each do |obj| %>
+
+    <a class='ankor' name="<%= obj.dataset_name %>s"></a>
+    <div style='background: rgba(197, 241, 255, 0.81); padding: 4px;'>
+      DataSet: <b><%= obj.dataset_name %>s</b>
+      <small style="float: right; padding-right: 5px;"><a href='#top' onclick="window.scrollTo(0,0);">top</a></small><br/>
+      <small><%= raw obj.overview %></small>
+      <table class="table table-condensed table-bordered" style="margin-bottom: 0;">
+        <tr>
+          <td><u>Column</u></td>
+          <td><u>Type</u></td>
+          <td><u>Validations</u></td>
+          <td><u>Remarks</u></td>
+        </tr>
+        <% obj.column_names.each do |col| %>
+          <tr>
+            <td><%= col %></td>
+            <td><%= obj.data_type(col) %></td>
+            <td><%= obj.validators(col) %></td>
+            <td><%= obj.remark(col) %></td>
+          </tr>
+        <% end %>
+      </table>
+      <div style="margin-top: 0;">
+        <small><%= raw obj.footnote %></small>
+      </div>
+    </div>
+    <p></p>
+
+  <% end %>
+
+
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

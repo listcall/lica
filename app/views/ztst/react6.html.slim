@@ -1,0 +1,13 @@
+- content_for :page_js do
+  = javascript_include_tag 'ztst/all_react6'
+
+.container
+  = render :partial => 'shared_nav'
+
+.container
+  .row
+    .col-md-12
+      h2 TEST OF REACT/BOOTSTRAP POPOVER
+      #reactHere
+      p
+      #reactThere

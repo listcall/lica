@@ -1,0 +1,19 @@
+This is the handlebars template!
+<div class="entry">
+  <h3>{{title}}</h3>
+  <div class="body">
+    {{body}}
+  </div>
+</div>
+<p>Here is a list.</p>
+{{#each lst}}
+  <li>{{name}}</li>
+{{/each}}
+<p>Here is a table.</p>
+{{#each tbl}}
+  >
+  {{#each this}}
+    {{this.org}} |
+  {{/each}}
+  <br/>
+{{/each}}

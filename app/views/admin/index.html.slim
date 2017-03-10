@@ -1,0 +1,24 @@
+- content_for :admin_header do
+  b Admin Home
+
+- content_for :admin_body do
+  css:
+    .table-sel-hover tbody tr:hover > td.sel {
+      background-color: whitesmoke;
+    }
+  intro.ac
+    - if current_membership.owner?
+      | Team Owner: configure the features and functions for your team.
+    - else
+      | Team Manager: update member ranks/roles, and member profile data.
+  table.table.table-condensed.table-sel-hover
+    thead
+      th width=80 Feature
+      th Page
+      th Description
+    tbody
+      - AdminOpts.menus.each do |key, menus|
+        = menu_group(key, menus)
+
+= render :partial => 'admin/admin_layout'
+

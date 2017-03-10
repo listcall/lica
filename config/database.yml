@@ -1,0 +1,23 @@
+common: &common
+  pool: 5
+  adapter:  postgresql
+  encoding: UTF8
+  template: template_base
+  username: postgres
+  password: postgres
+
+development:
+  <<: *common
+  database: list_call_development
+
+test:
+  <<: *common
+  database: list_call_test
+
+staging:
+ <<: *common
+ database: list_call_staging
+
+production:
+  <<: *common
+  database: list_call_production

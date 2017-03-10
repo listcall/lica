@@ -1,0 +1,6 @@
+<% x=1 %>
+<% fields = %w(organization rank full_name mobile_phone home_phone work_phone other_phone home_address work_address other_address home_email personal_email work_email) %>
+<%= fields.join(',') %>
+<% @guests.each do |mem| %>
+<%= raw csv_record(mem, fields) %>
+<% end %>

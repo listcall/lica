@@ -1,0 +1,94 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/svc_index/all_indx'
+
+css:
+  .color {
+    width:  65px;
+    height: 23px;
+  }
+
+  .calSquare {
+    background: #fff;
+    border: 1px solid #dcdcdc;
+    border-radius: 1px;
+    height: 11px;
+    margin-right: 4px;
+    position: relative;
+    top: 2px;
+    *top: -1px;
+    width: 11px;
+    -moz-border-radius: 1px;
+    -webkit-border-radius: 1px
+  }
+  .cPicker {
+    border: 1px solid grey;
+    padding: 1px 5px;
+    line-height: 1.5;
+    font-size: 12px;
+    border-radius: 3px;
+    display: inline-block;
+    text-align: center;
+    cursor: pointer;
+   }
+   .colorBox {
+     height: 12px;
+     width:  12px;
+     cursor: pointer;
+     display: inline-block;
+     margin-left: 3px;
+     margin-right: 3px;
+     border: 1px solid white;
+   }
+   .colorBox:hover {
+     border: 1px solid black;
+   }
+   .grayBorder { border: 1px solid #5d5d5d; }
+
+- content_for :admin_header do
+  = admin_header :Lica_Services, :index
+
+- content_for :admin_body do
+  b #{current_team.acronym} Services
+  table.table.table-condensed.table-hover.table-bordered
+    thead
+      tr
+        th Name
+        /th Description
+        th Partners
+        th Color
+        th.ar
+          button.btn.btn-default.btn-xs#svcCreateBtn New
+    tbody#svcBody
+      - @services.each do |service|
+        tr.dragRow id="svc_#{service.id} "
+          td
+            i.fa.fa-arrows-v.sortIcon
+            a.inline data-name="name" data-pk="#{service.id}" data-type="text" data-url="/admin/svc_index/#{service.id}" href='#'
+              = service.name
+          /td
+          /  a.inline data-name="description" data-pk="#{service.id}" data-type="text" data-url="/admin/svc_index/#{service.id}" href='#'
+          /    = service.description
+          td
+            = xeCkl cls:"ptCk", pk:service.id, name:"partner_acronyms",
+                    val:service.partner_acronyms, src: team_partner_acronyms,
+                    place: 'bottom'
+          td
+            .cPicker id="cp_#{service.id}" data-color='#{service.label_color}' style="background: ##{service.label_color};" Select Color
+          td.ar
+            = link_to 'Delete', "/admin/svc_index/#{service.id}", method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger'
+
+= modal 'svcModal', "Create a New Service"
+  .modal-body
+    form#svcCreateForm action="/admin/svc_index" method="POST"
+      input name="authenticity_token" type="hidden" value=form_authenticity_token
+      .form-group
+        label for="svcName" Service Name
+        input#svcName.form-control name="svc[name]" placeholder="Enter name" type="text"
+      /.form-group
+      /  label for="svcDesc" Description
+      /  input#svcDesc.form-control name="svc[description]" placeholder="Enter description" type="text"
+  .modal-footer
+    button#svcSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Create
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close
+
+= render :partial => 'admin/admin_layout'

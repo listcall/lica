@@ -1,0 +1,41 @@
+{{#ifZero current_count }}
+  <small>There are no events happening right now...</small>
+{{else}}
+  <table class="table table-condensed table-bordered">
+    <tr>
+      <th>Happening Now</th>
+      <th>Type</th>
+      <th>Start</th>
+    </tr>
+    {{#each current_events}}
+      <tr>
+        <td>
+          <a href="/events/{{ref}}">{{title}}</a>
+        </td>
+        <td>{{type}}</td>
+        <td>{{start}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/ifZero}}
+<p></p>
+{{#ifZero upcoming_count }}
+  <small>No scheduled events from {{upcoming_start}} to {{upcoming_finish}}...</small>
+{{else}}
+  <table class="table table-condensed table-bordered">
+    <tr>
+      <th>{{upcoming_start}} to {{upcoming_finish}}</th>
+      <th>Type</th>
+      <th>Start</th>
+    </tr>
+    {{#each upcoming_events}}
+      <tr>
+        <td>
+          <a href="/events/{{ref}}">{{title}}</a>
+        </td>
+        <td>{{type}}</td>
+        <td>{{start}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/ifZero}}

@@ -1,0 +1,15 @@
+tr id=("rank_#{rank.acronym}")
+  td
+    i.fa.fa-arrows-v.sortIcon
+    a.inline data-name="name" data-pk=("#{rank.id}") data-type="text" data-url=("/admin/member_ranks/#{rank.id}") href="#"
+      = rank.name
+  td
+    a.inlineLbl data-name="acronym" data-pk=("#{rank.id}") data-type="text" data-url=("/admin/member_ranks/#{rank.id}") href="#"
+      = rank.acronym
+  td align="center" style=("text-align: center;") width="65"
+    span.badge.rankBadge
+    a href=("/admin/member_registry?ranks=#{rank.acronym}") target="_blank"
+      i.fa.fa-group
+      = rank_count(rank)
+  td align="center" width="50"
+    = raw rank_delete_button(rank)

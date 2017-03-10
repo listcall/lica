@@ -1,0 +1,61 @@
+- # integration_test: features/events_new
+
+- content_for :page_js do
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9knuWFHshMUw5f9Vv6eaFEaU2oX-MDXA&sensor=false" type="text/javascript"
+  javascript:
+    window.lclData = {};
+    lclData.eTypes = '#{raw(@ev_times)}';
+    lclData.isCopy = window.location.search.indexOf('copy') > -1
+  = javascript_include_tag 'events/all_new'
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = raw link_to "#{current_team.acronym} Events", "/events"
+            |  > Create New Event
+        .col-xs-6.text-right
+          = member_help_button('events')
+
+.container
+  = bs_vert_multi_form_for @event do |f|
+    - if @event.errors.any?
+      .row
+        .col-xs-12
+          .form-error
+            small
+              b
+                = pluralize(@event.errors.count, "error")
+                |  prevented this event from being saved:
+              = @event.errors.full_messages.map.with_index {|msg, i| "#{i+1}) #{msg}"}.join(', ')
+    .row
+      = f.select     :typ    , @ev_types, cols: 3, label: "Event Type"
+      = f.text_field :title  , cols: 4, placeholder: "event title", label: "Title *"
+      = f.text_field :leaders, cols: 3, placeholder: "last name(s)"
+      .form-group.col-sm-2
+        label.control-label Published?
+        = published_helper(@event)
+    .row
+      = f.itxt_field :location_name    , cols: 3, placeholder: "eg. 'Yosemite'", id: "frmNam", label: "Location Name *", fa: 'map-marker', color: 'red'
+      = f.text_field :location_address , cols: 5, placeholder: "street address", id: 'frmAdr'
+      = f.text_field :lat, id: 'frmLat', cols: 2
+      = f.text_field :lon, id: 'frmLon', cols: 2
+    #dateRow.row
+      = f.date_time_field :start,   cols: 5, label: "Start *"
+      = f.date_time_field :finish,  cols: 5, label: "Finish *"
+      .form-group.col-sm-2
+        label.control-label All Day?
+        = all_day_helper(@event)
+    .row
+      = f.text_area :description, rows: 5, placeholder: "Write a short description - 1-3 sentences is sufficient.  (example 'Winter Skills Training in Yosemite.') Check spelling and typos! Proofread! NO SENSITIVE INFORMATION!!"
+    .row
+      .col-xs-6
+        small
+          b *
+          |  Required
+      .col-xs-6.text-right
+        = f.submit_btn "Create Event"
+
+= render 'geopicker_modal'

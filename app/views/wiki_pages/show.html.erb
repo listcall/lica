@@ -1,0 +1,7 @@
+<%= render :partial => 'foundation',
+           :locals  => {
+                   :nav     => wiki_show_nav,
+                   :content => @page.try(:formatted_data)
+           }
+%>
+

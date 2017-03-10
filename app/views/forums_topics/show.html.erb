@@ -1,0 +1,76 @@
+<% content_for :page_js do %>
+  <script>
+    window.memId    = <%= @memId %>;
+    window.pageType = "show";
+  </script>
+  <%= javascript_include_tag 'topics/all_show' %>
+<% end %>
+
+<% content_for :subhead do %>
+  <div class='subhead'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-xs-6'>
+          <b>
+            <%= link_to "#{current_team.acronym} Forums", "/forums" %> >
+            <%= link_to "#{@forum.name.titleize} #{topic_label(@forum.type)}s", "/forums/#{@forum.name}" %>
+          </b>
+        </div>
+        <div class='col-xs-6 text-right'>
+          <%= member_help_button('forums') %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class='container'>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <div class="topic_header">
+        <div class="pull-left">
+          <b><%= @topic.title %></b>
+        </div>
+        <div class="text-right">
+          <% if @forum.type == "FmIssue" %>
+          <col-md->
+            <%= topic_status_helper(@topic) %>
+          </col-md->
+          <% end %>
+          <small style="margin-left: 10px;">created <%= time_ago_in_words(@topic.created_at) %> ago</small>
+        </div>
+      </div>
+
+        <% @posts.each do |post| %>
+        <div class="media">
+          <a class="pull-left" href="#">
+            <%= raw avatar_path(post.creator.try(:user), "media-object") %>
+          </a>
+          <div class="media-body">
+            <h5 class="media-heading"><%= post.creator.try(:user).try(:user_name) %> <%= post.action || "commented" %></h5>
+            <%= post.parsed_body %>
+          </div>
+        </div>
+        <% end %>
+
+      <br/>
+
+      <form action='/forums/<%= @post.topic.forum.name %>/posts' method='post' role="form">
+        <input type="hidden" name="authenticity_token"         value="<%= form_authenticity_token %>" />
+        <input type="hidden" name="forum_post[team_id]"        value="<%= current_team.id %>" />
+        <input type="hidden" name="forum_post[forum_topic_id]" value="<%= @topic.id %>" />
+        <input type="hidden" name="forum_post[creator_id]"     value="<%= current_membership.id %>" />
+        <div class='form-group'>
+          <div class="'col-lg-10">
+            <textarea name='forum_post[body]' class="form-control"></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-default">Add New Post</button>
+      </form>
+
+    </div>
+  </div>
+
+</div>

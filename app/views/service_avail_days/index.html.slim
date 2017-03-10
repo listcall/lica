@@ -1,0 +1,35 @@
+- content_for :services_header do
+  = svc_breadcrumb ["services/#{@service.id}", "avail"], [@service.name, "Availability"]
+
+- content_for :services_body do
+  ' Click
+  a href='/services/#{@service.id}/avail_days/#{current_membership.user_name}' here
+  |  to update your availability.
+
+  table#myTable.tablesorter.table.table-condensed.table-bordered
+    thead
+      tr
+        th Role
+        th Name
+        th Available<br/>today?
+        th = day_label(1)
+        th = day_label(2)
+        th = day_label(3)
+        th = day_label(4)
+        th Return
+        th Comment
+    tbody
+      - @members.each do |mem|
+        tr
+          td = mem.rank
+          td = link_to mem.full_name, "/services/#{@service.id}/avail/#{mem.user_name}"
+          = raw day_helper(mem, 0)
+          = raw day_helper(mem, 1)
+          = raw day_helper(mem, 2)
+          = raw day_helper(mem, 3)
+          = raw day_helper(mem, 4)
+          td = raw return_date_helper(mem, 4)
+          td TBD
+          /! # mem.current_status_comment(@service)
+
+= render :partial => "services/services_layout"

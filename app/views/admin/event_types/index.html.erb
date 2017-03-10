@@ -1,0 +1,102 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'admin/event_types/all_event_types' %>
+<% end %>
+
+<% content_for :admin_header do %>
+  <%= admin_header :Lica_Events, :types %>
+<% end %>
+
+<% content_for :admin_body do %>
+
+  <table class='table table-hover table-condensed'>
+    <thead>
+    <th>Type</th>
+    <th>Acronym</th>
+    <th>Transit Times</th>
+    <th>Signin Times</th>
+    <th>Max Periods</th>
+    <th>Start</th>
+    <th>Finish</th>
+    <th class="ar"><button id='eventTypeCreateBtn' class='btn btn-xs btn-primary'>Create</button></th>
+    </thead>
+    <tbody id='eventTypeBody'>
+
+    <% @types.each do |type| %>
+
+      <tr id="type_<%= type.acronym %>">
+        <td>
+          <i class="fa fa-arrows-v sortIcon"></i>
+          <a class='updateName' href='#' data-value='<%= type.name %>' data-pk='<%= type.id %> ' data-url='/admin/event_types/<%= type.id %>' data-name='name'>
+            <%= type.name %>
+          </a>
+        </td>
+        <td>
+          <a class='updateAcronym' href='#' data-value='<%= type.acronym %>' data-pk='<%= type.id %> ' data-url='/admin/event_types/<%= type.id %>' data-name='acronym'>
+            <%= type.acronym %>
+          </a>
+        </td>
+        <td>
+          <%= event_transit_helper(type) %>
+        </td>
+        <td>
+          <%= event_signin_helper(type) %>
+        </td>
+        <td>
+          <%= event_period_helper(type) %>
+        </td>
+        <td>
+          <a class='updateTime' href='#' data-value='<%= type.default_start_time %>' data-pk='<%= type.id %> ' data-url='/admin/event_types/<%= type.id %>' data-name='default_start_time'>
+            <%= type.default_start_time %>
+          </a>
+        </td>
+        <td>
+          <a class='updateTime' href='#' data-value='<%= type.default_finish_time %>' data-pk='<%= type.id %> ' data-url='/admin/event_types/<%= type.id %>' data-name='default_finish_time'>
+            <%= type.default_finish_time %>
+          </a>
+        </td>
+        <td class="ar">
+          <span class="badge rankBadge">
+            <i class='fa fa-calendar'></i>
+            <%= type_count(type.id) %>
+          </span>
+          <%= raw delete_event_type_button(type.id) %>
+        </td>
+      </tr>
+
+    <% end %>
+
+    </tbody>
+  </table>
+
+  <%= modal 'myModal', 'Create a New Event Type' do %>
+    <div class="modal-body">
+      <form id="eventTypeCreateForm" action="/admin/event_types" method='POST'>
+        <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>" />
+
+        <div class="form-group">
+          <label for="eventName">Event Type</label>
+          <input type="text" class="form-control" id="eventName" placeholder="Event Type" name="event[name]">
+        </div>
+
+        <div class="form-group">
+          <label for="eventName">Acronym</label>
+          <input type="text" class="form-control" id="eventAcronym" placeholder="Acronym" name="event[acronym]">
+        </div>
+
+        <div class="form-group">
+          <label for="eventName">Description</label>
+          <input type="text" class="form-control" id="eventDescription" placeholder="Description" name="event[description]">
+        </div>
+
+      </form>
+    </div>
+
+    <div class="modal-footer">
+      <button type="button" class="btn btn-primary btn-sm avEdit" id="eventTypeSaveBtn">Create</button>
+      <button type="button" class="btn btn-default btn-sm" data-dismiss="modal">Close</button>
+    </div>
+  <% end %>
+
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

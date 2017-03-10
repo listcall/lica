@@ -1,0 +1,76 @@
+- content_for :page_js do
+  = javascript_include_tag 'qual_certs/all_show'
+  javascript:
+    window.memberName = "#{@member.user_name}";
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = link_to "#{current_team.acronym} Qualifications", "/quals"
+            '  >
+            = link_to @qual.name, "/quals/#{@qual.id}/certs"
+            |  > #{@member.full_name}
+        .col-xs-6.text-right
+          = member_help_button('member_certs')
+
+= render 'style'
+
+css:
+  .certEditBtn {
+    margin-right: 4px;
+  }
+  .legendRow  { margin-top: 10px; margin-bottom: 10px;}
+  .datepicker {z-index:1500;}
+  .comTT {
+    background: rgba(173, 216, 230, 0.50);
+    padding-left: 1px;
+    padding-right: 1px;
+  }
+  .comTT:hover { cursor:default;}
+
+.container
+  .row
+    - @qual.qual_ctypes.each do |type|
+      table.table.table-condensed.table-hover data-type=type style=("table-layout: fixed;")
+        thead
+          th = qual_cert_hdr_lbl(type, @qual)
+            | #{type.name} Certs
+          th
+            small Evidence
+          th
+            small Expiration
+          - if @editable
+            th.ar
+              = create_cert_button(type)
+
+        tbody.sortContainer id="sortContainer_#{type.id}"
+          - type.certs_for(@member).each do |mc|
+            tr.sortItem id="certSort_#{mc.id}"
+              td
+                i.fa.fa-arrows-v.sortIcon
+                = mc.try(:title)
+              td
+                = evidence_link(mc)
+                = comment_link(mc)
+              td = qual_exp_date(mc, type, @qual)
+              - if @editable
+                td.ar
+                  = edit_cert_button(mc)
+                  = delete_cert_button(mc, @qual)
+  .row.legendRow
+    .col-ms-9
+      small
+        | <span class="bGrn lbl">Green</span>: current cert, <span class="bYel lbl">Yellow</span>: expires within 3 months, <span class="bOra lbl">Orange</span>: expires within one month, <span class="bPnk lbl">Pink</span>: expired
+    .col-ms-3.ar
+      small
+        | <u>underlined certs</u> are requried
+
+= modal 'myModal', '<span id="modTitle"></span> Cert' do
+  .modal-body#formBody
+    | Loading...
+  .modal-footer
+    button#certSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Save
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close

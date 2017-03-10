@@ -1,0 +1,3 @@
+//= require ./tablesorter
+//= require ./tooltip
+

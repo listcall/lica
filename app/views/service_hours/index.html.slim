@@ -1,0 +1,29 @@
+- content_for :page_js do
+  = javascript_include_tag 'service_hours/all_index'
+
+- content_for :services_header do
+  = svc_breadcrumb "services/#{@service.id}", [@service.name, "Approve Hours"]
+
+- content_for :services_body do
+  h4 Record Hours for #{link_to @service.name, "/services/#{@service.id}"}
+  table.table.table-condensed.table-hover
+    thead
+      tr
+        th Name
+        th Start
+        th Finish
+        th Hours
+        th Action
+    tbody
+      - @providers.each do |provider|
+        tr id="row_#{provider.id}"
+          td = provider.membership.full_name
+          td.start = provider.period.start.try(:fmt)
+          td.finis = provider.period.finish.try(:fmt)
+          td = (provider.period.finish - provider.period.start)/3600 if provider.period.finish
+          td
+            button.btn.btn-xs.btn-primary.acceptBtn id="accept_#{provider.id}" Accept
+            '
+            button.btn.btn-xs.btn-danger.rejectBtn id="reject_#{provider.id}" Reject
+
+= render :partial => "services/services_layout"

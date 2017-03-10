@@ -1,0 +1,92 @@
+<% content_for :page_js do %>
+  <script type="text/javascript">
+    window.lclData = {};
+    lclData.partnerList = <%= raw @partner_bot.full_partner_list %>;
+  </script>
+  <%= javascript_include_tag 'admin/team_partners/all_team_partners' %>
+<% end %>
+
+<% content_for :admin_header do %>
+    <%= admin_header :Lica_Team, :partners %>
+<% end %>
+
+<% content_for :admin_body do %>
+
+  <div class="row">
+    <div class="col-sm-6">
+      <b>Partnership Requests (<%= current_team.unconfirmed_partnerships.count %>)</b>
+    </div>
+    <div class="col-sm-6 text-right">
+      <input class="form-control input-sm" id='addPartner' type="text" placeholder="add partner..." style="width: 250px; float: right;"/>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <% if current_team.unconfirmed_partnerships.count > 0 %>
+      <table class="table table-condensed">
+        <thead>
+          <th>Request</th>
+          <th>On</th>
+          <th>Action</th>
+        </thead>
+        <tbody>
+        <% current_team.pending_partnerships.each do |partnership| %>
+          <tr>
+            <td>
+              From <%= current_team.acronym %> to <%= partnership.partner.acronym %>
+            </td>
+            <td><%= partnership.created_at.strftime("%b-%d") %></td>
+            <td>
+              <%= partnership_delete_helper(partnership, "Withdraw") %>
+            </td>
+          </tr>
+        <% end %>
+        <% current_team.requested_partnerships.each do |partnership| %>
+          <tr>
+            <td>
+              From <%= partnership.partner.acronym %> to <%= current_team.acronym %>
+            </td>
+            <td><%= partnership.created_at.strftime("%b-%d") %></td>
+            <td>
+              <%= partnership_delete_helper(partnership, "Decline") %>
+              <a href="#" id="accept_<%= partnership.partner.id %>" class="btn btn-xs btn-primary btnAccept">Accept</a>
+            </td>
+          </tr>
+        <% end %>
+        </tbody>
+      </table>
+      <% end %>
+    </div>
+  </div>
+
+  <p></p>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <b>Partnerships (<%= current_team.accepted_partnerships.count %>)</b>
+      <% if current_team.accepted_partnerships.count > 0 %>
+        <table class="table table-condensed">
+          <thead>
+          <th>Partner</th>
+          <th>Action</th>
+          </thead>
+          <tbody>
+          <% current_team.accepted_partnerships.includes(:partner).each do |partnership|  %>
+            <tr>
+              <td>
+                <%= partnership.partner.acronym %>
+              </td>
+              <td>
+                <%= partnership_delete_helper(partnership, "Delete") %>
+              </td>
+            </tr>
+          <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  </div>
+
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

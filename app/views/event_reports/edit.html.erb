@@ -1,0 +1,45 @@
+<div class='container'>
+
+  <div class="row">
+    <div class="col-sm-12">
+      <p></p>
+      <h2>Editing AAR Event Report for Period <%= @period_ref %></h2>
+      <p></p>
+    </div>
+  </div>
+
+  <%= bs_vert_multi_form_for @event_report do |f| %>
+
+    <% if @event_report.errors.any? %>
+      <div class='row'>
+        <div class="col-xs-12">
+          <div class="form-error">
+            <small>
+              <b><%= pluralize(@event_report.errors.count, "error") %> prevented this event from being saved:</b>
+              <%= @event_report.errors.full_messages.map.with_index {|msg, i| "#{i+1}) #{msg}"}.join(', ') %>
+            </small>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="row">
+      <%= f.text_field :unit_leader, placeholder: "unit leader name..."       %>
+    </div>
+
+    <div class="row">
+      <%= f.text_field :signed_by,   placeholder: "secretary name..."         %>
+    </div>
+
+    <div class="row">
+    <%= f.text_area :description, rows: 5, placeholder: "TBD"                 %>
+    </div>
+
+    <div class="row">
+      <div class="col-sm-12">
+        <%= f.submit_btn "Update Report" %>
+      </div>
+    </div>
+  <% end %>
+
+</div>

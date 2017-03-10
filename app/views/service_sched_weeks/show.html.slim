@@ -1,0 +1,47 @@
+- content_for :page_js do
+  javascript:
+    window.lclData     = {}
+    lclData.serviceId  = JSON.parse(#{@service.id})
+    lclData.memberName = "#{@member.user_name}"
+  = javascript_include_tag 'service_cal_resrcs/all_show'
+
+
+- content_for :services_header do
+  = svc_breadcrumb ["services/#{@service.id}",   "resrc",     @member.user_name], \
+                   [@service.name, "Resources", @member.user_name], currlnk(@quarter)
+
+- content_for :services_body do
+  div
+    div style='float: right; margin-right: 30px;'
+      - if not_current_quarter(@quarter)
+        a.pn> href="/services/#{@service.id}/resrc/#{@member.user_name}#{homelnk}"
+          i.fa.fa-home style='margin-right: 10px;' data-toggle='tooltip' title='current quarter'
+      a.pn> href="/services/#{@service.id}/resrc/#{@member.user_name}#{prevlnk(@quarter)}"
+        i.fa.fa-chevron-left data-toggle='tooltip' title='previous quarter'
+      b> #{@quarter[:year]} Q#{@quarter[:quarter]}
+      a.pn> href="/services/#{@service.id}/resrc/#{@member.user_name}#{nextlnk(@quarter)}"
+        i.fa.fa-chevron-right data-toggle='tooltip' title="next quarter"
+    | #{@service.name} availability for <b>#{@member.user_name}</b>
+  table.table.table-condensed style='margin-bottom: 5px;'
+    thead
+      tr
+        th : b Shift
+        th : b Start
+        th : b Finish
+        th : b Status
+        th : b Comment
+    tbody
+      - @avail_set.each do |avail|
+        tr
+          td Week #{avail.week}
+          td = avail.weekly_start.strftime("%a %b %d %H:%M")
+          td = avail.weekly_finish.strftime("%a %b %d %H:%M")
+          td = raw three_state_status(avail)
+          td : a.inline.textEditable data-name='comment' data-pk='#{avail.id}' = avail.comment
+  div.text-center style='border: 1px solid black; padding: 2px; background: #eee;'
+    small
+      ' set the Status for every week to
+      button.btn.btn-default.btn-xs#allAvail> available
+      button.btn.btn-default.btn-xs#allUnava> unavailable
+
+= render :partial => "services/services_layout"

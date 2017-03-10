@@ -1,0 +1,70 @@
+- content_for :page_js do
+  javascript:
+    window.lclData     = {}
+    lclData.memberName = "#{@member.user_name}"
+  = javascript_include_tag 'service_cal_avail/all_show'
+
+  css:
+    .calendar {
+      border-spacing : 3px;
+      border-collapse: separate;
+    }
+    input.frm, input.frm:last-child {
+      border-top-left-radius    : 3px;
+      border-bottom-left-radius : 3px;
+      text-align                : left;
+    }
+    #formDiv {
+      margin-top    : 5px;
+      margin-bottom : 30px;
+      background    : lightgray;
+      padding       : 8px;
+    }
+    #createBtn {
+      margin-top: 5px;
+      width     : 100%;
+      text-align: center;
+    }
+
+.container
+  .row
+    .col-ms-9
+      .text-center
+        b #{@member.first_name} has
+          #{pluralize(@avails.count, " Busy Period")}
+
+      - if @avails.length != 0
+        table.table.table-condensed style='margin-top: 20px;'
+          tr
+            th Start
+            th Finish
+            th Comment
+            th Action
+          - @avails.each do |avail|
+            tr.availRow id="avail_#{avail.id}"
+              td : input.inline_date id="start_#{avail.id}"  value="#{avail.start.try(:strftime, "%Y-%m-%d")}"
+              td : input.inline_date id="finis_#{avail.id}"  value="#{avail.finish.try(:strftime, "%Y-%m-%d")}"
+              td : a.inline.textEditable data-name='comment' data-pk='#{avail.id}' = avail.comment
+              td : button.btn.btn-danger.btn-xs.delBtn data-pid='#{avail.id}' Delete
+
+      div#formDiv
+        form#createForm action="/avails" method="post"
+          input type="hidden" name="form[membership_id]"    value="#{@member.id}"
+          input type="hidden" name="authenticity_token"     value="#{form_authenticity_token}"
+          input type="hidden" name="user_name"              value="#{@member.user_name}"
+          table.calendar
+            tr
+              td : b Start
+              td : b Finish
+              td : b Comment
+            tr.input-daterange
+              td : input.form-control.frm#createStart  type='text' name='form[start]'
+              td : input.form-control.frm#createFinis  type='text' name='form[finish]'
+              td : input.form-control.frm              type='text' name='form[comment]'
+            tr
+              td colspan=3
+                input.btn.btn-primary#createBtn type='submit' value="Create New Busy Period"
+
+    .col-ms-3#calCol
+      /! = render 'cal_column'
+

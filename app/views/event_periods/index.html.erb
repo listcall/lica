@@ -1,0 +1,34 @@
+<% content_for :page_js do %>
+  <script>
+    window.lclData   = {};
+    lclData.eventId  = <%= @event.id %>;
+  </script>
+  <%= javascript_include_tag 'event_periods/all_event_period_idx' %>
+<% end %>
+
+<% content_for :subhead do %>
+  <div class='subhead'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-xs-6'>
+          <b><%= raw link_to "#{current_team.acronym} Events", "/events" %> >
+             <%= raw link_to @event.event_ref, "/events/#{@event.event_ref}" %> > Periods</b>
+        </div>
+        <div class='col-xs-6 text-right'>
+          <%= member_help_button('events') %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed table-bordered">
+          <%= raw @event.event_row(parent_row: true, row_klas: 'parentRow') %>
+          <%= raw @event.event_children_rows %>
+        </table>
+    </div>
+  </div>
+</div>

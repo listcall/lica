@@ -1,0 +1,27 @@
+- # integration_test: features/ztst
+
+- content_for :page_js do
+
+  = javascript_include_tag 'ztst/all_react4'
+
+  coffee:
+    window.LocalComponent = React.createClass
+      render: ->
+        React.DOM.div {}, "LOCAL COMPONENT"
+
+.container
+  = render :partial => 'shared_nav'
+
+.container
+  .row
+    .col-md-12
+      h2 This is a react class rendered from a UJS div
+      div data-react-class='VT.Hello'
+      h2 This is a react class rendered from a helper
+      = react_component "VT.Hello"
+      h2 The slide component rendered from a helper
+      = react_component "VT.Slide"
+      h2 Test component
+      = react_component "VT.TestComponent"
+      h3 Locally Defined Component
+      = react_component "LocalComponent"

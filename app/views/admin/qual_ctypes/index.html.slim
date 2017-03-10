@@ -1,0 +1,99 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/qual_ctypes/all_qual_ctypes'
+
+- content_for :admin_header do
+  = admin_header :Lica_Qualifications, :ctypes
+
+css:
+  .updateAttendance:hover { cursor: pointer; }
+  .selectNum { width: 65px; display: inline; margin-bottom: 5px;}
+  .selectTxt { display:inline; margin-bottom: 5px;}
+  .overBox {
+    border: 1px solid gray;
+    padding: 6px;
+    float: left;
+    width: 200px;
+    margin-bottom: 6px;
+    border-radius: 5px;
+  }
+  .loadingDiv { height: 245px; }
+  .sideBox {
+    width: 48%;
+    float: right;
+    text-align: left;
+  }
+  #helpDiv {
+    margin-top: 12px;
+  }
+  #helpDiv ul {
+    font-size: 10px;
+    padding-left: 14px;
+  }
+  .btn-primary.active {
+    background: rgba(24, 156, 19, 0.87);
+  }
+
+- content_for :admin_body do
+  table.table.table-hover
+    thead
+      th Type
+      th Resource<br/>ID
+      th Evidence
+      th Title
+      th Options
+      th.ar
+        button#certTypeCreateBtn.btn.btn-xs.btn-primary Create
+    tbody#certTypeBody
+      - @types.each do |type|
+        tr id="type_#{type.acronym}"
+          td
+            i.fa.fa-arrows-v.sortIcon
+            a.updateName data-name="name" data-pk=("#{type.id}") data-url="/admin/qual_ctypes/#{type.id}" data-value=type.name href="#"
+              = type.name
+          td
+            a.updateAcronym data-name="acronym" data-pk=("#{type.id}") data-url="/admin/qual_ctypes/#{type.id}" data-value=type.acronym href="#"
+              = type.acronym
+          td
+            a.updateEvidence data-name="ev_types" data-pk=("#{type.id}") data-url="/admin/qual_ctypes/#{type.id}" data-value=type.ev_types.reverse href="#"
+              = type.ev_types.reverse.join(', ')
+            - if type.ev_types.include? 'attendance'
+              span id='evi_#{type.id}'
+                '  |
+                a.updateAttendance.editable-click data-name="attendance_rule" data-pk=("#{type.id}") data-url="/admin/qual_ctypes/#{type.id}" data-value=type.attendance_rule
+                  i.fa.fa-filter style=('margin-left: 4px;')
+          td
+            - if type.ev_types == ['attendance']
+              | Attendance
+            - else
+              a.updateSelectMethod data-name="title_select_method" data-pk=("#{type.id}") data-url="/admin/qual_ctypes/#{type.id}" data-value=type.title_select_method href="#"
+                = type.title_select_method
+              - if type.title_select_method == "free_text"
+                span id='list_#{type.id}'
+                  '  |
+                  a.updateTitlePlaceholder data-name="title_placeholder" data-pk=("#{type.id}") data-url="/admin/qual_ctypes/#{type.id}" data-value=type.title_placeholder href="#"
+                    i.fa.fa-quote-left style=('margin-left: 4px;')
+              - if type.title_select_method == "fixed_list"
+                span id='list_#{type.id}'
+                  '  |
+                  a.updateSelectList data-name="title_fixed_options" data-pk=("#{type.id}") data-url="/admin/qual_ctypes/#{type.id}" data-value=type.title_fixed_options href="#"
+                    i.fa.fa-list style=('margin-left: 4px;')
+          td
+            = cert_options_helper(type)
+          td.ar
+            = raw delete_qual_ctype_button(type.id)
+
+  = modal 'myModal', 'Create a New Cert Type' do
+    .modal-body
+      form#certTypeCreateForm action="/admin/qual_ctypes" method="POST"
+        input name="authenticity_token" type="hidden" value=form_authenticity_token /
+        .form-group
+          label for="certName"  Cert Type
+          input#certName.form-control name="cert[name]" placeholder=("Cert Type") type="text"
+        .form-group
+          label for="certName"  Acronym
+          input#certAcronym.form-control name="cert[acronym]" placeholder="Acronym" type="text"
+    .modal-footer
+      button#certTypeSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Create
+      button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close
+
+= render :partial => 'admin/admin_layout'

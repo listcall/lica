@@ -1,0 +1,19 @@
+- content_for :page_js do
+  = javascript_include_tag 'ztst/all_react2'
+
+div.container
+  = render partial: 'shared_nav'
+
+div.container
+  div.row
+    div.col-sm-6
+      div#recurTgt
+      div#recurTgt2
+    div.col-sm-6
+      div#childEx
+  div.row style='margin-top: 20px;'
+    div.col-sm-6
+      div#mount1
+    div.col-sm-6
+      | "Hello World"
+

@@ -1,0 +1,67 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'reports/all_reports' %>
+<% end %>
+
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12'>
+
+      <div width=100% style='text-align: center;'><b>Current Reports</b></div>
+
+      <table id="myTable1" class="table table-condensed table-bordered">
+        <thead>
+        <tr>
+          <th width=65>Category</th>
+          <th>Name</th>
+          <th width=50>Type</th>
+          <th>Description</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @current_report_list.each do |report| %>
+            <tr>
+              <td><%= report[0] %></td>
+              <td><%= report[1] %></td>
+              <td><%= report_format(report) %>     </td>
+              <td><%= report_description(report) %></td>
+              <td><%= download_link(report)%>      </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div width=100% style='text-align: center;'><b>Historical Reports</b></div>
+      <table id="myTable2" class="table table-condensed table-bordered">
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Set Date Range</th>
+          <th>Start</th>
+          <th>End</th>
+          <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% @historical_report_list.each do |report| %>
+            <tr>
+              <td><%= report[0] %></td>
+              <td><%= report[1] %></td>
+              <td>
+                <i id='<%= report[0] %>-<%= report[2] %>_YTD' class="fa faIcon fa-yen      faYTD"></i>
+                <i id='<%= report[0] %>-<%= report[2] %>_12m' class="fa faIcon fa-circle   fa12m"></i>
+                <i id='<%= report[0] %>-<%= report[2] %>_6m'  class="fa faIcon fa-adjust   fa6m"></i>
+                <i id='<%= report[0] %>-<%= report[2] %>_3m'  class="fa faIcon fa-circle-o fa3m"></i>
+              </td>
+              <td><input style='font-size: 8pt;' class="inp" id="<%= report[0] %>-<%= report[2] %>_start"  type="text" value="<%= (Time.now).strftime("%Y") %>-01-01"/></td>
+              <td><input style='font-size: 8pt;' class="inp" id="<%= report[0] %>-<%= report[2] %>_finish" type="text" value="<%= (Time.now).strftime("%Y-%m-%d") %>"/></td></td>
+              <td><a id="<%= report[0] %>-<%= report[2] %>_link" class='hRep' data-type='<%= report[2] %>' href="/hreports/<%= report[0] %>.html" target='_blank'>HTML</a></td>
+            </tr>
+        <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</div>

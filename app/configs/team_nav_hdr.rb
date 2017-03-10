@@ -1,0 +1,3 @@
+class TeamNavHdr < TeamNav
+
+end

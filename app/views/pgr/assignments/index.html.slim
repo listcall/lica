@@ -1,0 +1,48 @@
+- content_for :page_js do
+  = javascript_include_tag "pgr/all_index"
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = current_team.acronym
+            |  Paging
+        .col-xs-4.text-center
+          small = Time.now.strftime("%a %b %d %H:%M")
+        .col-xs-2.text-right
+          small = link_to "Create New Page", paging_new_path
+          = member_help_button('paging')
+
+.container
+  .row
+    .col-md-12
+      table.table.table-compact
+        thead
+          th ID
+          th From
+          th Message Text
+          th Sent
+          th Read
+          th Replies
+          th Action
+        tbody
+          - @assignments.each do |assig|
+            tr
+              td = assig.sequential_id
+              td
+                => avatar_path(assig.sender_user)
+                => link_to assig.sender_name, assig.sender_path, target: "_blank"
+                => team_icon_path(assig.sender)
+              td = link_to truncate(assig.short_body), assig.broadcast_path
+              td = assig.created_at.strftime("%m-%d %H:%M")
+              td
+                => assig.read_count
+                ' of
+                => assig.recipient_count
+              td
+                => raw assig.reply_count_link
+                => raw assig.comment_icon_for(current_membership)
+              td
+                = raw assig.action_status

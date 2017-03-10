@@ -1,0 +1,3 @@
+class TeamNavFtr < TeamNav
+
+end

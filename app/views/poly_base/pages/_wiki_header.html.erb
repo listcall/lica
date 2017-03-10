@@ -1,0 +1,21 @@
+<% content_for :subhead do %>
+  <div class='subhead'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-md-6'>
+          <b style='margin-right: 20px;'><%= @wiki_title %> Wiki</b>
+          <small>
+            <% unless @is_index == true %>
+              <a href='<%= @prefix %>home'>Home</a> | <a href="<%= @prefix %>../<%= @wiki_name %>">Pages</a>
+            <% end %>
+          </small>
+        </div>
+        <div class='col-md-6 text-right'>
+          <!--<form class="navbar-search pull-right input-minn">-->
+          <!--<input type="text" class="search-query" placeholder="Search <%= @wiki_title %>...">-->
+          <!--</form>-->
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

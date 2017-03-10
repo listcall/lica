@@ -1,0 +1,60 @@
+<% content_for :page_js do %>
+  <script>
+    window.memId = <%= @memId %>;
+  </script>
+  <%= javascript_include_tag 'forums/all_index' %>
+<% end %>
+
+<% content_for :subhead do %>
+  <div class='subhead'>
+    <div class='container'>
+      <div class='row'>
+        <div class='col-xs-6'>
+          <b><%= current_team.acronym %> Forums</b>
+        </div>
+        <div class='col-xs-6 text-right'>
+          <%= member_help_button('forums') %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class='container'>
+
+  <div class="row">
+    <div class="col-md-12">
+
+      <table class='table'>
+        <thead>
+        <tr>
+          <th>Forum Name</th>
+          <th>eMail Alias</th>
+          <th>Unread Topics</th>
+          <th>Watch Forum</th>
+        </tr>
+        </thead>
+        <tbody>
+          <% @forums.each do |forum| %>
+          <tr>
+            <td>
+              <%= link_to forum.name.titleize, forum_path(forum)  %>
+            </td>
+            <td>
+              <%= forum.email_address %>
+            </td>
+            <td>
+              <%= forum.unread_topics_for(current_membership).count %>
+            </td>
+            <td>
+              <%= forum_subscription_helper(forum) %>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>

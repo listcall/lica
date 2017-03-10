@@ -1,0 +1,35 @@
+<%= render :partial => 'wiki_header' %>
+
+<div class='container'>
+  <div class='row wiki-title'>
+    <div class='col-md-6'>
+      <h2 style='margin: 0;'>Editing <%= @page_name.titleize %></h2>
+    </div>
+    <div class='col-md-6 text-right' style='padding-top: 12px;'>
+      <a href="<%= @wiki_path %>/<%= @page_name %>">View</a>
+      <% unless @page_name == "home" %>
+        |
+        <%= link_to "Delete", "#{@wiki_path}/#{@page_name}", :method => :delete, :confirm => 'Are you sure?' %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<div class='container'>
+  <div class='row' style='margin-bottom: 40px;'>
+    <div class='col-md-12'>
+      <p style='height: 15px;'></p>
+      <%= simple_form_for(@wiki_form, method: 'PUT', url: "#{@wiki_path}/#{@page_name}", html: {class: 'form-horizontal'}) do |f| %>
+        <%= f.input  :name   , input_html: {class: 'input-block-level'}               %>
+        <%= f.input  :content, input_html: {class: 'input-block-level wikiEdit', rows: 12}, :as => :text %>
+        <%= f.input  :comment, input_html: {class: 'input-block-level'}               %>
+        <div class='control-group'>
+        <label class='control-label'></label>
+          <div class='controls'>
+        <%= f.button :submit, "Update" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+<tr id="row_<%= participant.id %>">
+  <td class="partCell">
+    <img class='icon' src="<%= participant.membership.team.icon_path %>" />
+    <%= participant.membership.team.acronym %>
+  </td>
+  <td class="partCell">
+    <%= child_mem_link(participant.membership) %>
+  </td>
+  <td class='transitCell'>
+    <%= if_partner participant, participant.departed_at, depart_field(participant) %>
+  </td>
+  <td class='transitCell'>
+    <%= if_partner participant, participant.returned_at, return_field(participant) %>
+  </td>
+  <td class='signinCell'>
+    <%= if_partner participant, participant.signed_in_at, signin_field(participant)  %>
+  </td>
+  <td class='signinCell'>
+    <%= if_partner participant, participant.signed_out_at, signout_field(participant)  %>
+  </td>
+  <td class="ar partCell">
+    <% if current_team.partnered_with?(participant.membership.team) %>
+      <i id='pDel_<%= participant.id %>' class="fa fa-times-circle parDel"></i>
+    <% end %>
+  </td>
+</tr>

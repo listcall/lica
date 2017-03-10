@@ -1,0 +1,45 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/member_add/all_member_add'
+
+- content_for :admin_header do
+  = admin_header :Lica_Members, :add
+- content_for :admin_body do
+  .row
+    .col-sm-12
+      p
+      h2 Add a new Member
+      p
+      br
+  = bs_vert_multi_form_for @form,  url: "/admin/member_add" do |f|
+    - if @form.errors.any?
+      .row
+        .col-xs-12
+          .form-error
+            small
+              b
+                = pluralize(@form.errors.count, "error")
+                |  prevented this event from being saved:
+              = @form.errors.full_messages.map.with_index {|msg, i| "#{i+1}) #{msg}"}.join(', ')
+    = f.hidden_field :team_id,   value: current_team.id
+    = f.hidden_field :phone_typ, value: 'Mobile'
+    = f.hidden_field :email_typ, value: 'Work'
+    .row
+      = f.text_field :title,       label: "Title"
+    .row
+      = f.text_field :first_name,  label: "First Name"
+    .row
+      = f.text_field :middle_name, label: "Middle Name"
+    .row
+      = f.text_field :last_name,   label: "Last Name"
+    .row
+      = f.text_field :phone_num,   label: "Mobile Phone", placeholder: "NNN-NNN-NNNN"
+    .row
+      = f.text_field :email_adr,   label: "Email Address", placeholder: "valid email address"
+    .row
+      = f.select     :form_rank,   current_team.ranks.pluck(:acronym), label: "New Member Rank"
+    .row
+      .col-sm-12
+        br
+        = f.submit_btn "Create New Member"
+
+= render :partial => 'admin/admin_layout'

@@ -1,0 +1,40 @@
+css:
+  #dodata {
+    text-align: center;
+    font-size : 12px;
+  }
+  #dodata th {
+    width: 30px;
+    text-align: center;
+  }
+  .status:hover, .mouseover_hdr {
+    cursor      : pointer;
+    border      : 1px solid blue;
+    color       : blue;
+  }
+  .green, .green_label  { background: #b8edab; }
+  .blue,  .blue_label   { background: #f9ffad; }
+  .pink,  .pink_label   { background: #ffdfe4; }
+  .padded { padding-left: 3px; padding-right: 3px;}
+  .memtag {
+    padding-left : 3px;
+    padding-right: 3px;
+  }
+  .memlink { color: black; }
+
+table#dodata border=1
+  tr style='background: #ededed;'
+    th#top_corner align="center"
+    - 13.times do |idx|
+      = raw plan_header_cell(@service, @quarter, idx)
+  - @members.each do |mem|
+    = raw display_member_row(mem, @service, @quarter)
+
+div#x_footer
+  | Instructions: Click a cell to create a duty assignment, click again to
+    un-assign.<br/>
+    Legend: <b>A</b> = Available, <b>-</b> = Unavailable, '*'
+    means there is a comment<br/>
+    <span class='padded blue_label'>Unscheduled Member</span>
+    <span class='padded pink_label'>Unscheduled Week</span>
+    <span class='padded green_label'>DO Assignment</span>

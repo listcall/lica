@@ -1,0 +1,23 @@
+= bs_vert_multi_form_for @contact, url: '/a/b/c', html: {id: 'contactCreateForm'} do |f|
+
+  - if @contact.errors.any?
+    div class='row'
+      div class="col-xs-12"
+        div class="form-error"
+          small
+            b
+              =' pluralize(@contact.errors.count, "error")
+              | prevented this contact from being created:
+            = @contact.errors.full_messages.map.with_index {|msg, i| " #{i+1}) #{msg}"}.join(',')
+
+  .row
+    = f.text_field :name,     label: "Name"
+    = f.text_field :kinship,  label: "Kinship"
+  .row
+    = f.text_field :phone_number,   label: "Phone Number"
+    = f.select     :phone_type , %w(Mobile Home Work Other), label: "Phone Type"
+  .row
+    = f.switch_box :visible, cols: 6, on_color: 'default', on_text: "yes <i class='fa fa-eye'/>", off_text: "no <i class='fa fa-eye-slash obscure_contact'/>"
+    .col-sm-6
+      small
+        | If this contact is visible, everyone on your team can see it.  Otherwise, only team administrators can see it.

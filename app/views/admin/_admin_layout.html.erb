@@ -1,0 +1,19 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'admin/base/all_base' %>
+<% end %>
+
+<div class='container' style='margin-bottom: 5px;'>
+  <div class='row'>
+    <div id="adminNav" class='col-md-2'>
+      <%= render :partial => 'admin/admin_nav' %>
+    </div>
+    <div class='col-md-10'>
+      <div class='adminBodyHeader'>
+        <%= yield :admin_header %>
+      </div>
+      <div class="adminBodyBody">
+        <%= yield :admin_body %>
+      </div>
+    </div>
+  </div>
+</div>

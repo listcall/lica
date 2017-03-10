@@ -1,0 +1,37 @@
+div style='margin-bottom: 4px;'
+  ' #{@member.first_name} attended at least
+  b = pluralize @rule.event_count, "event"
+  - if @rule.has_title?
+    '  matching
+    b #{@rule.title}
+  - if @rule.has_types?
+    '  with
+    b #{"type".pluralize(@types.count)} #{@types.join('|')}
+  - if @rule.has_tags?
+    '  with
+    b #{"tag".pluralize(@tags.count)} #{@tags.join('&')}
+  '  in the past
+  b = pluralize @rule.month_count, "month"
+  | .
+table.table.table-condensed.table-bordered.table-small style='margin-bottom: 4px;'
+  tr
+    th Event
+    - if @rule.has_types?
+      th Type
+    - if @rule.has_tags?
+      th Tags
+    th Started
+  - @events.each do |event|
+    tr
+      td = link_to event.title, "/events/#{event.event_ref}", target: "_blank"
+      - if @rule.has_types?
+        td = event.typ
+      - if @rule.has_tags?
+        td = event.tags.join(' ')
+      td = event.start.strftime("%Y-%m-%d")
+div style='margin-bottom: 5px;'
+  div style='float: left;'
+    small = link_to "all activities", "/members/andyl#activities", target: "_blank"
+  div style='float: right;'
+    small
+      a.closePop href='#' close

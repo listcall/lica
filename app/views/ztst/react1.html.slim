@@ -1,0 +1,18 @@
+- content_for :page_js do
+  = javascript_include_tag 'ztst/all_react1'
+
+div.container
+  = render :partial => 'shared_nav'
+  |A test of ReactJS
+
+  .row
+    .col-md-6
+      h2 Hello World
+      p
+      div#example1
+      p
+      |fini.
+    .col-md-6
+      h2 TypeAhead
+      #typetest
+

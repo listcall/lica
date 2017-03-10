@@ -1,0 +1,16 @@
+tr id="row_#{participant.id}"
+  td.partCell
+    a.inline.roleButton data-name="role" data-value='#{participant.role}' data-pk=participant.id data-url="/ajax/event_periods/#{participant.period.id}/event_participants/#{participant.id}" href="#" = participant.role
+    |  #{participant.membership.try(:rank)}
+  td.partCell
+    = mem_link(participant.membership)
+  td.transitCell
+    = depart_field(participant)
+  td.transitCell
+    = return_field(participant)
+  td.signinCell
+    = signin_field(participant)
+  td.signinCell
+    = signout_field(participant)
+  td.ar.partCell
+    i.fa.fa-times-circle.parDel id="pDel_#{participant.id}"

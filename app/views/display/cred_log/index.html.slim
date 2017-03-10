@@ -1,0 +1,22 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            => current_team.acronym
+            | Member Rank/Role Assignments
+        .col-xs-6.text-right
+          = member_help_button('certs')
+
+.container
+  .row
+    div
+      table.table.table-condensed.table-bordered.table-hover
+        tbody
+          - @mems.includes(:user).in_groups_of(5).each do |grp|
+            tr
+              - grp.each do |mem|
+                td
+                  small
+                    = link_to("#{mem.full_name} (#{mem.user_name})", "/display/cred_log/#{mem.user_name}") if mem

@@ -1,0 +1,15 @@
+- content_for :page_js do
+  = javascript_include_tag 'service_cal_provis/all_index'
+
+- content_for :services_header do
+  = svc_breadcrumb ["services/#{@service.id}", "provi"], [@service.name, "OnDuty"]
+
+- content_for :services_body do
+  b = @service.on_duty_message
+  p
+  form#goForm method='post' action="/services/#{@service.id}/provi"
+    input type='hidden' name='user_name' value='#{current_membership.user_name}'
+    input type='hidden' value='#{form_authenticity_token}' name='authenticity_token'
+    input.btn.btn-success#goOnDuty type='submit' value='click to go on-duty'
+
+= render :partial => "services/services_layout"

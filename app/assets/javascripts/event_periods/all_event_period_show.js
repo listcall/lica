@@ -1,0 +1,9 @@
+//= require jquery-ui-timepicker-addon
+//= require bootstrap-typeahead/bootstrap-typeahead
+//= require hogan
+//= require ./config_ajax
+//= require ./show_type_ahead
+//= require ./show_time_buttons
+//= require ./show_remove_participant
+//= require ./show_date_picker
+//= require ./show_role_picker

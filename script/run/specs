@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+
+# start the spec runner
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+export APP="ListCall"
+
+clear
+echo "script/run/specs"
+RUBYOPT=W0 bundle exec guard -c

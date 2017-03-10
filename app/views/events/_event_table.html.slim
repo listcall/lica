@@ -1,0 +1,21 @@
+- title ||= "Title"
+
+table.table.table-condensed.table-bordered.table-hover
+  tr
+    th = title
+    th Type
+    th Periods
+    th Participants
+    th Start Date
+    th Tags
+    th Published
+  - events.each do |event|
+    - cache [event, "eventrow"] do
+      tr
+        td width="40%" = raw link_to event.title, "/events/#{event.event_ref}"
+        td = event.typ_name
+        td = event.event_periods_count
+        td = event.event_participants_count
+        td = event.start.strftime("%y-%m-%d")
+        td = event.tags.join(', ')
+        td = event.published

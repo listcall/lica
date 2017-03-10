@@ -1,0 +1,7 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/qual_partners/all_qual_partners'
+  - content_for :admin_header do
+    = admin_header :Lica_Qualifications, :partners
+  - content_for :admin_body do
+    | UNDER CONSTRUCTION
+= render :partial => 'admin/admin_layout'

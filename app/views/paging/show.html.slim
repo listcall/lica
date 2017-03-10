@@ -1,0 +1,42 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = render :partial => 'team_title'
+            | > #{truncate(@bcst.short_body, length: 20)}
+        .col-xs-6.text-right
+          small= link_to "Index", "/paging"
+          = member_help_button('paging')
+
+.container
+  .row
+    .col-md-12
+      b> Fm:
+      => pgr_mem_link @bcst.sender
+      b> To:
+      => @bcst.recip_people
+      = @bcst.via
+      br
+      = @bcst.message_text
+      table.table.table-condensed
+        thead
+          th Recpient
+          th Replies
+          th Updated
+        tbody
+          - @targets.to_a.each do |target|
+            tr
+              td
+                => avatar_path target.recipient.user
+                - if target.recipient.team == current_team
+                  => link_to "#{target.recipient.full_name} @#{target.recipient.user_name}", "/members/#{target.recipient.id}", target: "_blank"
+                - else
+                  => target.recipient.full_name
+                  | @#{target.recipient.user_name}
+                => team_icon_path(target.recipient)
+              td
+                = raw target.post_count_link(@assignment.sequential_id)
+              td
+                = raw target.updated_disp

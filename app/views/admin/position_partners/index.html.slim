@@ -1,0 +1,38 @@
+/ new_serv
+
+- content_for :page_js do
+  = javascript_include_tag 'admin/position_partners/all_indx'
+
+- content_for :admin_header do
+  = admin_header :Lica_Positions, :partners
+
+css:
+  .xdiv { background: #f8f8f8; padding: 4px; }
+  .mt10 { margin-top: 10px;    }
+
+- content_for :admin_body do
+  .xdiv
+    - if @pos_partners.blank?
+      | No shared partner positions
+    - else
+      b Position Partners
+      table.table.table-condensed.table-bordered
+        thead
+          tr
+            th Position Name
+            th Description
+            th Provided by
+            th Active
+            th Action
+        tbody#positionBody
+          - @pos_partners.each do |part|
+            tr id="partner_#{part.id}"
+              td
+                i.fa.fa-arrows-v.sortIcon
+                | #{part.position.name} (#{part.position.acronym})
+              td = part.position.description
+              td = part.position.role.team.acronym
+              td = member_names_in(part.position.role, part.position.role.team)
+              td = raw position_partner_unsubscribe_button(part)
+
+= render :partial => 'admin/admin_layout'

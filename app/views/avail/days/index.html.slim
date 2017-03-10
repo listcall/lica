@@ -1,0 +1,39 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-4
+          b #{current_team.acronym} Availability
+        .col-xs-4.text-center
+          small
+            a href='/avail/days/#{current_membership.user_name}'
+              | update your availability
+        .col-xs-4.text-right
+          = member_help_button('avail_days')
+
+.container
+  .row
+    table#myTable.tablesorter.table.table-condensed.table-bordered
+      thead
+        tr
+          th Role
+          th Name
+          th Available<br/>today?
+          th = day_label(1)
+          th = day_label(2)
+          th = day_label(3)
+          th = day_label(4)
+          th Return
+          th Comment
+      tbody
+        - @members.each do |mem|
+          tr
+            td = mem.rank
+            td = link_to mem.full_name, "/avail/days/#{mem.user_name}"
+            = raw day_helper(mem, 0)
+            = raw day_helper(mem, 1)
+            = raw day_helper(mem, 2)
+            = raw day_helper(mem, 3)
+            = raw day_helper(mem, 4)
+            td = raw return_date_helper(mem, 4)
+            td = oot_comment_for(mem)

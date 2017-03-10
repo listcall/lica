@@ -1,0 +1,80 @@
+- content_for :page_js do
+  javascript:
+    window.lclData         = {};
+    lclData.serviceTypeId  = JSON.parse(#{ @service_type.id });
+  = javascript_include_tag 'admin/service_types/all_show'
+
+- content_for :admin_header do
+  = admin_sub_header :Lica_Services, :types, @service_type.name
+
+- content_for :admin_body do
+  table class="table table-condensed table-bordered"
+    tr
+      td align="right"
+        b Name:
+      td
+        a href='#' class='inline textEditable' data-name='name'
+          = @service_type.name
+    tr
+      td align="right"
+        b Schedule Type:
+      td
+        a id='schedType' href='#' class='inline selectEditable' data-source='#{ServiceType.schedule_type.values}' data-name='schedule_type' data-value='#{@service_type.schedule_type}'
+          = @service_type.schedule_type
+    tr id='rotationType'
+      td align="right"
+        b Rotation Type:
+      td
+        a href='#' class='inline selectEditable' data-source='#{ServiceType.rotation_type.values}' data-name='rotation_type' data-value='#{@service_type.rotation_type}'
+          = @service_type.rotation_type
+    tr.wkly
+      td align="right"
+        b Rotation Day / Time:
+      td
+        a href='#' class='inline selectEditable' data-source='#{ServiceType.weekly_rotation_day.values}' data-name='weekly_rotation_day' data-value='#{@service_type.weekly_rotation_day}'
+          = @service_type.rotation_day
+        = " / "
+        a href='#' class='inline selectTime' data-name='weekly_rotation_time' data-value='#{@service_type.weekly_rotation_time}'
+          = @service_type.weekly_rotation_time
+    tr
+      td align="right"
+        b Service Policy:
+      td
+        = " Coverage: "
+        a href='#' class='inline selectEditable' data-source='#{ServiceType.coverage.values}' data-name='coverage' data-value='#{@service_type.coverage}'
+          = @service_type.coverage
+        = " Response Time: "
+        a href='#' class='inline selectEditable' data-source='#{ServiceType.response_time.values}' data-name='response_time' data-value='#{@service_type.response_time}'
+          = @service_type.response_time
+    tr
+      td align="right"
+        b Description:
+      td
+        a href='#' class='inline areaEditable' data-name='description'
+          = @service_type.description
+    tr
+      td align="right"
+        b Visible To:
+      td
+        | TODO: add Rights/Roles
+    tr
+      td align="right"
+        b Scheduler Pool:
+      td
+        | TODO: add Rights/Roles
+    tr
+      td align="right"
+        b Participant Pool:
+      td
+        | TODO: add Rights/Roles
+    tr
+      td align="right"
+        b Calendars:
+      td
+        div class='btn-group'
+          button.adhc type='button' data-service_id='#{@service_type.id}' data-name='cal_avail' class='#{@service_type.btn_klas('cal_avail')} btn btn-xs btnCal' Availability
+          button.adhc type='button' data-service_id='#{@service_type.id}' data-name='cal_sched' class='#{@service_type.btn_klas('cal_sched')} btn btn-xs btnCal' Scheduling
+          button.wkly type='button' data-service_id='#{@service_type.id}' data-name='cal_resrc' class='#{@service_type.btn_klas('cal_resrc')} btn btn-xs btnCal' Resource
+          button      type='button' data-service_id='#{@service_type.id}' data-name='cal_tmlog' class='#{@service_type.btn_klas('cal_tmlog')} btn btn-xs btnCal' Time Log
+
+= render :partial => 'admin/admin_layout'

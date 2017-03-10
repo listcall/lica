@@ -1,0 +1,16 @@
+div id="contentDiv" data-title="<b>#{@recipient.full_name}</b>"
+  small
+    table.table.table-condensed.table-bordered
+      tr
+        td <b>#{@action.label}:</b>
+        td #{@action.query_msg.capitalize}?
+      tr
+        td <b>Answer:</b>
+        td #{@current}
+    | <b>Change To:</b><br/>
+    = raw alt_response_list(@action, @current, @asid)
+
+  p
+
+.ar style='margin-top: 6px; font-size: 10px;'
+  a.closePop href='#' cancel

@@ -1,0 +1,35 @@
+- content_for :page_js do
+  javascript:
+    window.lclData    = {};
+    lclData.serviceId = #{raw @service.id};
+    lclData.memList   = #{raw @svc_bot.member_list};
+  = javascript_include_tag 'service_cal_index/all_index'
+
+- content_for :services_header do
+  = svc_breadcrumb ["services/#{@service.id}", "sched"], [@service.name, "Schedule"]
+
+- content_for :services_body do
+  css:
+    #calHere    {padding-right: 4px;}
+    #memberTags {margin-bottom: 4px; border: 1px solid gray; padding: 4px;}
+
+  #calHere
+
+= modal 'eventModal' do
+  .modal-body
+    #memberTags
+      input#memberTagInput.tagInput type='text'   placeholder='add member...'
+      input#memberTagNames          type='hidden' value=''
+    #recur
+
+  .modal-footer
+    .row
+      .col-xs-6.text-left
+        button.btn.btn-danger.btn-sm#deleteEvent type='button' Delete
+      .col-xs-6.text-right
+        button.btn.btn-primary.btn-sm#updateEvent type='button' Update
+        button.btn.btn-primary.btn-sm#createEvent type='button' Create
+        button.btn.btn-default.btn-sm type='button' data-dismiss='modal' Close
+
+= render :partial => "services/services_layout"
+N

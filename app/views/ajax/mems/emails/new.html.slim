@@ -1,0 +1,25 @@
+= bs_vert_multi_form_for @email, url: '/a/b/c', html: {id: 'emailCreateForm'} do |f|
+
+  - if @email.errors.any?
+    div class='row'
+      div class="col-xs-12"
+        div class="form-error"
+          small
+            b
+              =' pluralize(@email.errors.count, "error")
+              | prevented this email from being created:
+            = @email.errors.full_messages.map.with_index {|msg, i| " #{i+1}) #{msg}"}.join(',')
+
+  div class="row"
+    = f.text_field :address, placeholder: "address@organizataion.com"
+    = f.select     :typ    , %w(Personal Work Home), label: "Email Type"
+  div id='pagableRow' class="row" style='background: #eeeeee;'
+    = f.switch_box  :pagable, cols: 6, on_color: 'default', on_text: "yes <i class='fa fa-bullhorn green'/>", off_text: "no <i class='fa fa-ban red'/>"
+    div class='col-sm-6'
+      small
+        | Pagable addresses will recieve email alerts via our paging system.  It is OK to have multiple pagable addresses.
+  div class="row"
+    = f.switch_box  :visible, cols: 6, on_color: 'default', on_text: "yes <i class='fa fa-eye'/>", off_text: "no <i class='fa fa-eye-slash obscure_email'/>"
+    div class='col-sm-6'
+      small
+        | If this address is visible, everyone on your team can see it.  Otherwise, only team administrators can see it.

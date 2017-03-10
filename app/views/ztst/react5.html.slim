@@ -1,0 +1,35 @@
+- content_for :page_js do
+  = javascript_include_tag 'ztst/all_react5'
+
+.container
+  = render :partial => 'shared_nav'
+
+.container
+  .row
+    .col-md-12
+      h2 Tests with React BootStrap
+
+      p ReactBootstrap Button
+      = react_component "VT.My.Button1"
+
+      p
+      p Panel
+      #panel
+
+      p
+      | REACT BUTTON 1
+      #button1
+
+      p
+      | REACT BUTTON 2
+      #button2
+
+      p
+      | REACT BUTTON 3
+      #button3
+
+      p
+
+.container
+  .row
+    .col.md-12

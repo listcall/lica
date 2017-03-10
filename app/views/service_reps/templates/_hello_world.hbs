@@ -1,0 +1,38 @@
+---
+color:
+  sky: blue
+  color: green
+---
+Hello World
+<p></p>
+
+<div id='template'>
+
+  Sky is: {{color.sky}}<br/>
+  Grass is: {{color.grass}}<p></p>
+
+  Start: {{report.start}}<br/>
+  Finish: {{report.finish}}
+
+  <p></p>
+
+  <p><b>SERVICES</b></p>
+  {{#each services}}
+    <li>{{id}} / {{name}} / {{color}}</li>
+  {{/each}}
+
+  <p><b>PARTICIPANTS</b></p>
+  {{#each participants}}
+    <li>svc_id:{{service_id}} / mem_id:{{membership_id}} /
+        start:{{start}} / finish:{{finish}} / mins:{{minutes}}</li>
+  {{/each}}
+
+  <p><b>MEMBERS</b></p>
+  {{#each members}}
+    <li>{{id}} / {{first_name}} {{last_name}}</li>
+  {{/each}}
+
+</div>
+
+
+<div id='target'></div>

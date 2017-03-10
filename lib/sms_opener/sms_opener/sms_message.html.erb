@@ -1,0 +1,119 @@
+<meta http-equiv="Content-Type" content="text/html;">
+<title>SMS from <%= @fm %></title>
+
+<style type="text/css">
+  .message_headers {
+    width: 100%;
+    padding: 10px 0 0 0;
+    margin: 0;
+    background: #fff;
+    font-size: 12px;
+    font-family: "Lucida Grande";
+    border-bottom: 1px solid #dedede;
+    overflow: auto;
+  }
+
+  .message_headers dl {
+    float: left;
+    width: 75%;
+    margin: 0 0 10px 0;
+    padding: 0;
+  }
+
+  .message_headers dt {
+    width: 92px;
+    padding: 1px;
+    margin: 0;
+    float: left;
+    text-align: right;
+    font-weight: bold;
+    color: #7f7f7f;
+  }
+
+  .message_headers dd {
+    width: 100%;
+    margin: 0 0 0 102px;
+    padding: 1px;
+  }
+
+  .message_headers p.alternate {
+    float: right;
+    margin: 0;
+  }
+
+  .message_headers p.alternate a {
+    color: #09c;
+  }
+
+  pre.message_body {
+    padding: 10px;
+    word-wrap: break-word;
+  }
+
+  .message_banner {
+    background: lightblue;
+    text-align: center;
+    border: 1px solid black;
+    margin-bottom: 5px;
+    font-size: 10px;
+    padding: 2px;
+  }
+
+  input { width: 100% }
+
+  textarea {
+    margin-top: 10px;
+    margin-bottom: 5px;
+    width: 100%;
+    height: 100px;
+  }
+</style>
+
+<div id="message_display">
+
+  <div class="message_headers">
+    <dl>
+      <dt></dt>
+      <dd><b>SMS_OPENER MESSAGE USING TEMPLATE sms_opener/sms_message</b></dd>
+
+      <dt>Date:</dt>
+      <dd><%= Time.now.strftime("%b %e, %Y %I:%M:%S %p %Z") %></dd>
+
+      <dt>Fm:</dt>
+      <dd><%= @fm %></dd>
+
+      <dt>To:</dt>
+      <dd><%= @to %></dd>
+
+      <dt>Text:</dt>
+      <dd><%= @text %></dd>
+    </dl>
+  </div>
+</div>
+
+<div id="message_reply">
+
+  <div class="message_banner">REPLY</div>
+
+  <form action="http://<%= @fqdn %>/sms_opener_reply" method="POST">
+
+    <div class="message_headers">
+      <dl>
+
+        <dt>Fm:</dt>
+        <dd><input type='text' name='inbound[fm]' value='<%= @to %>'/></dd>
+
+        <dt>To:</dt>
+        <dd><input type='text' name='inbound[to]' value='<%= @fm %>'/></dd>
+
+        <dt>Text:</dt>
+        <dd><input type='text' name='inbound[text]'/></dd>
+
+      </dl>
+    </div>
+
+    <input type="submit" value="Submit form data via HTTP POST to http://<%= @fqdn %>/sms_opener_reply"/>
+
+  </form>
+
+</div>

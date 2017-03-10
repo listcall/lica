@@ -1,0 +1,33 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'admin/team_features/all_team_features' %>
+<% end %>
+
+<% content_for :admin_header do %>
+  <%= admin_header :Lica_Team, :features %>
+<% end %>
+
+<% content_for :admin_body do %>
+  <table class='table table-hover'>
+    <thead>
+    <th>Feature</th>
+    <th>Description</th>
+    <th>Author</th>
+    <th>Version</th>
+    <th>Status</th>
+    </thead>
+    <tbody>
+
+    <% @features.each do |fea| %>
+      <tr>
+        <td><%= FEATURES[fea.label].name %> </td>
+        <td><%= FEATURES[fea.label].description %> </td>
+        <td><%= FEATURES[fea.label].author %> </td>
+        <td><%= FEATURES[fea.label].version %> </td>
+        <td><%= status_helper(fea) %> </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

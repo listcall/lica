@@ -1,0 +1,75 @@
+/ controllers/admin/forum_index_controller
+
+- content_for :page_js do
+  = javascript_include_tag 'admin/forum_index/all_forum_index'
+- content_for :admin_header do
+  = admin_header :Lica_Forums, :index
+- content_for :admin_body do
+  table.table.table-condensed.table-hover
+    thead
+      tr
+        th Forum
+        th Type
+        th Who Can View
+        th Who Can Post
+        th
+          button#forumCreateBtn.btn.btn-xs.btn-primary Create
+    tbody#forumBody
+      - @forums.each do |forum|
+        tr id=("forum_#{forum.id} ")
+          td
+            i.fa.fa-arrows-v.sortIcon
+            a.updateName data-name="name" data-pk=forum.id data-url="/admin/forum_index/#{forum.id}" href="#"
+              = forum.display_title
+          td
+            a.updateType data-name="type" data-pk=forum.id data-url="/admin/forum_index/#{forum.id}" data-value=forum.type href="#"
+              = forum.display_type
+          td
+            .btn-group style=("margin-bottom: 4px;")
+              | <button type='button' data-forum_id='#{forum.id}' data-name='view_owner'    class='#{forum.perm_class('view_owner')} btn btn-xs btnRights'>OWN
+              | <button type='button' data-forum_id='#{forum.id}' data-name='view_manager'  class='#{forum.perm_class('view_manager')} btn btn-xs btnRights'>MGR
+              | <button type='button' data-forum_id='#{forum.id}' data-name='view_active'   class='#{forum.perm_class('view_active')} btn btn-xs btnRights'>ACT
+              | <button type='button' data-forum_id='#{forum.id}' data-name='view_reserve'  class='#{forum.perm_class('view_reserve')} btn btn-xs btnRights'>RES
+              | <button type='button' data-forum_id='#{forum.id}' data-name='view_guest'    class='#{forum.perm_class('view_guest')} btn btn-xs btnRights'>GST
+              | <button type='button' data-forum_id='#{forum.id}' data-name='view_alum'     class='#{forum.perm_class('view_alum')} btn btn-xs btnRights'>ALM
+            br
+            small
+              a.roleX.xEdit data-name="view_roles_array" data-pk=forum.id data-url="/admin/forum_index/#{forum.id}" data-value=forum.view_roles.values href="#"
+                = forum.view_roles.values
+          td
+            .btn-group style=("margin-bottom: 4px;")
+              | <button type='button' data-forum_id='#{forum.id}' data-name='post_owner'    class='#{forum.perm_class('post_owner')} btn btn-xs btnRights'>OWN
+              | <button type='button' data-forum_id='#{forum.id}' data-name='post_manager'  class='#{forum.perm_class('post_manager')} btn btn-xs btnRights'>MGR
+              | <button type='button' data-forum_id='#{forum.id}' data-name='post_active'   class='#{forum.perm_class('post_active')} btn btn-xs btnRights'>ACT
+              | <button type='button' data-forum_id='#{forum.id}' data-name='post_reserve'  class='#{forum.perm_class('post_reserve')} btn btn-xs btnRights'>RES
+              | <button type='button' data-forum_id='#{forum.id}' data-name='post_guest'    class='#{forum.perm_class('post_guest')} btn btn-xs btnRights'>GST
+              | <button type='button' data-forum_id='#{forum.id}' data-name='post_alum'     class='#{forum.perm_class('post_alum')} btn btn-xs btnRights'>ALM
+            br
+            small
+              a.roleX.xEdit data-name="post_roles_array" data-pk=forum.id data-url="/admin/forum_index/#{forum.id}" data-value=forum.post_roles.values href="#"
+                = forum.post_roles.values
+          td align="center" width="50"
+            = raw forum.delete_button(forum)
+  form#createforumForm action="/admin/member_forums" method="post"
+    input name="authenticity_token" type="hidden" value=form_authenticity_token /
+  = modal 'myModal', 'Create a New Forum' do
+    .modal-body
+      form#forumCreateForm action="/admin/forum_index" method="POST"
+        input name="authenticity_token" type="hidden" value=form_authenticity_token /
+        input name="forum[team_id]" type="hidden" value=current_team.id /
+        .form-group
+          label for="forumName"  Forum Name
+          input#forumName.form-control name="forum[name]" placeholder=("Enter name") type="text"
+        label Forum Type
+        br/
+        label.radio-inline
+          input checked="checked" name="forum[type]" type="radio" value="FmDiscussion"
+            | Discussion
+        label.radio-inline
+          input name="forum[type]" type="radio" value="FmIssue"
+            | Issues
+    .modal-footer
+      button#forumSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Create
+      button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close
+
+= render :partial => 'admin/admin_layout'

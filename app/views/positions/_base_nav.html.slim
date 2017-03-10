@@ -1,0 +1,17 @@
+.servicesHeader
+  b = link_to_unless_current "Positions", "/positions"
+
+.servicesBreak = current_team.acronym
+ul.nav.nav-tabs.nav-stacked.servicesNav
+  - @positions.each do |pos|
+    = raw pos_nav_link(pos)
+
+- if @ser_parts.present? && @ser_pars.length > 0
+  .servicesBreak Partner Services
+    ul.nav.nav-tabs.nav-stacked.servicesNav
+      - @ser_pars.each do |service|
+        li
+          a href=("/positions/<%= service.id %>") style=("padding-top: 4px; padding-bottom: 4px;")
+            img.icon src=("<%= service.team.icon_path %>")
+              = service.name
+

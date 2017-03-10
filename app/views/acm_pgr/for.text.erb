@@ -1,0 +1,12 @@
+[ <%= @outbound.team.try(:acronym) %> Page ]
+
+<%= @outbound.msg_text %>
+<%= @outbound.action_footer_text %>
+<%= @outbound.sender_block_text %>
+
+<%= __FILE__ if Rails.env.development? %>
+
+<%= @outbound.sender_block_text %>
+
+<%= __FILE__ if Rails.env.development? %>
+

@@ -1,0 +1,13 @@
+<b><%= @outbound.team.try(:acronym) %> Page</b>
+
+<p></p>
+
+<%= raw @outbound.msg_html %>
+
+<%= raw @outbound.action_footer_html %>
+
+<%= raw @outbound.sender_block_html %>
+
+<%= raw @outbound.tracking_pixel_html %>
+
+<%= raw "<small>#{__FILE__}</small><p></p>" if Rails.env.development? %>

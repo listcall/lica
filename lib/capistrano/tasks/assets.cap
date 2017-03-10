@@ -1,0 +1,13 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+namespace :assets do
+  desc "Precompile assets on local machine then upload them to the server."
+  task :precompile do
+    run_locally { execute "rake assets:precompile RAILS_ENV=production" }
+    on roles(:all) do |server|
+      run_locally { execute "rsync -vr public/assets #{fetch(:user)}@#{server.hostname}:#{shared_path}/public/" }
+    end
+  end
+end
+

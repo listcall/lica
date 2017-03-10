@@ -1,0 +1,71 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/svc_reps/all_index'
+
+- content_for :admin_header do
+  = admin_header :Lica_Services, :reports
+
+css:
+  .btn-xs                    { margin-left: 2px; margin-right: 2px;    }
+  .button_to, .button_to div { margin: 0; padding: 0; display: inline; }
+  .fa:hover { cursor: pointer; }
+
+- content_for :admin_body do
+  b #{current_team.acronym} Services Reports
+  table.table.table-condensed.table-bordered
+    thead
+      tr
+        th Report Name
+        th Services
+        th Date Query
+        th.ar
+          button.btn.btn-default.btn-xs#reportCreateBtn Create New Report
+    tbody#reportBody
+      - @reports.each do |rep|
+        tr id="report_#{rep.id}"
+          td
+            i.fa.fa-arrows-v>
+            = xeTxt cls:'nameEdit', pk:rep.id, name:'name', val:rep.name
+          td
+            = xeCkl cls: 'svcEdit', pk: rep.id, name:'service_ids',
+              val: rep.service_ids, src: rep.service_src
+          td
+            = xeTxt cls:'dateEdit', pk: rep.id, name:'date_query',
+              val: rep.date_query
+
+          td align='right'
+            nobr
+              a.btn.btn-success.btn-xs href="/reps/#{rep.id_plus_query}" target='_blank' View
+              a.btn.btn-primary.btn-xs href="/admin/svc_reps/#{rep.id}/edit" Edit
+              = svcs_report_delete_button(rep)
+
+  - if @shared_templates.present?
+    b.mt10 #{current_team.acronym} Shared Report Templates
+    table.table.table-condensed.table-bordered
+      thead
+        tr
+          th Template Name
+          th Parent Report
+          th Shared With
+          th Actions
+      tbody
+        - @shared_templates.each do |template|
+          tr
+            td = template.name
+            td = template.origin_rep.name
+            td = template.picker_team_acronyms.join(', ')
+            td
+              a.btn.btn-primary.btn-xs href="/admin/svc_reps/#{template.origin_svcrep.id}/edit" Edit
+
+= modal 'myModal', "Create a New Report"
+  .modal-body
+    form#reportCreateForm action="/admin/svc_reps" method="POST"
+      input name="authenticity_token" type="hidden" value=form_authenticity_token
+      .form-group
+        label for="reportName"  Report Name
+        input#reportName.form-control name="report[name]" placeholder="Enter name" type="text"
+  .modal-footer
+    button#reportSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Create
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close
+
+= render :partial => 'admin/admin_layout'
+

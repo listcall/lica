@@ -1,0 +1,76 @@
+<style>
+  iframe {
+    height: 400px;
+    width : 615px;
+    border: 1px solid black;
+  }
+</style>
+
+<h2>Team Directory - Sample Landing Page</h2>
+
+This sample page shows how <%= current_org.name %> can create a landing page
+containing a team directory with current event data.
+<p></p>
+<iframe src="<%= @base_url %>/published/team_directory">
+</iframe>
+
+<h4>How it Works</h4>
+
+On the <%= current_org.name %> public website, create a landing page which contains an iframe tag.
+<p></p>
+The iframe pulls directory data from the server and renders it on the page.
+
+<h4>Embedding the Directory in an iframe</h4>
+
+A <%= current_org.name %> web developer can embed the team directory into the <%= current_org.name %> public website using an <b><code>iframe</code></b> tag.
+<p></p>
+The iframe source URL is <code><%= link_to x="#{@base_url}/published/team_directory",x,target:"_blank" %></code>.
+<p></p>
+Use the url in an iframe like this:
+<p></p>
+<code>
+  <%= "<iframe src='#{@base_url}/published/team_directory'></iframe>"%>
+</code>
+<p></p>
+To restyle the iframe content, reference your own custom style sheet with the <b><code>style-src=URL</code></b> parameter.
+<p></p>
+<code><%= link_to x="#{@base_url}/published/team_directory?style-src=#{@base_url}/published/team_directory.css",x, target: "_blank" %></code>
+<p></p>
+Note that in this example, <code>style-src</code> is <code><%= link_to x="#{@base_url}/published/team_directory.css",x, target: "_blank" %></code>.
+<p></p>
+For the <%= current_org.name %> public website, the <code>style-src</code> needs to originate from the <%= current_org.name %> web server.
+
+<h4>Alternative Techniques</h4>
+
+In addition to the iframe technique, you can embed the team directory using AJAX or Server-Side Includes.
+<p></p>
+To do this, turn off the default styling using <b><code>style-src=none</code></b> parameter.
+<p></p>
+<code><%= link_to "#{@base_url}/published/team_directory?style-src=none" %></code>
+<p></p>
+Then embed your own styling in the parent landing page.
+
+<h4>Selecting Teams</h4>
+
+The <%= current_org.name %> Enterprise Administrator can select which teams are included in the directory.
+<p></p>
+Contact Andy Leak (andy@r210.com/650-823-0836) for instructions.
+
+<h4>Selecting Events</h4>
+
+Each event has a 'published' attribute.  When 'published' is set to 'true', the event will appear on
+the <%= current_org.name %> landing page.
+<p></p>
+Any team Manager can update the <code>Event#published</code> attribute using the Event UI.
+
+<h4>Reference</h4>
+
+<ul>
+  <li>
+    <a href="http://stackoverflow.com/questions/217776/how-to-apply-css-to-iframe" target="_blank">
+    StackOverflow: how to apply CSS to an iframe
+    </a>
+  </li>
+</ul>
+
+<p></p>

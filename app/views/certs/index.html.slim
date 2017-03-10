@@ -1,0 +1,30 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = current_team.acronym
+            | Certs
+        .col-xs-6.text-right
+          = member_help_button('certs')
+.container
+  .row
+    div
+      - cache ['teamCerts', current_team] do
+        table#teamCertTable.table.table-condensed.table-bordered.table-hover
+          thead
+            th Member
+            = raw qual_ctype_headers
+          tbody
+            - @members.each do |mem|
+              - cache ['memCerts', mem] do
+                tr id=mem.id
+                  td
+                    div style=("display: inline-block; width: 34px;") = mem.rank
+                    = avatar_path(mem.user, 'msAvatar')
+                    a href="/members/#{mem.user_name}/certs" = mem.user.last_name
+                    div style=("float:right; padding-right: 4px;")
+                      a href="/members/#{mem.user_name}"
+                        i.fa.fa-info-sign
+                  = raw mem.cert_cells

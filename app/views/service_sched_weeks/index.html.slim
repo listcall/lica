@@ -1,0 +1,32 @@
+- content_for :page_js do
+  = javascript_include_tag 'service_sched_weeks/all_index'
+
+- content_for :services_header do
+  = svc_breadcrumb "services/#{@service.id}", [@service.name, "Schedule"]
+
+  div style='margin-bottom: 10px;'
+    div style='float: right; padding-top: 10px;'
+      span style='margin-right: 80px;'
+        - if not_current_quarter(@quarter)
+            a.pn> href="/services/#{@service.id}/sched_weeks#{homelnk(@tab)}"
+              i.fa.fa-home style='margin-right: 10px;' data-toggle='tooltip' title='current quarter'
+        a.pn> href="/services/#{@service.id}/sched_weeks#{prevlnk(@quarter, @tab)}"
+          i.fa.fa-chevron-left data-toggle='tooltip' title='previous quarter'
+        b> #{@quarter[:year]} Q#{@quarter[:quarter]}
+        a.pn> href="/services/#{@service.id}/sched_weeks#{nextlnk(@quarter, @tab)}"
+          i.fa.fa-chevron-right data-toggle='tooltip' title="next quarter"
+
+      small
+        a href='/services/#{@service.id}/avail_weeks/#{current_membership.user_name}#{currlnk(@quarter)}'
+          ' update your Q#{@quarter[:quarter]} availability
+    ul.nav.nav-tabs#navTab
+      li class="#{tabsel('rost')}" : a href="#rost" data-typ='rost' data-toggle='tab' Schedule
+      li class="#{tabsel('plan')}" : a href="#plan" data-typ='plan' data-toggle='tab' Plan
+
+  div.tab-content
+    div#rost class="tab-pane #{tabsel('rost')}"
+      = render 'schedule'
+    div#plan class="tab-pane #{tabsel('plan')}"
+      = render 'plan'
+
+= render :partial => "services/services_layout"

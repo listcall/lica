@@ -1,0 +1,50 @@
+- content_for :page_js do
+  = javascript_include_tag 'qual_certs/all_index'
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = link_to "#{current_team.acronym} Qualifications", "/quals"
+            |  > #{@qual.name}
+        .col-xs-6.text-right
+          = member_help_button('certs')
+
+= render 'style'
+
+.container
+  .row
+    table.table.table-condensed.table-bordered
+      thead
+        tr
+          th
+          th Name
+          - @types.each do |type|
+            th.ac = hdr_lbl(type, @qual)
+      tbody
+        - cache ['qctb', @qual, current_team] do
+          - @mems.includes(:user).each do |mem|
+            - cache ['qcmr', mem.user, current_team, @qual] do
+              tr
+                td = mem.rank
+                td
+                  img.smAvatar src='#{mem.user.avatar.url(:icon)}'
+                  '
+                  = link_to mem.full_name, "/quals/#{@qual.id}/certs/#{mem.id}", class: "#{red_mem(mem, @qual)}"
+                - @types.each do |type|
+                  = gen_cell(mem, type, @qual)
+  .row
+    .col-ms-9
+      small
+        | <span class="bGrn lbl">Green</span>: current cert, <span class="bYel lbl">Yellow</span>: expires within 3 months, <span class="bOra lbl">Orange</span>: expires within one month, <span class="bPnk lbl">Pink</span>: expired
+        br
+        | <span class="cRed">Red member name</span>: <u>required cert</u> is expired
+    .col-ms-3.ar
+        small
+          | * indicates multiple certs
+          br
+          | <u>underlined certs</u> are requried
+  .row
+    p style="margin-bottom: 15px;"

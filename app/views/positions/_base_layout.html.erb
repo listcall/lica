@@ -1,0 +1,17 @@
+<!-- new_serv -->
+
+<div class='container' style='margin-bottom: 5px;'>
+  <div class='row'>
+    <div id="positionsNav" class='col-md-3'>
+      <%= render :partial => 'positions/base_nav' %>
+    </div>
+    <div class='col-md-9'>
+      <div class='positionsBodyHeader'>
+        <%= yield :positions_header %>
+      </div>
+      <div class="positionsBodyBody">
+        <%= yield :positions_body %>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,10 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12'>
+      Wiki Content<p></p>
+      <% @wiki_repos.pages.each do |page| %>
+        <a href="/wiki_pages/<%= page.name %>"><%= page.name %></a><br/>
+      <% end %>
+    </div>
+  </div>
+</div>

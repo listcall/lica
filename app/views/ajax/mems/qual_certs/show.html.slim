@@ -1,0 +1,47 @@
+css:
+  .popTable td { padding: 3px; font-size: 10px; }
+  .popTable .b { font-weight: bold; text-align: right;}
+  .popTable { width: 100%; }
+
+table.table-bordered.popTable
+  tr
+    td.b Qualification
+    td
+      = @qual.name
+      = qual_link(@qual, @member, "edit")
+  tr
+    td.b Cert Type
+    td   = @ctype.name
+  tr
+    td.b Title
+    td
+      = @cert.title
+  - if @ctype.has_expires?
+    tr
+      td.b Expires
+      td   = expire_helper(@cert)
+  - if @cert.is_file?
+    tr
+      td.b Doc File
+      td   = cert_doc_helper(@cert)
+  - if @cert.is_link?
+    tr
+      td.b Link
+      td = cert_link_helper(@cert)
+  - if @cert.is_attendance?
+    tr
+      td.b Roster
+      td = link_to attendance_helper(@ctype, @member), "/members/#{@member.user_name}#activity", target: "_blank"
+  - if @ctype.has_comment?
+    tr
+      td.b Comment
+      td = @cert.comment
+  - if @certs.length > 1
+    tr
+      td.b Other #{@ctype.rname} Certs
+      td
+        = alt_certs(@certs)
+        = qual_link(@qual, @member, "view")
+
+.ar style='margin-top: 6px; font-size: 10px;'
+  a.closePop href='#' close

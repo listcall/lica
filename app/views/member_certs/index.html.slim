@@ -1,0 +1,51 @@
+- content_for :page_js do
+  = javascript_include_tag 'member_certs/all_member_certs'
+  javascript:
+    window.memberName = "#{@member.user_name}";
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = raw link_to "#{current_team.acronym} Certs", "/quals"
+            |  > #{@member.last_name}
+        .col-xs-6.text-right
+          = member_help_button('member_certs')
+
+css:
+  .certEditBtn { margin-right: 4px; }
+
+.container
+  .row
+    - @quals.each do |qual|
+      - qual.qual_ctypes.each do |type|
+        table.table.table-condensed.table-hover data-type=type style=("table-layout: fixed;")
+          thead
+            th
+              | #{type.name} Certs (#{qual.rname})
+            th
+              small Documentation
+            th
+              small Expiration
+            th.ar
+              button.btn.btn-xs.btn-primary.certCreateBtn data-tkey=type.rname data-tid=type.id Create
+          tbody.sortContainer id="sortContainer_#{type.id}"
+            - type.certs_for(@member).each do |mc|
+              tr.sortItem id="certSort_#{mc.id}"
+                td
+                  i.fa.fa-arrows-v.sortIcon
+                  = mc.title
+                td= attachment_link(mc)
+                td= mc.expires_at.try(:strftime, "%Y-%m-%d")
+                td.ar
+                  = edit_cert_button(mc)
+                  = delete_cert_button(mc)
+
+= modal 'myModal', '<span id="modTitle"></span> Cert' do
+  .modal-body#formBody
+    | Loading...
+  .modal-footer
+    button#certSaveBtn.btn.btn-primary.btn-sm.avEdit type="button"  Save
+    button.btn.btn-default.btn-sm data-dismiss="modal" type="button"  Close

@@ -1,0 +1,36 @@
+<% content_for :admin_header do %>
+  <%= admin_header :Lica_Team, :icon %>
+<% end %>
+
+<% content_for :admin_body do %>
+  <p></p>
+  <div>
+    The current icon is <img style='margin-left: 15px;' class='icon' src='<%= current_team.icon_path %>'/>
+  </div>
+  <p></p>
+  <%= form_for(@team, url: "/admin/team_icon", html: {class: 'form-horizontal'}) do |f| %>
+    <%= f.hidden_field :teamid, value: current_team.id %>
+    <%= f.label "New Icon" %>
+    <%= f.file_field :icon  %>
+    <p></p>
+    <div class='form-actions'>
+      <%= f.submit "Update" %>
+    </div>
+  <% end %>
+  <div style='margin-top: 120px; padding-left: 25px;'>
+    <small>
+      About Team Icons:<br/>
+      <ul>
+        <li>Icon files typically contain a 16x16 graphic image.</li>
+        <li>Icon filenames end in ".ico".</li>
+        <li>People often refer to icon files as 'favicons'.</li>
+        <li>You can create a new icon file with photo editing software like
+          <a href='http://en.wikipedia.org/wiki/Adobe_Photoshop' target='_blank'>Photoshop</a>,
+          or with an online tool like <a href='http://favicon.cc' target='_blank'>favicon.cc</a>.</li>
+      </ul>
+    </small>
+  </div>
+
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

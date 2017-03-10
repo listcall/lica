@@ -1,0 +1,10 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <b>Access Denied</b><p></p>
+      You are a registered member of this team.<p></p>
+      You currently have <b><%= current_membership.try(:rights) || "undefined" %></b> rights with this team.
+      You do not have the correct rights to access this page.
+    </div>
+  </div>
+</div>

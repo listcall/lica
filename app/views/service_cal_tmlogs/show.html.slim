@@ -1,0 +1,13 @@
+- content_for :services_header do
+  = svc_breadcrumb ["services/#{@service.id}", "tmlog", @member.user_name], \
+                   [@service.name, "TimeLog", @member.user_name]
+
+- content_for :services_body do
+  b Member TimeLog Calendar for #{@service.name} - Under Construction
+  div style='margin-top: 15px; margin-bottom: 15px;'
+    p The schedule type is '<b>#{@service.type.schedule_type}</b>'
+    p The calendar type is '<b>#{@service.type.cal_type}</b>'
+  | This page shows the time log for one member: <b>#{current_membership.user_name}</b>.<br/>
+
+
+= render :partial => "services/services_layout"

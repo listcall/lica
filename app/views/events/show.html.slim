@@ -1,0 +1,82 @@
+- content_for :page_js do
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9knuWFHshMUw5f9Vv6eaFEaU2oX-MDXA&sensor=false" type="text/javascript"
+  javascript:
+    window.lclData   = {};
+    lclData.eventId  = #{@event.id};
+    lclData.eventRef = '#{@event.event_ref}';
+    lclData.eTypes   = '#{raw(@ev_times)}';
+    lclData.eSelect  = '#{raw(@select)}';
+    lclData.parents  = #{raw @event_bot.potential_parent_events};
+    lclData.children = #{raw @event_bot.potential_child_events};
+  = javascript_include_tag 'events/all_show'
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = raw link_to "#{current_team.acronym} Events", "/events"
+            '  > #{@event.event_ref}
+        .col-xs-6.text-right
+          a.help-button href="/events/new"  Create New Event
+          a.help-button href="/events/new?copy=#{@event.id}"  Copy This Event
+          = raw event_delete_link(@event.event)
+          = member_help_button('events')
+
+css:
+  .select2wide { width: 350px; }
+
+.container
+  .row
+    .col-md-6
+      = render 'event_overview'
+
+    .col-md-6
+      table.table.table-condensed.table-bordered
+        thead
+          th Period
+          th # Participants
+          th.ar
+            form action="/events/#{@event.event_ref}/periods" method="POST"
+              input name="authenticity_token" type="hidden" value=form_authenticity_token /
+              button#eventPeriodCreateBtn.btn.btn-xs.btn-primary Create
+        tbody#periodBody
+          - @event.periods.sorted.each do |period|
+            tr id="period_#{period.id}"
+              td
+                i.fa.fa-arrows-v.sortIcon
+                a href="/events/#{@event.event_ref}/periods/#{period.position}"
+                  = "Period #{period.position}"
+              td
+                = period.participants.count
+              td.ar
+                = delete_event_period_button(period)
+      small
+        div style=("margin-bottom: 8px;")
+          b= participating_teams_title(@event.event)
+          div style=("display: inline-block; float: right;")
+            = event_add_parent_button(@event.event)
+            = event_add_child_button(@event.event)
+            = event_directory_button(@event.event)
+        - if @event.event.parent
+          div style=("margin-top: 4px; margin-bottom: 4px; border-bottom: 1px solid gray;")  Parent Team
+          = parent_team(@event.event.parent)
+          p
+        - if @event.event.has_children?
+          div style=("margin-top: 4px; border-bottom: 1px solid grey; padding-bottom: 1px; margin-bottom: 2px;")
+            | Child #{"Team".pluralize(@event.event.children.count)}
+            div style=("float: right;")
+              a.inline.addChild href="#"  Add Child
+          - @event.event.children.sort {|x,y| x.team.acronym <=> y.team.acronym}.each do |child_event|
+            = child_team(child_event)
+          = child_periods(@event.event)
+  .row
+    .col-xs-12
+      b Event Description:
+      br/
+      small#descShow.display_edit
+        = raw(@event.description.blank? ? "TBD" : @event.description)
+      a#descEdit.inline.areaEditable data-mode="inline" data-name="description" data-type="textarea" href="#" style=("display: none; width: 100%;")
+        = @event.description
+= render 'geopicker_modal'

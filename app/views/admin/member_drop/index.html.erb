@@ -1,0 +1,44 @@
+<% content_for :page_js do %>
+  <%= javascript_include_tag 'admin/member_drop/all_member_drop' %>
+<% end %>
+
+<% content_for :admin_header do %>
+  <%= admin_header :Lica_Members, :drop %>
+<% end %>
+
+<% content_for :admin_body do %>
+
+  <div class="row" style="margin-bottom: 4px;">
+    <div class="col-sm-6">
+      <small>
+        filter: <%= @query.to_s %>
+        (<%= @members.count %> members)
+      </small>
+    </div>
+    <div class="col-sm-6 text-right">
+      <a href="/admin/member_registry" type="button" class="btn btn-default btn-xs">clear filter</a>
+      <button id='clearSort' type="button" class="btn btn-default btn-xs">reset sort/search</button>
+    </div>
+  </div>
+
+  <table id='tablesort' class='table table-condensed tablesorter-bootstrap'>
+    <thead>
+    <th class='filter-false'></th>
+    <th>Name</th>
+    <th>Created</th>
+    <th># Logins</th>
+    <th>Last Login</th>
+    <th>Action</th>
+    </thead>
+    <tbody>
+    <% @members.each do |mem| %>
+      <% cache ['mem_reg_row', mem] do %>
+        <%= render :partial => 'registry_row', locals: {mem: mem} %>
+      <% end %>
+    <% end %>
+    </tbody>
+  </table>
+
+<% end %>
+
+<%= render :partial => 'admin/admin_layout' %>

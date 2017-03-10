@@ -1,0 +1,12 @@
+//# require bootstrap-datepicker/js/bootstrap-datepicker
+//# require ./show_ajax
+//# require ./base_geopicker
+//# require ./show_geopicker
+//# require ./show_form
+//# require ./show_inline_edit
+//# require ./show_datepicker
+//# require ./show_switch_pub
+//# require ./show_switch_day
+//# require ./show_description
+//# require ./show_period_sort
+//# require ./show_partner_select

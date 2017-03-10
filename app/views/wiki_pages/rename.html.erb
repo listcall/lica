@@ -1,0 +1,9 @@
+<%= csrf_meta_tag %>
+
+<%=
+    render :partial => 'foundation',
+           :locals => {
+                   :nav     => wiki_rename_nav,
+                   :content => wiki_rename_content
+           }
+%>

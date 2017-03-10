@@ -1,0 +1,69 @@
+<div class='container'>
+  <div class='row'>
+    <div class='col-md-12'>
+      <p></p>
+      Update the password for <b><%= @user.full_name %></b>.
+      <p></p>
+    </div>
+  </div>
+  <div class='row' style="margin-top: 20px;">
+    <div class='col-md-12'>
+      <%= bs_vert_multi_form_for @user do |f| %>
+
+        <% if @user.errors.any? %>
+          <div class='row'>
+            <div class="col-xs-12">
+              <div class="form-error">
+                <small>
+                  <b><%= pluralize(@user.errors.count, "error") %> prevented this password from being saved:</b>
+                  <%= @user.errors.full_messages.map.with_index {|msg, i| "#{i+1}) #{msg}"}.join(', ') %>
+                </small>
+              </div>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="row">
+          <%= f.password_field :password  , cols: 4   %>
+        </div>
+
+        <div class="row">
+          <%= f.password_field :password_confirmation  , cols: 4   %>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-6">
+            <%= f.submit_btn "Update Password" %>
+          </div>
+        </div>
+
+      <% end %>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 30px;">
+      <div class="col-md-12">
+        <div class="well">
+          <small>
+            Passwords should have minimum 8 characters, with a mix of upper/lower case letters and numbers.
+            <p></p>
+            Best practice: use the first letters of a passphrase sentence to create an un-hackable password.  For example:
+            <p></p>
+            <ul>
+              <li>"<b>F</b>ido <b>h</b>as <b>4</b> <b>l</b>egs <b>a</b>nd <b>f</b>ur <b>a</b>ll <b>o</b>ver"  -> Fh4lafao<br>
+              <li>"<b>E</b>lvis <b>P</b>resley <b>s</b>adly <b>d</b>ied <b>i</b>n <b>1997</b>"                             -> EPsdi1997<br>
+              <li>"<b>w</b>edding <b>a</b>nniversary <b>i</b>s <b>M</b>ay <b>5</b>th <b>s</b>o <b>d</b>on't <b>f</b>orget <b>f</b>lowers" -> waiM5sdff<br>
+            </ul>
+            <p></p>
+            <a href="https://www.schneier.com/blog/archives/2013/06/a_really_good_a.html" target="_blank">more about secure passwords</a>
+          </small>
+        </div>
+      </div>
+    </div>
+    <div class='row'>
+      <div class='col-md-12'>
+        Click <a href="/members/<%= @user.user_name %>">here</a> to update your profile data.
+        <p></p>
+      </div>
+    </div>
+  </div>
+</div>

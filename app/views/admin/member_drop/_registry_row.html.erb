@@ -1,0 +1,26 @@
+<tr id='<%= mem.id %>'>
+  <td><%= avatar_path(mem.user) %></td>
+  <td data-sort='<%= mem.last_name %>'>
+    <col-md- style='width: 180px; display: inline-block;'>
+    <a href='/members/<%= mem.user.user_name %>' target='_blank'>
+      <%= mem.user.full_name %>
+    </a>
+    </col-md->
+    @<%= mem.user.user_name %>
+  </td>
+  <td data-sort='<%= raw mem.created_at.strftime("%Y%M%D%h%m") %>'>
+    <%= mem.created_at.strftime("%b %Y") %>
+    <a class='hLink' href="/display/cred_log/<%= mem.user_name %>" target="_blank">
+      <i class="fa fa-history"></i>
+    </a>
+  </td>
+  <td data-sort='<%= raw mem.sign_in_count %>'>
+    <%= raw mem.sign_in_count %>
+  </td>
+  <td data-sort='<%= mem.last_sign_in_at ? Time.parse(mem.last_sign_in_at).strftime("%Y%M%D%h%m") : "x" %>'>
+    <%= mem.last_sign_in_at ? Time.parse(mem.last_sign_in_at).strftime("%b %Y") : "NA" %>
+  </td>
+  <td>
+    <%= member_delete_button(mem) %>
+  </td>
+</tr>

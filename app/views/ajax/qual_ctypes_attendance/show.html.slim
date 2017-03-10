@@ -1,0 +1,47 @@
+div
+  .sideBox
+    #buttonDiv
+      button.btn.btn-primary.btn-sm#submitBtn
+        i.glyphicon.glyphicon-ok
+      '
+      button.btn.btn-default.btn-sm#closeBtn
+        i.glyphicon.glyphicon-remove.closePop
+    #helpDiv
+  .overBox
+    ' at least
+    select.form-control.selectNum.input-sm#eventCount
+      = event_count_for(@rule)
+    |  events
+    br
+    | with title:
+    input#ttlTxt.form-control.selectTxt.input-sm placeholder="*" type="text" value="#{title_val_for(@rule)}"
+    br
+    | with type:
+    input#typTxt.form-control.selectTxt.input-sm placeholder="*" type="text" value="#{type_val_for(@rule)}"
+    br
+    | with tag:
+    input#tagTxt.form-control.selectTxt.input-sm placeholder="*" type="text" value="#{tag_val_for(@rule)}"
+    br
+    ' in the past
+    select.form-control.selectNum.input-sm#monthCount
+      = month_count_for(@rule)
+    |  months
+
+#ttlHelp style=('display: none;')
+  ul
+    li enter an Event title
+    li case insensitive
+    li '%' matches zero or more characters
+    li '_' matches one character
+
+#typHelp style=('display: none;')
+  ul
+    li enter zero or more Event types, separated by spaces
+    li valid if any type matches
+    li acceptible types: #{@types || "TBD"}
+
+#tagHelp style=('display: none;')
+  ul
+    li enter zero or more Event tags, separated by spaces
+    li valid if all tags match
+    li acceptible tags: #{@tags || "TBD"}

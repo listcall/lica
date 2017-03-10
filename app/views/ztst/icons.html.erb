@@ -1,0 +1,147 @@
+<style>
+    .style1, .style2 { display: block; font-size: 40px; margin-right: 40px }
+    .style1 {
+        color: #ed5a76;
+        text-shadow: 0 1px 0 rgba(0,0,0,0.5),
+        0 -1px 0 rgba(0,0,0,0.5),
+        1px 0 0 rgba(0,0,0,0.5),
+        -1px 0 0 rgba(0,0,0,0.5),
+        0 2px 0 rgba(0,0,0,0.3),
+        0 3px 0 rgba(0,0,0,0.4),
+        0 4px 0 rgba(0,0,0,0.5);
+    }
+    .style2 {
+        color: green;
+        text-shadow: 0 0 20px #1F849E
+    }
+    .shover:hover {
+        color: blue;
+    }
+</style>
+
+<!-- Navigation -->
+
+<div class='container'>
+  <%= render :partial => 'shared_nav' %>
+  <div class="row">
+    <div class='col-md-4'>
+      <b>General Icons</b><p></p>
+      <i class="fa fa-camera-retro"> fa-camera-retro</i><br/>
+      <i class="fa fa-spinner fa-spin"></i> fa-spinner<br/>
+      <i class='fa fa-trash-o'> fa-trash-o</i><br/>
+      <i class='fa fa-cog'> fa-cog</i><br/>
+      <i class='fa fa-repeat'> fa-repeat</i><br/>
+      <i class='fa fa-info'> fa-info</i><br/>
+      <i class='fa fa-map-marker'> fa-map-marker</i><p></p>
+    </div>
+    <div class="col-md-4">
+      <b>SAR Icons</b><p></p>
+      <i class='fa fa-bell'> fa-bell</i><br/>
+      <i class='fa fa-stethoscope'> fa-stethoscope</i><br/>
+      <i class='fa fa-ambulance'> fa-ambulance</i><br/>
+      <i class='fa fa-plus-square'> fa-plus-square</i><br/>
+      <i class='fa fa-user-md'> fa-user-md</i><br/>
+      <i class='fa fa-medkit'> fa-medkit</i><br/>
+      <i class='fa fa-hospital-o'> fa-hospital-o</i><p></p><p></p>
+    </div>
+    <div class="col-md-4">
+      <b>Social Icons</b><p></p>
+      <i class='fa fa-facebook'> fa-facebook</i><br/>
+      <i class='fa fa-twitter'> fa-twitter</i><br/>
+      <i class='fa fa-pinterest'> thumb-down</i><br/>
+      <i class='fa fa-google-plus'> fa-google-plus</i><br/>
+      <i class='fa fa-rss'> fa-rss</i><br/>
+      <i class='fa fa-phone'> fa-phone</i><br/>
+      <i class='fa fa-comment'> fa-comment</i><p></p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-4">
+      <b>Buttons and Forms</b><p></p>
+      <a class="tiny button" href="#"><i class="fa fa-repeat"></i> Reload</a>
+      <div class="button-group">
+        <a class="tiny button" href="#"><i class="fa fa-align-left"></i></a>
+        <a class="tiny button" href="#"><i class="fa fa-align-center"></i></a>
+        <a class="tiny button" href="#"><i class="fa fa-align-right"></i></a>
+        <a class="tiny button" href="#"><i class="fa fa-align-justify"></i></a>
+      </div>
+
+      <br/>
+
+      <form>
+        <div class="input-prepend">
+            <col-md- class="add-on"><i class="fa fa-envelope"></i></col-md->
+            <input class='col-md-3' type="text" placeholder="Email address">
+        </div>
+      </form>
+
+    </div>
+
+    <div class="col-md-4">
+      <b>Icon Styling</b><p></p>
+      <i class="fa fa-cog style1"></i><p></p>
+      <i class="fa fa-comment style2"></i>
+    </div>
+    <div class="col-md-4">
+      <b>Vertical Nav</b><p></p>
+
+      <ul class="nav nav-list">
+        <li class="active"><a href="#"><i class="fa fa-home"></i> Home</a></li>
+        <li><a href="#"><i class="fa fa-book"></i> Library</a></li>
+        <li><a href="#"><i class="fa fa-pencil"></i> Applications</a></li>
+        <li><a href="#"><i class="fa fa-cogs"></i> Settings</a></li>
+      </ul>
+
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <b>TestA</b><p></p>
+      <form>
+        <div class="input-prepend input-append">
+          <col-md- class="add-on"><i class="fa fa-cog"></i></col-md->
+          <input type="text" placeholder="Setting">
+          <col-md- class="add-on"><i class="fa fa-trash"></i></col-md->
+        </div>
+      </form>
+    </div>
+    <div class="col-md-4">
+      <b>TestB</b><p></p>
+      <div class="btn-group">
+        <a class='btn xtip' href="http://yahoo.com" data-title="Yahoo!">Yahoo</a>
+        <a class='btn xtip' href="http://google.com" data-title="Google">Google</a>
+        <button class='btn dropdown-toggle xtip' data-title="Nav Options" data-toggle='dropdown'>
+          <col-md- class='caret'></col-md->
+        </button>
+        <ul class='dropdown-menu'>
+          <li><a href='/users/<%= current_user.id %>/edit'>asdf</a></li>
+          <li><a href='/users/<%= current_user.id %>/edit'>qwer</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <b>TestC</b><p></p>
+      some stuff <a href='#' class='xtip' title="this tip">link here</a> more stuff
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <b>Glypyicons 1</b><p></p>
+      <i class="glyphicon glyphicon-phone"></i><br/>
+      <i class="glyphicon glyphicon-search"></i>
+    </div>
+    <div class="col-md-4">
+      <b>Glypyicons 2</b><p></p>
+      <i class="glyphicon glyphicon-star"></i><br/>
+      <i class="glyphicon glyphicon-stats"></i>
+    </div>
+    <div class="col-md-4">
+      <b>Glypyicons 3</b><p></p>
+      <i class="glyphicon glyphicon-comment"></i><br/>
+      <i class="glyphicon glyphicon-leaf"></i>
+    </div>
+  </div>
+
+</div>

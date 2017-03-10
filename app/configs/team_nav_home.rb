@@ -1,0 +1,3 @@
+class TeamNavHome < TeamNav
+
+end

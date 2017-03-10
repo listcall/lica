@@ -1,0 +1,54 @@
+- content_for :page_js do
+  = javascript_include_tag "pgr/all_dialog"
+
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            = render :partial => 'pgr/team_title'
+            |  > #{link_to truncate(@dialog.short_body, length: 20), "/paging/#{@assig.sequential_id}"}
+            |  > #{@dialog.recipient.user_name}
+        .col-xs-4.text-center
+          small = Time.now.strftime("%a %b %d %H:%M")
+        .col-xs-2.text-right
+          small= link_to "Index", "/paging"
+          = member_help_button('paging')
+
+.container
+  .row
+    .col-md-12
+      b> Fm:
+      => pgr_mem_link(@assig.sender)
+      b> To:
+      => pgr_mem_link(@dialog.recipient)
+      => @dialog.broadcast.other_count
+      => @assig.via
+      => raw @dialog.action_header
+      br
+      - @dialog.posts.for_dialog.by_id.each do |post|
+        .media
+          a.pull-left href="#"
+            = raw avatar_path(post.author.try(:user), "media-object")
+          .media-body
+            h5.media-heading = post.headline
+            = post.parsed_body
+      p
+      - if @dialog.is_participant?(current_membership)
+        .control-group
+          label.text.control-label
+            ' Post a reply to @#{@dialog.recipient.alt_name(@dialog.sender, current_membership)}
+            ' #{@post.via}
+          br
+          form.form-horizontal action="/paging/#{@assig.sequential_id}/for/#{@dialog.id}" method="post" role="form"
+            input name="authenticity_token" type="hidden" value=form_authenticity_token
+            input name="pgr_post[pgr_dialog_id]" type="hidden" value=@dialog.id
+            input name="pgr_post[author_id]" type="hidden" value=current_membership.id
+            input name="pgr_post[long_body]" type="hidden" value=""
+            .form-group
+              .col-lg-10
+                textarea#inputText.form-control name="pgr_post[short_body]" type="email"
+            .form-group
+              .col-lg-offset-2.col-lg-10
+                button.btn.btn-default type="submit"  Send

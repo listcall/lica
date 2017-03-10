@@ -1,0 +1,38 @@
+- content_for :subhead do
+  .subhead
+    .container
+      .row
+        .col-xs-6
+          b
+            ' Rank/Role Assignments for #{@mem.full_name} >
+            => link_to "all members", "/display/cred_log"
+        .col-xs-6.text-right
+          = member_help_button('certs')
+
+.container
+  .row
+    div
+      table.table.table-condensed.table-bordered.table-hover
+        thead
+          th Rank
+          th Start
+          th Finish
+        tbody
+          - @mem.rank_assignments.includes(:rank).each do |assig|
+            tr
+              td #{assig.rank.try(:name) || "DELETED RANK"} (#{assig.rank.try(:acronym) || 'NA'})
+              td = assig.started_at.try(:strftime, "%Y-%m-%d %H:%M")
+              td = assig.finished_at.try(:strftime, "%Y-%m-%d %H:%M")
+    div
+      table.table.table-condensed.table-bordered.table-hover
+        thead
+          th Role
+          th Start
+          th Finish
+        tbody
+          - @mem.role_assignments.includes(:role).each do |assig|
+            tr
+              td #{assig.role.try(:name) || "DELETED ROLE"} (#{assig.role.try(:acronym) || 'NA'})
+              td = assig.started_at.try(:strftime, "%Y-%m-%d %H:%M")
+              td = assig.finished_at.try(:strftime, "%Y-%m-%d %H:%M")
+    small Note: Rank/Role Assignments which are active for less than ten minutes are not recorded

@@ -1,0 +1,43 @@
+<% content_for :page_js do %>
+  <script>
+    var templates = JSON.parse('<%= raw @templates %>');
+    var col1      = JSON.parse('<%= raw @col1.to_json %>');
+    var col2      = JSON.parse('<%= raw @col2.to_json %>');
+  </script>
+  <%= javascript_include_tag 'ztst/all_handle' %>
+<% end %>
+
+<div class="container">
+
+  <%= render :partial => 'shared_nav' %>
+
+  <div class="row">
+    <div class="col-md-6">
+      <% @col1.each_with_index do |widget, idx| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= widget %>
+          </div>
+          <div class="panel-body">
+            <div id="c1_<%= "#{widget}_#{idx+1}"  %>">Loading...</div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-6">
+      <% @col2.each_with_index do |widget, idx| %>
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <%= widget %>
+          </div>
+          <div class="panel-body">
+            <div id="c2_<%= "#{widget}_#{idx+1}"  %>">Loading...</div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+

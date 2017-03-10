@@ -1,0 +1,32 @@
+- content_for :page_js do
+  = javascript_include_tag 'admin/positions/all_indx'
+
+- content_for :admin_header do
+  = admin_header :Lica_Positions, :index
+
+- content_for :admin_body do
+  table.table.table-hover
+    thead
+      th Role
+      th Name
+      th Partners
+      th.ar
+        = dropdown 'Create', :align => :right, :size => :extra_small, :context => :primary do
+          - @roles.each do |role|
+            li
+              a.createPos data-role_id="#{role.id}" href="#"
+                | #{role.name} (#{role.acronym})
+    tbody#positionBody
+      - @positions.each do |position|
+        tr.dragRow id="position_#{position.team_role.try(:acronym)}"
+          td
+            i.fa.fa-arrows-v.sortIcon
+            = position.team_role.try(:acronym)
+          td
+            = position.team_role.try(:name)
+          td
+            = xeCkl cls:"ptCk", pk:position.id, name:"partner_acronyms", val:position.partner_acronyms, src: team_partner_acronyms
+          td.ar
+            = raw delete_position_button(position.id)
+
+= render :partial => 'admin/admin_layout'

@@ -1,0 +1,9 @@
+.container style="margin-bottom: 5px;"
+  .row
+    #servicesNav.col-md-3
+      = render :partial => 'svcs/services_nav'
+    .col-md-9
+      .servicesBodyHeader
+        = yield :services_header
+      .servicesBodyBody
+        = yield :services_body

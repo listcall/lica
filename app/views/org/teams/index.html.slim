@@ -1,0 +1,36 @@
+- content_for :page_js do
+  = javascript_include_tag 'org/teams/all_teams'
+
+css:
+  .btn { margin-left: 3px; }
+
+.container
+  .row
+    .col-md-12
+      table.table.table-compact.table-hover
+        thead
+          th Acronym
+          th Name
+          th Members
+          th URL
+          th Published
+          th Action
+        tbody
+          - @teams.each do |team|
+            tr
+              td= team.acronym
+              td= team.name
+              td= link_to team.memberships.count, "/org/teams/# team.acronym /members"
+              td= link_to NavBarSvc.team_path(team, request.env), NavBarSvc.team_url(team, request.env), target: "_blank"
+              td= team.published
+              td
+                button.btn.btn-xs.ftBtn id="ft_#{team.id}" data-teamname='#{team.name}' Features
+                button.btn.btn-xs.disabled.arBtn id="ar_#{team.id}" Archive
+                button.btn.btn-xs.disabled.deBtn id="de_#{team.id}" Delete
+
+= modal "featureModal", "Update Features" do
+  .modal-body#featureBody
+    | Loading...
+  .modal-footer
+    button.btn.btn-default.btn-sm.btn-primary#resetBtn  board="button" Reset
+    button.btn.btn-default.btn-sm data-dismiss="modal" board="button"  Close

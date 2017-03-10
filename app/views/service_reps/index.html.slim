@@ -1,0 +1,15 @@
+- content_for :services_header do
+  = svc_breadcrumb ["services/#{@service.id}", "tmlog"], [@service.name, "Time Log"]
+
+- content_for :services_body do
+  b Team Time Log Calendar - Under Construction
+  li historical data / reports
+  li update hours and assignments
+  div style='margin-top: 15px; margin-bottom: 15px;'
+    p The schedule type is '<b>#{@service.type.schedule_type}</b>'.
+    p The calendar type is '<b>#{@service.type.cal_type}</b>'.
+  | Click
+    <a href='/services/#{@service.id}/tmlog/#{current_membership.user_name}'>here</a>
+    to view your personal log.
+
+= render :partial => "services/services_layout"

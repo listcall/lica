@@ -1,0 +1,27 @@
+= javascript_include_tag 'ztst/all_form1'
+
+.container
+  = render :partial => 'shared_nav'
+
+.container
+  .row
+
+    h3 bs_horiz_single_form_for
+
+    = bs_horiz_single_form_for @user do |f|
+      = f.text_field :first_name
+      = f.text_field :last_name
+
+    h3 bs_vert_multi_form_for
+
+    = bs_vert_multi_form_for @user do |f|
+      = f.text_field :first_name
+      = f.text_field :last_name
+
+  .row
+    .col-ms-6
+      h3 xeditable select2
+      a href="#" id="country" data-type="select2" data-pk="1" data-value="html, css" data-url="/post" data-title="test"
+    .col-ms-6
+      h3 select2
+      | TBD

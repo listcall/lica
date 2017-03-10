@@ -1,0 +1,20 @@
+css:
+  table.table-condensed {
+    font-size: 12px;
+  }
+
+table.table.table-condensed
+  thead
+    tr
+      th : b Shift
+      th : b Start
+      th : b Finish
+      th : b Assigned
+  tbody
+    - @sched_set.each do |period|
+      tr class="#{period.current_weekly_period ? 'green' : ''}"
+        td #{period.year} / Q#{period.quarter} / Week #{period.week}
+        td = period.weekly_start.strftime("%a %b %d %H:%M")
+        td = period.weekly_finish.strftime("%a %b %d %H:%M")
+        td TBD
+        /td = raw participant_name period.participants.first.try(:membership)

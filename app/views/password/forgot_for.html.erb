@@ -1,0 +1,60 @@
+<div class='container'>
+  <div class="row">
+    <div class="col-sm-12">
+
+      <h2 style="margin-bottom: 25px;">Send Password Reset Link to <%= @user.try(:full_name) || "User" %></h2>
+
+      <% if @user.emails.pagable.length > 0 %>
+
+      <b><%= @user.try(:first_name) %>'s pagable email addresses:</b>
+      <%= @user.emails.pagable.map {|x| x.address}.join(', ') %>
+
+      <p></p>
+
+      <form method=post action='/password/send_email_for'>
+        <input type=hidden name=sender_id value="<%= current_membership.id %>">
+        <input type=hidden name=user value="<%= @user.try(:user_name) %>">
+        <input type=hidden name=email value="<%= @user.try(:emails).try(:first).try(:address) %>">
+        <input type=submit value="Send password reset link to all of <%= @user.try(:first_name) %>'s pagable email addresses">
+      </form>
+
+      <% else %>
+
+      <b>Cannot send password reset link:</b> <%= @user.first_name %> has no pagable email addresses.
+      <p></p>
+      Visit <%= link_to "#{@user.first_name}'s profile page", "/members/#{@user.user_name}" %>, add a pagable email address, then try again.
+
+      <% end %>
+
+      <div style="margin-top: 50px;">
+        <% if @user.present? %>
+          <div class="well">
+            <%= avatar_path(@user) %><b> <%= link_to @user.full_name, "/members/#{@user.user_name}" %></b>
+          <p></p>
+          <small>
+          Username: <%= @user.user_name %>
+          <p></p>
+          Email Addresses
+          <ul>
+            <% @user.emails.each do |email| %>
+              <li><%= email.address %> (<%= email.typ %>) <%= pagable_icon_for(email) %></li>
+            <% end %>
+          </ul>
+          <p></p>
+          Phone Numbers
+          <ul>
+            <% @user.phones.each do |phone| %>
+              <li><%= phone.number %> (<%= phone.typ %>) <%= pagable_icon_for(phone) %></li>
+            <% end %>
+          </ul>
+          <p></p>
+          Last Login: <%= @user.last_sign_in_at.try(:strftime, "%Y-%m-%d %H:%M") %>
+
+          </small>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
+</div>

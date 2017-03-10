@@ -1,0 +1,26 @@
+<% content_for :page_js do %>
+  <%# javascript_include_tag 'ztst/all_ace' %>
+<% end %>
+
+<style>
+  #editor {
+    position: absolute;
+    width: 500px;
+    height: 400px;
+  }
+</style>
+
+<div class='container'>
+  <%= render :partial => 'shared_nav' %>
+</div>
+
+<div class='container'>
+  <div class="row">
+    <div class="col-md-12">
+      This is the page for ACE - javascript syntax highlighting.
+      <div id="editor"></div>
+    </div>
+  </div>
+</div>
+
+

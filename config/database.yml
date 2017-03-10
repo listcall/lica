@@ -21,3 +21,8 @@ staging:
 production:
   <<: *common
   database: list_call_production
+
+travis:
+  adapter:  postgresql
+  username: postgres
+  database: lica_travis

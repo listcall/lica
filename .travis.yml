@@ -1,5 +1,7 @@
 language: ruby
 env:
-- DB=postgres
-- SH=bash
-- RUN_ENV=TRAVIS
+- RAILS_ENV=travis
+services:
+  - postgresql
+before_script:
+  - psql -c 'create database lica_travis;' -U postgres

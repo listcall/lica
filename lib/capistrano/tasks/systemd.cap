@@ -1,9 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-before 'deploy:restart', 'systemd:export'
-after 'deploy:update', 'systemd:restart'
-after 'deploy:rollback:revision', 'systemd:export_rollback'
+# before 'deploy:restart', 'systemd:export'
+# after 'deploy:update', 'systemd:restart'
+# after 'deploy:rollback:revision', 'systemd:export_rollback'
 
 before 'deploy:check', 'systemd:test'
 #after  'systemd:test', 'systemd:exit'
@@ -34,8 +34,8 @@ namespace :systemd do
       template "lica.erb"        , "/tmp/lica.service"
       template "lica_sidekiq.erb", "/tmp/lica_sidekiq.service"
 
-      execute "sudo mv /tmp/lica.service         /etc/systemd/service"
-      execute "sudo mv /tmp/lica_sidekiq.service /etc/systemd/service"
+      execute "sudo mv /tmp/lica.service         /etc/systemd/system"
+      execute "sudo mv /tmp/lica_sidekiq.service /etc/systemd/system"
     end
   end
 

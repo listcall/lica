@@ -30,11 +30,11 @@ namespace :foreman do
     on roles(:all) do
       debug " EXPORT ".center(80,'-')
       execute "sudo rm -f /etc/init/#{fetch(:application)}*.conf"
-      cmd = "cd #{current_path}; sudo bin/foreman export systemd /etc/systemd/system -e .env -p #{fetch(:web_port)} -a #{fetch(:application)} -u #{fetch(:user)} -d #{current_path}"
+      cmd = "cd #{current_path}; bin/foreman export systemd /tmp/xinit -e .env -p #{fetch(:web_port)} -a #{fetch(:application)} -u #{fetch(:user)} -d #{current_path}"
       info cmd
       execute cmd
-      # execute "sudo mv /tmp/xinit/* /etc/init"
-      # execute "rm -rf /tmp/xinit"
+      execute "sudo mv /tmp/xinit/* /etc/systemd/system"
+      execute "rm -rf /tmp/xinit"
     end
   end
 

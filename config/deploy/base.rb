@@ -2,20 +2,20 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 
 # ===== App Config =====
 
-set :application, 'X440'
+set :application, 'LICA'
 set :log_level,   :info     # use :warn, :info or :debug
 
 set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}" }
 
 # ===== Nginx Config =====
 
-set :vhost_names, %w(smsoesb.net *.smsoesb.net x440.com)
+set :vhost_names, %w(smsoesb.net *.smsoesb.net lica.com)
 set :web_port,    8500
 
 # ===== Source Access =====
 
 set :scm,              :git
-set :repo_url,         'ssh://git@github.com/andyl/X440.git'
+set :repo_url,         'ssh://git@github.com/listcall/list_call.git'
 before 'deploy:check', 'setup:netrc'  # supplies username/password for access to private repo
 
 # ===== Tasks =====

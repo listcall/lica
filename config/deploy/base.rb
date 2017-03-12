@@ -2,7 +2,7 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 
 # ===== App Config =====
 
-set :application, 'LICA'
+set :application, 'lica'
 set :log_level,   :info     # use :warn, :info or :debug
 
 set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}" }
@@ -48,7 +48,7 @@ namespace :deploy do
 
   desc 'Restart application'
   task :restart do
-    invoke 'foreman:export'
+    invoke 'systemd:export'
     on roles(:app) do
       debug ' RESTART '.center(80,'-')
       debug ' TODO: FIX THE BROKEN KILL SIGNALS '.center(80,'-')
@@ -56,12 +56,14 @@ namespace :deploy do
       # execute "(kill -s SIGUSR1 $(ps -C ruby -F | grep '/puma' | awk {'print $2'})) || sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
       # restart SIDEKIQ
       # execute "(kill -s TERM $(ps -C ruby -F | grep 'sidekiq' | awk {'print $2'})) || sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
-      execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
+      # execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
+      execute "sudo systemctl restart lica"
+      execute "sudo systemctl restart lica_sidekiq"
     end
   end
 
   after  :publishing , :restart
   after  :finishing  , :cleanup
-  after  :cleanup    , 'foreman:symlink_logs'
+  after  :cleanup    , 'systemd:symlink_logs'
 
 end

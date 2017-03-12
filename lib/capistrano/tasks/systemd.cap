@@ -1,9 +1,9 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-#before 'deploy:restart', 'systemd:export'
-#after 'deploy:update', 'systemd:restart'
-#after 'deploy:rollback:revision', 'systemd:export_rollback'
+before 'deploy:restart', 'systemd:export'
+after 'deploy:update', 'systemd:restart'
+after 'deploy:rollback:revision', 'systemd:export_rollback'
 
 before 'deploy:check', 'systemd:test'
 #after  'systemd:test', 'systemd:exit'

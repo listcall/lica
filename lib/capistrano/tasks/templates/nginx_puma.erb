@@ -6,14 +6,14 @@ server {
   listen 80;
 
   # ----- required for ssl -----
-  listen 443 ssl;
-  ssl on;
-  ssl_certificate     <%= fetch(:deploy_to) %>/current/config/certs/STAR_smsoesb_net.pem;
-  ssl_certificate_key <%= fetch(:deploy_to) %>/current/config/certs/STAR_smsoesb_net.key;
-  ssl_session_timeout 5m;
-  ssl_protocols       SSLv2 SSLv3 TLSv1;
-  ssl_ciphers         HIGH:!aNULL:!MD5;
-  ssl_prefer_server_ciphers  on;
+  # listen 443 ssl;
+  # ssl on;
+  # ssl_certificate     <%= fetch(:deploy_to) %>/current/config/certs/STAR_smsoesb_net.pem;
+  # ssl_certificate_key <%= fetch(:deploy_to) %>/current/config/certs/STAR_smsoesb_net.key;
+  # ssl_session_timeout 5m;
+  # ssl_protocols       SSLv2 SSLv3 TLSv1;
+  # ssl_ciphers         HIGH:!aNULL:!MD5;
+  # ssl_prefer_server_ciphers  on;
   # -----
 
   server_name ~^.*$;
@@ -45,7 +45,7 @@ server {
     proxy_set_header Host $host;
     proxy_intercept_errors on;
     # ----- required for ssl -----
-    proxy_set_header X-Forwarded-Proto https;
+    # proxy_set_header X-Forwarded-Proto https;
     # -----
   }
 }

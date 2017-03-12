@@ -28,8 +28,8 @@ namespace :systemd do
   task :export do
     invoke("systemd:env_chruby")
     on roles(:all) do
-      template "lica.erb"        , "/tmp/lica.service"
-      template "lica_sidekiq.erb", "/tmp/sidekiq.service"
+      template "lica.erb"   , "/tmp/lica.service"
+      template "sidekiq.erb", "/tmp/sidekiq.service"
 
       execute "sudo mv /tmp/lica.service    /etc/systemd/system"
       execute "sudo mv /tmp/sidekiq.service /etc/systemd/system"

@@ -58,7 +58,7 @@ namespace :deploy do
       # execute "(kill -s TERM $(ps -C ruby -F | grep 'sidekiq' | awk {'print $2'})) || sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
       # execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
       execute "sudo systemctl restart lica"
-      execute "sudo systemctl restart lica_sidekiq"
+      execute "sudo systemctl restart sidekiq"
     end
   end
 

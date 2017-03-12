@@ -28,14 +28,11 @@ namespace :systemd do
   task :export do
     invoke("systemd:env_chruby")
     on roles(:all) do
-      # template "lica.erb"        , "/etc/systemd/system/lica.service"
-      # template "lica_sidekiq.erb", "/etc/systemd/system/lica_sidekiq.service"
-
       template "lica.erb"        , "/tmp/lica.service"
-      template "lica_sidekiq.erb", "/tmp/lica_sidekiq.service"
+      template "lica_sidekiq.erb", "/tmp/sidekiq.service"
 
-      execute "sudo mv /tmp/lica.service         /etc/systemd/system"
-      execute "sudo mv /tmp/lica_sidekiq.service /etc/systemd/system"
+      execute "sudo mv /tmp/lica.service    /etc/systemd/system"
+      execute "sudo mv /tmp/sidekiq.service /etc/systemd/system"
     end
   end
 
@@ -50,14 +47,14 @@ namespace :systemd do
   task :start do
     on roles(:all) do
       execute "sudo systemctl enable lica"
-      execute "sudo systemctl enable lica_sidekiq"
+      execute "sudo systemctl enable sidekiq"
     end
   end
 
   desc "Stop the application services"
   task :stop do
     on roles(:all) do
-      execute "sudo systemctl stop lica_sidekiq"
+      execute "sudo systemctl stop sidekiq"
       execute "sudo systemctl stop lica"
     end
   end
@@ -65,9 +62,8 @@ namespace :systemd do
   desc "Restart the application services"
   task :restart do
     on roles(:all) do
-      # execute "sudo start #{fetch(:application)} || sudo restart #{fetch(:application)}"
       execute "sudo systemctl restart lica"
-      execute "sudo systemctl restart lica_sidekiq"
+      execute "sudo systemctl restart sidekiq"
     end
   end
 end

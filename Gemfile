@@ -86,7 +86,7 @@ gem 'webpacker' , github: "rails/webpacker"   # webpack support
 
 # ----- asset management -----
 gem 'therubyracer' , platforms: :ruby  # javascript execution engine
-# gem 'uglifier'     , '>= 1.0.3'        # javascript minifier
+gem 'uglifier'     , '>= 1.0.3'        # javascript minifier
 gem 'coffee-rails' , '~> 4.2.0'        # coffeescript support
 # gem 'jquery-ujs'
 gem 'bh'           , '~> 1.3.6'        # bootstrap helpers

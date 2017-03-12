@@ -518,6 +518,8 @@ GEM
     ttfunk (1.0.3)
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
+    uglifier (3.1.4)
+      execjs (>= 0.3.0, < 3)
     ultrahook (0.1.4)
       json (>= 1.8.0)
     unf (0.1.4)
@@ -652,6 +654,7 @@ DEPENDENCIES
   spring-watcher-listen (~> 2.0.0)
   therubyracer
   traceroute
+  uglifier (>= 1.0.3)
   ultrahook
   webpacker!
   webrat

@@ -14,6 +14,7 @@ gem 'rails', '~> 5.1.0.beta1'   # rails
 
 # ----- environment -----
 gem 'dotenv-rails'
+gem 'foreman' , require: false 
 
 # ----- servers -----
 gem 'puma', '~> 3.7'              # web server

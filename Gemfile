@@ -131,6 +131,8 @@ end
 
 # ----- email services -----
 gem 'mailgun-ruby'        # outbound mail and provisioning for mailgun
+# gem 'mandrill-rails'      # incoming mail and webhooks from mandrill
+# gem 'mandrill-api'        # outbound mail and provisioning - see mandrillapp.com
 gem 'email_reply_parser'  # remove email reply quotes and signatures
 
 # ----- sms services -----

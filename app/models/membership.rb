@@ -24,7 +24,7 @@ class Membership < ActiveRecord::Base
   xfield_accessor :editor_keystyle
   enumerize :editor_keystyle, in: %w(vim emacs notepad)  , default: 'notepad'
 
-  upcase_fields :rank, :roles
+  # upcase_fields :rank, :roles
 
   # ----- Associations -----
   belongs_to  :user, touch: true

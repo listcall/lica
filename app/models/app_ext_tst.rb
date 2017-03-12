@@ -1,26 +1,26 @@
-require 'app_ext/pkg'
-
-class AppExtTst < ActiveRecord::Base
-
-  extend AppExt::Accessor
-
-  # ----- Attributes -----
-
-  xfields_accessor :xf0
-  xfields_accessor :xf1, default: 0
-  xfields_accessor :xf2, default: []
-  xfields_accessor :xf3, default: {}
-
-  jfields_accessor :jf1, :jf2, default: 0
-
-  jnested_accessor :jb1, :jb2
-  jnested_accessor :jb3
-  jnested_accessor :jb4
-  jnested_accessor :jb5, column: 'jdatab'
-
-  upcase_field :title, :sarr1
-
-end
+# require 'app_ext/pkg'
+#
+# class AppExtTst < ActiveRecord::Base
+#
+#   extend AppExt::Accessor
+#
+#   # ----- Attributes -----
+#
+#   xfields_accessor :xf0
+#   xfields_accessor :xf1, default: 0
+#   xfields_accessor :xf2, default: []
+#   xfields_accessor :xf3, default: {}
+#
+#   jfields_accessor :jf1, :jf2, default: 0
+#
+#   jnested_accessor :jb1, :jb2
+#   jnested_accessor :jb3
+#   jnested_accessor :jb4
+#   jnested_accessor :jb5, column: 'jdatab'
+#
+#   upcase_field :title, :sarr1
+#
+# end
 
 # == Schema Information
 #

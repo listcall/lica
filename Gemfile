@@ -14,7 +14,7 @@ gem 'rails', '~> 5.1.0.beta1'   # rails
 
 # ----- environment -----
 gem 'dotenv-rails'
-gem 'foreman' , require: false 
+# gem 'foreman' , require: false 
 
 # ----- servers -----
 gem 'puma', '~> 3.7'              # web server
@@ -69,7 +69,7 @@ gem 'active_type'       # extensions for ActiveModel
 # gem 'simple_form', '~> 3.2.0' # form generator
 gem 'simple_form'             # form generator
 # gem 'active_link_to'          # for creating bootstrap nav bars
-# gem 'launchy'                 # static page launcher
+gem 'launchy'                 # static page launcher
 # gem 'draper'                  # view models
 
 # ----- audit trails, versioning and activity logs -----

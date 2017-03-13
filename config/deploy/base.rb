@@ -9,7 +9,7 @@ set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}"
 
 # ===== Nginx Config =====
 
-set :vhost_names, %w(smsoesb.net *.smsoesb.net lica.com)
+set :vhost_names, %w(smsoesb.net *.smsoesb.net lica.com *.smso.vgr)
 set :web_port,    8500
 
 # ===== Source Access =====

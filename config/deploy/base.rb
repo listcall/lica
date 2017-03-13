@@ -34,7 +34,7 @@ set :bundle_flags,    '--deployment --quiet'
 set :bundle_without,  'development test'
 set :bundle_gemfile,  -> { release_path.join('Gemfile') }
 set :bundle_dir,      -> { shared_path.join('bundle')   }
-set :bundle_binstubs, -> { release_path.join('bin')     }
+# set :bundle_binstubs, -> { release_path.join('bin')     }
 set :bundle_roles,    :all
 
 # ===== Misc Config =====

@@ -28,7 +28,7 @@ namespace :data do
   def gen_backup_opts(dataset)
     opt = OpenStruct.new
     opt.dataset       = dataset
-    opt.app           = 'list_call'
+    opt.app           = 'lica'
     opt.host          = `hostname`.chomp
     opt.base_dir      = File.expand_path('~/e')
     opt.time_stamp    = Time.now.strftime('%y%m%d_%H%M%S')

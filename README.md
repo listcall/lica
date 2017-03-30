@@ -24,7 +24,7 @@ Ubuntu Virtual machine.
 
 6. Login to your virtual machine using `vagrant ssh`
 
-7. Clone the repo `mkdir lr; cd lr; git clone https://github.com/listcall/list_call.git`
+7. Clone the repo `mkdir lr; cd lr; git clone https://github.com/listcall/lica.git`
 
 8. CD to the repo directory `cd ~/lr/Lica`
 

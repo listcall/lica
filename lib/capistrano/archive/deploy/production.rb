@@ -1,7 +1,7 @@
 puts ' Target Environment: PRODUCTION '.center(70, '-')
 
 set :user,      'deploy'
-set :handler,   'Lica'
+set :handler,   'lica'
 set :branch,    fetch(:branch, 'master')
 set :rails_env, fetch(:env,    'production')
 

@@ -1,7 +1,7 @@
 puts ' Target Environment: VAGRANT '.center(70, '-')
 
-set :user,      'vagrant'
-set :handler,     'vagrant'
+set :user,      'deploy'
+set :handler,   'lica'
 set :branch,    fetch(:branch, 'dev')
 set :rails_env, fetch(:env,    'staging')
 

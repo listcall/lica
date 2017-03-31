@@ -1,7 +1,7 @@
 class Org < ActiveRecord::Base
 
   ALT_DOMAINS ||= {
-    'smsoesb.net' => %w(smesb.com smso.dev smso.pre smso.vgr smso.vbox)
+    'smsoesb.net' => %w(smesb.com smso.dev smso.pre smso.vgr smso.vbox lica.dev)
   }
 
   # for development - a mapping of dev domains with their production equivalents

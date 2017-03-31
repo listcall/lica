@@ -12,8 +12,8 @@ create_new_session()
 
   tmux split-window -v -t $APP:1      # horizontal split
 
-  tmux send-keys -t $APP:1.1 'journalctl -u lica    -f' C-m # web log
-  tmux send-keys -t $APP:1.2 'journalctl -u sidekiq -f' C-m # sidekiq
+  tmux send-keys -t $APP:1.1 'sudo journalctl -u lica    -f' C-m # web log
+  tmux send-keys -t $APP:1.2 'sudo journalctl -u sidekiq -f' C-m # sidekiq
 
   # ----- Open With DEV Window -----
 

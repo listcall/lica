@@ -10,7 +10,7 @@
 # - http://github.com/javan/whenever  | cron processor
 # - http://en.wikipedia.org/wiki/Cron | cron instructions
 
-set :output, "/tmp/cron_Lica.log"
+set :output, "/tmp/cron_lica.log"
 
 every 1.day, at: "3:00 am" do
   script  "cron/backup.sh"

@@ -1,0 +1,19 @@
+# Use this file to define cron jobs on your development system.
+#
+# to preview cronfile  : `whenever -f CronJobs`
+# to generate cronfile : `whenever -f CronJobs --update-crontab`
+# to clear cronfile    : `whenever -f CronJobs --clear-crontab`
+# for help on whenever : `whenever -h`
+# to see cron settings : `crontab -l`
+# to edit the cronfile : `crontab -e`
+#
+# Learn more:
+# - http://github.com/javan/whenever  | cron processor
+# - http://en.wikipedia.org/wiki/Cron | cron instructions
+
+set :output, "/tmp/cron_lica.log"
+
+every 1.day, at: "3:00 am" do
+  script  "cron/backup.sh"
+end
+

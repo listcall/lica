@@ -3,14 +3,15 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 # ===== App Config =====
 
 set :application,    'lica'
-set :log_level,      :error     # use :error, :warn, :info, or :debug
-set :format_options, command_output: false
+
+set :log_level,      :error                 # use :error, :warn, :info, or :debug
+set :format_options, command_output: false  # :stdout, :stderr, true, false
 
 set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}" }
 
 # ===== Nginx Config =====
 
-set :vhost_names, %w(smsoesb.net *.smsoesb.net lica.com *.smso.vgr)
+set :vhost_names, %w(smsoesb.net *.smsoesb.net *.lica.com *.smso.vgr *.smso.vbox)
 set :web_port,    8500
 
 # ===== Source Access =====

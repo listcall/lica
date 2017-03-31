@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# should be called from tmux_console
+
+export APP="LICA-LOGVIEW"
+
+create_new_session()
+{
+
+  # ----- LICA-LOGVIEW Window -----
+
+  tmux new-session -s $APP -n "LICA-LOGVIEW" -d
+
+  tmux split-window -v -t $APP:1      # horizontal split
+
+  tmux send-keys -t $APP:1.1 'journalctl -u lica    -f' C-m # web log
+  tmux send-keys -t $APP:1.2 'journalctl -u sidekiq -f' C-m # sidekiq
+
+  # ----- Open With DEV Window -----
+
+  tmux select-window -t $APP:1
+
+}

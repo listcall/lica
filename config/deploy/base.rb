@@ -14,9 +14,7 @@ set :web_port,    8500
 
 # ===== Source Access =====
 
-# set :scm,              :git
 set :repo_url,         'ssh://git@github.com/listcall/lica.git'
-# before 'deploy:check', 'setup:netrc'  # supplies username/password for access to private repo
 
 # ===== Tasks =====
 

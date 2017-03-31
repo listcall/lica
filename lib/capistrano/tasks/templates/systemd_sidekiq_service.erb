@@ -1,8 +1,10 @@
-# Unit file for Sidekiq on Ubuntu
+# SystemD unit file for Sidekiq on Ubuntu
 # This file created by Capistrano <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
 # This file installed in /lib/systemd/system. Run:
 #   - systemctl enable sidekiq
-#   - systemctl {start,stop,restart} sidekiq
+#   - systemctl {status,start,stop,restart} sidekiq
+#   - journalctl -u sidekiq
+#   - journalctl -u sidekiq -f
 #
 # This file corresponds to a single Sidekiq process.  Add multiple copies
 # to run multiple processes (sidekiq-1, sidekiq-2, etc).
@@ -15,7 +17,7 @@
 # http://0pointer.de/public/systemd-man/systemd.exec.html
 
 [Unit]
-Description=Sidekiq: Rails background job processing for ListCall
+Description=Sidekiq: Rails background job processing for Lica
 After=syslog.target network.target redis-server.service lica.service
 
 [Service]

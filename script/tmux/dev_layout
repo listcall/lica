@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # should be called from tmux_console
 
-export APP="ListCall"
+export APP="LICA-DEV"
 
 create_new_session()
 {

@@ -2,8 +2,9 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 
 # ===== App Config =====
 
-set :application, 'lica'
-set :log_level,   :error     # use :error, :warn, :info, or :debug
+set :application,    'lica'
+set :log_level,      :error     # use :error, :warn, :info, or :debug
+set :command_output, false
 
 set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}" }
 
@@ -32,7 +33,6 @@ set :bundle_flags,    '--deployment --quiet'
 set :bundle_without,  'development test'
 set :bundle_gemfile,  -> { release_path.join('Gemfile') }
 set :bundle_dir,      -> { shared_path.join('bundle')   }
-# set :bundle_binstubs, -> { release_path.join('bin')     }
 set :bundle_roles,    :all
 
 # ===== Misc Config =====

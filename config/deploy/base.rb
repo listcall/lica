@@ -3,7 +3,7 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 # ===== App Config =====
 
 set :application, 'lica'
-set :log_level,   :info     # use :warn, :info or :debug
+set :log_level,   :error     # use :error, :warn, :info, or :debug
 
 set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}" }
 

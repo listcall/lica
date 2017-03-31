@@ -83,7 +83,7 @@ describe Membership do
   describe 'Role Manipulation' do
     it 'updates a whole array' do
       expect(subject.roles).to eq([])
-      subject.roles = %w(A b C)
+      subject.roles = %w(A B C)
       expect(subject.roles).to eq(%w(A B C))
     end
     it 'handles concatenation' do
@@ -113,7 +113,7 @@ describe Membership do
     end
 
     it 'updates the array with a role' do
-      @mem.roles = ['Ul']
+      @mem.roles = ['UL']
       @mem.save ; @mem.reload
       expect(@mem.roles).to eq(['UL'])
       @mem.roles += ['BD']

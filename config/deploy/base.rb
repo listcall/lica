@@ -2,21 +2,20 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 
 # ===== App Config =====
 
-set :application, 'lica'
-set :log_level,   :info     # use :warn, :info or :debug
+set :application,    'lica'
+set :log_level,      :error                 # use :error, :warn, :info, or :debug
+set :format_options, command_output: false  # :stdout, :stderr, true, false
 
 set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}" }
 
 # ===== Nginx Config =====
 
-set :vhost_names, %w(smsoesb.net *.smsoesb.net lica.com *.smso.vgr)
+set :vhost_names, %w(smsoesb.net *.smsoesb.net *.lica.com *.smso.vgr *.smso.vbox)
 set :web_port,    8500
 
 # ===== Source Access =====
 
-# set :scm,              :git
 set :repo_url,         'ssh://git@github.com/listcall/lica.git'
-# before 'deploy:check', 'setup:netrc'  # supplies username/password for access to private repo
 
 # ===== Tasks =====
 
@@ -34,7 +33,6 @@ set :bundle_flags,    '--deployment --quiet'
 set :bundle_without,  'development test'
 set :bundle_gemfile,  -> { release_path.join('Gemfile') }
 set :bundle_dir,      -> { shared_path.join('bundle')   }
-# set :bundle_binstubs, -> { release_path.join('bin')     }
 set :bundle_roles,    :all
 
 # ===== Misc Config =====

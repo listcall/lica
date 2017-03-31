@@ -4,7 +4,7 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 
 set :application,    'lica'
 set :log_level,      :error     # use :error, :warn, :info, or :debug
-set :command_output, false
+set :format_options, command_output: false
 
 set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}" }
 

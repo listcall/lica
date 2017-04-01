@@ -1,7 +1,7 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-before 'deploy:update', 'whenever:update'
+after 'deploy:restart', 'whenever:update'
 
 namespace :whenever do
   desc "Update Crontab with Whenever"

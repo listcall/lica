@@ -26,3 +26,5 @@
 /public/source_maps/
 /public/qrcodes/
 /app/assets/stylesheets/.sass-cache/
+/public/packs
+/node_modules

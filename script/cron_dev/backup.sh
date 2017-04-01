@@ -1,4 +1,4 @@
-#/usr/bin/env bash
+#!/usr/bin/env bash
 # this is meant to be run on the dev machine
 # not the production server
 #

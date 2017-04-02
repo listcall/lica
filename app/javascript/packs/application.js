@@ -8,3 +8,5 @@
 // layout file, like app/views/layouts/application.html.erb
 
 alert('Hello World from Webpacker')
+
+bing = "bang"

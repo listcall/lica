@@ -1,4 +1,4 @@
 # Restart webpack-dev-server if you make changes here
 enabled: true
-host: localhost
+host: soak
 port: 8080

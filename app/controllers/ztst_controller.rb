@@ -17,6 +17,7 @@ class ZtstController < ApplicationController
   def ace     ;   end
   def d3      ;   end
   def cjs     ;   end
+  def pack1   ;   end
 
   def handle
     @col1 = %w(hello handle)

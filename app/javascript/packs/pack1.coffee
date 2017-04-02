@@ -9,4 +9,3 @@
 
 alert('Hello World from Pack1');
 
-x = "error

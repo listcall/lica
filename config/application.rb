@@ -12,6 +12,8 @@ require_relative '../lib/ext/string'
 require_relative '../lib/ext/kernel'
 require_relative '../lib/ext/ar_proxy'
 
+ActiveSupport::Deprecation.silenced = true
+
 module ListCall
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.

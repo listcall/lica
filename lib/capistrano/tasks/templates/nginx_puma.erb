@@ -29,7 +29,7 @@ server {
   location @503 {
     rewrite ^(.*)$ /util/maintenance.html break;
   }
-  location ~ ^/(img|fonts|assets|system|icons|avatar|metrics)/ {
+  location ~ ^/(packs|img|fonts|assets|system|icons|avatar|metrics)/ {
     expires max;
     gzip_static on;
     add_header ETag "";

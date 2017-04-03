@@ -22,7 +22,7 @@ class ChatChannel < ApplicationCable::Channel
   def format_response data
     {
       message: filter( data["message"] ),
-      username: current_user.username
+      username: current_user.user_name
     }
   end 
 end

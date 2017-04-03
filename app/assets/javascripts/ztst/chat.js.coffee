@@ -2,7 +2,8 @@
 App.chatChannel = App.cable.subscriptions.create { channel: "ChatChannel", room: "Lobby"},
   received: (data) ->
     @appendLine(data)
-    $('#chat-feed').stop().animate{ scrollTop: $('#chat-feed')[0].scrollHeight }, 800
+    #
+    $('#chat-feed').stop().animate { scrollTop: $('#chat-feed')[0].scrollHeight }, 800
 
   appendLine: (data) ->
     html = @createLine(data)

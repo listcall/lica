@@ -15,6 +15,7 @@ Rails.application.config.assets.paths << Rails.root.join('node_modules')
 
 js_prefix = 'app/assets/javascripts/'
 Rails.application.config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+Rails.application.config.assets.precompile += %w( ztst/all_chat.js )
 Rails.application.config.assets.precompile += Dir.glob("#{js_prefix}**/all_*.js").map {|x| x.gsub(js_prefix, '')}
 Rails.application.config.assets.precompile += Dir.glob("#{js_prefix}*.js.coffee").map {|x| x.gsub(js_prefix, '').gsub('.coffee','')}
 Rails.application.config.assets.paths << Rails.root.join('vendor/assets/javascripts')

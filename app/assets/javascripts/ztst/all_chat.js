@@ -1,11 +1,14 @@
-// app/assets/javascripts/cable.js
+// app/assets/javascripts/ztst/all_cable.js
+//
 //
 //= require action_cable
 //= require_self
-//# require_tree ./channels
+//= require ./chat
 
 (function() {
   this.App || (this.App = {});
+
+  console.log("BING");
 
   App.cable = ActionCable.createConsumer("/cable");
 

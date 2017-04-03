@@ -34,7 +34,7 @@ describe 'Page Rendering' do
         session2.get '/'
         expect(session2.response.status).to eq(200)
         expect(session2.path).to eq('/')
-      end
+      end #
     end
   end
 end

@@ -8,8 +8,6 @@
 (function() {
   this.App || (this.App = {});
 
-  console.log("BING");
-
   App.cable = ActionCable.createConsumer("/cable");
 
 }).call(this);

@@ -26,7 +26,8 @@ Rails.application.routes.draw do
   get 'ytst' => 'ytst#index'
 
   # ----- test pages -----
-  ztst_pgs = %w(index icons react1 react2 react3 react4 react5 react6 reflux handle ace d3 form1 cjs pack1)
+  # ztst_pgs = %w(index icons react1 react2 react3 react4 react5 react6 reflux handle ace d3 form1 cjs pack1)
+  ztst_pgs = %w(index icons pack1)
   info_pgs = %w(not_authorized domain_not_found page_not_found inactive no_access no_feature not_member)
   ZTST_PAGES = ztst_pgs        unless defined?(ZTST_PAGES)
   HOME_PAGES = %w(index)       unless defined?(HOME_PAGES)

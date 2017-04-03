@@ -1,8 +1,5 @@
 # rails-specific support methods
 
-# how to use:
-#
-
 def create_user
   FG.create(:user)
 end

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # should be called from tmux_console
 
-export APP="LICA-LOGVIEW"
+export APP="LOGVIEW"
 
 create_new_session()
 {

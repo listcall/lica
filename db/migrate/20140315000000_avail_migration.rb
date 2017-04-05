@@ -20,16 +20,18 @@ class AvailMigration < ActiveRecord::Migration[5.1]
     create_table 'avail_days' do |t|
       t.integer  'team_id'
       t.integer  'membership_id'
-      t.datetime 'start'
-      t.datetime 'finish'
+      t.date     'start'
+      t.date     'finish'
       t.string   'status'          # [avail, unavail]
       t.string   'comment'
+      t.integer  'position'
       t.timestamps
     end
     add_index :avail_days, :team_id
     add_index :avail_days, :membership_id
     add_index :avail_days, :status
     add_index :avail_days, [:start, :finish]
+    add_index :avail_days, :position
 
     # create_table 'service_types' do |t|
     #   t.integer  'team_id'

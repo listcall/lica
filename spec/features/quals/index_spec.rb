@@ -20,6 +20,6 @@ feature 'quals#index'  do
       expect(current_path).to eq('/quals')
       expect(page.status_code).to be 200
       expect(page).not_to be_nil
-    end #
+    end
   end
 end

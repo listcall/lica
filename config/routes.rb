@@ -30,11 +30,11 @@ Rails.application.routes.draw do
 
   # ----- Test Pages -----
   # ztst_pgs = %w(index icons react1 react2 react3 react4 react5 react6 reflux handle ace d3 form1 cjs pack1)
-  ztst_pgs = %w(index icons chat pack1)
+  ztst_pgs = %w(index icons react1 react2 react3 react4 react5 chat pack1 pack2)
   info_pgs = %w(not_authorized domain_not_found page_not_found inactive no_access no_feature not_member)
-  ZTST_PAGES = ztst_pgs        unless defined?(ZTST_PAGES)
-  HOME_PAGES = %w(index)       unless defined?(HOME_PAGES)
-  INFO_PAGES = info_pgs        unless defined?(INFO_PAGES)
+  ZTST_PAGES = ztst_pgs    unless defined?(ZTST_PAGES)
+  HOME_PAGES = %w(index)   unless defined?(HOME_PAGES)
+  INFO_PAGES = info_pgs    unless defined?(INFO_PAGES)
 
   get 'ztst' => 'ztst#index'
   get_pages ZTST_PAGES, 'ztst'
@@ -269,6 +269,7 @@ Rails.application.routes.draw do
   post '/ajax/memberships/:membership_id/contacts/sort'         => 'ajax/mems/contacts#sort'
   post '/ajax/memberships/:membership_id/certs/sort'            => 'ajax/mems/certs#sort'
   put  '/ajax/avail_day'                                        => 'avail/day#update'
+
   namespace :ajax do
     resources :topic_status
     resources :members

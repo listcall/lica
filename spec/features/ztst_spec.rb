@@ -10,10 +10,7 @@ describe 'Ztst', :js do
   end
 
   context 'as a registered user' do
-    # (ZTST_PAGES).each do |page_name|
-    dong = %w(index pack2)
-    dong.each do |page_name|
-      puts page_name
+    (ZTST_PAGES).each do |page_name|
       it "renders #{page_name}" do
         tst_path = "/ztst/#{page_name}"
         visit tst_path

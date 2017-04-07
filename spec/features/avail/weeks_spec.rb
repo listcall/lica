@@ -56,7 +56,7 @@ feature 'Avail/Days', :capy do
 
     context 'when clicking first avail', :js do
       it 'modifies one record' do
-        first('.avail').click #
+        first('.avail').click
         wait_for_ajax
         expect(Avail::Week.avail.count).to eq(1)
       end

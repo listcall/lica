@@ -1,2 +1,5 @@
+-I /home/aleak/lr/lica/spec
 --color
+--format progress
+--fail-fast
 --require spec_helper

@@ -85,7 +85,6 @@ gem 'mini_magick'                 # server-side image resizing & cropping
 # gem 'sprockets-rails'  , '~> 3.1'
 # gem 'sass-rails', github: "rails/sass-rails"  # sass processor based on libsass
 gem 'webpacker'                                 # webpack support
-# gem 'webpacker', github: 'rails/webpacker'
 
 # ----- asset management -----
 gem 'therubyracer' , platforms: :ruby  # javascript execution engine
@@ -95,20 +94,11 @@ gem 'coffee-rails' , '~> 4.2.0'        # coffeescript support
 gem 'bh'           , '~> 1.3.6'        # bootstrap helpers
 
 # ----- javascript packages / gems -----
-# gem 'jquery-rails'           , '~> 4.0'   # jquery
-# gem 'jquery-ui-rails'        , '4.2.1'    # jquery UI
-# gem 'react-rails'            , '1.2.0'    # render helpers for react
-# gem 'bootstrap-sass'         , '~> 3.3'   # bootstrap UI framework
-# gem 'bootstrap-switch-rails' , '1.8.1'    # bootstrap on-off switch
-# gem 'ace-rails-ap'                        # ace editor
-
-# ----- javascript packages / gems -----
 # gem 'jquery-rails'            # jquery
 gem 'jquery-ui-rails'        , '4.2.1'    # jquery UI
-gem 'react-rails'             # render helpers for react
+# gem 'react-rails'                         # render helpers for react
 gem 'bootstrap-sass'         , '~> 3.3'   # bootstrap UI framework
 gem 'bootstrap-switch-rails' , '1.8.1'    # bootstrap on-off switch
-# gem 'ace-rails-ap'            # ace editor
 
 # ----- javascript packages / http://rails-assets.org -----
 source 'https://rails-assets.org' do

@@ -31,13 +31,12 @@
 #= require jquery.tablesorter/jquery.tablesorter.widgets
 #= require sweetalert
 #= require react/react-with-addons
-#= require react_ujs
+## require react_ujs
 #= require react-bootstrap
 #= require radium
 #= require util/react_popover
 #= require simulate-drag-sort
 #= require jsn_bundle
-
 
 Function::property = (prop, desc) ->
   Object.defineProperty @prototype, prop, desc

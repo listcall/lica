@@ -7,6 +7,6 @@
 // To reference this file, add <%= javascript_pack_tag 'application' %> to the appropriate
 // layout file, like app/views/layouts/application.html.erb
 
-import msg from '../ztst/pack1_a';
+var msg = require("../ztst/pack1_a")
 
 alert('Hello World from Pack1 Version 3: ' + msg.msg);

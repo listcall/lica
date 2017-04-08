@@ -22,9 +22,4 @@ Zapp.chatChannel = Zapp.cable.subscriptions.create { channel: "ChatChannel", roo
     </article>
     """
 
-$(document).on 'keypress', 'input.chat-input', (event) ->
-  if event.keyCode is 13
-    Zapp.chatChannel.send
-      message: event.target.value
-      room: 'Lobby'
-    event.target.value = ''
+module.exports = Zapp

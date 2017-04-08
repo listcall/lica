@@ -1,5 +1,5 @@
 require("coffee-script/register")
-arg = require('./src2')
+arg = require('../src2')
 
 describe "something nice", ->
   test 'arg keys', -> expect(Object.keys(arg).length).toBe(2)

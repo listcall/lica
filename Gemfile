@@ -85,6 +85,7 @@ gem 'mini_magick'                 # server-side image resizing & cropping
 # gem 'sprockets-rails'  , '~> 3.1'
 # gem 'sass-rails', github: "rails/sass-rails"  # sass processor based on libsass
 gem 'webpacker'                                 # webpack support
+# gem 'webpacker', github: "rails/webpacker"                                 # webpack support
 
 # ----- asset management -----
 gem 'therubyracer' , platforms: :ruby  # javascript execution engine

@@ -1,4 +1,4 @@
-const arg = require('./src1');
+const arg = require('../src1');
 
 test('arg keys', () => {
   expect(Object.keys(arg).length).toBe(2);

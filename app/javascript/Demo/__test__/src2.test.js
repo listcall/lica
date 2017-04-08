@@ -1,4 +1,5 @@
-const arg = require('./src1');
+require("coffee-script/register")
+const arg = require('../src2.coffee');
 
 test('arg keys', () => {
   expect(Object.keys(arg).length).toBe(2);
@@ -15,3 +16,4 @@ test('#bing with arg', () => {
 test('addition', () => {
   expect(arg.sum(1,2)).toBe(3);
 });
+

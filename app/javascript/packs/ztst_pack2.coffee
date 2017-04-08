@@ -1,6 +1,3 @@
-
-
-
 msg1 = require('../ztst/pack1_a')
 msg2 = require('../ztst/pack2_a')
 

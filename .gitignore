@@ -27,4 +27,5 @@
 /public/qrcodes/
 /app/assets/stylesheets/.sass-cache/
 /public/packs
+/public/all_packs
 /node_modules

@@ -1,3 +1,3 @@
-myCounter = {"msg": "this is pack2_a.coffee"}
+myArg = {"msg": "this is pack2_a.coffee"}
 
-module.exports = myCounter
+module.exports = myArg

@@ -1,9 +1,10 @@
-// I found it simpler to use coffee-react,
-// since it does the jsx transform and coffeescript compilation 
+// This file processes coffeescript files in jest testing.
+// Review the package.json file for configuration info.
+
 var coffee = require('coffee-script');
 
 module.exports = {
-  process: function(src, path) {
+  process: function (src, path) {
     if (path.match(/\.coffee$/)) {
       return coffee.compile(src, {bare: true});
     }

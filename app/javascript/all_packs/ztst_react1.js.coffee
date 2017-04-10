@@ -1,1 +1,0 @@
-require("../ztst/react1_coffee.js")

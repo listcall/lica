@@ -28,7 +28,7 @@ create_new_session()
 
   tmux new-window -n "WEBPACK"
 
-  tmux split-window -v -p 50 -t $APP:3   # horizontal split
+  # tmux split-window -v -p 50 -t $APP:3   # horizontal split
 
   tmux send-keys -t $APP:3.1 'clear ; webpack-dev-server --host 0.0.0.0' C-m # webpack 
 

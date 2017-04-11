@@ -27,16 +27,12 @@ Button = React.createClass
 
 F.Button = React.createFactory(Button)
 
-$(document).ready ->
-  React.render React.createElement(Typeahead), $('#typetest')[0]
-
-myOutput = ->
+myHello = ->
   D.div {},
     "hello von coffee"
     D.br {}
-    D.b  {}, "Hello World from Coffee!"
+    D.b  {}, "Hello World from Coffee! (react111)"
     D.br {}
     D.h3 {}, "This is an h3!!"
 
-$(document).ready ->
-  React.render myOutput(), $('#example1')[0]
+module.exports = {hello: myHello, typeAhead: Typeahead}

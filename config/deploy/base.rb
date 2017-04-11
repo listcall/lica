@@ -26,7 +26,7 @@ after 'deploy:symlink:shared', 'data:varfile'
 
 # ===== Symlinking =====
 
-set :linked_dirs,  %w{data log tmp/pids tmp/cache tmp/sockets public/packs public/util public/system public/assets}
+set :linked_dirs,  %w{data log tmp/pids tmp/cache tmp/sockets public/all_packs public/util public/system public/assets}
 
 # ===== Bundler =====
 

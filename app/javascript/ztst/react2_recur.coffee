@@ -1,7 +1,7 @@
 R = React.DOM
 F = {}
 
-reactOutput = ->
+reactHello = ->
   R.div {},
     "hello von coffee"
     R.br {}
@@ -44,7 +44,4 @@ App = React.createClass
 
 F.App = React.createFactory(App)
 
-$(document).ready ->
-  console.log("coffee recur");
-  React.render reactOutput(), $('#recurTgt')[0]
-  React.render F.App( txt: "this is text" ), $('#recurTgt2')[0]
+module.exports = {hello: reactHello, factory: F}

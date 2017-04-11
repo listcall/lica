@@ -16,7 +16,6 @@ F.BHeart = React.createFactory(BHeart)
 
 App = React.createClass
   render: ->
-    console.log "APP IS RENDERING"
     R.div {},
       "HELLO APP "
       F.BHeart {}
@@ -30,5 +29,4 @@ App = React.createClass
 
 F.App = React.createFactory(App)
 
-$(document).ready ->
-  React.render F.App(), $('#childEx')[0]
+module.exports = {factory: F}

@@ -1,5 +1,11 @@
 require("coffee-script/register")
-React = require('react')
-arg = require('../react0');
+window.React    = require("react")
+window.ReactDOM = require("react-dom")
+component = require('../react0');
 
-test 'arg presence', -> expect(arg).toBeDefined()
+test 'component presence', -> expect(component).toBeDefined()
+
+test 'component rendering with ReactDOM', =>
+  div = document.createElement('div')
+  result = ReactDOM.render(component(), div)
+  expect(result).toBeDefined()

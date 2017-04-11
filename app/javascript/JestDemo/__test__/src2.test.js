@@ -1,15 +1,15 @@
 require("coffee-script/register")
 const arg = require('../src2.coffee');
 
-test('arg keys', () => {
+test('component keys', () => {
   expect(Object.keys(arg).length).toBe(2);
 });
 
-test('#bing with default arg', () => {
+test('#bing with default component', () => {
   expect(arg.bing()).toBe("what");
 });
 
-test('#bing with arg', () => {
+test('#bing with component', () => {
   expect(arg.bing("fang")).toBe("fang");
 });
 

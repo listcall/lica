@@ -27,7 +27,7 @@ class Ajax::Mems::PhonesController < ApplicationController
     @phone  = User::Phone.new(opts)
     if @phone.valid? && @phone.save
       @phone.move_to_top
-      render text: 'OK'    # JS will re-load the page...
+      render plain: 'OK'    # JS will re-load the page...
     else
       render :new, status: 400
     end
@@ -39,10 +39,10 @@ class Ajax::Mems::PhonesController < ApplicationController
     phone = User::Phone.find(params['id'])
     phone.update_attributes({field => value})
     if phone.valid?
-      render text: {success: true}.to_json, status: 200, layout: false
+      render json: {success: true}.to_json, status: 200, layout: false
     else
       msg = phone.errors.messages.to_json.gsub(/[\[\]\"\{\}]/,'').gsub(':',': '),gsub(',',', ')
-      render text: msg, layout: false, status: 400
+      render json: msg, layout: false, status: 400
     end
   end
 
@@ -59,7 +59,7 @@ class Ajax::Mems::PhonesController < ApplicationController
       phone = User::Phone.find(phone_id)
       phone.update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

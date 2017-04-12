@@ -1,7 +1,7 @@
 class ActionController::Base
 
   def device
-    agent = env['HTTP_USER_AGENT']
+    agent = request.env['HTTP_USER_AGENT']
     case agent
       when /Kindle/      then 'Kindle'
       when /Android/     then 'Android'

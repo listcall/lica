@@ -1,5 +1,5 @@
-//= require bootstrap-typeahead/bootstrap-typeahead
-console.log("A");
+//# require bootstrap-typeahead/bootstrap-typeahead
+// console.log("A");
 //= require reflux
 console.log("B");
 //= require hogan

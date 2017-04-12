@@ -20,6 +20,15 @@ module ListCall
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # Precompile additional assets.
+    # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
+    js_prefix = 'app/assets/javascripts/'
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif)
+    config.assets.precompile += Dir.glob("#{js_prefix}**/all_*.js").map {|x| x.gsub(js_prefix, '')}
+    config.assets.precompile += Dir.glob("#{js_prefix}*.js.coffee").map {|x| x.gsub(js_prefix, '').gsub('.coffee','')}
+
+    config.assets.paths << Rails.root.join('vendor/assets/javascripts')
+
     dirs = %w(api assets contexts databots decorators forms msgs queries services validators values zrun)
     dirs.each do |directory|
       config.autoload_paths += %W(#{config.root}/app/#{directory})

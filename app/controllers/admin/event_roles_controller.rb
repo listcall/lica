@@ -23,7 +23,7 @@ class Admin::EventRolesController < ApplicationController
 
   def update
     EventRolesSvc.new(current_team).update(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   def destroy
@@ -33,12 +33,12 @@ class Admin::EventRolesController < ApplicationController
 
   def sort
     EventRolesSvc.new(current_team).sort(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   def list
     keys = current_team.event_roles.keys.map {|x| {value: x, text: x}}
-    render text: keys.to_json, layout: false
+    render json: keys.to_json, layout: false
   end
 
   private

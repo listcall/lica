@@ -19,7 +19,7 @@ class Admin::EventAttributesController < ApplicationController
 
   def update
     EventAttributesSvc.new(current_team).update(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   def destroy
@@ -29,7 +29,7 @@ class Admin::EventAttributesController < ApplicationController
 
   def sort
     EventAttributesSvc.new(current_team).sort(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   private

@@ -14,7 +14,6 @@ gem 'rails', '~> 5.1.0.rc1'   # rails
 
 # ----- environment -----
 gem 'dotenv-rails'
-# gem 'foreman' , require: false 
 
 # ----- servers -----
 gem 'puma', '~> 3.7'              # web server
@@ -26,11 +25,9 @@ gem 'dalli'                       # memcached support (caching)
 gem 'dalli-ui'                    # web interface for memcached
 gem 'connection_pool'             # dalli helper for puma (multi-threaded)
 
-# ----- data importing -----
+# ----- misc -----
 # gem 'active_importer'              # import csv and spreadsheet files
-
-# ----- finite-state-machine -----
-# gem 'workflow'
+# gem 'workflow'                     # finite state machine
 
 # ----- template processors -----
 gem 'slim-rails'            # slim templates
@@ -56,7 +53,6 @@ gem 'exception_notification'     # sends alert emails on 500 errors
 
 # ----- active-record helpers -----
 gem 'acts_as_list'      # order objects by position field
-# gem 'ice_cube'          # schedule repeating events
 gem 'ancestry'          # manage objects in a tree-structure
 gem 'sequenced'         # generate scoped IDs
 gem 'enumerize'         # hstore helpers for enum fields
@@ -90,13 +86,10 @@ gem 'webpacker'                                 # webpack support
 gem 'therubyracer' , platforms: :ruby  # javascript execution engine
 gem 'uglifier'     , '>= 1.0.3'        # javascript minifier
 gem 'coffee-rails' , '~> 4.2.0'        # coffeescript support
-# gem 'jquery-ujs'
 gem 'bh'           , '~> 1.3.6'        # bootstrap helpers
 
 # ----- javascript packages / gems -----
-# gem 'jquery-rails'            # jquery
 gem 'jquery-ui-rails'        , '4.2.1'    # jquery UI
-# gem 'react-rails'                         # render helpers for react
 gem 'bootstrap-sass'         , '~> 3.3'   # bootstrap UI framework
 gem 'bootstrap-switch-rails' , '1.8.1'    # bootstrap on-off switch
 

@@ -70,8 +70,7 @@ gem 'active_type'       # extensions for ActiveModel
 gem 'simple_form'             # form generator
 # gem 'active_link_to'          # for creating bootstrap nav bars
 gem 'launchy'                 # static page launcher
-# gem 'activemodel-serializers-xml' #, git: 'https://github.com/rails/activemodel-serializers-xml'
-# gem 'draper'                  # view models
+
 
 # ----- audit trails, versioning and activity logs -----
 # gem 'paper_trail'

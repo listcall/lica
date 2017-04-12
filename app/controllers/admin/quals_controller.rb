@@ -3,8 +3,9 @@ class Admin::QualsController < ApplicationController
 before_action :authenticate_owner!
 
   def index
-    @title  = 'Qualifications'
-    @quals = QualDecorator.decorate_collection(current_team.quals.to_a)
+    @title = 'Qualifications'
+    # @quals = QualDecorator.decorate_collection(current_team.quals.to_a)
+    @quals = ActiveType.cast(current_team.quals, QualDecorator)
   end
 
   def create

@@ -1,7 +1,10 @@
+window.Reflux = require("reflux");
+window.Hogan  = require("hogan.js");
 
-console.log "HELLO WORLD"
-
-#require("reflux");
-console.log("B");
-window.hogan = require("hogan.js");
-console.log("C");
+require("../pgr/new_test1")
+require("../pgr/new_tablesorter")
+require("../pgr/new_check_box")
+require("../pgr/new_send_button")
+require("../pgr/new_show_reserves")
+#require("../pgr/new_tag_manager")
+require("../pgr/new_select_action")

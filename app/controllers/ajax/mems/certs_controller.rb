@@ -34,11 +34,12 @@ class Ajax::Mems::CertsController < ApplicationController
   end
 
   def update
-    opts = {'id' => params['id']}.merge(params['mem_cert_form'])
+    opts = {'id' => params['id']}.merge(params['mem_cert_form'].to_unsafe_h)
+    binding.pry
     opts['title'] = params['new_title'] unless params['new_title'].blank?
     @cert = MemCertForm.new(opts)
     if @cert.valid? && @cert.update
-      render text: 'OK'
+      render plain: 'OK'
     else
       @member = current_team.memberships.by_id_or_user_name(params[:membership_id]).first
       @ctype_id = @cert.qual_ctype_id

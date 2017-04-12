@@ -90,7 +90,7 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def member_ids(params)
-    params[:member_recipients].to_a.reduce([]) do |acc, val|
+    params[:member_recipients].to_unsafe_h.to_a.reduce([]) do |acc, val|
       acc << val.first if val.last == '1'; acc
     end
   end

@@ -20,6 +20,9 @@ module ListCall
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
+    # job queue
+    config.active_job.queue_adapter = :sidekiq
+
     # Precompile additional assets.
     # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
     js_prefix = 'app/assets/javascripts/'

@@ -35,7 +35,6 @@ class Ajax::Mems::CertsController < ApplicationController
 
   def update
     opts = {'id' => params['id']}.merge(params['mem_cert_form'].to_unsafe_h)
-    binding.pry
     opts['title'] = params['new_title'] unless params['new_title'].blank?
     @cert = MemCertForm.new(opts)
     if @cert.valid? && @cert.update

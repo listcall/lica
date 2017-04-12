@@ -20,7 +20,6 @@ class Inbound::Handler::PgrEmailReply
       return
     end
     params = post_params(inbound)
-    # binding.pry
     Pgr::Util::GenReply.new(dialog, params).generate_all
   end
 

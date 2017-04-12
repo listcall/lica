@@ -9,9 +9,9 @@ module Pgr::Send::Util
 
   private
 
-  def proxy_class(outbound, env = Rails.env.to_s)
-    env = 'dev_live' if dev_live_test(env, outbound)
-    proxies[env]
+  def proxy_class(outbound, env1 = Rails.env.to_s)
+    env2 = dev_live_test(env1, outbound) ? 'dev_live' : env1
+    proxies[env2]
   end
 
   def dev_live_test(env, outbound)

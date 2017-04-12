@@ -40,7 +40,7 @@ class Pgr::AssignmentsController < ApplicationController
 
   def save_broadcast
     if @broadcast.save
-      # TODO - run this in background
+      # TODO - run this in background !!!!!
       Pgr::Util::GenBroadcast.new(@broadcast).generate_all.deliver_all
       redirect_to paging_path
     end

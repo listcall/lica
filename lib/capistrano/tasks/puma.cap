@@ -20,8 +20,8 @@ namespace :puma do
   desc "Export an puma config file for nginx."
   task :nginx_conf => :certs do
     on roles(:web) do |server|
-      is_prod_host = (server.hostname == "lch1")
-      template "nginx_puma.erb", "/etc/nginx/conf.d/Lica.conf"
+      set :is_prod_host, (server.hostname == "lch1")
+      template "nginx_puma.erb", "/etc/nginx/conf.d/lica.conf"
       execute  "sudo /etc/init.d/nginx reload"
     end
   end

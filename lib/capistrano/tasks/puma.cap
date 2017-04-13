@@ -9,7 +9,7 @@ namespace :puma do
   desc "Upload Certs to Deploy Targets"
   task :certs do
     on roles(:all) do |server|
-      cmd = "rsync -a .certs #{ fetch(:user) }@#{server.hostname}:#{release_path}/.certs"
+      cmd = "rsync -a .certs #{ fetch(:user) }@#{server.hostname}:#{release_path}"
       puts cmd
       run_locally { execute cmd }
     end

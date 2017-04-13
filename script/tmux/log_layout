@@ -8,30 +8,30 @@ create_new_session()
 
   # ----- AppLog -----
 
-  tmux new-session -s $APP -n "APP_LOG" -d
+  tmux new-session -s $APP -n "WEB_LOG" -d
 
   tmux split-window -v -t $APP:1      # horizontal split
 
   tmux send-keys -t $APP:1.1 'cd log; tail -f production.log' C-m # app log
+  tmux send-keys -t $APP:1.2 'sudo journalctl -u lica    -f'  C-m # web log
 
   # ----- LICA-LOGVIEW Window -----
 
-  tmux new-window -n "SystemD"
+  tmux new-window -n "SIDEKIQ"
 
-  tmux split-window -v -t $APP:2      # horizontal split
+  # tmux split-window -v -t $APP:2      # horizontal split
 
-  tmux send-keys -t $APP:2.1 'sudo journalctl -u lica    -f' C-m # web log
-  tmux send-keys -t $APP:2.2 'sudo journalctl -u sidekiq -f' C-m # sidekiq log
+  tmux send-keys -t $APP:2.1 'sudo journalctl -u sidekiq -f' C-m # sidekiq log
 
   # ----- NGINX Window -----
 
-  tmux new-window -n "NGINX"
+  tmux new-window -n "NGINX/SYSTEMD"
 
-  tmux split-window -v -p 50 -t $APP:3   # horizontal split
+  # tmux split-window -v -p 50 -t $APP:3   # horizontal split
 
   tmux send-keys -t $APP:3.1 'sudo journalctl -u nginx -f' C-m # nginx log
 
-  # ----- Open With AppLog Window -----
+  # ----- Open With First Window -----
 
   tmux select-window -t $APP:1
 

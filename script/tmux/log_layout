@@ -31,7 +31,7 @@ create_new_session()
 
   tmux send-keys -t $APP:3.1 'sudo journalctl -u nginx -f' C-m # nginx log
 
-  # ----- Open With DEV Window -----
+  # ----- Open With AppLog Window -----
 
   tmux select-window -t $APP:1
 

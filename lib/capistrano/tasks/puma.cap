@@ -8,13 +8,10 @@ before "deploy:symlink:release", "puma:nginx_conf"
 namespace :puma do
   desc "Upload Certs to Deploy Targets"
   task :certs do
-    varpath = "#{release_path}/.certs"
     on roles(:all) do |server|
-      cmd = "rsync -a .certs #{ fetch(:user) }@#{server.hostname}:#{release_path}"
+      cmd = "rsync -a .certs #{ fetch(:user) }@#{server.hostname}:#{release_path}/.certs"
       puts cmd
       run_locally { execute cmd }
-      execute "cat #{varpath} | sed s/=development/=production/ > /tmp/vars"  # change environment to production
-      execute "mv /tmp/vars #{varpath}"                                       # change environment to production
     end
   end
   desc "Export an puma config file for nginx."

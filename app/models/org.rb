@@ -1,12 +1,12 @@
 class Org < ActiveRecord::Base
 
   ALT_DOMAINS ||= {
-    'smsoesb.net' => %w(smesb.com smso.dev smso.pre smso.vgr smso.vbox lica.dev)
+    'listcall.net' => %w(smesb.com smso.dev smso.vbox lica.dev)
   }
 
   # for development - a mapping of dev domains with their production equivalents
   DEV_HOST_WITH_PORT ||= {
-    'smsoesb.net' => 'smso.dev:3000'
+    'listcall.net' => 'smso.dev:3000'
   }
 
   # ----- Attributes -----

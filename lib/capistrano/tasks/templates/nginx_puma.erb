@@ -45,7 +45,7 @@ server {
     proxy_set_header Host $host;
     proxy_intercept_errors on;
     # ----- ssl redirection - only on production host -----
-    <%= fetch(:is_prod_host) ? "" : "# " %> proxy_set_header X-Forwarded-Proto https;
+    <%= fetch(:is_prod_host) ? "" : "# " %>proxy_set_header X-Forwarded-Proto https;
     # -----
   }
   location /cable {

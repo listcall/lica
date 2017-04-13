@@ -11,7 +11,7 @@ set :deploy_to,   -> { "/home/#{fetch(:user)}/a/#{fetch(:application).downcase}"
 
 # ===== Nginx Config =====
 
-set :vhost_names, %w(smsoesb.net *.smsoesb.net *.lica.com *.smso.vgr *.smso.vbox)
+set :vhost_names, %w(listcall.net *.listcall.net *.lica.com *.smso.vbox)
 set :web_port,    8500
 
 # ===== Source Access =====

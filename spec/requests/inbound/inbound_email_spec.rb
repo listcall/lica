@@ -19,16 +19,16 @@ describe 'Inbound Letter Opener' do
   def reply_params
     {
       'from'        => 'andy@r210.com',
-      'In-Reply-To' => '<pgr-35-22@test1.smsoesb.net>',
+      'In-Reply-To' => '<pgr-35-22@test1.listcall.net>',
       'Message-ID'  => '<msg-132608@opnletter.org>',
       'subject'     => 'Re: PAGE 10-03 13:26:08',
-      'to'          => 'pager@test1.smsoesb.net',
+      'to'          => 'pager@test1.listcall.net',
       'text'        => 'incoming!!',
     }
   end
 
   def invalid_reply_params
-    reply_params.merge({'In-Reply-To' => '<invalid_id@test1.smsoesb.net'})
+    reply_params.merge({'In-Reply-To' => '<invalid_id@test1.listcall.net'})
   end
 
   # describe 'single-team member page' do

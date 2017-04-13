@@ -8,10 +8,10 @@
         .row style=("vertical-align: middle;")
           .col-ms-8
             b.vmid.visible-sm-and-above
-              = current_team.name
+              => current_team.name
               | Members
             b.vmid.visible-ms-and-below
-              = current_team.acronym
+              => current_team.acronym
               | Members
           .col-ms-4.text-right
             button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button"  reset

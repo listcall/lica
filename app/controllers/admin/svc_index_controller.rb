@@ -21,7 +21,7 @@ class Admin::SvcIndexController < ApplicationController
     name, value, cid = [params[:name], params[:value], params[:id]]
     qual = current_team.svcs.find(cid)
     qual.update_attribute(name.to_sym, value)
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def destroy
@@ -35,7 +35,7 @@ class Admin::SvcIndexController < ApplicationController
       svc = Svc.find(val.squeeze)
       svc.update_attributes(sort_key: idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 end
 

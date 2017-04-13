@@ -50,7 +50,7 @@
 #   def destroy
 #     plan = Svc::Plan.find(params[:id])
 #     plan.destroy unless plan.blank?
-#     render text: 'OK'
+#     render plain: 'OK'
 #   end
 #
 #   private

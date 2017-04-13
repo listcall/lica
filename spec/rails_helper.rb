@@ -14,6 +14,11 @@ require 'capybara/rspec'
 require 'capybara/rails'
 require 'capybara/poltergeist'
 
+class NullIO
+  def puts(*args)
+  end
+end
+
 # from https://github.com/teampoltergeist/poltergeist/issues/375
 Capybara.register_driver(:poltergeist) do |cfg|
   opts = {
@@ -21,7 +26,7 @@ Capybara.register_driver(:poltergeist) do |cfg|
     timeout:   180,
     js_errors: false,
     phantomjs: 'phantomjs211',
-    phantomjs_logger:  Puma::NullIO.new,
+    phantomjs_logger:  NullIO.new,
     phantomjs_options: %w(--load-images=no --ignore-ssl-errors=yes)
   }
   # noinspection RubyArgCount

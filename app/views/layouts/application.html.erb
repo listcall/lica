@@ -74,7 +74,7 @@
             <% if Rails.env.development? %>
               <%= raw debug_text %>
             <% else %>
-              Powered by Lica
+              Powered by ListCall
             <% end %>
           </td>
         </tr>
@@ -83,7 +83,7 @@
   </div>
 </div>
 
-<%# javascript_include_tag "application" %>
+<%= javascript_include_tag "application" %>
 <%= yield :page_js %>
 
 </body>

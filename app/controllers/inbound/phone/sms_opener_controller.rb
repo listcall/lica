@@ -7,7 +7,7 @@ class Inbound::Phone::SmsOpenerController < ApplicationController
   def create
     build_inbound
     save_inbound
-    render :text => 'OK', :status => 200
+    render :plain => 'OK', :status => 200
   end
 
   private

@@ -15,4 +15,3 @@ set :rails_env, 'staging'
 role :app, ['deploy@vagrant']
 role :db,  ['deploy@vagrant']
 role :web, ['deploy@vagrant']
-

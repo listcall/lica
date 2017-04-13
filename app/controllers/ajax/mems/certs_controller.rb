@@ -25,7 +25,7 @@ class Ajax::Mems::CertsController < ApplicationController
     opts['title'] = params['new_title'] unless params['new_title'].blank?
     @cert   = MemCertForm.new(params['mem_cert_form'])
     if @cert.valid? && @cert.generate
-      render text: 'OK'    # JS will re-load the page...
+      render plain: 'OK'    # JS will re-load the page...
     else
       @ctype_id = @cert.qual_ctype_id
       @ctype    = QualCtype.find(@ctype_id)
@@ -34,11 +34,11 @@ class Ajax::Mems::CertsController < ApplicationController
   end
 
   def update
-    opts = {'id' => params['id']}.merge(params['mem_cert_form'])
+    opts = {'id' => params['id']}.merge(params['mem_cert_form'].to_unsafe_h)
     opts['title'] = params['new_title'] unless params['new_title'].blank?
     @cert = MemCertForm.new(opts)
     if @cert.valid? && @cert.update
-      render text: 'OK'
+      render plain: 'OK'
     else
       @member = current_team.memberships.by_id_or_user_name(params[:membership_id]).first
       @ctype_id = @cert.qual_ctype_id
@@ -51,6 +51,6 @@ class Ajax::Mems::CertsController < ApplicationController
     params['certSort'].each_with_index do |mcert_id, idx|
       MembershipCert.find(mcert_id).update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 end

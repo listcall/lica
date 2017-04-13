@@ -22,7 +22,7 @@ class Admin::MemberRanksController < ApplicationController
 
   def update
     Team::RanksSvc.new(current_team).update(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   def destroy
@@ -32,14 +32,14 @@ class Admin::MemberRanksController < ApplicationController
 
   def sort
     Team::RanksSvc.new(current_team).sort(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   def list
     keys = current_team.ranks.map do |rank|
       {value: rank.acronym, text: "#{rank.name} (#{rank.acronym})"}
     end
-    render text: keys.to_json, layout: false
+    render json: keys.to_json, layout: false
   end
 
   private

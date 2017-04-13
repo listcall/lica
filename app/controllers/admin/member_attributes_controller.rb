@@ -19,7 +19,7 @@ class Admin::MemberAttributesController < ApplicationController
 
   def update
     MemberAttributesSvc.new(current_team).update(clean(params))
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   def destroy
@@ -29,7 +29,7 @@ class Admin::MemberAttributesController < ApplicationController
 
   def sort
     MemberAttributesSvc.new(current_team).sort(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   private

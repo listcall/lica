@@ -42,7 +42,7 @@ class Ajax::Mems::UsersController < ApplicationController
       dev_log 'UPDATE WAS NOT SUCCESSFUL'
       user.errors.messages.keys.each { |key| user.errors.add key, user.errors[key].first}
       dev_log 'ERRORS:', validation_message(user)
-      render text: validation_message(user), status: 400
+      render plain: validation_message(user), status: 400
     end
 
   end

@@ -23,7 +23,7 @@ class HomeController < ApplicationController
     new_list = ([params['type']] + list).join(' ')
     mem.widget_col1 = new_list
     mem.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def destroy
@@ -35,7 +35,7 @@ class HomeController < ApplicationController
     mem.xfields["widget_#{col}"] = list.join(' ')
     mem.xfields_will_change!
     mem.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def sort
@@ -45,7 +45,7 @@ class HomeController < ApplicationController
     mem.xfields["widget_#{col}"] = list
     mem.xfields_will_change!
     mem.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private

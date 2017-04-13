@@ -6,31 +6,35 @@ Rails.application.routes.draw do
     end
   end
 
-  # ----- sidekiq -----
+  # ----- ActionCable -----
+  mount ActionCable.server => "/cable"
+
+  # ----- Sidekiq -----
   require 'sidekiq/web'
   Sidekiq::Web.use Rack::Auth::Basic do |user, pass|
     user == 'side' && pass == 'kiq'
   end
   mount Sidekiq::Web => '/sq'
 
-  # ----- dalli -----
+  # ----- Dalli -----
   mount Dalli::Ui::Engine, at: 'dalli'
 
-  # ----- published -----
+  # ----- Published -----
   namespace :published do
     resources :events         , only: [:index, :show]
     resources :team_directory , only: [:index, :show]
   end
 
-  # ----- js raw test -----
+  # ----- Js Raw Test -----
   get 'ytst' => 'ytst#index'
 
-  # ----- test pages -----
-  ztst_pgs = %w(index icons react1 react2 react3 react4 react5 react6 reflux handle ace d3 form1 cjs)
+  # ----- Test Pages -----
+  # ztst_pgs = %w(index icons react1 react2 react3 react4 react5 react6 reflux handle ace d3 form1 cjs pack1)
+  ztst_pgs = %w(index icons react0 react1 react2 react3 chat pack1 pack2)
   info_pgs = %w(not_authorized domain_not_found page_not_found inactive no_access no_feature not_member)
-  ZTST_PAGES = ztst_pgs        unless defined?(ZTST_PAGES)
-  HOME_PAGES = %w(index)       unless defined?(HOME_PAGES)
-  INFO_PAGES = info_pgs        unless defined?(INFO_PAGES)
+  ZTST_PAGES = ztst_pgs    unless defined?(ZTST_PAGES)
+  HOME_PAGES = %w(index)   unless defined?(HOME_PAGES)
+  INFO_PAGES = info_pgs    unless defined?(INFO_PAGES)
 
   get 'ztst' => 'ztst#index'
   get_pages ZTST_PAGES, 'ztst'
@@ -39,7 +43,7 @@ Rails.application.routes.draw do
 
   get 'ztst/handle/:template' => 'ztst#handle'
 
-  # ----- login, sessions, passwords -----
+  # ----- Login, Sessions, Passwords -----
 
   get 'login'  => 'sessions#new',     :as => 'login'
   get 'logout' => 'sessions#destroy', :as => 'logout'
@@ -56,7 +60,7 @@ Rails.application.routes.draw do
 
   get  'password/reset'        # link embedded in the email goes to this page
 
-  # ----- certifications activity -----
+  # ----- Certifications Activity -----
 
   get 'certs'                           => 'certs#index'
 
@@ -78,7 +82,7 @@ Rails.application.routes.draw do
   post   'members/:id/certs/:cert_id'  => 'member_certs#update'
   delete 'members/:id/certs/:cert_id'  => 'member_certs#destroy'
 
-  # ----- certifications activity -----
+  # ----- Certifications Activity -----
 
   resources :sessions
   resources :users
@@ -94,7 +98,7 @@ Rails.application.routes.draw do
 
   resources :positions
 
-  # ----- events -----
+  # ----- Events -----
 
   put 'events/:id/periods/sort' => 'event_periods#sort'
 
@@ -104,30 +108,7 @@ Rails.application.routes.draw do
 
   resources :event_reports
 
-  # ----- drives and files -----
-
-  # resources :drives do
-  #   resources :drive_files, path: 'files'
-  # end
-
-  # ----- wikis and pages -----
-
-  # resources :wikis do
-  #   resources :wiki_pages, path: 'pages'
-  # end
-  # get  '/wikis/:wiki_id/pages/:id/delete'  => 'wiki_pages#destroy'
-  # get  '/wikis/:wiki_id/pages/:id/history' => 'wiki_pages#history'
-  # get  '/wikis/:wiki_id/pages/:id/rename'  => 'wiki_pages#rename'
-  # put  '/wikis/:wiki_id/pages/:id/reproc'  => 'wiki_pages#reproc'
-
-  # ----- forums and paging -----
-
-  # get '/forums/new'                => 'forums#new'
-  # get '/forums/:forum_id/mark_all' => 'forums#mark_all'
-  # resources :forums do
-  #   resources :topics , controller: 'forums_topics', path: ''
-  #   resources :posts  , controller: 'forums_posts'
-  # end
+  # ----- Paging -----
 
   get  '/paging'                 => 'pgr/assignments#index'
   get  '/paging/new'             => 'pgr/assignments#new'
@@ -143,7 +124,7 @@ Rails.application.routes.draw do
   mount Api::Base                 => '/api'
   mount GrapeSwaggerRails::Engine => '/apidoc'
 
-  # ----- new routes for inbound mail and sms -----
+  # ----- New Routes for Inbound Mail and Sms -----
 
   if Rails.env.development? || Rails.env.test?
     post '/inbound/email/letter_opener' => 'inbound/email/letter_opener#create'
@@ -157,11 +138,11 @@ Rails.application.routes.draw do
   get  '/inbound/phone/nexmo'    => 'inbound/phone/nexmo#create'    # create a new inbound SMS
   get  '/inbound/phone/plivo'    => 'inbound/phone/plivo#create'    # create a new inbound SMS
 
-  # ----- email actions -----
+  # ----- Email Actions -----
 
   get '/action/rsvp/:outbound_id/:response' => 'action/rsvp#index'  # handle an inbound rsvp action
 
-  # ----- team admin -----
+  # ----- Team Admin -----
 
   get '/admin' => 'admin#index'
   get '/admin/member_ranks/list'  => 'admin/member_ranks#list'
@@ -255,7 +236,7 @@ Rails.application.routes.draw do
   get '/nav/footer' => 'nav#footer'
   get '/nav/admin'  => 'nav#admin'
 
-  # ----- org admin -----
+  # ----- Org Admin -----
 
   namespace :org do
     resources :teams do
@@ -264,7 +245,7 @@ Rails.application.routes.draw do
     end
   end
 
-  # ----- members -----
+  # ----- Members -----
 
   get    'members'         => 'members#index'
   get    'members/:id'     => 'members#show'
@@ -272,14 +253,14 @@ Rails.application.routes.draw do
   get    'members/export'  => 'members#export'
   delete 'members/:id'     => 'members#destroy'
 
-  # ----- data display -----
+  # ----- Data Display -----
 
   namespace :display do
     resources :cred_log  # history of member credentials
     resources :role_log  # history of role changes
   end
 
-  # ----- ajax support -----
+  # ----- Ajax Support -----
 
   get  '/ajax/events/tag_uniq'                                  => 'ajax/events#tag_uniq'
   post '/ajax/memberships/:membership_id/phones/sort'           => 'ajax/mems/phones#sort'
@@ -288,6 +269,7 @@ Rails.application.routes.draw do
   post '/ajax/memberships/:membership_id/contacts/sort'         => 'ajax/mems/contacts#sort'
   post '/ajax/memberships/:membership_id/certs/sort'            => 'ajax/mems/certs#sort'
   put  '/ajax/avail_day'                                        => 'avail/day#update'
+
   namespace :ajax do
     resources :topic_status
     resources :members

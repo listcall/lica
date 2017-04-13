@@ -27,7 +27,7 @@ def update
   qual  = current_team.qual_partners.find(cid)
   qual.send("#{name}=", value)
   qual.update_attribute(name.to_sym, value)
-  render text: 'OK', layout: false
+  render plain: 'OK', layout: false
 end
 
   def destroy
@@ -42,7 +42,7 @@ end
     params['partner'].each_with_index do |key, idx|
       pos_hash[key.to_i].update_attribute(:sort_key, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
 end

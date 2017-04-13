@@ -1,6 +1,6 @@
 # ListCall Readme
 
-ListCall - Team Alerting and Checklists
+ListCall (lica) - Team Alerting and Checklists
 
 ## Overview
 

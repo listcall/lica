@@ -23,12 +23,12 @@ class Ajax::EventsController < ApplicationController
     ef_event      = EventForm.new.with_event(ar_event).update(select_vals)
     if ef_event.valid? && ef_event.save
       dev_log 'UPDATE WAS SUCCESSFUL'
-      render text: ef_event.event_ref
+      render plain: ef_event.event_ref
     else
       dev_log 'UPDATE WAS NOT SUCCESSFUL'
       ef_event.event.errors.messages.keys.each { |key| ef_event.errors.add key, ef_event.errors[key].first}
       dev_log 'ERRORS:', validation_message(ef_event)
-      render text: validation_message(ef_event), status: 400
+      render plain: validation_message(ef_event), status: 400
     end
   end
 

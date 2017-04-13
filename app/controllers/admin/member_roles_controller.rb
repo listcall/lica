@@ -23,7 +23,7 @@ class Admin::MemberRolesController < ApplicationController
 
   def update
     Team::RolesSvc.new(current_team).update(params)
-    render :text => 'OK'
+    render :plain  => 'OK'
   end
 
   def destroy
@@ -33,14 +33,14 @@ class Admin::MemberRolesController < ApplicationController
 
   def sort
     Team::RolesSvc.new(current_team).sort(params)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   def list
     keys = current_team.roles.map do |role|
       {value: role.acronym, text: "#{role.name} (#{role.acronym})"}
     end
-    render text: keys.to_json, layout: false
+    render json: keys.to_json, layout: false
   end
 
   private

@@ -3,6 +3,7 @@
 /.env-chruby
 /.bundle
 /.idea/
+/.certs/
 /.vagrant/
 /.erdconfig
 /*.pdf
@@ -26,3 +27,8 @@
 /public/source_maps/
 /public/qrcodes/
 /app/assets/stylesheets/.sass-cache/
+/public/packs
+/public/all_packs
+/node_modules
+/public/packs
+/node_modules

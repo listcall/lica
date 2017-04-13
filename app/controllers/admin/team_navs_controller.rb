@@ -23,7 +23,7 @@ class Admin::TeamNavsController < ApplicationController
     np = {id: params[:id], name: params[:name], value: params[:value]}
     typ = params['pk'].strip
     TeamNavsSvc.new(current_team, typ).update(np)
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def destroy
@@ -37,14 +37,14 @@ class Admin::TeamNavsController < ApplicationController
     result = list.map do |x|
       {:text => x.split('_').last, :value => x}
     end
-    render :text => result.to_json, :layout => false
+    render :json => result.to_json, :layout => false
   end
 
   def sort
     type = %w(hdrNavs ftrNavs homeNavs).find {|lbl| params[lbl]}
     list = params[type]
     TeamNavsSvc.new(current_team, type.gsub('Navs','')).sort(list)
-    render :text => 'OK'
+    render :plain => 'OK'
   end
 
   private

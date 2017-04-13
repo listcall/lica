@@ -3,6 +3,7 @@ puts ' CAP CONFIG BASE '.center(70,'-')
 # ===== App Config =====
 
 set :application,    'lica'
+
 set :log_level,      :error                 # use :error, :warn, :info, or :debug
 set :format_options, command_output: false  # :stdout, :stderr, true, false
 
@@ -25,7 +26,7 @@ after 'deploy:symlink:shared', 'data:varfile'
 
 # ===== Symlinking =====
 
-set :linked_dirs,  %w{data log tmp/pids tmp/cache tmp/sockets public/util public/system public/assets}
+set :linked_dirs,  %w{data log tmp/pids tmp/cache tmp/sockets public/all_packs public/util public/system public/assets}
 
 # ===== Bundler =====
 

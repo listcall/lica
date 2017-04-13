@@ -24,7 +24,7 @@ class Admin::SvcRepsController < ApplicationController
     base_opts  = {team: current_team, member: current_membership}
     query_opts = params.slice(:month, :quarter, :year)
     @report = Rep::StiService.find(params[:id]).with_opts(base_opts, query_opts)
-    render text: @report.template_content, layout: 'report'
+    render plain: @report.template_content, layout: 'report'
   end
 
   def update
@@ -32,9 +32,9 @@ class Admin::SvcRepsController < ApplicationController
     svcrep      = current_team.reps.service.find(params[:id])
     svcrep.send("#{name}=", value)
     if svcrep.valid? && svcrep.save
-      render text: params['pk'], layout: false
+      render plain: params['pk'], layout: false
     else
-      render text: validation_message(type), layout: false, status: 422
+      render plain: validation_message(type), layout: false, status: 422
     end
   end
 
@@ -51,7 +51,7 @@ class Admin::SvcRepsController < ApplicationController
     params['report'].each_with_index do |key, idx|
       reports.find(key).update_attribute(:sort_key, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

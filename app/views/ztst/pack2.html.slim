@@ -1,0 +1,10 @@
+- content_for :page_js do
+  = javascript_pack_tag 'ztst_pack2'
+
+div.container
+  = render :partial => 'shared_nav'
+  |This is Pack2
+
+  .row
+    .col-md-12
+      h2 See console for javascript output!

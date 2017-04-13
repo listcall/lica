@@ -18,7 +18,7 @@ class Admin::SvcPartnersController < ApplicationController
     params['service'].each_with_index do |key, idx|
       ser_pars.find(key).update_attribute(:position, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def update
@@ -26,9 +26,9 @@ class Admin::SvcPartnersController < ApplicationController
     service     = current_team.svcs.find(params[:id])
     service.send("#{name}=", value)
     if service.valid? && service.save
-      render text: params['pk'], layout: false
+      render plain: params['pk'], layout: false
     else
-      render text: validation_message(type), layout: false, status: 422
+      render plain: validation_message(type), layout: false, status: 422
     end
   end
 

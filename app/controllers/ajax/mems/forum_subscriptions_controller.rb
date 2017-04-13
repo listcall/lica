@@ -16,7 +16,7 @@ class Ajax::Mems::ForumSubscriptionsController < ApplicationController
     memid  = params[:membership_id]
     member = current_team.memberships.find(memid)
     fm_sub = ForumSubscription.create(team_id: current_team.id, membership_id: memid, forum_id: params[:value])
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def update
@@ -31,14 +31,14 @@ class Ajax::Mems::ForumSubscriptionsController < ApplicationController
     member = current_team.memberships.find(memid)
     fm_sub = ForumSubscription.where(membership_id: memid, forum_id: params[:value]).to_a.first
     fm_sub.destroy
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def sort
     params['phone'].each_with_index do |phone_id, idx|
       User::Phone.find(phone_id).update_attributes(position: idx)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
 end

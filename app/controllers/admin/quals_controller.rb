@@ -3,8 +3,8 @@ class Admin::QualsController < ApplicationController
 before_action :authenticate_owner!
 
   def index
-    @title  = 'Qualifications'
-    @quals = QualDecorator.decorate_collection(current_team.quals.to_a)
+    @title = 'Qualifications'
+    @quals = ActiveType.cast(current_team.quals, QualDecorator)
   end
 
   def create
@@ -24,7 +24,7 @@ def update
   qual.send("#{name}=", value)
   qual.update_attribute(name.to_sym, value)
   instrument 'qual.update', {qual_id: qual.id, name: name, value: value}
-  render text: 'OK', layout: false
+  render plain: 'OK', layout: false
 end
 
   def destroy
@@ -39,6 +39,6 @@ end
     params['qual'].each_with_index do |key, idx|
       cert_hash[key].update_attribute(:position, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 end

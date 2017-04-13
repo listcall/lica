@@ -29,11 +29,11 @@ class YtstController < ApplicationController
   end
 
   def two
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def four
-    render text: 'ERROR', status: 400
+    render plain: 'ERROR', status: 400
   end
 
   def form1

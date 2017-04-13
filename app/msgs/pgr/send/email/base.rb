@@ -14,6 +14,7 @@ class Pgr::Send::Email::Base
       }
     end
 
+    # send live from dev if the outbound email address is 'andy@r210.com'
     def live_from_dev?(outbound)
       return false unless outbound.is_a? Pgr::Outbound::StiEmail
       outbound.target_address == 'andy@r210.com'

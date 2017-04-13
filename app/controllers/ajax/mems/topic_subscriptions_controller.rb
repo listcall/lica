@@ -17,7 +17,7 @@ class Ajax::Mems::TopicSubscriptionsController < ApplicationController
     top_id = params[:value]
     args   = {team_id: current_team.id, membership_id: mem_id, forum_topic_id: top_id}
     ForumTopicSubscription.create(args)
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def update
@@ -31,14 +31,14 @@ class Ajax::Mems::TopicSubscriptionsController < ApplicationController
     memid  = params[:membership_id]
     tp_sub = ForumTopicSubscription.where(membership_id: memid, forum_topic_id: params[:value]).to_a.first
     tp_sub.try(:destroy)
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def sort
     params['phone'].each_with_index do |phone_id, idx|
       User::Phone.find(phone_id).update_attributes(position: idx)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
 end

@@ -40,7 +40,7 @@ class Pgr::AssignmentsController < ApplicationController
 
   def save_broadcast
     if @broadcast.save
-      # TODO - run this in background
+      # TODO - run this in background !!!!!
       Pgr::Util::GenBroadcast.new(@broadcast).generate_all.deliver_all
       redirect_to paging_path
     end
@@ -90,7 +90,7 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def member_ids(params)
-    params[:member_recipients].to_a.reduce([]) do |acc, val|
+    params[:member_recipients].to_unsafe_h.to_a.reduce([]) do |acc, val|
       acc << val.first if val.last == '1'; acc
     end
   end

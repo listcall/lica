@@ -3,11 +3,11 @@ class Published::EventsController < ApplicationController
   respond_to :html, :json, :csv
 
   def index
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def show
-    render text: 'OK'
+    render plain: 'OK'
   end
 
 end

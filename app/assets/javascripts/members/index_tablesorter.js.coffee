@@ -20,7 +20,7 @@ dataSort =
   is     : (s) -> false
   type   : 'text'
   format : (s, table, cell) ->
-             $(cell).attr('data-sort')
+             $(cell).attr('data-sort') || ""
 
 # -----
 

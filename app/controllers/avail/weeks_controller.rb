@@ -37,6 +37,6 @@ class Avail::WeeksController < ApplicationController
     avail = Avail::Week.find(params[:pk])
     avail.send("#{params[:name]}=", params[:value])
     avail.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 end

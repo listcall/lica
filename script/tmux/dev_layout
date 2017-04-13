@@ -1,35 +1,36 @@
 #!/usr/bin/env bash
 # should be called from tmux_console
 
-export APP="ListCall"
+export APP="LICA-DEV"
 
 create_new_session()
 {
 
   # ----- DEV Window -----
 
-  tmux new-session -s $APP -n "DEV" -d
+  tmux new-session -s $APP -n "TEST" -d
 
   tmux split-window -v -t $APP:1      # horizontal split
 
   tmux send-keys -t $APP:1.1 'script/run/specs'  C-m # spec runner
-  tmux send-keys -t $APP:1.2 'script/run/server' C-m # app server
+  tmux send-keys -t $APP:1.2 'jest --watch'      C-m # jest runner
 
   # ----- JOBS Window -----
 
-  tmux new-window -n "JOBS"
+  tmux new-window -n "SERVERS"
 
   tmux split-window -v -p 50 -t $APP:2   # horizontal split 
 
-  tmux send-keys -t $APP:2.1 'clear ; bundle exec sidekiq -C config/sidekiq.yml' C-m # bg jobs
+  tmux send-keys -t $APP:2.1 'script/run/server' C-m  # app server
+  tmux send-keys -t $APP:2.2 'script/run/sidekiq' C-m # bg jobs
 
   # ----- Webpacker Window -----
 
   tmux new-window -n "WEBPACK"
 
-  tmux split-window -v -p 50 -t $APP:3   # horizontal split
+  # tmux split-window -v -p 50 -t $APP:3   # horizontal split
 
-  tmux send-keys -t $APP:3.1 'clear ; webpack-dev-server --host 0.0.0.0' C-m # webpack development server
+  tmux send-keys -t $APP:3.1 'clear ; webpack-dev-server --host 0.0.0.0' C-m # webpack 
 
   # ----- Tunnel Window -----
 
@@ -37,7 +38,7 @@ create_new_session()
 
   tmux split-window -v -p 70 -t $APP:4   # horizontal split
 
-  tmux send-keys -t $APP:4.1 'clear ; rpf deploy@Licah64:3000 3000'  C-m     # for inbound email testing
+  tmux send-keys -t $APP:4.1 'clear ; rpf deploy@Licah64:3000 3000'  C-m     
 
   # ----- Open With DEV Window -----
 

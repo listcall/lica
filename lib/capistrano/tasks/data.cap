@@ -6,7 +6,7 @@ namespace :data do
   task :rsync do
     on roles(:all) do |server|
       execute "mkdir -p #{shared_path}/data"
-      run_locally { execute "rsync -vr data #{ fetch(:user) }@#{server.hostname}:#{shared_path}" }
+      run_locally { execute "rsync -qr data #{ fetch(:user) }@#{server.hostname}:#{shared_path} ; echo done" }
       execute "chown -R #{ fetch(:user) } #{shared_path}/data"
       execute "chgrp -R #{ fetch(:user) } #{shared_path}/data"
     end

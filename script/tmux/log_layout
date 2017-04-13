@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+# should be called from tmux_console
+
+export APP="LOGVIEW"
+
+create_new_session()
+{
+
+  # ----- AppLog -----
+
+  tmux new-session -s $APP -n "APP_LOG" -d
+
+  tmux split-window -v -t $APP:1      # horizontal split
+
+  tmux send-keys -t $APP:1.1 'cd log; tail -f production.log' C-m # app log
+
+  # ----- LICA-LOGVIEW Window -----
+
+  tmux new-window -n "SystemD"
+
+  tmux split-window -v -t $APP:2      # horizontal split
+
+  tmux send-keys -t $APP:2.1 'sudo journalctl -u lica    -f' C-m # web log
+  tmux send-keys -t $APP:2.2 'sudo journalctl -u sidekiq -f' C-m # sidekiq log
+
+  # ----- NGINX Window -----
+
+  tmux new-window -n "NGINX"
+
+  tmux split-window -v -p 50 -t $APP:3   # horizontal split
+
+  tmux send-keys -t $APP:3.1 'sudo journalctl -u nginx -f' C-m # nginx log
+
+  # ----- Open With AppLog Window -----
+
+  tmux select-window -t $APP:1
+
+}

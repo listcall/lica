@@ -17,6 +17,9 @@ class ZtstController < ApplicationController
   def ace     ;   end
   def d3      ;   end
   def cjs     ;   end
+  def chat    ;   end
+  def pack1   ;   end
+  def pack2   ;   end
 
   def handle
     @col1 = %w(hello handle)
@@ -31,11 +34,11 @@ class ZtstController < ApplicationController
   end
 
   def two
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def four
-    render text: 'ERROR', status: 400
+    render plain: 'ERROR', status: 400
   end
 
   def form1

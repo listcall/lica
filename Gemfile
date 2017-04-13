@@ -10,11 +10,10 @@ git_source(:github) do |repo_name|
 end
 
 # ----- rails -----
-gem 'rails', '~> 5.1.0.beta1'   # rails
+gem 'rails', '~> 5.1.0.rc1'   # rails
 
 # ----- environment -----
 gem 'dotenv-rails'
-# gem 'foreman' , require: false 
 
 # ----- servers -----
 gem 'puma', '~> 3.7'              # web server
@@ -26,11 +25,9 @@ gem 'dalli'                       # memcached support (caching)
 gem 'dalli-ui'                    # web interface for memcached
 gem 'connection_pool'             # dalli helper for puma (multi-threaded)
 
-# ----- data importing -----
+# ----- misc -----
 # gem 'active_importer'              # import csv and spreadsheet files
-
-# ----- finite-state-machine -----
-# gem 'workflow'
+# gem 'workflow'                     # finite state machine
 
 # ----- template processors -----
 gem 'slim-rails'            # slim templates
@@ -56,7 +53,6 @@ gem 'exception_notification'     # sends alert emails on 500 errors
 
 # ----- active-record helpers -----
 gem 'acts_as_list'      # order objects by position field
-# gem 'ice_cube'          # schedule repeating events
 gem 'ancestry'          # manage objects in a tree-structure
 gem 'sequenced'         # generate scoped IDs
 gem 'enumerize'         # hstore helpers for enum fields
@@ -70,7 +66,7 @@ gem 'active_type'       # extensions for ActiveModel
 gem 'simple_form'             # form generator
 # gem 'active_link_to'          # for creating bootstrap nav bars
 gem 'launchy'                 # static page launcher
-# gem 'draper'                  # view models
+
 
 # ----- audit trails, versioning and activity logs -----
 # gem 'paper_trail'
@@ -83,30 +79,19 @@ gem 'mini_magick'                 # server-side image resizing & cropping
 # gem 'sprockets'        , '3.6.3'
 # gem 'sprockets-rails'  , '~> 3.1'
 # gem 'sass-rails', github: "rails/sass-rails"  # sass processor based on libsass
-gem 'webpacker' , github: "rails/webpacker"   # webpack support
+gem 'webpacker'                                 # webpack support
+# gem 'webpacker', github: "rails/webpacker"                                 # webpack support
 
 # ----- asset management -----
 gem 'therubyracer' , platforms: :ruby  # javascript execution engine
 gem 'uglifier'     , '>= 1.0.3'        # javascript minifier
 gem 'coffee-rails' , '~> 4.2.0'        # coffeescript support
-# gem 'jquery-ujs'
 gem 'bh'           , '~> 1.3.6'        # bootstrap helpers
 
 # ----- javascript packages / gems -----
-# gem 'jquery-rails'           , '~> 4.0'   # jquery
-# gem 'jquery-ui-rails'        , '4.2.1'    # jquery UI
-# gem 'react-rails'            , '1.2.0'    # render helpers for react
-# gem 'bootstrap-sass'         , '~> 3.3'   # bootstrap UI framework
-# gem 'bootstrap-switch-rails' , '1.8.1'    # bootstrap on-off switch
-# gem 'ace-rails-ap'                        # ace editor
-
-# ----- javascript packages / gems -----
-# gem 'jquery-rails'            # jquery
 gem 'jquery-ui-rails'        , '4.2.1'    # jquery UI
-gem 'react-rails'             # render helpers for react
 gem 'bootstrap-sass'         , '~> 3.3'   # bootstrap UI framework
 gem 'bootstrap-switch-rails' , '1.8.1'    # bootstrap on-off switch
-# gem 'ace-rails-ap'            # ace editor
 
 # ----- javascript packages / http://rails-assets.org -----
 source 'https://rails-assets.org' do

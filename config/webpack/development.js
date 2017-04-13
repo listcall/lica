@@ -1,31 +1,16 @@
 // Note: You must restart bin/webpack-watcher for changes to take effect
 
-const webpack = require('webpack')
 const merge = require('webpack-merge')
-
 const sharedConfig = require('./shared.js')
 
-module.exports = merge(sharedConfig.config, {
+module.exports = merge(sharedConfig, {
   devtool: 'sourcemap',
 
   stats: {
-    errorDetails: false,
-    noInfo: false,
-    hash: false,
-    version: false,
-    chunks: false,
-    assets: false,
-    warnings: false,
-    modules: false
+    errorDetails: true
   },
 
   output: {
     pathinfo: true
-  },
-
-  plugins: [
-    new webpack.LoaderOptionsPlugin({
-      debug: true
-    })
-  ]
+  }
 })

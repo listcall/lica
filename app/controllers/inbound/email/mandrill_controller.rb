@@ -12,7 +12,7 @@
 #     green_log 'MANDRILL INBOUND IS BUILT'
 #     save_inbound
 #     green_log "MANDRILL INBOUND IS SAVED (ID: #{@inbound.id})"
-#     render text: 'OK'
+#     render plain: 'OK'
 #   end
 #
 #   private

@@ -11,14 +11,23 @@
     <div class="col-sm-offset-1 col-sm-4">
 
       <%= simple_form_for(@user, url: sessions_path, html: {class: 'form-horizontal'}) do |f| %>
-        <%= f.input :user_name, required: false, label: "Username or Email" %>
-        <%= f.input :password,  required: false %>
+        <div class="input string optional user_user_name">
+          <label class="string optional" for="user_user_name">Username or Email</label>
+          <input class="string optional" type="text" name="user[user_name]" id="user_user_name"/>
+        </div>
+        <p></p>
+        <div class="input password optional user_password">
+          <label class="string optional" for="user_password">Password</label><br/>
+          <input class="password optional" type="password" name="user[password]" id="user_password"/>
+        </div>
+        <p></p>
         <%= f.input :remember_me, :label => false do %>
           <label>
           <span style='vertical-align: 2px; margin-right: 8px;'>Remember me?</span>
           <input id='user_remember_me' name='user[remember_me]' type='checkbox' value='1'/>
           </label>
         <% end %>
+        <p></p>
         <div class='form-actions'>
           <%= f.button :submit, "Log In" %>
           <div style='display: inline-block; float: right; padding-top: 8px;'>

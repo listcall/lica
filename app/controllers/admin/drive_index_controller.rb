@@ -29,14 +29,14 @@ class Admin::DriveIndexController < ApplicationController
     drive = Drive.find params['pk'].strip
     drive.send("#{name}=", value)
     drive.save
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def sort
     params['drive'].each_with_index do |fid, idx|
       Drive.find(fid).update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

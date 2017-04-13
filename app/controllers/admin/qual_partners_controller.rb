@@ -24,7 +24,7 @@ def update
   qual  = current_team.qual_partners.find(cid)
   qual.send("#{name}=", value)
   qual.update_attribute(name.to_sym, value)
-  render text: 'OK', layout: false
+  render plain: 'OK', layout: false
 end
 
   def destroy
@@ -41,7 +41,7 @@ end
     params['qual'].each_with_index do |key, idx|
       cert_hash[key].update_attribute(:position, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
 end

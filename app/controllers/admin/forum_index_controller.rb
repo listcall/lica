@@ -29,14 +29,14 @@ class Admin::ForumIndexController < ApplicationController
     forum = Forum.find params['pk'].strip
     forum.send("#{name}=", value)
     forum.save
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def sort
     params['forum'].each_with_index do |fid, idx|
       Forum.find(fid).update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

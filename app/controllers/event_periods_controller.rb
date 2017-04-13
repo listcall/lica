@@ -14,7 +14,7 @@ class EventPeriodsController < ApplicationController
   end
 
   def new
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def create
@@ -37,7 +37,7 @@ class EventPeriodsController < ApplicationController
     params['period'].each_with_index do |pid, idx|
       Event::Period.find(pid).update_attributes(position: idx+1)
     end
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private

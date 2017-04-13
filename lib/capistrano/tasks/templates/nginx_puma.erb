@@ -6,14 +6,14 @@ server {
   listen 80;
 
   # ----- required for ssl -----
-  # listen 443 ssl;
-  # ssl on;
-  # ssl_certificate     <%= fetch(:deploy_to) %>/current/config/certs/STAR_smsoesb_net.pem;
-  # ssl_certificate_key <%= fetch(:deploy_to) %>/current/config/certs/STAR_smsoesb_net.key;
-  # ssl_session_timeout 5m;
-  # ssl_protocols       SSLv2 SSLv3 TLSv1;
-  # ssl_ciphers         HIGH:!aNULL:!MD5;
-  # ssl_prefer_server_ciphers  on;
+  listen 443 ssl;
+  ssl on;
+  ssl_certificate     <%= fetch(:release_path) %>/.certs/STAR_listcall_net.pem;
+  ssl_certificate_key <%= fetch(:release_path) %>/.certs/STAR_listcall_net.key;
+  ssl_session_timeout 5m;
+  ssl_protocols       SSLv2 SSLv3 TLSv1;
+  ssl_ciphers         HIGH:!aNULL:!MD5;
+  ssl_prefer_server_ciphers  on;
   # -----
 
   server_name ~^.*$;
@@ -29,7 +29,7 @@ server {
   location @503 {
     rewrite ^(.*)$ /util/maintenance.html break;
   }
-  location ~ ^/(img|fonts|assets|system|icons|avatar|metrics)/ {
+  location ~ ^/(all_packs|img|fonts|assets|system|icons|avatar|metrics)/ {
     expires max;
     gzip_static on;
     add_header ETag "";
@@ -44,9 +44,15 @@ server {
     proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
     proxy_set_header Host $host;
     proxy_intercept_errors on;
-    # ----- required for ssl -----
-    # proxy_set_header X-Forwarded-Proto https;
+    # ----- ssl redirection - only on production host -----
+    <%= fetch(:is_prod_host) ? "" : "# " %> proxy_set_header X-Forwarded-Proto https;
     # -----
+  }
+  location /cable {
+    proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
   }
 }
 

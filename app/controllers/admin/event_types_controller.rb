@@ -29,9 +29,9 @@ class Admin::EventTypesController < ApplicationController
     current_team.event_types = types
     if type.valid? && current_team.save
       update_event_typ(oldt, value) if name.to_s == 'acronym'
-      render text: params['pk'], layout: false
+      render plain: params['pk'], layout: false
     else
-      render text: validation_message(type), layout: false, status: 422
+      render plain: validation_message(type), layout: false, status: 422
     end
   end
 
@@ -50,7 +50,7 @@ class Admin::EventTypesController < ApplicationController
     end
     current_team.event_types = event_types
     current_team.save
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

@@ -26,7 +26,7 @@ class Ajax::EventParentsController < ApplicationController
     event.parent = parent_event
     event.save
     parent_event.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def destroy
@@ -35,7 +35,7 @@ class Ajax::EventParentsController < ApplicationController
         period.update_attributes parent: nil
     end
     event.update_attributes parent: nil
-    render text: 'OK'
+    render plain: 'OK'
   end
 
 end

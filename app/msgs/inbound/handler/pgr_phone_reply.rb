@@ -24,7 +24,6 @@ class Inbound::Handler::PgrPhoneReply
   private
 
   def post_params(inbound)
-    binding.pry
     {
       pgr_dialog_id:    inbound.reply_dialog_id,
       author_id:        inbound.reply_author_id,

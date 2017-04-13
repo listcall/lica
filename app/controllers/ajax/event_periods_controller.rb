@@ -7,7 +7,7 @@ class Ajax::EventPeriodsController < ApplicationController
   def create
     Event::Period.create(event_id: params['tgt_event_id'], position: params['position'])
     reposition_periods(Event.find(params['tgt_event_id']))
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def update
@@ -19,7 +19,7 @@ class Ajax::EventPeriodsController < ApplicationController
     child_period.try(:save)
     parent_period.try(:save)
     obj = EventPeriodDecorator.new(child_period)
-    render text: obj.period_cell
+    render plain: obj.period_cell
   end
 
   def destroy
@@ -28,7 +28,7 @@ class Ajax::EventPeriodsController < ApplicationController
     eperi.destroy
     event.reload
     reposition_periods(event)
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private

@@ -179,7 +179,7 @@ class ActionController::Base
 
   def authenticate_api_member!
     unless member_signed_in?
-      render :text => 'Access Denied', :status => :unauthorized
+      render :plain => 'Access Denied', :status => :unauthorized
     end
   end
 

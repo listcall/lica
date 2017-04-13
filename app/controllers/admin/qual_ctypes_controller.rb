@@ -24,7 +24,7 @@ def update
   cleanup_memcerts(type, name, value)
   type.send("#{name}=", value)
   type.save
-  render text: 'OK', layout: false
+  render plain: 'OK', layout: false
 end
 
   def destroy
@@ -39,7 +39,7 @@ end
     params['type'].each_with_index do |key, idx|
       cert_hash[key].update_attribute(:position, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private
@@ -49,5 +49,4 @@ end
     return unless type.ev_types.include?('attendance') && ! value.include?('attendance')
     type.membership_certs.attendance.each {|x| x.destroy}
   end
-
 end

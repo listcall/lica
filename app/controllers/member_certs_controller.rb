@@ -40,7 +40,7 @@ class MemberCertsController < ApplicationController
     params['certSort'].each_with_index do |cid,idx|
       MembershipCert.find(cid).update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

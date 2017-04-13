@@ -5,7 +5,7 @@ class BaseMailer < ActionMailer::Base
   private
 
   def update_delivery_method
-    return unless Rails.env.development? && mail.to[0] == 'andy@r210.com'
-    self.delivery_method = :mailgun_dm
+    # return unless Rails.env.development? && mail.to[0] == 'andy@r210.com'
+    # self.delivery_method = :mailgun_dm
   end
 end

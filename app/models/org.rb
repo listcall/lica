@@ -13,7 +13,6 @@ class Org < ActiveRecord::Base
 
   # ----- Associations -----
   has_many    :teams,    :dependent  => :destroy
-  #has_many    :wikis,    :dependent  => :destroy, :as => :parent
   belongs_to  :org_team, :class_name => 'Team'
 
   # ----- Validations -----

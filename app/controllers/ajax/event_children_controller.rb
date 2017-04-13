@@ -28,14 +28,14 @@ class Ajax::EventChildrenController < ApplicationController
     child_event.parent = parent_event
     child_event.save
     parent_event.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def destroy
     event = Event.find(params[:event_id])
     event.parent = nil
     event.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
 end

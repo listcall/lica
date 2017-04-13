@@ -9,6 +9,6 @@ class Ajax::Mems::OthersController < ApplicationController
     # mem.attr_set(params["pk"], params["value"])
     mem.xfields[params['pk']] = params['value']
     mem.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 end

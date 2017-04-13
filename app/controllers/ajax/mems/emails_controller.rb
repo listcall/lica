@@ -27,7 +27,7 @@ class Ajax::Mems::EmailsController < ApplicationController
     @email  = User::Email.new(opts)
     if @email.valid? && @email.save
       @email.move_to_top
-      render text: 'OK'    # JS will re-load the page...
+      render plain: 'OK'    # JS will re-load the page...
     else
       render :new, status: 400
     end
@@ -39,10 +39,10 @@ class Ajax::Mems::EmailsController < ApplicationController
     email = User::Email.find(params['id'])
     email.update_attributes({field => value})
     if email.valid?
-      render text: {success: true}.to_json, status: 200, layout: false
+      render json: {success: true}.to_json, status: 200, layout: false
     else
       msg = email.errors.messages.to_json.gsub(/[\[\]\"\{\}]/,'').gsub(':',': ')
-      render text: msg, layout: false, status: 400
+      render json: msg, layout: false, status: 400
     end
   end
 
@@ -58,7 +58,7 @@ class Ajax::Mems::EmailsController < ApplicationController
     params['email'].each_with_index do |email_id, idx|
       User::Email.find(email_id).update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def random_email

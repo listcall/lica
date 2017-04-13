@@ -12,6 +12,6 @@ class Admin::TeamOwnersController < ApplicationController
     mem = Membership.find(id)
     mem.update_attribute(:owner_plus, params[:owner_plus])
     mem.update_rights_and_scores!
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 end

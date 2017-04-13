@@ -8,7 +8,8 @@ class Pgr::Send::Email::Base
     def proxies
       {
         'development' => Pgr::Send::Email::Proxy::PgrMailer      ,
-        'dev_live'    => Pgr::Send::Email::Proxy::Mailgun        ,
+        'dev_live'    => Pgr::Send::Email::Proxy::PgrMailer      ,
+        # 'dev_live'    => Pgr::Send::Email::Proxy::Mailgun        ,
         'production'  => Pgr::Send::Email::Proxy::Mailgun        ,
         'test'        => Pgr::Send::Email::Proxy::NoOp
       }

@@ -21,7 +21,7 @@ class Admin::MemberRegistryController < ApplicationController
     tgt_role = params[:id]
     remove_all_from_role(tgt_role)
     add_role_to_member(params[:value], tgt_role)
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def role_many
@@ -32,7 +32,7 @@ class Admin::MemberRegistryController < ApplicationController
         add_role_to_member(val, tgt_role)
       end
     end
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private

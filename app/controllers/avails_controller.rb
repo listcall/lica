@@ -34,7 +34,7 @@ class AvailsController < ApplicationController
     else
       avail.send("#{params[:name]}=", params[:value])
       avail.save
-      render text: 'OK'
+      render plain: 'OK'
     end
   end
 

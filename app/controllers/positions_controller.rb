@@ -29,7 +29,7 @@ class PositionsController < ApplicationController
   #   avail = Avail::Week.find(params[:pk])
   #   avail.send("#{params[:name]}=", params[:value])
   #   avail.save
-  #   render text: "OK"
+  #   render plain: 'OK'
   # end
 
   # all team members (assignment and plan tab)
@@ -43,6 +43,6 @@ class PositionsController < ApplicationController
   #   value = params[:value]
   #   member = current_team.memberships.find(id)
   #   member.update_attribute(name.to_sym, value || [])
-  #   render text: "OK"
+  #   render plain: 'OK'
   # end
 end

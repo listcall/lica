@@ -21,8 +21,8 @@ create_new_session()
 
   tmux split-window -v -p 50 -t $APP:2   # horizontal split 
 
-  tmux send-keys -t $APP:2.1 'script/run/server' C-m # app server
-  tmux send-keys -t $APP:2.2 'clear ; bundle exec sidekiq -C config/sidekiq.yml' C-m # bg jobs
+  tmux send-keys -t $APP:2.1 'script/run/server' C-m  # app server
+  tmux send-keys -t $APP:2.2 'script/run/sidekiq' C-m # bg jobs
 
   # ----- Webpacker Window -----
 

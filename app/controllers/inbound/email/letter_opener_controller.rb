@@ -11,7 +11,7 @@ class Inbound::Email::LetterOpenerController < ApplicationController
     dev_log params[:inbound][:to].to_s, color: 'green'
     save_inbound
     dev_log 'OPENER INBOUND IS SAVED',  color: 'green'
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private

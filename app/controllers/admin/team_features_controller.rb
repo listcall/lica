@@ -15,7 +15,7 @@ class Admin::TeamFeaturesController < ApplicationController
     remove_nav(feature) if status.downcase == 'off'
     current_team.team_features = features
     current_team.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private

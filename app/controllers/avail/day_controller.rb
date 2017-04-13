@@ -7,7 +7,7 @@ class Avail::DayController < ApplicationController
     member = current_team.memberships.by_user_name(params["user_name"]).to_a.first
     opts   = valid_params(params).merge({member: member})
     AvailDaySvc.new(opts).update
-    render text: "OK"
+    render plain: 'OK'
   end
 
   private

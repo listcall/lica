@@ -28,7 +28,7 @@ class Ajax::Mems::AddressesController < ApplicationController
     @address = User::Address.new(opts)
     if @address.valid? && @address.save
       @address.move_to_top
-      render text: 'OK'
+      render plain: 'OK'
     else
       render :new, status: 400
     end
@@ -46,7 +46,7 @@ class Ajax::Mems::AddressesController < ApplicationController
     params['address'].each_with_index do |address_id, idx|
       User::Address.find(address_id).update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def update
@@ -69,7 +69,7 @@ class Ajax::Mems::AddressesController < ApplicationController
       dev_log 'UPDATE WAS NOT SUCCESSFUL'
       addr.errors.messages.keys.each { |key| addr.errors.add key, addr.errors[key].first}
       dev_log 'ERRORS:', validation_message(addr)
-      render text: validation_message(addr), status: 400
+      render plain: validation_message(addr), status: 400
     end
   end
 

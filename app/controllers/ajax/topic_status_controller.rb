@@ -6,7 +6,7 @@ class Ajax::TopicStatusController < ApplicationController
 
   def update
     TopicStatusSvc.new(params[:membership_id], params[:id], params[:status]).update
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
 end

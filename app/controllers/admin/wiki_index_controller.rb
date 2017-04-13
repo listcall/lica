@@ -29,14 +29,14 @@ class Admin::WikiIndexController < ApplicationController
     wiki = Wiki.find params['pk'].strip
     wiki.send("#{name}=", value)
     wiki.save
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def sort
     params['wiki'].each_with_index do |fid, idx|
       Wiki.find(fid).update_attributes(position: idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

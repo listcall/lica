@@ -11,7 +11,7 @@ class Inbound::Phone::NexmoController < ApplicationController
   #   rescue
   #     devlog "THERE WAS AN ERROR"
   #   end
-  #   render text: "OK", layout: false
+  #   render plain: 'OK', layout: false
   # end
 
 end

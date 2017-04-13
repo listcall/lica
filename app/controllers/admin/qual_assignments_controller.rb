@@ -22,7 +22,7 @@ class Admin::QualAssignmentsController < ApplicationController
       qual = QualAssignment.find_by(valid_opts) || QualAssignment.create(valid_opts)
       qual.update_attribute :status, status
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def update
@@ -30,7 +30,7 @@ class Admin::QualAssignmentsController < ApplicationController
     qual  = current_team.quals.find(cid)
     qual.send("#{name}=", value)
     qual.update_attribute(name.to_sym, value)
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def destroy
@@ -47,7 +47,7 @@ class Admin::QualAssignmentsController < ApplicationController
     params['qual'].each_with_index do |key, idx|
       cert_hash[key].update_attribute(:position, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

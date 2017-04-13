@@ -28,7 +28,7 @@ class Ajax::Mems::ContactsController < ApplicationController
     @contact = User::EmergencyContact.new(opts)
     if @contact.valid? && @contact.save
       @contact.move_to_top
-      render text: 'OK'
+      render plain: 'OK'
     else
       render :new, status: 400
     end
@@ -46,7 +46,7 @@ class Ajax::Mems::ContactsController < ApplicationController
     params['contact'].each_with_index do |contact_id, idx|
       User::EmergencyContact.find(contact_id).update_attribute(:position, idx+1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def update
@@ -68,7 +68,7 @@ class Ajax::Mems::ContactsController < ApplicationController
       dev_log 'UPDATE WAS NOT SUCCESSFUL'
       contact.errors.messages.keys.each { |key| contact.errors.add key, contact.errors[key].first}
       dev_log 'ERRORS:', validation_message(contact)
-      render text: validation_message(contact), status: 400
+      render plain: validation_message(contact), status: 400
     end
   end
 

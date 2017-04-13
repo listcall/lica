@@ -23,6 +23,6 @@ class Ajax::QualCtypesAttendanceController < ApplicationController
     ctype.save
     opts = {qual_ctype_id: ctype.id}
     instrument 'ctype_attendance_rule.update', opts
-    render text: 'OK'
+    render plain: 'OK'
   end
 end

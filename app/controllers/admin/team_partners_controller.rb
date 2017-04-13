@@ -8,12 +8,12 @@ class Admin::TeamPartnersController < ApplicationController
 
   def create
     TeamPartnership.request(current_team, Team.find(params[:partner_id]))
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def update
     TeamPartnership.accept(current_team.id, params[:id])
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def destroy

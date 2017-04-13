@@ -15,7 +15,7 @@ class Admin::PositionIndexController < ApplicationController
     name, value, cid = [params[:name], params[:value], params[:id]]
     position = current_team.positions.find(cid)
     position.update_attribute(name.to_sym, value)
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   def create
@@ -23,7 +23,7 @@ class Admin::PositionIndexController < ApplicationController
     position.team_id  = current_team.id
     position.sort_key = 0
     position.save
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   def destroy
@@ -38,7 +38,7 @@ class Admin::PositionIndexController < ApplicationController
     params['position'].each_with_index do |key, idx|
       pos_hash[key].update_attribute(:sort_key, idx + 1)
     end
-    render text: 'OK', layout: false
+    render plain: 'OK', layout: false
   end
 
   private

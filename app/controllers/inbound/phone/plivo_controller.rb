@@ -9,7 +9,7 @@ class Inbound::Phone::PlivoController < ApplicationController
     green_log 'PLIVO INBOUND IS BUILT'
     save_inbound
     green_log "PLIVO INBOUND IS SAVED (ID: #{@inbound.id})"
-    render text: 'OK'
+    render plain: 'OK'
   end
 
   private

@@ -15,7 +15,6 @@ module Pgr::Send::Util
   end
 
   def dev_live_test(env, outbound)
-    return false if env == :double
     env == 'development' && live_from_dev?(outbound)
   end
 

@@ -41,6 +41,12 @@ server {
   location = /robots.txt { }
   location = /500.html   { }
   location = /422.html   { }
+  location /cable {
+    proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "upgrade";
+  }
   location / {
     proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
     proxy_set_header Host $host;
@@ -48,12 +54,6 @@ server {
     # ----- ssl support -----
     proxy_set_header X-Forwarded-Proto https;
     # -----
-  }
-  location /cable {
-    proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
-    proxy_http_version 1.1;
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
   }
 }
 

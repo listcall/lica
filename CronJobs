@@ -24,6 +24,10 @@ if dev_host?
   every 1.hour do
     run_scripts 'util/download_backup', app: "LICA"
   end
+
+  every 7.days do
+    run_scripts 'util/backup_keys', app: "LICA"
+  end
 end
 
 if rails_production?

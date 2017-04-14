@@ -3,7 +3,7 @@ require 'ostruct'
 
 include RakeUtil
 
-PRODUCTION_SERVER = 'lica1'
+PRODUCTION_SERVER = 'lch1'
 
 namespace :data do
 
@@ -14,14 +14,18 @@ namespace :data do
 
   def backup_params
     {
-      'sysdir' => {
-        :trans   => ''             ,
-        :target  => 'public/system',
-        :copies  => 5 },
       'db' => {
         :trans   => 'db/data.psql'        ,
-        :target  => 'db/backups/data.psql',
-        :copies  => 30 }
+        :targets => 'db/backups/data.psql',
+        :copies  => 30 },
+      'keys' => {
+        :trans   => ''        ,
+        :targets => %w(.env .certs),
+        :copies  => 10 },
+      'sysdir' => {
+        :trans   => ''             ,
+        :targets => 'public/system',
+        :copies  => 5 },
     }
   end
 
@@ -34,12 +38,11 @@ namespace :data do
     opt.time_stamp    = Time.now.strftime('%y%m%d_%H%M%S')
     opt.lbl_dir       = [opt.base_dir, opt.app, opt.host, dataset].join('/')
     opt.tgt_dir       = [opt.base_dir, opt.app, opt.host, dataset, opt.time_stamp].join('/')
-    opt.target        = backup_params[dataset][:target]
+    opt.targets       = Array(backup_params[dataset][:targets])
     opt.copies        = backup_params[dataset][:copies]
     opt.trans         = backup_params[dataset][:trans]
-    opt.backup_cp_cmd = Proc.new {|data_path| "cp -rL #{data_path} #{opt.tgt_dir}"}
     opt.backup_cp_cmd = Proc.new do |data_path|
-      base = data_path.split('/').last
+      base = data_path.split('/').last.gsub(/^\./,"_")
       "tar -chzf #{opt.tgt_dir}/#{base}.tgz #{data_path}"
     end
     opt
@@ -94,7 +97,7 @@ namespace :data do
   namespace :backup do
 
     desc 'Backup all Targets'
-    task :all => [:db, :sysdir] do
+    task :all => [:db, :keys, :sysdir] do
       puts 'All targets backed up'
     end
 
@@ -108,6 +111,10 @@ namespace :data do
       backup('db')
     end
 
+    desc 'Backup Keys'
+    task :keys do
+      backup('keys')
+    end
   end
 
   def gen_restore_opts(opts, server, snapshot)
@@ -159,14 +166,14 @@ namespace :data do
       puts 'All targets restored'
     end
 
-    desc 'Restore Sysdir (SERVER=bamru1 SNAPSHOT=latest)'
+    desc "Restore Sysdir (SERVER=#{PRODUCTION_SERVER} SNAPSHOT=latest)"
     task :sysdir do
       server   = ENV['SERVER']   || PRODUCTION_SERVER
       snapshot = ENV['SNAPSHOT'] || 'latest'
       restore('sysdir', server, snapshot)
     end
 
-    desc 'Restore Database (SERVER=bamru1 SNAPSHOT=latest)'
+    desc "Restore Database (SERVER=#{PRODUCTION_SERVER} SNAPSHOT=latest)"
     task :db do
       server   = ENV['SERVER']   || PRODUCTION_SERVER
       snapshot = ENV['SNAPSHOT'] || 'latest'

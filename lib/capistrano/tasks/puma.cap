@@ -12,7 +12,7 @@ namespace :puma do
       cmd = "rsync -a .certs #{ fetch(:user) }@#{server.hostname}:#{release_path}"
       puts cmd
       run_locally { execute cmd }
-      execute "cd #{release_path}/.certs/staging ; generate"
+      execute "cd #{release_path}/.certs/staging ; ./generate"
     end
   end
   desc "Export an puma config file for nginx."

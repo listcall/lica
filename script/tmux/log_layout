@@ -3,33 +3,41 @@
 
 export APP="LOGVIEW"
 
-create_new_session()
-{
+sendkeys() {
+  tmux send-keys -t $APP:$1 "$2" C-m
+}
+
+splitwin() {
+  tmux split-window -v -p $1 -t $APP:$2
+}
+
+create_new_session() {
 
   # ----- AppLog -----
 
-  tmux new-session -s $APP -n "WEB_LOG" -d
+  tmux new-session -s $APP -n "APPLOG" -d
 
-  tmux split-window -v -t $APP:1      # horizontal split
+  splitwin 50 1
 
-  tmux send-keys -t $APP:1.1 'cd log; tail -f production.log' C-m # app log
-  tmux send-keys -t $APP:1.2 'sudo journalctl -u lica    -f'  C-m # web log
+  sendkeys 1.1 'cd log; tail -f production.log'  # app log
+  sendkeys 1.2 'cd log; tail -f production.log'  # app log
 
   # ----- LICA-LOGVIEW Window -----
 
   tmux new-window -n "SIDEKIQ"
 
-  # tmux split-window -v -t $APP:2      # horizontal split
-
-  tmux send-keys -t $APP:2.1 'sudo journalctl -u sidekiq -f' C-m # sidekiq log
+  sendkeys 2.1 'sudo journalctl -u sidekiq -f'
 
   # ----- NGINX Window -----
 
-  tmux new-window -n "NGINX/SYSTEMD"
+  tmux new-window -n "NGINX"
 
-  # tmux split-window -v -p 50 -t $APP:3   # horizontal split
+  splitwin 75 3
+  splitwin 50 3
 
-  tmux send-keys -t $APP:3.1 'sudo journalctl -u nginx -f' C-m # nginx log
+  sendkeys 3.1 'sudo journalctl -u nginx -f'
+  sendkeys 3.2 'sudo tail -f /var/log/nginx/access.log'
+  sendkeys 3.3 'sudo tail -f /var/log/nginx/error.log'
 
   # ----- Open With First Window -----
 

@@ -3,8 +3,9 @@
 # generated <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
 
 server {
-  listen 80;
-  return 301 https://$host$request_uri;
+  listen  80;
+  server_name ~^.*$;
+  return  301 https://$host$request_uri;
 }
 
 server {

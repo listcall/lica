@@ -2,24 +2,20 @@
 # this file created by Capistrano
 # generated <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
 
-# ----- http: redirect to https -----
 server {
   listen 80;
-  # in production, redirect all http request to https...
   return 301 https://$host$request_uri;
 }
 
-# ----- https -----
 server {
   listen 443 ssl;
   ssl on;
-  ssl_certificate     <%= fetch(:release_path) %>/.certs/STAR_listcall_net.pem;
-  ssl_certificate_key <%= fetch(:release_path) %>/.certs/STAR_listcall_net.key;
+  ssl_certificate     <%= fetch(:release_path) %>/.certs/<%= fetch(:rails_env) %>.pem;
+  ssl_certificate_key <%= fetch(:release_path) %>/.certs/<%= fetch(:rails_env) %>.key;
   ssl_session_timeout 5m;
   ssl_protocols       SSLv2 SSLv3 TLSv1;
   ssl_ciphers         HIGH:!aNULL:!MD5;
   ssl_prefer_server_ciphers  on;
-  # -----
 
   server_name ~^.*$;
   client_max_body_size 20M;

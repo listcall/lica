@@ -2,10 +2,15 @@
 # this file created by Capistrano
 # generated <%= Time.now.strftime("%Y-%m-%d %H:%M") %>
 
+# ----- http: redirect to https -----
 server {
   listen 80;
+  # in production, redirect all http request to https...
+  return 301 https://$host$request_uri;
+}
 
-  # ----- required for ssl -----
+# ----- https -----
+server {
   listen 443 ssl;
   ssl on;
   ssl_certificate     <%= fetch(:release_path) %>/.certs/STAR_listcall_net.pem;
@@ -44,8 +49,8 @@ server {
     proxy_pass http://127.0.0.1:<%= fetch(:web_port) %>;
     proxy_set_header Host $host;
     proxy_intercept_errors on;
-    # ----- ssl redirection - only on production host -----
-    <%= fetch(:is_prod_host) ? "" : "# " %>proxy_set_header X-Forwarded-Proto https;
+    # ----- ssl support -----
+    proxy_set_header X-Forwarded-Proto https;
     # -----
   }
   location /cable {

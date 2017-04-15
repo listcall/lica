@@ -31,41 +31,41 @@ describe 'Inbound Letter Opener' do
     reply_params.merge({'In-Reply-To' => '<invalid_id@test1.listcall.net'})
   end
 
-  # describe 'single-team member page' do
-  #   it 'generates one pager assignment' do
-  #     post "#{team1_url}/inbound/email/letter_opener", params: inbound_params
-  #     expect(Pgr::Assignment.count).to eq 1
-  #     expect(Pgr::Broadcast.count).to  eq 1
-  #     expect(Pgr::Outbound.count).to   eq 4
-  #   end
-  # end
+  describe 'single-team member page' do
+    it 'generates one pager assignment' do
+      post "#{team1_url}/inbound/email/letter_opener", params: inbound_params
+      expect(Pgr::Assignment.count).to eq 1
+      expect(Pgr::Broadcast.count).to  eq 1
+      expect(Pgr::Outbound.count).to   eq 4
+    end
+  end
 
-  # describe 'multi-team member page' do
-  #   it 'generates two pager assignments' do
-  #     parms = inbound_params.merge({'to' => mmail3})
-  #     post "#{team1_url}/inbound/email/letter_opener", parms
-  #     expect(Pgr::Assignment.count).to eq 1  # TODO: should be 2, not 1 !!
-  #     expect(Pgr::Broadcast.count).to  eq 1
-  #     expect(Pgr::Outbound.count).to   eq 4
-  #   end
+  describe 'multi-team member page' do
+    it 'generates two pager assignments' do
+      parms = inbound_params.merge({'to' => mmail3})
+      post "#{team1_url}/inbound/email/letter_opener", params: parms
+      expect(Pgr::Assignment.count).to eq 1  # TODO: should be 2, not 1 !!
+      expect(Pgr::Broadcast.count).to  eq 1
+      expect(Pgr::Outbound.count).to   eq 4
+    end
 
-  #   it 'generates three pager assignments' do
-  #     parms = inbound_params.merge({'from' => email1, 'to' => "#{mmail2}, #{mmail3}"})
-  #     post "#{team2_url}/inbound/email/letter_opener", parms
-  #     expect(Pgr::Assignment.count).to eq 0   # TODO: this is broken!
-  #     expect(Pgr::Broadcast.count).to  eq 0   # TODO: this is broken!
-  #     expect(Pgr::Outbound.count).to   eq 0   # TODO: this is broken!
-  #   end
-  # end
+    it 'generates three pager assignments' do
+      parms = inbound_params.merge({'from' => email1, 'to' => "#{mmail2}, #{mmail3}"})
+      post "#{team2_url}/inbound/email/letter_opener", params: parms
+      expect(Pgr::Assignment.count).to eq 0   # TODO: this is broken!
+      expect(Pgr::Broadcast.count).to  eq 0   # TODO: this is broken!
+      expect(Pgr::Outbound.count).to   eq 0   # TODO: this is broken!
+    end
+  end
 
-  # describe 'single-team role page' do
-  #   it 'generates one pager assignment' do
-  #     mem2.roles << 'SEC'; mem2.save;
-  #     parms = inbound_params.merge({'from' => email1, 'to' => "sec@#{team1.fqdn}"})
-  #     post "http://#{team1.fqdn}/inbound/email/letter_opener", parms
-  #     expect(Pgr::Assignment.count).to eq 1
-  #     expect(Pgr::Broadcast.count).to  eq 1
-  #     expect(Pgr::Outbound.count).to   eq 4
-  #   end
-  # end
+  describe 'single-team role page' do
+    it 'generates one pager assignment' do
+      mem2.roles << 'SEC'; mem2.save;
+      parms = inbound_params.merge({'from' => email1, 'to' => "sec@#{team1.fqdn}"})
+      post "http://#{team1.fqdn}/inbound/email/letter_opener", params: parms
+      expect(Pgr::Assignment.count).to eq 1
+      expect(Pgr::Broadcast.count).to  eq 1
+      expect(Pgr::Outbound.count).to   eq 4
+    end
+  end
 end

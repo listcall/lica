@@ -39,7 +39,8 @@ set :bundle_roles,    :all
 # ===== Misc Config =====
 
 set :keep_releases, 5
-set :default_env, { RAILS_ENV: 'production' }
+set :default_env        , { 'RAILS_ENV' => 'production' }
+set :default_environment, { 'RAILS_ENV' => 'production' }
 
 # ===== Deploy Tasks =====
 

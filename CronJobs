@@ -32,11 +32,11 @@ end
 
 if rails_production?
   every 1.day, at: "00:30 am" do
-    run_scripts 'util/backup_db', app: "LICA"
+    run_scripts 'util/backup_db', app: "LICA", rails_env: "production"
   end
 
   every 4.days, at: "01:30 am"do
-    run_scripts 'util/backup_sysdir', app: "LICA"
+    run_scripts 'util/backup_sysdir', app: "LICA", rails_env: "production"
   end
 end
 

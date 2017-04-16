@@ -42,7 +42,7 @@ create_new_session()
 
   splitwin 70 4
 
-  sendkeys 4.1 'clear ; rpf deploy@Licah64:3000 3000'
+  sendkeys 4.1 'clear ; rpf deploy@x440h64:3000 3000'
 
   # ----- -----
 

@@ -3,44 +3,48 @@
 
 export APP="LICA-DEV"
 
+sendkeys() {
+  tmux send-keys -t $APP:$1 "$2" C-m
+}
+
+splitwin() {
+  tmux split-window -v -p $1 -t $APP:$2
+}
+
 create_new_session()
 {
 
-  # ----- DEV Window -----
-
   tmux new-session -s $APP -n "TEST" -d
 
-  tmux split-window -v -t $APP:1      # horizontal split
+  splitwin 50 1
 
-  tmux send-keys -t $APP:1.1 'script/run/specs'  C-m # spec runner
-  tmux send-keys -t $APP:1.2 'jest --watch'      C-m # jest runner
+  sendkeys 1.1 'script/run/specs'  
+  sendkeys 1.2 'jest --watch'     
 
-  # ----- JOBS Window -----
+  # ----- -----
 
   tmux new-window -n "SERVERS"
 
-  tmux split-window -v -p 50 -t $APP:2   # horizontal split 
+  splitwin 50 2
 
-  tmux send-keys -t $APP:2.1 'script/run/server' C-m  # app server
-  tmux send-keys -t $APP:2.2 'script/run/sidekiq' C-m # bg jobs
+  sendkeys 2.1 'script/run/server' 
+  sendkeys 2.2 'script/run/sidekiq' 
 
-  # ----- Webpacker Window -----
+  # ----- -----
 
   tmux new-window -n "WEBPACK"
 
-  # tmux split-window -v -p 50 -t $APP:3   # horizontal split
+  sendkeys 3.1 'clear ; webpack-dev-server --host 0.0.0.0'
 
-  tmux send-keys -t $APP:3.1 'clear ; webpack-dev-server --host 0.0.0.0' C-m # webpack 
-
-  # ----- Tunnel Window -----
+  # ----- -----
 
   tmux new-window -n "TUNNEL"
 
-  tmux split-window -v -p 70 -t $APP:4   # horizontal split
+  splitwin 70 4
 
-  tmux send-keys -t $APP:4.1 'clear ; rpf deploy@Licah64:3000 3000'  C-m     
+  sendkeys 4.1 'clear ; rpf deploy@Licah64:3000 3000'
 
-  # ----- Open With DEV Window -----
+  # ----- -----
 
   tmux select-window -t $APP:1
 

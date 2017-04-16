@@ -2,6 +2,8 @@
 # integration_test: features/pgr/reply
 # integration_test: requests/pgr/interaction requests/pgr/multi_partner
 
+require 'ext/hash'
+
 class Pgr::Util::GenReply
 
   attr_reader :params, :dialog, :post, :outbounds
@@ -9,7 +11,7 @@ class Pgr::Util::GenReply
   def initialize(dialog, post_params, author_opts = {})
     d_id = dialog.id
     opts = [:broadcast]
-    @params    = post_params.symbolize_keys.merge(author_opts)
+    @params    = post_params.to_unsafe_hash.symbolize_keys.merge(author_opts)
     @dialog    = Pgr::Dialog::AsPaging.includes(opts).find(d_id)
     @broadcast = @dialog.broadcast
   end

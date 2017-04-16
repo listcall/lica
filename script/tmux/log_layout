@@ -13,8 +13,6 @@ splitwin() {
 
 create_new_session() {
 
-  # ----- -----
-
   tmux new-session -s $APP -n "APPLOG" -d
 
   splitwin 50 1

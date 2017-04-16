@@ -30,7 +30,7 @@ if dev_host?
   end
 end
 
-if rails_production? || rails_staging?
+if rails_production? 
   every 1.day, at: "00:30 am" do
     run_scripts 'util/backup_db', app: "LICA", rails_env: "production"
   end

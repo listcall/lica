@@ -8,7 +8,7 @@ namespace :whenever do
   task :update do
     on roles(:all) do
       within current_path do
-        execute :bundle, :exec, "RAILS_ENV=production whenever -f ~/a/lica/current/CronJobs --update-crontab"
+        execute :bundle, :exec, "whenever -f ~/a/lica/current/CronJobs --update-crontab RAILS_ENV=production"
       end
     end
   end

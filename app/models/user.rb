@@ -78,7 +78,6 @@ class User < ActiveRecord::Base
   # ----- Virtual Attributes (Accessors) -----
 
   def full_name
-    binding.pry
     lcl_title  = title.blank? ? '' : title + ' '
     lcl_middle = middle_name.blank? ? '' : middle_name + ' '
     lcl_title + first_name + ' ' + lcl_middle + last_name

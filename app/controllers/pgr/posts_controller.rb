@@ -9,6 +9,7 @@ class Pgr::PostsController < ApplicationController
     @assig  = load_assignment
     @dialog = load_dialog
     @post   = build_post
+    dev_log @post
     @dialog.mark_read_thread(current_membership.id)
   end
 

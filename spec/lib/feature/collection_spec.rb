@@ -31,7 +31,7 @@ describe Feature::Collection do
         {
             label:          'x.xyz',
             name:           'XYZ',
-            author:         'X440',
+            author:         'LICA',
             description:    'TBD',
             dependencies:   [],
             version:        '1.0'

@@ -4,11 +4,11 @@
 - vars:
     - rem_host:     all           
     - rem_user:     vagrant      
-    # - rem_host:     x440h64
+    # - rem_host:     lch1
     # - rem_user:     deploy
     # - roles_dir:    ~/.ansible/playbooks/roles       
     - lcl_user:     aleak                            
-    - lcl_root:     "/home/{{lcl_user}}/lr/X440"       
+    - lcl_root:     "/home/{{lcl_user}}/lr/lica"
     - dotfile:      "{{lcl_root}}/.env"
     - pg_user:      "{{APP_NAME}}"
     - pg_pass:      "{{POSTGRES_PASS}}"

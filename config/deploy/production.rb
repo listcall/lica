@@ -5,8 +5,8 @@ set :user,      'deploy'
 
 set :rails_env, 'production'
 
-role :app, ['deploy@x440host']
-role :db,  ['deploy@x440host']
-role :web, ['deploy@x440host']
+role :app, ['deploy@lch1']
+role :db,  ['deploy@lch1']
+role :web, ['deploy@lch1']
 
 

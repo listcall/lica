@@ -9,7 +9,7 @@ class Inbound::Handler::PgrEmailReply
   def handle
     dialog_id = inbound.reply_dialog_id
     if dialog_id.blank?
-      err_log "ERROR: Invalid Inbound ID #{self.headers}"
+      err_log "ERROR: Invalid Inbound ID #{self}"
       err_log "Skipping Inbound (ID: #{@inbound.id})"
       return
     end

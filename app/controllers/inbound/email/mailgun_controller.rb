@@ -59,9 +59,7 @@ class Inbound::Email::MailgunController < ApplicationController
 
   # ----- helper methods -----
 
-  def recipient_array
-    params['recipient'].split(',').map(&:strip)
-  end
+  def recipient_array() params['recipient'].split(',').map(&:strip); end
 
   def header_hash
     hda = [
@@ -71,4 +69,3 @@ class Inbound::Email::MailgunController < ApplicationController
     hda.reduce({}) { |acc, val| acc[val.first] = val.last; acc }
   end
 end
-

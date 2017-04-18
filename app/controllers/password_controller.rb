@@ -35,6 +35,7 @@ class PasswordController < ApplicationController
 
   # post /password/send_email_for
   def send_email_for
+    binding.pry
     adr  = params['email']
     user = User.by_email_adr(adr)
     mem  = Membership.find(params['sender_id'])

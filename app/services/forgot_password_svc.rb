@@ -22,9 +22,6 @@ class ForgotPasswordSvc
     opts['channel']       = 'Autobot'
     opts['short_body']    = "Password Reset (#{user.user_name})"
     opts['long_body']     = long_body
-    PagerSingleAddressSvc.new(team.pager, opts).create
+    PagerSingleAddressSvc.new(team.pgr, opts).create
   end
-
 end
-
-

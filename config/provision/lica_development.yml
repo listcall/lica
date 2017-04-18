@@ -6,10 +6,10 @@
 - vars:
     - rem_host:     all           
     - rem_user:     vagrant      
-    # - rem_host:     x440h64
+    # - rem_host:     lch1
     # - rem_user:     deploy
     - lcl_user:     "{{ lookup('env', 'USER') }}"
-    - lcl_root:     "/home/{{lcl_user}}/lr/X440"       
+    - lcl_root:     "/home/{{lcl_user}}/lr/lica"
     - dotenv:       "{{lcl_root}}/.env"
     - pg_user:      "{{APP_NAME}}"
     - pg_pass:      "{{POSTGRES_PASS}}"

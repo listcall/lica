@@ -1,5 +1,3 @@
-# new_pgr
-
 class Pgr::Post::StiMsg < Pgr::Post
 
   # ----- Associations -----

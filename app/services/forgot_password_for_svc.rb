@@ -23,7 +23,6 @@ class ForgotPasswordForSvc
     opts['phone']         = 'off'
     opts['short_body']    = "Password Reset (#{user.user_name})"
     opts['long_body']     = long_body
-    PagerBroadcastSvc.new(team.pager, opts).create
+    PagerBroadcastSvc.new(team.pgr, opts).create
   end
-
 end

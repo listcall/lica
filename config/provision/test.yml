@@ -4,7 +4,7 @@
   vars:
     - roles_dir:    ~/.ansible_playbooks/roles
     - dev_user:     aleak
-    - src_root:     /home/{{dev_user}}/lr/X440
+    - src_root:     /home/{{dev_user}}/lr/lica
     - dotfile:      ${src_root}/.env
     - user:         vagrant
   tasks:
@@ -32,7 +32,7 @@
 #   vars:
 #     - roles_dir:  ~/.ansible_playbooks/roles
 #     - user: vagrant
-#     - pg_user: x440 
+#     - pg_user: lica
 #     - pg_pass: simple
 #   roles:
 #     - ${roles_dir}/cli_util

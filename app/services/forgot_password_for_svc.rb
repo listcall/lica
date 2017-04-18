@@ -25,5 +25,4 @@ class ForgotPasswordForSvc
     opts['long_body']     = long_body
     PagerBroadcastSvc.new(team.pager, opts).create
   end
-
 end

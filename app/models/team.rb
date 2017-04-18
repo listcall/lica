@@ -74,9 +74,9 @@ class Team < ActiveRecord::Base
   alias_method :periods      , :event_periods
 
   # ----- Delegated Methods -----
-  def_delegator  :pager , :assignments , :pager_assignments
-  def_delegator  :pager , :assignments , :pager_broadcasts
-  def_delegators :org   , :domain, :domain_with_port
+  def_delegator  :pgr , :assignments , :pager_assignments
+  def_delegator  :pgr , :assignments , :pager_broadcasts
+  def_delegators :org , :domain, :domain_with_port
 
   # ----- Validations -----
   validates :typ, :presence => true

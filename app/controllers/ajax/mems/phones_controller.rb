@@ -23,7 +23,7 @@ class Ajax::Mems::PhonesController < ApplicationController
   def create
     @member = current_team.memberships.find(params[:membership_id])
     @user   = @member.user
-    opts    = {user_id: @user.id}.merge(params[:phone])
+    opts    = {user_id: @user.id}.merge(params.to_unsafe_h[:phone])
     @phone  = User::Phone.new(opts)
     if @phone.valid? && @phone.save
       @phone.move_to_top

@@ -23,7 +23,7 @@ class Ajax::Mems::EmailsController < ApplicationController
   def create
     @member = current_team.memberships.find(params[:membership_id])
     @user   = @member.user
-    opts    = {user_id: @user.id}.merge(params[:email])
+    opts    = {user_id: @user.id}.merge(params.to_unsafe_h[:email])
     @email  = User::Email.new(opts)
     if @email.valid? && @email.save
       @email.move_to_top

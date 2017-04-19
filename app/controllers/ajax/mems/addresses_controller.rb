@@ -24,7 +24,7 @@ class Ajax::Mems::AddressesController < ApplicationController
     memid    = params[:membership_id]
     member   = current_team.memberships.find(memid)
     user     = member.user
-    opts = {user_id: user.id}.merge(params[:address])
+    opts = {user_id: user.id}.merge(params.to_unsafe_h[:address])
     @address = User::Address.new(opts)
     if @address.valid? && @address.save
       @address.move_to_top

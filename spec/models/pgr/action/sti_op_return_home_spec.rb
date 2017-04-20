@@ -28,7 +28,7 @@ describe Pgr::Action::StiOpReturnHome do
   describe 'Instance Methods' do
     it { should respond_to :email_footer_html     }
     it { should respond_to :email_footer_text     }
-    it { should respond_to :phone_footer          }
+    it { should respond_to :sms_footer            }
   end
 end
 

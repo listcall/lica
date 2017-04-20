@@ -24,7 +24,7 @@ describe Pgr::Util::GenBroadcast do
         'short_body'             => 'Hello World',
         'long_body'              => 'Hello Long Body World',
         'email'                  => true,
-        'phone'                  => true,
+        'sms'                    => true,
         'recipient_ids'          => [recv1.id],
       }
   end

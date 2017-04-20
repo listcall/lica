@@ -1,5 +1,5 @@
 #required_by: msgs/pgr/send/email/base
-#required_by: msgs/pgr/send/phone/base
+#required_by: msgs/pgr/send/sms/base
 
 module Pgr::Send::Util
 

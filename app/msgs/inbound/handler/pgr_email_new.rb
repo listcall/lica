@@ -19,7 +19,7 @@ class Inbound::Handler::PgrEmailNew
       'short_body'             => inbound.text,
       'long_body'              => '',
       'email'                  => true,
-      'phone'                  => true,
+      'sms'                    => true,
       'recipient_ids'          => inbound.new_recipient_ids,
       'assignments_attributes' => inbound.new_assignments_attributes,
     }

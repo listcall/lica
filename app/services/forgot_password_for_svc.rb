@@ -20,7 +20,7 @@ class ForgotPasswordForSvc
     opts['action']        = 'sent page'
     opts['channel']       = 'Autobot'
     opts['email']         = 'on'
-    opts['phone']         = 'off'
+    opts['sms']           = 'off'
     opts['short_body']    = "Password Reset (#{user.user_name})"
     opts['long_body']     = long_body
     PagerBroadcastSvc.new(team.pgr, opts).create

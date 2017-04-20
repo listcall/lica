@@ -65,7 +65,7 @@ class Pgr::AssignmentsController < ApplicationController
       :sender_id,
       :sender_channel,
       :email,
-      :phone,
+      :sms,
       :short_body,
       :long_body
     ]

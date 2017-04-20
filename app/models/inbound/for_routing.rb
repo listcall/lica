@@ -7,8 +7,8 @@ module Inbound::ForRouting
     self.type == 'Inbound::StiEmail'
   end
 
-  def is_phone?
-    self.type == 'Inbound::StiPhone'
+  def is_sms?
+    self.type == 'Inbound::StiSms'
   end
 
   def has_destination?

@@ -20,12 +20,12 @@ class AcmInboundError < BaseMailer
     mail std_opts(inbound, 'Error: Unrecognized Address')
   end
 
-  def origin_phone_nonmember(inbound)
+  def origin_sms_nonmember(inbound)
     @inbound = inbound
     mail std_opts(inbound, 'Error: No SMS Access')
   end
 
-  def origin_phone_unrecognized(inbound)
+  def origin_sms_unrecognized(inbound)
     @inbound = inbound
     mail std_opts(inbound, 'Error: Phone Number Unrecognized')
   end

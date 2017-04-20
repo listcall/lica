@@ -28,10 +28,10 @@ class Pgr::Broadcast < ActiveRecord::Base
     # use `dialogs(true)` to force reloading the relationship
     self.read_first = dialogs.includes(:broadcast.try(:id).try(:id)).map do |dialog|
       dialog.first_read_by
-    end.reduce(:|).sort
+    end.reduce(:|).try(:sort)
     self.red_mems = dialogs.map do |dialog|
       dialog.target_mems_with_unread_posts
-    end.reduce(:|).sort
+    end.reduce(:|).try(:sort)
     self.clear_mems = dialogs.map do |dialog|
       dialog.mems_who_read_all_posts(read_first)
     end.reduce(:&)

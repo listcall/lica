@@ -31,9 +31,9 @@ Rails.application.routes.draw do
   get 'logout' => 'sessions#destroy', :as => 'logout'
 
   # user forgot password ...
-  get  'pwd/forgot'       # form that collects an email address
-  post 'pwd/send_email'   # collects an email address and sends email
-  get  'pwd/sending'      # user notice after the email has been sent
+  get  'password/forgot'       # form that collects an email address
+  post 'password/send_email'   # collects an email address and sends email
+  get  'password/sending'      # user notice after the email has been sent
 
   # user forgot password ...
   get  'password/forgot'       # form that collects an email address

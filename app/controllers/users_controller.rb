@@ -14,7 +14,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    @user = current_team.users.infd_by(id: params[:id])
+    @user = current_team.users.find_by(id: params[:id])
     if @user && @user.update_attributes(valid_params(params[:user]))
       redirect_to "/members/#{current_user.user_name}", notice: 'Password was updated'
     else

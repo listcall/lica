@@ -54,25 +54,4 @@ describe Inbound::Util::Lookup do
       expect(keys.first.downcase).to match tgt[:address_regex]
     end
   end
-
-  # describe "#forums" do
-  #   before(:each) do
-  #     Rails.cache.clear
-  #     gen_team
-  #     @forum = Forum.create type: "FmDiscussion", name: "kola", team_id: team.id
-  #   end
-  #
-  #   it "generates a list of forums" do
-  #     tas = AddressLookupSvc.new(team)
-  #     expect(tas.forums).to be_an Array
-  #     expect(tas.forums.length).to eq(1)
-  #     expect(tas.forums.first[:id]).to eq(@forum.id)
-  #   end
-  #
-  #   it "matches the forum address" do
-  #     tas = AddressLookupSvc.new(team)
-  #     expect(tas.match("kola")).to be_a Hash
-  #     expect(tas.match("kola")[:id]).to eq(@forum.id)
-  #   end
-  # end
 end

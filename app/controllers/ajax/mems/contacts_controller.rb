@@ -24,7 +24,7 @@ class Ajax::Mems::ContactsController < ApplicationController
     memid    = params[:membership_id]
     member   = current_team.memberships.find(memid)
     user     = member.user
-    opts = {user_id: user.id}.merge(params[:contact])
+    opts = {user_id: user.id}.merge(params.to_unsafe_h[:contact])
     @contact = User::EmergencyContact.new(opts)
     if @contact.valid? && @contact.save
       @contact.move_to_top

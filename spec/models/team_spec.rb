@@ -50,7 +50,6 @@ describe Team do
     it { should respond_to :org           }
     it { should respond_to :users         }
     it { should respond_to :memberships   }
-    it { should respond_to :forums        }
     it { should respond_to :pgr           }
     it { should respond_to :pgr_templates }
     it { should respond_to :ranks         }

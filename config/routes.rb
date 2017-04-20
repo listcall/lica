@@ -35,6 +35,11 @@ Rails.application.routes.draw do
   post 'password/send_email'   # collects an email address and sends email
   get  'password/sending'      # user notice after the email has been sent
 
+  # user forgot password ...
+  get  'password/forgot'       # form that collects an email address
+  post 'password/send_email'   # collects an email address and sends email
+  get  'password/sending'      # user notice after the email has been sent
+
   # admin resets password ...
   get  'password/forgot_for'      # form that collects an email address
   post 'password/send_email_for'  # collects an email address and sends email

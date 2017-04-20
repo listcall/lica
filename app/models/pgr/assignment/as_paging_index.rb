@@ -18,7 +18,7 @@ class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
   end
 
   def sender
-    broadcast.sender
+    broadcast.try(:sender)
   end
 
   def sender_user

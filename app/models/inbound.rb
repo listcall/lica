@@ -5,7 +5,7 @@ TODO: design question...
 Inbounds are attached to Teams.
 In some situations it will make sense to attach inbounds to Dialogs.
 Should inbounds always be attached to dialogs?  Probably so...
-This causes problems in Inbound::StiPhone#origin_phone_allowed?
+This causes problems in Inbound::StiSms#origin_phone_allowed?
 =end
 
 class Inbound < ActiveRecord::Base

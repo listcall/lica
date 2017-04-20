@@ -1,7 +1,7 @@
 # new_pgr
 
 # required_by: msgs/pgr/send/email/base
-# required_by: msgs/pgr/send/phone/base
+# required_by: msgs/pgr/send/sms/base
 
 def kp(env)
   klas.send :proxy_class, :double, env

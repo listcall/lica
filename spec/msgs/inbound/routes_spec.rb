@@ -25,8 +25,8 @@ describe Inbound::RouteMap, '#config' do
   end
 
   describe 'origin phone unrecognized' do
-    let(:obj) { Inbound::StiPhone.new(to: ['650-234-1234']) }
-    specify { expect_handler_for obj, Inbound::Error::OriginPhoneUnregistered }
+    let(:obj) { Inbound::StiSms.new(to: ['650-234-1234']) }
+    specify { expect_handler_for obj, Inbound::Error::OriginSmsUnregistered }
   end
 
   describe 'origin email unrecognized' do

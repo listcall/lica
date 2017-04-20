@@ -3,7 +3,7 @@
 require          'rails_helper'
 require_relative '../handler_shared'
 
-describe Inbound::Error::OriginPhoneUnregistered do
+describe Inbound::Error::OriginSmsUnregistered do
 
   let(:klas) { described_class }
   subject    { klas.new        }

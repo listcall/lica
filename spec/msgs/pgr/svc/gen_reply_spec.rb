@@ -28,7 +28,7 @@ describe Pgr::Util::GenReply do
       'short_body'             => 'Hello World',
       'long_body'              => 'Hello Long Body World',
       'email'                  => true,
-      'phone'                  => true,
+      'sms'                    => true,
       'recipient_ids'          => [recp1.id],
       'assignments_attributes' => [{'pgr_id' => pagr1.id}]
     }

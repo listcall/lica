@@ -30,7 +30,7 @@ class Pgr::Outbound < ActiveRecord::Base
   scope :pending,    -> { where('sent_at is NULL')          }
   scope :sent,       -> { where('sent_at is not NULL')      }
   scope :recent,     -> { order('sent_at DESC')             }
-  scope :phone,      -> { where(target_channel: 'phone')    }
+  scope :sms,        -> { where(target_channel: 'sms')      }
   scope :email,      -> { where(target_channel: 'email')    }
 
   # ----- Local Methods -----

@@ -2,7 +2,7 @@ require 'app_ext/pkg'
 
 class Pgr::Broadcast < ActiveRecord::Base
 
-  PAGER_CHANNELS = %i(email phone)
+  PAGER_CHANNELS = %i(email sms)
 
   # ----- Associations -----
   belongs_to :sender,  :class_name => 'Membership', :foreign_key => :sender_id

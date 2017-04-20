@@ -10,7 +10,7 @@ module PagerUtil
       return if recipient.nil?
       return if inbound_from_sms_or_email?(post) && sending_to_yourself?(post, recipient)
       generate_email_outbounds(post, recipient)
-      generate_phone_outbounds(post, recipient)
+      generate_sms_outbounds(post, recipient)
       devlog "FINISH INBOUND FOR RECIPIENT #{recipient.id}"
     end
 
@@ -30,8 +30,8 @@ module PagerUtil
       recipient.user.id == Membership.find(post.creator_id).user.id
     end
 
-    def generate_phone_outbounds(post, recipient)
-      return unless post.broadcast.phone
+    def generate_sms_outbounds(post, recipient)
+      return unless post.broadcast.sms
       recipient.phones.pagable.to_a.each do |phone|
         devlog "CREATING OUTBOUND - RECIP: #{recipient.id} - PHONE: #{phone.id}"
         send_page(PagerOutbound.create(phone_id: phone.id, recipient_id: recipient.id, type: "PagerOutboundSms", pager_post_id: post.id))

@@ -27,7 +27,7 @@ class Pgr::Post < ActiveRecord::Base
 
   def set_valid_target_channels
     target_channels = %w(web) if target_channels.blank?
-    valid = %w(email phone web)
+    valid = %w(email sms web)
     raise 'INVALID TARGET CHANNEL' if (target_channels - valid).present?
   end
 

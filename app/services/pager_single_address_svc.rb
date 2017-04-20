@@ -36,7 +36,7 @@ class PagerSingleAddressSvc
         recipient_ids: params["recipient_ids"],
         recipient_adr: params["recipient_adr"],
         email:         "on",
-        phone:         "off",
+        sms:           "off",
         action:        params["action"],
         channel_type:  params["channel_type"],
         channel_id:    params["channel_id"]

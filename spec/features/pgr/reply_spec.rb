@@ -13,8 +13,8 @@ feature 'pgr#reply', :capy do
         recipient_ids: [mem2.id],
         short_body:    'asdf',
         sender_id:     mem1.id,
-        email:         'on',
-        phone:         'on'
+        email:         'on', #.
+        sms:           'on'
       }
       @broadcast = Pgr::Broadcast::AsPagingCreate.create(bcst_params)
       Pgr::Util::GenBroadcast.new(@broadcast).generate_all.deliver_all

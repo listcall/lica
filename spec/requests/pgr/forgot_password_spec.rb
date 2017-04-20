@@ -11,7 +11,7 @@ describe 'Forgot Password', :focus do
 
     before(:each) { hydrate(mem1, mmail1, email1); set_request_host(team1)}
 
-    it 'renders the forgot page' do  #....
+    it 'renders the forgot page' do  #.....
       get "/password/forgot"
       expect(path).to eq('/password/forgot')
       expect(response.status).to eq(200)

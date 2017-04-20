@@ -85,7 +85,7 @@ class Pgr::Util::GenReply
 
   def devices_for(post, channel)
     return [] if post.target.blank?
-    post.target.send("#{channel}s").pagable
+    post.target.send("#{Pgr::Util::Channel.device_for(channel)}s").pagable
   end
 
   def outbound_opts(post, channel, device)

@@ -35,7 +35,7 @@ class PagerBroadcastSvc
         long_body:     params["long_body"],
         recipient_ids: params["recipient_ids"],
         email:         params["email"],
-        phone:         params["phone"],
+        sms:           params["sms"],
         action:        params["action"],
         channel_type:  params["channel_type"],
         channel_id:    params["channel_id"]

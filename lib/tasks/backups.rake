@@ -141,7 +141,7 @@ namespace :data do
 
     # ----- restore each target -----
     trans = restore_opts.trans
-    path  = restore_opts.target
+    path  = Array(restore_opts.targets).first
     restore_cmd = restore_opts.restore_cp_cmd.call(path)
     prevent_overwrite_cmd = "mv #{path} #{path}.#{restore_opts.time_stamp}"
     trans_cmd = "mv #{trans} #{path}"

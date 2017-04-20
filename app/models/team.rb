@@ -32,12 +32,8 @@ class Team < ActiveRecord::Base
 
   with_options :dependent => :destroy do
     has_many :memberships
-    has_many :forums
     has_many :events
     has_many :avail_weeks, class_name: 'Avail::Week', foreign_key: 'team_id'
-    # has_many :avail_days , class_name: 'Avail::Day' , foreign_key: 'team_id'
-    # has_many :reps
-    # has_many :svcs              , ->{ order(:sort_key) }
     has_many :quals             , ->{ order(:position) }
     has_many :qual_ctypes       , ->{ order(:position) }
     has_many :positions         , ->{ order(:sort_key) }
@@ -51,7 +47,6 @@ class Team < ActiveRecord::Base
 
   has_many :rank_assignments, :through => :ranks, class_name: 'Team::RankAssignment'
   has_many :role_assignments, :through => :roles, class_name: 'Team::RoleAssignment'
-  # has_many :services        , :through => :service_types
   has_many :users           , :through => :memberships
 
   alias_method :members, :memberships

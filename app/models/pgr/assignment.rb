@@ -3,7 +3,7 @@ class Pgr::Assignment < ActiveRecord::Base
   acts_as_sequenced :scope => :pgr_id
 
   belongs_to :pgr      , class_name: 'Pgr'
-  belongs_to :broadcast, class_name: 'Pgr::Broadcast'#, foreign_key: :pgr_broadcast_id
+  belongs_to :broadcast, class_name: 'Pgr::Broadcast', foreign_key: :pgr_broadcast_id
 
 end
 

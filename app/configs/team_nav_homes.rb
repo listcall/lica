@@ -11,7 +11,6 @@ class TeamNavHomes < AppConfig::Collection
     objs << TeamNav.new( type: 'Lica_Reports'      , label: 'Reports'      , path: '/reports'      )
     #objs << TeamNav.new( type: "Lica_Paging"       , label: "Paging"       , path: "/paging"       )
     #objs << TeamNav.new( type: "Lica_Certs"        , label: "Certs"        , path: "/certs"        )
-    #objs << TeamNav.new( type: "Lica_Forums"       , label: "Forums"       , path: "/forums"       )
     #objs << TeamNav.new( type: "<custom>"          , label: "Help"         , path: "/sys/wikis"    )
     #objs << TeamNav.new( type: "<custom>"          , label: "Wiki"         , path: "/team_wiki"    )
     #objs << TeamNav.new( type: "Lica_DutyOfc"      , label: "DutyOfc"      , path: "/duty_ofc"     )

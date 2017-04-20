@@ -4,18 +4,13 @@ require 'rails_helper'
 
 feature 'members#show'  do
 
-  let(:orgn) { FG.create(:org)                                            }
-  let(:team) { FG.create(:team, org_id: orgn.id)                          }
-  let(:usr1) { FG.create(:user_with_phone_and_email)                      }
-  let(:usr2) { FG.create(:user_with_phone_and_email)                      }
-  let(:mem1) { FG.create(:membership, team_id: team.id, user_id: usr1.id) }
-  let(:mem2) { FG.create(:membership, team_id: team.id, user_id: usr2.id) }
+  include_context 'Integration Environment'
 
   feature 'page rendering' do
-    before(:each) { set_host_url(team, orgn) }
+    before(:each) { set_feature_host(team1) }
 
     context 'when logged as member' do
-      let(:user1)  { capy_create_member_and_login(team)      }
+      let(:user1)  { capy_create_member_and_login(team1)     }
       let(:user2)  { capy_member_login(mem2)                 }
       let(:path1)  { "/members/#{user1.user_name}"           }
       let(:path2)  { "/members/#{user2.user_name}"           }

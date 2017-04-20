@@ -2,12 +2,9 @@ require 'rails_helper'
 
 feature 'Session login', :capy do
 
-  let(:orgn) { FG.create(:org)                                             }
-  let(:team) { FG.create(:team, org_id: orgn.id)                           }
-  let(:user) { FG.create(:user)                                            }
-  let(:mem)  { FG.create(:membership, user: user, team: team, rank: 'ACT') }
+  include_context "Integration Environment"
 
-  before(:each) { set_host_url(team, orgn) }
+  before(:each) { set_feature_host(team1) }
 
   it 'renders /login' do
     visit '/login'
@@ -17,11 +14,11 @@ feature 'Session login', :capy do
 
   it 'handles a valid login' do
     visit '/login'
-    fill_in 'Username or Email', with: mem.user_name
+    fill_in 'Username or Email', with: mem1.user_name
     fill_in 'Password',  with: 'smso'
     click_button 'Log In'
     expect(page).not_to be_nil
-    expect(page).to have_content user.user_name
+    expect(page).to have_content usr1.user_name
   end
 
   it 'handles invalid login' do

@@ -1,12 +1,12 @@
 require 'rails_helper'
 
 describe 'Ztst', :js do
-  let(:orgn) { FG.create(:org)                    }
-  let(:team) { FG.create(:team, org: orgn)        }
+
+  include_context 'Integration Environment'
 
   before(:each) do
-    set_host_url(team, orgn)
-    capy_create_member_and_login team
+    set_feature_host(team1)
+    capy_create_member_and_login team1
   end
 
   context 'as a registered user' do
@@ -18,18 +18,5 @@ describe 'Ztst', :js do
         expect(page).not_to be_nil
       end
     end
-
-    # it 'renders a react component' do
-    #   tst_path = '/ztst/react4'
-    #   visit tst_path
-    # end
-    #
-    # it 'interacts with a react component' do
-    #   tst_path = '/ztst/react4'
-    #   visit tst_path
-    #   expect(page.body).to include 'Numclicks: 0'
-    #   first('.btn-success').click
-    #   expect(page.body).to include 'Numclicks: 1'
-    # end
   end
 end

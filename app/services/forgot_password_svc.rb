@@ -1,3 +1,5 @@
+# integration_test: requests/pgr/forgot_password
+
 class ForgotPasswordSvc
 
   include ForgotPasswordUtil

@@ -12,7 +12,7 @@ feature 'quals#index'  do
 
   describe 'page rendering' do
 
-    before(:each) { set_host_url(team, orgn) }
+    before(:each) { set_feature_host(team, orgn) }
 
     it 'renders /quals' do
       capy_create_member_and_login team

@@ -2,20 +2,14 @@ require 'rails_helper'
 
 feature 'pgr#reply', :capy do
 
-  let(:orgn) { FG.create(:org)                                            }
-  let(:team) { FG.create(:team, org_id: orgn.id)                          }
-  let(:pagr) { Pgr.find_or_create_by(team_id: team.id)                    }
-  let(:usr1) { FG.create(:user_with_phone_and_email)                      }
-  let(:usr2) { FG.create(:user_with_phone_and_email)                      }
-  let(:mem1) { FG.create(:membership, team_id: team.id, user_id: usr1.id) }
-  let(:mem2) { FG.create(:membership, team_id: team.id, user_id: usr2.id) }
+  include_context "Integration Environment"
 
-  describe 'page replies' do #
+  describe 'page replies' do
     before(:each) do
-      set_host_url(team, orgn)
-      @pager                = pagr
+      set_feature_host(team1)
+      @pager = pagr1
       bcst_params = {
-        assignments_attributes: [{'pgr_id' => pagr.id}],
+        assignments_attributes: [{'pgr_id' => pagr1.id}],
         recipient_ids: [mem2.id],
         short_body:    'asdf',
         sender_id:     mem1.id,

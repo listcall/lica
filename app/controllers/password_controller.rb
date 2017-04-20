@@ -1,3 +1,5 @@
+# integration_test: requests/pgr/forgot_password
+
 class PasswordController < ApplicationController
 
   before_action :authenticate_manager!, only: [:forgot_for, :sending_for]
@@ -15,7 +17,7 @@ class PasswordController < ApplicationController
     if svc.create
       redirect_to "/password/sending?address=#{adr}"
     else
-      flash.now.alert = "Unrecognized email address.  [#{params[:email]}]  Please try again."
+      flash.now.alert = "Unrecognized email address.  [#{adr}]  Please try again."
       render 'forgot'
     end
   end

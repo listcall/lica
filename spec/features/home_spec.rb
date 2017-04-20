@@ -2,10 +2,9 @@ require 'rails_helper'
 
 describe 'Home', :capy do
 
-  let(:orgn) { FG.create(:org)                    }
-  let(:team) { FG.create(:team, org: orgn)        }
+  include_context 'Integration Environment'
 
-  before(:each) { set_host_url(team, orgn)        }
+  before(:each) { set_feature_host(team1)          }
 
   context 'with a subdomain' do
     context 'as a public user' do

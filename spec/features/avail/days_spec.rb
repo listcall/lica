@@ -2,22 +2,18 @@ require 'rails_helper'
 require 'ext/time'
 
 feature 'Avail/Days', :capy do
-  let(:orgn) { FG.create(:org)                                            }
-  let(:team) { FG.create(:team, org_id: orgn.id)                          }
-  let(:usr1) { FG.create(:user_with_phone_and_email)                      }
-  let(:usr2) { FG.create(:user_with_phone_and_email)                      }
-  let(:mem1) { FG.create(:membership, team_id: team.id, user_id: usr1.id) }
-  let(:mem2) { FG.create(:membership, team_id: team.id, user_id: usr2.id) }
+
+  include_context 'Integration Environment'
 
   let(:indx_path) { '/avail/days'                      }
   let(:show_path) { "/avail/days/#{mem1.user_name}"    }
 
-  before(:each) { set_host_url(team, orgn)                                }
+  before(:each) { set_feature_host(team1)                                }
 
   describe 'basic rendering' do
-    context 'with generated user' do #
+    context 'with generated user' do #.
       it 'renders indx_path' do
-        capy_create_member_and_login team
+        capy_create_member_and_login team1
         visit indx_path
         expect(current_path).to eq(indx_path)
         expect(page.status_code).to be 200

@@ -53,7 +53,11 @@ def login_with(user)
   user
 end
 
-# ----- request specs -----
+# ----- for request specs -----
+
+def set_request_host(team)
+  host! team.fqdn
+end
 
 def _breakout(mem, pwd)
   [ mem.team, {user: {user_name: mem.user.user_name, password: pwd}} ]
@@ -73,13 +77,14 @@ def request_login_session(member, password = 'smso')
   end
 end
 
-# for feature specs
-def set_host_url(team, org)
+# ----- for feature specs -----
+def set_feature_host(team)
   Team.current_id       = team.id
-  Capybara.default_host = "http://#{team.subdomain}.#{org.domain}"
+  # Capybara.default_host = "http://#{team.subdomain}.#{org.domain}"
+  Capybara.default_host = "http://#{team.fqdn}"
 end
 
-# how to use:
+# use for either request specs or feature specs:
 # describe 'Inbound Letter Opener' do
 #   include_context 'Integration Environment'
 #   ...
@@ -101,8 +106,10 @@ RSpec.shared_context 'Integration Environment' do
   let(:email1) { mem1; usr1.emails.first.address                             }
   let(:email2) { mem2; usr2.emails.first.address                             }
   let(:email3) { mem3; usr3.emails.first.address                             }
-  let(:team1_url) { "https://#{team1.fqdn}"                                  }
-  let(:team2_url) { "https://#{team2.fqdn}"                                  }
+  let(:role1)  { team1.roles.first                                           }
+  let(:pos1)   { role1.create_position(team: team1)                          }
+  let(:team2_url) { "http://#{team2.fqdn}"                                   }
+  let(:team1_url) { "http://#{team1.fqdn}"                                   }
   let(:partnership) do
     opts = {team_id: team1.id, partner_id: team2.id, status: 'accepted'}
     TeamPartnership.create(opts)

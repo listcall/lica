@@ -30,7 +30,7 @@ describe Pgr::Send::Email::Proxy::LetterOpener do
       @pagr = Pgr.create team_id: @team.id
       @user = FG.create(:user_with_email)
       @memb = FG.create(:membership, team_id: @team.id, user_id: @user.id)
-      @bcst = PagerBroadcastSvc.new(@pagr, bcst_params)
+      @bcst = PgrPwd::PagerBroadcastSvc.new(@pagr, bcst_params)
       @bcst.params['sender_id']     = @memb.id
       @bcst.params['recipient_ids'] = [@memb.id]
       @bcst.create

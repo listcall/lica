@@ -10,7 +10,7 @@ feature '/forgot/password' do
       set_feature_host(team1)
     end
 
-    it 'renders /forgot/password' do
+    it 'renders /forgot/password' do  #.
       visit "password/forgot"
       expect(page.status_code).to be 200
     end

@@ -1,13 +1,12 @@
-class PagerSingleAddressSvc
+class PgrPwd::PagerBroadcastSvc
 
-  include PagerUtil::Outboundable
+  include PgrUtil::Outboundable
 
   attr_reader   :pagers, :asnmts, :bcst
   attr_accessor :params
 
   def initialize(pager, input_params = {})
     @pagers = Array(pager)
-    @pager  = pager
     @params = gen_bcst_params(input_params)
     @asnmts = nil
     @bcst   = nil
@@ -15,7 +14,8 @@ class PagerSingleAddressSvc
 
   def create
     @params[:recipient_ids] = to_int(@params[:recipient_ids])
-    @bcst   = Pgr::Broadcast.create(@params.except(:recipient_adr, :action, :channel_type, :channel_id))
+    @bcst   = Pgr::Broadcast.create(@params.except(:action, :channel_type, :channel_id))
+    dev_log "CREATED BROADCAST #{@bcst.id}", @params.to_s
 
     Pgr::Util::GenBroadcast.new(@bcst).generate_all.deliver_all
 
@@ -34,9 +34,8 @@ class PagerSingleAddressSvc
         short_body:    params["short_body"],
         long_body:     params["long_body"],
         recipient_ids: params["recipient_ids"],
-        recipient_adr: params["recipient_adr"],
-        email:         "on",
-        sms:           "off",
+        email:         params["email"],
+        sms:           params["sms"],
         action:        params["action"],
         channel_type:  params["channel_type"],
         channel_id:    params["channel_id"]

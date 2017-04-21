@@ -1,8 +1,6 @@
-# integration_test: requests/pgr/forgot_password
+class PgrPwd::ForgotPasswordFor
 
-class ForgotPasswordSvc
-
-  include ForgotPasswordUtil
+  include PgrPwd::ForgotPasswordUtil
 
   attr_reader :team, :email_adr, :env, :sender
 
@@ -18,12 +16,13 @@ class ForgotPasswordSvc
     user.reset_forgot_password_token
     opts = {}
     opts['recipient_ids'] = [member.id]
-    opts['recipient_adr'] = email_adr
     opts['sender_id']     = sender.id
     opts['action']        = 'sent page'
     opts['channel']       = 'Autobot'
+    opts['email']         = 'on'
+    opts['sms']           = 'off'
     opts['short_body']    = "Password Reset (#{user.user_name})"
     opts['long_body']     = long_body
-    PagerSingleAddressSvc.new(team.pgr, opts).create
+    PgrPwd::PagerBroadcastSvc.new(team.pgr, opts).create
   end
 end

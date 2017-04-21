@@ -1,5 +1,3 @@
-# require 'active_type'
-
 class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
 
   include ActiveType::Helpers

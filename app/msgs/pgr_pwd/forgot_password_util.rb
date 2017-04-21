@@ -1,4 +1,4 @@
-module ForgotPasswordUtil
+module PgrPwd::ForgotPasswordUtil
 
   private
 

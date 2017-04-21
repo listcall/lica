@@ -1,5 +1,3 @@
-# new_pgr
-
 class Pgr < ActiveRecord::Base
 
   opts = {:dependent => :destroy, :foreign_key => :pgr_id}

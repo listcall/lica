@@ -1,5 +1,3 @@
-# require 'active_type'
-
 class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
 
   include ActiveType::Helpers
@@ -60,8 +58,8 @@ class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
   end
 
   def via
-    return '' unless broadcast.phone || broadcast.email
-    chan = [broadcast.email ? 'eMail' : nil, broadcast.phone ? 'SMS' : nil].select {|x| x.present?}.join(', ')
+    return '' unless broadcast.sms || broadcast.email
+    chan = [broadcast.email ? 'eMail' : nil, broadcast.sms ? 'SMS' : nil].select {|x| x.present?}.join(', ')
     " via #{chan}"
   end
 

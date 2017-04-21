@@ -70,8 +70,8 @@ class Inbound::RouteMap
   def handler_for(inbound)
     obj = inbound.extend(Inbound::ForRouting)
     klas = @context.find {|rule| rule.last.call(obj) }.try(:first)
-    dev_log "HANDLER CLASS> #{klas}"
-    dev_log "INBOUND ID   > #{inbound.id}"
+    dev_log "HANDLER CLASS > #{klas}"
+    dev_log "INBOUND ID    > #{inbound.id}"
     klas || default_class
   end
 end

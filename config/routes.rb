@@ -73,14 +73,14 @@ Rails.application.routes.draw do
   if Rails.env.development? || Rails.env.test?
     post '/inbound/email/letter_opener' => 'inbound/email/letter_opener#create'
     post 'letter_opener_reply'          => 'inbound/email/letter_opener#create'
-    post 'sms_opener_reply'             => 'inbound/phone/sms_opener#create'
+    post 'sms_opener_reply'             => 'inbound/sms/sms_opener#create'
   end
 
   post '/inbound/email/mailgun'  => 'inbound/email/mailgun#create'  # create a new inbound email
   post '/inbound/email/mandrill' => 'inbound/email/mandrill#create' # create a new inbound email
   get  '/inbound/email/mandrill' => 'inbound/email/mandrill#show'   # mandrill test/returns 200
-  get  '/inbound/phone/nexmo'    => 'inbound/phone/nexmo#create'    # create a new inbound SMS
-  get  '/inbound/phone/plivo'    => 'inbound/phone/plivo#create'    # create a new inbound SMS
+  get  '/inbound/sms/nexmo'      => 'inbound/sms/nexmo#create'    # create a new inbound SMS
+  get  '/inbound/sms/plivo'      => 'inbound/sms/plivo#create'    # create a new inbound SMS
 
   # ----- Email Actions -----
 

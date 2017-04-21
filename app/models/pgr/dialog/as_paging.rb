@@ -76,8 +76,6 @@ class Pgr::Dialog::AsPaging < ActiveType::Record[Pgr::Dialog]
     line2 = " #{lblock} <b>Answer:</b> #{action.current_response(action_response, separator: ' -')}"
     line1 + line2
   end
-
-
 end
 
 # == Schema Information

@@ -13,7 +13,7 @@ class PasswordController < ApplicationController
   # post /password/send_email - validates address and sends reset email
   def send_email
     adr = params['email']
-    svc = ForgotPasswordSvc.new(current_team, adr, request.env)
+    svc = PgrPwd::ForgotPassword.new(current_team, adr, request.env)
     if svc.create
       redirect_to "/password/sending?address=#{adr}"
     else
@@ -40,7 +40,7 @@ class PasswordController < ApplicationController
     adr  = params['email']
     user = User.by_email_adr(adr)
     mem  = Membership.find(params['sender_id'])
-    svc  = ForgotPasswordForSvc.new(current_team, adr, request.env, mem)
+    svc  = PgrPwd::ForgotPasswordFor.new(current_team, adr, request.env, mem)
     if svc.create
       redirect_to "/password/sending_for?user=#{user.user_name}"
     else

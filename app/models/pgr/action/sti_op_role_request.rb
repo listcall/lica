@@ -1,8 +1,4 @@
-# new_pgr
-
 class Pgr::Action::StiOpRoleRequest < Pgr::Action
-
-
 
 end
 

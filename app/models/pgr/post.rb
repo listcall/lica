@@ -27,7 +27,7 @@ class Pgr::Post < ActiveRecord::Base
 
   def set_valid_target_channels
     target_channels = %w(web) if target_channels.blank?
-    valid = %w(email phone web)
+    valid = %w(email sms web)
     raise 'INVALID TARGET CHANNEL' if (target_channels - valid).present?
   end
 
@@ -40,7 +40,12 @@ class Pgr::Post < ActiveRecord::Base
     name = author.try(:user_name)
     cmnt = author_action || 'commented'
     time = created_at.try(:strftime, '%H:%M')
-    "#{name} #{cmnt} @ #{time}#{via}"
+    "#{name} #{cmnt} @ #{time}#{via}#{postid}"
+  end
+
+  def postid
+    return "" unless Rails.env.development?
+    " [#{self.id}]"
   end
 
   def parsed_body

@@ -1,5 +1,3 @@
-# new_pgr
-
 class Pgr::Post::StiAction < Pgr::Post
 
   # ----- local methods for message data -----

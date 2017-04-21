@@ -32,7 +32,7 @@ class Pgr::Broadcast::AsPagingShow < ActiveType::Record[Pgr::Broadcast]
   # ----- for dialog -----
 
   def blah
-    phone || email
+    sms || email
   end
 
   def action_status

@@ -82,12 +82,11 @@ class Pgr::Outbound::StiEmail < Pgr::Outbound
   end
 
   def sender_block_text
-    return "OK"
-    # <<-EOF.gsub('    ','').strip
-    # Sent by #{author.try(:full_name)} (#{author.try(:user_name)})
-    # Mobile: #{author.try(:phones).try(:mobile).try(:first).try(:number) || "NA"}
-    #  eMail: #{author.try(:emails).try(:first).try(:address) || "NA"}
-    # EOF
+    <<-EOF.gsub('    ','').strip
+    Sent by #{author.try(:full_name)} (#{author.try(:user_name)})
+    Mobile: #{author.try(:phones).try(:mobile).try(:first).try(:number) || "NA"}
+     eMail: #{author.try(:emails).try(:first).try(:address) || "NA"}
+    EOF
   end
 
   private

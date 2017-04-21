@@ -47,7 +47,7 @@ describe Pgr::Broadcast do
   describe '#outbound_channels' do
     context 'when no flags are set' do
       specify { expect(subject.email).to be_blank }
-      specify { expect(subject.phone).to be_blank }
+      specify { expect(subject.sms).to be_blank }
       specify { expect(subject.outbound_channels).to be_blank }
     end
     context 'when the email flag is set' do
@@ -56,10 +56,10 @@ describe Pgr::Broadcast do
       specify { expect(subject.outbound_channels).to eq([:email]) }
     end
     context 'when both flags are set' do
-      before(:each) { subject.email = true; subject.phone = true }
+      before(:each) { subject.email = true; subject.sms = true }
       specify { expect(subject.email).to eq(true) }
-      specify { expect(subject.phone).to eq(true) }
-      specify { expect(subject.outbound_channels).to eq([:email, :phone]) }
+      specify { expect(subject.sms).to eq(true) }
+      specify { expect(subject.outbound_channels).to eq([:email, :sms]) }
     end
   end
 

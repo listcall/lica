@@ -1,5 +1,3 @@
-# new_pgr
-
 require 'rails_helper'
 
 describe Inbound::RouteMap, '#config' do
@@ -19,14 +17,14 @@ describe Inbound::RouteMap, '#config' do
     specify { expect_handler_for Inbound.new, Inbound::Error::DestinationBlank }
   end
 
-  describe 'default class' do
+  describe 'destination blank' do ##
     let(:obj) { Inbound.new(to: 'asdf', fm: 'qwer') }
-    # specify { expect_handler_for obj, Inbound::Error::ClassDefault   }
+    specify { expect_handler_for obj, Inbound::Error::DestinationBlank   }
   end
 
   describe 'origin phone unrecognized' do
-    let(:obj) { Inbound::StiPhone.new(to: ['650-234-1234']) }
-    specify { expect_handler_for obj, Inbound::Error::OriginPhoneUnregistered }
+    let(:obj) { Inbound::StiSms.new(to: ['650-234-1234']) }
+    specify { expect_handler_for obj, Inbound::Error::OriginSmsUnregistered }
   end
 
   describe 'origin email unrecognized' do
@@ -35,7 +33,7 @@ describe Inbound::RouteMap, '#config' do
   end
 
   context 'valid matches' do
-    let!(:team) { FG.create :team }
+    let!(:team) { FG.create :team } #.
     let!(:usr1) { FG.create :user_with_email_and_phone }
     let!(:usr2) { FG.create :user_with_email_and_phone }
     let!(:mem1) { FG.create :membership, user: usr1, team: team }

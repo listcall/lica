@@ -3,9 +3,9 @@
 # required_by : msgs/pgr/send/email/proxy/letter_opener
 # required_by : msgs/pgr/send/email/proxy/mandrill
 # required_by : msgs/pgr/send/email/proxy/no_op
-# required_by : msgs/pgr/send/phone/proxy/nexmo
-# required_by : msgs/pgr/send/phone/proxy/no_op
-# required_by : msgs/pgr/send/phone/proxy/plivo
+# required_by : msgs/pgr/send/sms/proxy/nexmo
+# required_by : msgs/pgr/send/sms/proxy/no_op
+# required_by : msgs/pgr/send/sms/proxy/plivo
 
 shared_examples_for 'a sender proxy' do
   describe 'Accessors' do

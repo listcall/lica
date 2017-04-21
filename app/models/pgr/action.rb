@@ -1,5 +1,3 @@
-# new_pgr
-
 class Pgr::Action < ActiveRecord::Base
 
   ENABLED_OPTIONS = %i(None OpRsvp OpLeftHome OpReturnHome)

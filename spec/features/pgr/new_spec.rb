@@ -21,7 +21,7 @@ feature 'pgr#new' do
         login_with mem1
         visit '/paging/new'
         check("broadcast_member_recipients_#{mem1.id}")
-        uncheck('phoneCheck')
+        uncheck('smsCheck')
         fill_in 'txtShort', with: Time.now
         click_button 'Send'
         expect(current_path).to eq('/paging')
@@ -60,7 +60,7 @@ feature 'pgr#new' do
         login_with mem1
         visit '/paging/new'
         check("broadcast_member_recipients_#{mem2.id}")
-        uncheck('phoneCheck')
+        uncheck('smsCheck')
         fill_in 'txtShort', with: Time.now
         click_button 'Send'
       end
@@ -79,7 +79,7 @@ feature 'pgr#new' do
         login_with mem1
         visit '/paging/new'
         check("broadcast_member_recipients_#{mem2.id}")
-        check('phoneCheck')
+        check('smsCheck')
         check('emailCheck')
         fill_in 'txtShort', with: Time.now
         click_button 'Send'

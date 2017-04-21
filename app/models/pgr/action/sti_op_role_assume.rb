@@ -1,8 +1,4 @@
-# new_pgr
-
 class Pgr::Action::StiOpRoleAssume < Pgr::Action
-
-
 
 end
 

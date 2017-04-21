@@ -1,5 +1,3 @@
-# new_pgr
-
 class Pgr::Template < ActiveRecord::Base
 
   # ----- Associations -----

@@ -1,5 +1,3 @@
-# new_pgr
-
 require 'forwardable'
 require 'time'
 require 'app_ext/pkg'

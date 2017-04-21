@@ -1,5 +1,3 @@
-# new_pgr
-
 class Pgr::Action::StiOpLeftHome < Pgr::Action
 
   # ----- attributes -----

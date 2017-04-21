@@ -1,5 +1,3 @@
-# new_pgr
-
 require 'app_ext/pkg'
 
 class Pgr::Action::StiNone < Pgr::Action

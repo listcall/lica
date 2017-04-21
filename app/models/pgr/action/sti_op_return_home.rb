@@ -1,5 +1,3 @@
-# new_pgr
-
 class Pgr::Action::StiOpReturnHome < Pgr::Action
 
   # ----- attributes -----

@@ -1,8 +1,4 @@
-# new_pgr
-
 class Pgr::Action::StiYesNo < Pgr::Action
-
-
 
 end
 

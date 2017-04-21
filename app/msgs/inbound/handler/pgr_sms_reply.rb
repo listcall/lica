@@ -27,8 +27,8 @@ class Inbound::Handler::PgrSmsReply
       author_id:        inbound.reply_author_id,
       short_body:       inbound.text,
       long_body:        '',
-      target_channels:  %i(phone),
-      author_channel:   "phone",
+      target_channels:  %i(sms),
+      author_channel:   "sms",
       author_address:   inbound.fm.phone_dasherize
     }
   end

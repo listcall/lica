@@ -40,7 +40,12 @@ class Pgr::Post < ActiveRecord::Base
     name = author.try(:user_name)
     cmnt = author_action || 'commented'
     time = created_at.try(:strftime, '%H:%M')
-    "#{name} #{cmnt} @ #{time}#{via}"
+    "#{name} #{cmnt} @ #{time}#{via}#{postid}"
+  end
+
+  def postid
+    return "" unless Rails.env.development?
+    " [#{self.id}]"
   end
 
   def parsed_body

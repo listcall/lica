@@ -2,16 +2,8 @@ require 'rails_helper'
 
 describe Pgr::Util::GenReply do
 
-  let(:team1) { FG.create(:team)                      }
-  let(:pagr1) { Pgr.create(team_id: team1.id)         }
-  let(:team2) { FG.create(:team)                      }
-  let(:pagr2) { Pgr.create(team_id: team2.id)         }
-  let(:user1) { FG.create(:user_with_phone_and_email) }
-  let(:user2) { FG.create(:user_with_phone_and_email) }
-  let(:user3) { FG.create(:user_with_phone_and_email) }
-  let(:sendr) { FG.create(:membership, team_id: team1.id, user_id: user1.id) }
-  let(:recp1) { FG.create(:membership, team_id: team1.id, user_id: user2.id) }
-  let(:recp2) { FG.create(:membership, team_id: team1.id, user_id: user3.id) }
+  include_context "Integration Environment"
+
   let(:bcst) do
     bc = Pgr::Broadcast::AsPagingCreate.create(bcst_params)
     Pgr::Util::GenBroadcast.new(bc).generate_all.deliver_all

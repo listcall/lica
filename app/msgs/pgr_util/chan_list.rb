@@ -8,7 +8,6 @@ class PgrUtil::ChanList
   end
 
   def reply_channels_for_target(target_id)
-    binding.pry
     use_list = posts_by_author(target_id).map do |post|
       post.author_channel
     end.reverse

@@ -54,7 +54,7 @@ feature 'pgr#reply', :capy do
         click_button 'Send'
       end
 
-      it 'generates the right number of objects' do
+      it 'generates the right number of objects' do   #
         expect(Pgr::Broadcast.count).to eq(1)
         expect(Pgr::Dialog.count).to eq(1)
         expect(Pgr::Post.count).to eq(2)

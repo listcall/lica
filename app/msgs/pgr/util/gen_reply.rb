@@ -11,7 +11,7 @@ class Pgr::Util::GenReply
   def initialize(dialog, post_params, author_opts = {})
     d_id = dialog.id
     opts = [:broadcast]
-    @params    = post_params.to_unsafe_hash.symbolize_keys.merge(author_opts)
+    @params    = generate_params post_params.to_unsafe_hash.symbolize_keys.merge(author_opts)
     @dialog    = Pgr::Dialog::AsPaging.includes(opts).find(d_id)
     @broadcast = @dialog.broadcast
   end
@@ -31,6 +31,12 @@ class Pgr::Util::GenReply
   end
 
   private
+
+  def generate_params(input)
+    chan = input[:target_channels]
+    input[:target_channels] = Array(chan) if chan
+    input
+  end
 
   def generate_post
     @post ||= get_post

@@ -66,7 +66,7 @@ class Pgr::Outbound::StiSms < Pgr::Outbound
   end
 
   def first_origin_number_in_dialog
-    result = self.dialog_peers.phone.recent.first.try(:origin_address)
+    result = self.dialog_peers.sms.recent.first.try(:origin_address)
     result == "NA" ? next_in_number_pool : result
   end
 end

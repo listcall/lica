@@ -47,7 +47,8 @@
           form.form-horizontal action="/paging/#{@assig.sequential_id}/for/#{@dialog.id}" method="post" role="form"
             input name="authenticity_token" type="hidden" value=form_authenticity_token
             input name="pgr_post[pgr_dialog_id]" type="hidden" value=@dialog.id
-            input name="pgr_post[author_id]" type="hidden" value=current_membership.id
+            input name="pgr_post[author_id]" type="hidden" value=@author_id
+            input name="pgr_post[target_channels]" type="hidden" value=@post.reply_channels.try(:first)
             input name="pgr_post[long_body]" type="hidden" value=""
             .form-group
               .col-lg-10

@@ -9,7 +9,10 @@ class Pgr::PostsController < ApplicationController
     @assig  = load_assignment
     @dialog = load_dialog
     @post   = build_post
-    dev_log "VIA", @post.via
+    @author_id = current_membership.id
+    @target_id = @dialog.other_participant_id(@author_id)
+    @post.author_id = @author_id
+    @post.target_id = @target_id
     @dialog.mark_read_thread(current_membership.id)
   end
 

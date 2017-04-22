@@ -42,7 +42,7 @@
         .control-group
           label.text.control-label
             ' Post a reply to @#{@dialog.recipient.alt_name(@dialog.sender, current_membership)}
-            ' #{@post.via}
+            ' #{@post.reply_via}
           br
           form.form-horizontal action="/paging/#{@assig.sequential_id}/for/#{@dialog.id}" method="post" role="form"
             input name="authenticity_token" type="hidden" value=form_authenticity_token

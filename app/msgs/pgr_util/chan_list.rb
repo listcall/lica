@@ -8,11 +8,12 @@ class PgrUtil::ChanList
   end
 
   def reply_channels_for_target(target_id)
+    binding.pry
     use_list = posts_by_author(target_id).map do |post|
       post.author_channel
     end.reverse
     base_list = @dialog.broadcast.outbound_channels.map(&:to_s)
-    (use_list + base_list + %w(web)).uniq
+    (use_list + base_list).uniq
   end
 
   private

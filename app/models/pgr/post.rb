@@ -60,6 +60,16 @@ class Pgr::Post < ActiveRecord::Base
     " via #{author_channel}#{id}"
   end
 
+  def reply_channels
+    return nil if target_id.blank?
+    PgrUtil::ChanList.new(dialog).reply_channels_for_target(target_id)
+  end
+
+  def reply_via
+    item = reply_channels.try(:first)
+    item ? " via #{item}" : ""
+  end
+
   # def target_channels
   #   val = xfields["target_channels"]
   #   return [] if val.blank?

@@ -2,36 +2,10 @@ require 'rails_helper'
 
 describe Pgr::Util::GenBroadcast do
 
-  let(:team1) { FG.create(:team) }
-  let(:team2) { FG.create(:team) }
-  let(:user0) { FG.create(:user_with_phone_and_email) }
-  let(:user1) { FG.create(:user_with_phone_and_email) }
-  let(:user2) { FG.create(:user_with_phone_and_email) }
-  let(:user3) { FG.create(:user_with_phone_and_email) }
-  let(:sendr) { FG.create(:membership, team_id: team1.id, user_id: user0.id) }
-  let(:recv1) { FG.create(:membership, team_id: team1.id, user_id: user1.id) }
-  let(:recv2) { FG.create(:membership, team_id: team1.id, user_id: user2.id) }
-  let(:recv3) { FG.create(:membership, team_id: team2.id, user_id: user3.id) }
-  let(:bcst1) { Pgr::Broadcast.create(bcst1_params)                          }
-  let(:bcst2) { Pgr::Broadcast.create(bcst2_params)                          }
+  include_context "Integration Environment"
 
   let(:klas)    { described_class }
   let(:subject) { klas.new(1)     }
-
-  def bcst1_params
-      {
-        'sender_id'              => sendr.id,
-        'short_body'             => 'Hello World',
-        'long_body'              => 'Hello Long Body World',
-        'email'                  => true,
-        'sms'                    => true,
-        'recipient_ids'          => [recv1.id],
-      }
-  end
-
-  def bcst2_params
-    bcst1_params.merge({'recipient_ids' => [recv1.id, recv2.id]})
-  end
 
   describe 'Attributes' do
     it { should respond_to :broadcast }

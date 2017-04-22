@@ -5,7 +5,7 @@ feature 'events#new', :capy do
 
   include_context 'Integration Environment'
 
-  before(:each) { set_feature_host(team1)                                 }
+  before(:each) { set_feature_host(team1) }
 
   describe 'basic rendering' do
     context 'with generated user' do
@@ -18,7 +18,7 @@ feature 'events#new', :capy do
       end
     end
 
-    context 'with factory user' do
+    context 'with factory user' do   #
       it 'renders /events/new' do
         login_with mem1
         visit '/events/new'

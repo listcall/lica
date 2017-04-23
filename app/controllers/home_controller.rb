@@ -27,7 +27,7 @@ class HomeController < ApplicationController
   end
 
   def destroy
-    col, _type, idx = params['widget'].split('-')
+    col, _type, idx = params.to_unsafe_h['widget'].split('-')
     mem = Membership.find(params['id'])
     base = mem.xfields["widget_#{col}"] || mem.send("default_widget_#{col}")
     list = base.split(' ')

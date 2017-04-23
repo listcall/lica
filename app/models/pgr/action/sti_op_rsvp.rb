@@ -205,6 +205,31 @@ class Pgr::Action::StiOpRsvp < Pgr::Action
     @sms_helper ||= @sms_klas.new(self)
   end
 
+  # ----- for misc and sundry -----
+
+  def current_response_msg(response)
+    "#{response.upcase} : #{prompts[response]}"
+  end
+
+  def alt_response_msg(response)
+    "#{opposite_response(response).upcase} : #{opposite_prompt(response)}"
+  end
+
+  def opposite_response(response)
+    case response
+      when "yes" then "no"
+      when "no" then "yes"
+    end
+  end
+
+  def opposite_prompt(response)
+    prompts[opposite_response(response)]
+  end
+
+  def opposite_link(outbound, response)
+    "/action/rsvp/#{outbound.id}/#{opposite_response(response)}"
+  end
+
   # ----- for email rendering -----
 
   # TODO: FINISH THE ACTION HANDLERS

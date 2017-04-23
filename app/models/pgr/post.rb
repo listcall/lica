@@ -70,12 +70,6 @@ class Pgr::Post < ActiveRecord::Base
     item ? " via #{item}" : ""
   end
 
-  # def target_channels
-  #   val = xfields["target_channels"]
-  #   return [] if val.blank?
-  #   eval(val.to_s)
-  # end
-
   def broadcast; @broadcast ||= dialog.try(:broadcast); end
   def pgrs;      @pgrs      ||= broadcast.pgrs; end
 

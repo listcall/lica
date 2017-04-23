@@ -71,7 +71,6 @@ class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
     return '' if action.blank?
     "<b>#{action.label}: #{action.query_msg.capitalize}?</b> #{action.header} <small>#{action.status_msg_long}</small><p></p>"
   end
-
 end
 
 # == Schema Information

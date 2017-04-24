@@ -1,4 +1,6 @@
 - content_for :page_js do
+  javascript:
+    window.lclData = {};
   = javascript_include_tag "pgr/all_show"
 
 - content_for :subhead do
@@ -17,7 +19,7 @@
 
 .container
   .row
-    .col-md-12
+    .col-md-10
       b> Fm:
       => pgr_mem_link @assig.sender
       b> To:
@@ -25,6 +27,12 @@
       = @assig.via
       br
       = @assig.message_text
+    .col-md-2
+      - if @assig.broadcast.sender == current_membership
+        button.btn.btn-sm#followupBtn
+          ' send followup
+  .row
+    .col-md-12
       br
       = raw @assig.action_header
       table.table.table-condensed
@@ -54,3 +62,5 @@
                 = raw dialog.action_status(@assig)
               td
                 = raw dialog.updated_disp
+
+= render partial: "followup_modal"

@@ -1,3 +1,4 @@
 require("../pgr/show_response_edit")
 require("../pgr/show_tooltips")
+require("../pgr/show_followup")
 require("../pgr/_refresh")

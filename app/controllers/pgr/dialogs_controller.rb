@@ -10,6 +10,9 @@ class Pgr::DialogsController < ApplicationController
   def index
     @assig   = load_assignment
     @dialogs = load_dialogs
+    @action_type             = @assig.broadcast.action.try(:label) || "NONE"
+    @all_recipients          = @assig.broadcast.all_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
+    @unresponsive_recipients = @assig.broadcast.unres_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
   end
 
   private

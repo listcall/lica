@@ -1,6 +1,10 @@
 - content_for :page_js do
   javascript:
     window.lclData = {};
+    lclData.railsEnv               = "#{Rails.env                 }";
+    lclData.actionType             = "#{ @action_type             }";
+    lclData.allRecipients          = "#{ @all_recipients          }";
+    lclData.unresponsiveRecipients = "#{ @unresponsive_recipients }";
   = javascript_pack_tag "pgr_show"
 
 - content_for :subhead do

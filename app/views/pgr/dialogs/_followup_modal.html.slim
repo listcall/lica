@@ -1,9 +1,3 @@
-//javascript:
-/  optionLst = '#{raw Pgr::Action.option_list.to_json}';
-/  periodLst = '#{raw period_list(@events).to_json}';
-/  window.OptionList = JSON.parse(optionLst);
-/  window.PeriodList = JSON.parse(periodLst);
-
 css:
   .strikeout {
     text-decoration: line-through;
@@ -17,13 +11,20 @@ css:
 = modal 'followupModal', 'Send Followup' do
   .modal-body
     .row
-      .col-ms-4.ac
-        b Actions
+      .col-ms-6.al
+        b About Followups
+        br > Repage recipients
+        ' > Send a reminder
         p
-        #LCrcOptionList
-      .col-ms-8
-        #LCrcOptionDisplay
-
-  .modal-footer
-    #LCrcSaveButton
-    #LCrcCloseButton
+        b Original Message
+        br #{@assig.broadcast.short_body}
+        | sent by #{@assig.broadcast.sender.full_name} via #{@assig.via}
+        p
+        b Recipients
+        #recipList #{@assig.broadcast.all_recips.map {|x| x.last_name}.sort.join(", ")}
+        br
+      .col-ms-6
+        textarea
+        p
+          button.btn#cancelBtn> Cancel
+          button.btn#sendBtn> Send

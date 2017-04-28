@@ -2,7 +2,7 @@
 
 default: &default
   config: config/webpack
-  entry: all_paths
+  entry: all_packs
   output: public
   manifest: manifest.json
   node_modules: node_modules

@@ -10,7 +10,7 @@ git_source(:github) do |repo_name|
 end
 
 # ----- rails -----
-gem 'rails', '~> 5.1.0.rc2'   # rails
+gem 'rails', '~> 5.1.0'   # rails
 
 # ----- environment -----
 gem 'dotenv-rails'
@@ -46,7 +46,7 @@ gem 'whenever', require: nil    # cron jobs - see 'schedule.rb'
 gem 'json'                                # json serialization
 gem 'parslet'                    # for address and name parsers
 gem 'cancan'                     # access control
-gem 'responders'   , '~> 2.0'    # helper methods, extended flash messages
+gem 'responders'   #,  '~> 2.0'    # helper methods, extended flash messages
 gem 'bcrypt'       , '~> 3.1.7'  # encryption for 'has-secure-password'
 gem 'ruby_identicon'             # generates default identicons
 gem 'exception_notification'     # sends alert emails on 500 errors

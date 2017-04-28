@@ -97,7 +97,7 @@ class ActionController::Base
 
   def dom_not_found
     green_log "DOM NOT FOUND"
-    green_log session
+    green_log session.to_h
     reset_team_session
     redirect_to "http://#{Org.fallback.try(:domain)}/info/domain_not_found"
   end

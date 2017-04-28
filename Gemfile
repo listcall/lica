@@ -25,10 +25,6 @@ gem 'dalli'                       # memcached support (caching)
 gem 'dalli-ui'                    # web interface for memcached
 gem 'connection_pool'             # dalli helper for puma (multi-threaded)
 
-# ----- misc -----
-# gem 'active_importer'              # import csv and spreadsheet files
-# gem 'workflow'                     # finite state machine
-
 # ----- template processors -----
 gem 'slim-rails'            # slim templates
 gem 'jbuilder' , '~> 2.5'   # json templates
@@ -43,10 +39,10 @@ gem 'rake'                      # needed by Sidekiq
 gem 'whenever', require: nil    # cron jobs - see 'schedule.rb'
 
 # ----- support utilities -----
-gem 'json'                                # json serialization
+gem 'responders', github: 'plataformatec/responders' # helper methods, extended flash messages
+gem 'json'                       # json serialization
 gem 'parslet'                    # for address and name parsers
 gem 'cancan'                     # access control
-gem 'responders'   #,  '~> 2.0'    # helper methods, extended flash messages
 gem 'bcrypt'       , '~> 3.1.7'  # encryption for 'has-secure-password'
 gem 'ruby_identicon'             # generates default identicons
 gem 'exception_notification'     # sends alert emails on 500 errors
@@ -66,10 +62,6 @@ gem 'active_type'       # extensions for ActiveModel
 gem 'simple_form'             # form generator
 # gem 'active_link_to'          # for creating bootstrap nav bars
 gem 'launchy'                 # static page launcher
-
-
-# ----- audit trails, versioning and activity logs -----
-# gem 'paper_trail'
  
 # ----- images and attachments -----
 gem 'paperclip'                   # file attachments
@@ -116,8 +108,6 @@ end
 
 # ----- email services -----
 gem 'mailgun-ruby'        # outbound mail and provisioning for mailgun
-# gem 'mandrill-rails'      # incoming mail and webhooks from mandrill
-# gem 'mandrill-api'        # outbound mail and provisioning - see mandrillapp.com
 gem 'email_reply_parser'  # remove email reply quotes and signatures
 
 # ----- sms services -----
@@ -131,7 +121,6 @@ gem 'dnsimple'            # DNS service provider
 gem 'grape'                 # api engine
 gem 'grape-swagger'         # swagger generator for grape
 gem 'grape-swagger-rails'   # swagger UI
-# gem 'rack-contrib'          # jsonp callbacks - THIS CAUSES MIGRATION BUG !!
 
 # ----- console tools -----
 gem 'hirb'          # table-display
@@ -153,9 +142,6 @@ group :development, :test do
 
   # ----- rails4.1 workaround for should/rspec error message -----
   gem 'minitest'
-
-  # ----- coffeescript -----
-  # gem 'coffee-rails-source-maps'
 
   # ----- rspec -----
   gem 'webrat'                           # 'contain' matcher for view specs

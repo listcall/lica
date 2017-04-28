@@ -71,6 +71,20 @@ class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
     return '' if action.blank?
     "<b>#{action.label}: #{action.query_msg.capitalize}?</b> #{action.header} <small>#{action.status_msg_long}</small><p></p>"
   end
+
+  # ----- for followups -----
+
+  def recip_names
+    broadcast.all_recips.map do |x|
+      x.last_name
+    end.sort.join(", ")
+  end
+
+  def recip_ids
+    broadcast.all_recips.map do |x|
+      x.id
+    end.sort.join(",")
+  end
 end
 
 # == Schema Information

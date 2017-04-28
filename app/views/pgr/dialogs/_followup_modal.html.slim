@@ -10,21 +10,28 @@ css:
 
 = modal 'followupModal', 'Send Followup' do
   .modal-body
-    .row
-      .col-ms-6.al
-        b About Followups
-        br > Repage recipients
-        ' > Send a reminder
-        p
-        b Original Message
-        br #{@assig.broadcast.short_body}
-        | sent by #{@assig.broadcast.sender.full_name} via #{@assig.via}
-        p
-        b Recipients
-        #recipList #{@assig.broadcast.all_recips.map {|x| x.last_name}.sort.join(", ")}
-        br
-      .col-ms-6
-        textarea
-        p
-          button.btn#cancelBtn> Cancel
-          button.btn#sendBtn> Send
+    form#sendForm action="/paging/#{@assig.sequential_id}" method="post"
+      input type="hidden" name="authenticity_token" value="#{form_authenticity_token}"
+      input type="hidden" name="[fup]recipients" value="#{@assig.recip_ids}"
+      .row
+        .col-ms-6.al
+          b Original Message
+          br #{@assig.broadcast.short_body}
+          | sent by #{@assig.broadcast.sender.full_name} #{@assig.via}
+          p
+          b Recipients
+          #recipList #{@assig.recip_names}
+          br
+        .col-ms-6
+          | Send followup to X recipients
+          br
+          label.checkbox-inline #style=("margin-left: 40px;")
+            input#emailCheck checked="check" name="[fup][channels]email" type="checkbox"
+              | via eMail
+          label.checkbox-inline style=("margin-left: 20px;")
+            input#smsCheck checked="check" name="[fup][channels]sms" type="checkbox"
+              | via SMS
+          textarea.formcontrol type="text" name="[fup]short_body"
+          p
+            button.btn.btn-primary#sendBtn> Send
+            button.btn#cancelBtn> Cancel

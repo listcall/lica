@@ -8,11 +8,23 @@ class Pgr::DialogsController < ApplicationController
   before_action :authenticate_reserve!
 
   def index
-    @assig   = load_assignment
+    @assig   = load_assignment#.becomes(Pgr::Assignment::AsPagingFollowup)
+    dev_log @assig.class
     @dialogs = load_dialogs
     @action_type             = @assig.broadcast.action.try(:label) || "NONE"
     @all_recipients          = @assig.broadcast.all_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
     @unresponsive_recipients = @assig.broadcast.unres_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
+  end
+
+  def create
+    @sid        = params[:b_id]
+    @assig      = current_team.pager_assignments.find_by_sequential_id(@sid)
+    dev_log params.to_unsafe_h, @sid
+    dev_log @assig.class
+    followup    = FollowupVal.new(params.to_unsafe_h["fup"])
+    author_opts = {author_channel: "web"}
+    Pgr::Util::GenFollowup.new(@assig, followup, author_opts) #.generate_all.deliver_all
+    redirect_to "/paging/#{@sid}"
   end
 
   private
@@ -20,7 +32,7 @@ class Pgr::DialogsController < ApplicationController
   # ----- assignment -----
 
   def load_assignment
-    @assig_container ||= dialog_conf.assignment_for(params[:b_id])
+    @assig_container ||= dialog_conf.assignment_for(params.to_unsafe_h[:b_id])
   end
 
   # ----- dialog -----

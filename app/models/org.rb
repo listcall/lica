@@ -19,7 +19,7 @@ class Org < ActiveRecord::Base
   validates :typ, :presence => true
   validates :typ, :format   => { :with => /enterprise|hosting|system/ }
 
-  validates_presence_of    :name, :domain #, :org_team_id
+  validates_presence_of    :name, :domain
   validates_uniqueness_of  :name, :domain, :org_team_id
 
   validates_with TeamAltDomainValidator

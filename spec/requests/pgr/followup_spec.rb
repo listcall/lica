@@ -26,11 +26,9 @@ describe 'Pager Forwarding', :focus do
       post "/paging/#{req.assignment_sid}", params: req.web_followup_opts(mem2)
       expect(Pgr::Broadcast.count).to        eq(1)
       expect(Pgr::Dialog.count).to           eq(1)
-      expect(Pgr::Post.count).to             eq(1)
-      expect(Pgr::Post::StiMsg.count).to     eq(1)
-      expect(Pgr::Post::StiAction.count).to  eq(0)
-      expect(Pgr::Outbound.count).to         eq(2)
-      expect(Pgr::Outbound.pending.count).to eq(0)
+      expect(Pgr::Post.count).to             eq(2)
+      expect(Pgr::Outbound.count).to         eq(6)
+      expect(Pgr::Outbound.pending.count).to eq(2)
       expect(Inbound.count).to               eq(0)
     end
   end

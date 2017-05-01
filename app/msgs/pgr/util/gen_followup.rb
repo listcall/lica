@@ -21,6 +21,7 @@ class Pgr::Util::GenFollowup
 
   def deliver_all
     generate_all
+    dev_log @outbounds.first.class
     @outbounds.each { |out| out.deliver }
     self
   end
@@ -38,15 +39,17 @@ class Pgr::Util::GenFollowup
       dialogs.map do |dialog|
         post_params = {
           type:            'Pgr::Post::StiMsg',
-          author_action:   'followed up',
           author_id:       dialog.broadcast.sender_id,
           target_id:       dialog.recipient_id,
-          author_channel:  'web',
-          target_channels: @followup.target_channels,
           short_body:      @followup.short_body,
           long_body:       ""
         }
-        dialog.posts.first_or_create(post_params)
+        post = dialog.posts.find_by(post_params) || dialog.posts.create(post_params)
+        post.author_action   = "followed up"
+        post.author_channel  = "web"
+        post.target_channels = @followup.target_channels
+        post.save
+        post
       end
     end
   end
@@ -60,11 +63,16 @@ class Pgr::Util::GenFollowup
         post.target_channels.each do |channel|
           devices_for(post, channel).each do |device|
             opts = outbound_params(post, channel, device)
-            outb << post.outbounds.first_or_create(opts)
+            dev_log post
+            dev_log channel
+            dev_log device
+            dev_log opts.inspect
+            dev_log Pgr::Outbound.count
+            outb << (post.outbounds.find_by(opts) || post.outbounds.create(opts))
           end
         end
       end
-      outb.uniq
+      outb.uniq                  #
     end
   end
 

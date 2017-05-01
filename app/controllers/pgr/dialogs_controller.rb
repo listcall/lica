@@ -12,7 +12,6 @@ class Pgr::DialogsController < ApplicationController
     dev_log @assig.class
     @dialogs = load_dialogs
     @action_type             = @assig.broadcast.action.try(:label) || "NONE"
-    dev_log "BING"
     @all_recipients          = @assig.broadcast.all_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
     @unresponsive_recipients = @assig.broadcast.unres_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
   end
@@ -24,7 +23,7 @@ class Pgr::DialogsController < ApplicationController
     dev_log params.to_unsafe_h, @sid
     dev_log @assig.class
     followup    = FollowupVal.new(params.to_unsafe_h["fup"])
-    obj = Pgr::Util::GenFollowup.new(@assig, followup).generate_all.deliver_all
+    Pgr::Util::GenFollowup.new(@assig, followup).generate_all.deliver_all
     redirect_to "/paging/#{@sid}"
   end
 

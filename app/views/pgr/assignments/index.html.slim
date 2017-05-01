@@ -1,7 +1,8 @@
 - content_for :page_js do
   javascript:
     window.lclData = {};
-  = javascript_include_tag "pgr/all_index"
+    lclData.railsEnv = "#{Rails.env}";
+  = javascript_pack_tag "pgr/index"
 
 - content_for :subhead do
   .subhead

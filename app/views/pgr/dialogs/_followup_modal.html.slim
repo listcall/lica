@@ -12,18 +12,25 @@ css:
   .modal-body
     form#sendForm action="/paging/#{@assig.sequential_id}" method="post"
       input type="hidden" name="authenticity_token" value="#{form_authenticity_token}"
-      input type="hidden" name="[fup]recipients" value="#{@assig.recip_ids}"
+
       .row
         .col-ms-6.al
           b Original Message
-          br #{@assig.broadcast.short_body}
-          | sent by #{@assig.broadcast.sender.full_name} #{@assig.via}
+          br
+            i "#{@assig.broadcast.short_body}"
+          small sent by #{@assig.broadcast.sender.full_name} #{@assig.via}
           p
           b Recipients
-          #recipList #{@assig.recip_names}
+          - @assig.recip_pairs.each do |pair|
+            .checkbox
+              label
+                input.rChk checked="check" name="[fup][member_recipients]#{pair.last}" type="checkbox"
+                | #{pair.first}
           br
         .col-ms-6
-          | Send followup to X recipients
+          | Send followup to
+          b#selectCount<> #{@assig.recip_count}
+          | recipients
           br
           label.checkbox-inline #style=("margin-left: 40px;")
             input#emailCheck checked="check" name="[fup][channels]email" type="checkbox"
@@ -31,7 +38,8 @@ css:
           label.checkbox-inline style=("margin-left: 20px;")
             input#smsCheck checked="check" name="[fup][channels]sms" type="checkbox"
               | via SMS
-          textarea.formcontrol type="text" name="[fup]short_body"
+          textarea.formcontrol#txtShort type="text" name="[fup]short_body"
           p
-            button.btn.btn-primary#sendBtn> Send
+          .form-group
+            button#sendBtn.btn.btn-primary> type="submit" Send
             button.btn#cancelBtn> Cancel

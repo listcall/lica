@@ -74,6 +74,10 @@ class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
 
   # ----- for followups -----
 
+  def recip_count
+    broadcast.all_recips.count
+  end
+
   def recip_names
     broadcast.all_recips.map do |x|
       x.last_name
@@ -83,7 +87,13 @@ class Pgr::Assignment::AsPagingIndex < ActiveType::Record[Pgr::Assignment]
   def recip_ids
     broadcast.all_recips.map do |x|
       x.id
-    end.sort.join(",")
+    end.sort
+  end
+
+  def recip_pairs
+    broadcast.all_recips.map do |x|
+      [x.last_name, x.id]
+    end
   end
 end
 

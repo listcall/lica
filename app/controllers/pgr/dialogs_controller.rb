@@ -12,10 +12,12 @@ class Pgr::DialogsController < ApplicationController
     dev_log @assig.class
     @dialogs = load_dialogs
     @action_type             = @assig.broadcast.action.try(:label) || "NONE"
+    dev_log "BING"
     @all_recipients          = @assig.broadcast.all_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
     @unresponsive_recipients = @assig.broadcast.unres_recips.map {|x| [x.id, "#{x.last_name}"]}.to_json
   end
 
+  # send followup
   def create
     @sid        = params[:b_id]
     @assig      = current_team.pager_assignments.find_by_sequential_id(@sid)
@@ -23,7 +25,8 @@ class Pgr::DialogsController < ApplicationController
     dev_log @assig.class
     followup    = FollowupVal.new(params.to_unsafe_h["fup"])
     author_opts = {author_channel: "web"}
-    Pgr::Util::GenFollowup.new(@assig, followup, author_opts) #.generate_all.deliver_all
+    obj = Pgr::Util::GenFollowup.new(@assig, followup, author_opts) #.generate_all.deliver_all
+    binding.pry
     redirect_to "/paging/#{@sid}"
   end
 

@@ -1,4 +1,4 @@
-const zapp = require("../ztst/chat.js");
+const zapp = require("../../ztst/chat.js");
 
 $(document).on('keypress', 'input.chat-input', function(event) {
   if (event.keyCode === 13) {

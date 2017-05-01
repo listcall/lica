@@ -2,7 +2,7 @@ require 'ext/hash'
 
 class Pgr::Util::GenFollowup
 
-  attr_reader :assig, :dialog, :post, :outbounds
+  attr_reader :assig, :followup, :author_opts
 
   def initialize(assig, followup, author_opts = {})
     @assig       = assig

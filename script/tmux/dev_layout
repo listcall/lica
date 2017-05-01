@@ -23,18 +23,21 @@ create_new_session()
 
   # ----- -----
 
-  tmux new-window -n "SERVERS"
-
-  splitwin 50 2
+  tmux new-window -n "SERVER"
 
   sendkeys 2.1 'script/run/server' 
-  sendkeys 2.2 'script/run/sidekiq' 
 
   # ----- -----
 
   tmux new-window -n "WEBPACK"
 
-  sendkeys 3.1 'clear ; webpack-dev-server --host 0.0.0.0'
+  sendkeys 3.1 'clear ; webpack-dev-server --host 0.0.0.0 --public soak:8080'
+
+  # ----- -----
+
+  tmux new-window -n "SIDEKIQ"
+
+  sendkeys 4.1 'script/run/sidekiq'
 
   # ----- -----
 
@@ -42,7 +45,7 @@ create_new_session()
 
   splitwin 70 4
 
-  sendkeys 4.1 'clear ; rpf deploy@x440h64:3000 3000'
+  sendkeys 5.1 'clear ; rpf deploy@x440h64:3000 3000'
 
   # ----- -----
 

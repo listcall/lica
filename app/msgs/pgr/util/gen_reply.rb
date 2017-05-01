@@ -1,6 +1,7 @@
 # integration_test: msgs/inbound/handler/pgr_email_reply
 # integration_test: features/pgr/reply
 # integration_test: requests/pgr/interaction requests/pgr/multi_partner
+# integration_test: requests/pgr/interaction
 
 require 'ext/hash'
 

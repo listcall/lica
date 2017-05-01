@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# should be called from tmux_console
+
+# call from tmux_console
 
 export APP="LICA-DEV"
 
@@ -14,27 +15,33 @@ splitwin() {
 create_new_session()
 {
 
-  tmux new-session -s $APP -n "TEST" -d
+  tmux new-session -s $APP -n "RSPEC" -d
 
-  splitwin 50 1
-
-  sendkeys 1.1 'script/run/specs'  
-  sendkeys 1.2 'jest --watch'     
+  sendkeys 1.1 'script/run/specs'
 
   # ----- -----
 
-  tmux new-window -n "SERVERS"
+  tmux new-window -n "JEST"
 
-  splitwin 50 2
+  sendkeys 2.1 'jest --watch'
 
-  sendkeys 2.1 'script/run/server' 
-  sendkeys 2.2 'script/run/sidekiq' 
+  # ----- -----
+
+  tmux new-window -n "PUMA"
+
+  sendkeys 3.1 'script/run/server'
 
   # ----- -----
 
   tmux new-window -n "WEBPACK"
 
-  sendkeys 3.1 'clear ; webpack-dev-server --host 0.0.0.0'
+  sendkeys 4.1 'clear ; webpack-dev-server --host 0.0.0.0 --public soak:8080'
+
+  # ----- -----
+
+  tmux new-window -n "SIDEKIQ"
+
+  sendkeys 5.1 'script/run/sidekiq'
 
   # ----- -----
 
@@ -42,10 +49,10 @@ create_new_session()
 
   splitwin 70 4
 
-  sendkeys 4.1 'clear ; rpf deploy@x440h64:3000 3000'
+  sendkeys 6.1 'clear ; rpf deploy@x440h64:3000 3000'
 
   # ----- -----
 
-  tmux select-window -t $APP:1
+  tmux select-window -t $APP:3
 
 }

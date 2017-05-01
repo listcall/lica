@@ -7,6 +7,10 @@
 threads_count = ENV.fetch("RAILS_MAX_THREADS") { 5 }
 threads threads_count, threads_count
 
+# extend worker timeout in development for use with pry
+lclenv = ENV['RACK_ENV'] || "development"
+worker_timeout 900 if lclenv == "development"
+
 bind "unix:/tmp/lica.sock"
 
 # Specifies the `port` that Puma will listen on to receive requests; default is 3000.

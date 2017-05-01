@@ -81,6 +81,21 @@ class Pgr::Broadcast < ActiveRecord::Base
   def team
     sender.try(:team)
   end
+
+  def recipients
+    Membership.where(id: self.recipient_ids)
+  end
+  alias_method :all_recips, :recipients
+
+  # TODO: finish this
+  def unresponsive_recipients
+    Array(recipients.first)      # THIS IS PLACEHOLDER CODE
+  end
+  alias_method :unres_recips, :unresponsive_recipients
+
+  def action_type
+    action.try(:type)
+  end
 end
 
 # == Schema Information

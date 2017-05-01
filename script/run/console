@@ -28,4 +28,5 @@ devcon_run()
 }
 
 devcon_msg "runs the ListCall development environment" $@
+
 devcon_run $@

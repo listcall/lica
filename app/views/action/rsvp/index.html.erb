@@ -2,40 +2,37 @@
 
   <p></p>
 
-  THIS PAGE UNDER CONTRUCTION...
+  You set the RSVP response to '<%= @response.upcase %>'
 
   <p></p>
 
-  Your RSVP response was set to <%= @response.upcase %>
-
-  <p></p>
-
-  Params: <%= @params.slice("outbound_id", "response") %>
-
-  <p></p>
-
-  You set the RSVP response to '<%= @response.capitalize %>'
-
-  <p></p>
-
-  <table>
+  <table class="table">
+    <tr>
+      <td>Event:</td>
+      <td>
+        <a href="/events/<%= @action.event.event_ref %>">
+          <%= @action.event.title %> OP<%= @action.period.position %>
+        </a>
+      </td>
+    </tr>
     <tr>
       <td>Message:</td>
-      <td>Test Callout - Tech Rescue Skills Night/OP1</td>
+      <td><%= @dialog.short_body %> </td>
     </tr>
     <tr>
       <td>Sent:</td>
-      <td>from A. Leak to A. Leak at 16-08-13 19:17:56</td>
+      <td>from <%= @outbound.author.full_name %> to <%= @outbound.target.full_name %> at <%= @outbound.created_at.strftime("%m-%d %H:%M:%S") %></td>
     </tr>
     <tr>
       <td>RSVP:</td>
-      <td>Are you available?</td>
+      <td><%= @action.query_msg %></td>
     </tr>
   </table>
   <p></p>
-  Your current response is YES: I am available
+  Your current response is <%= @action.current_response_msg(@response) %>
   <p></p>
-  Change your response to TBD: I am not available
-  <p></p>
-  Show details
+  Change your response to
+  <a href="<%= @action.opposite_link(@outbound, @response) %>">
+    <%= @action.alt_response_msg(@response) %>
+  </a>
 </div>

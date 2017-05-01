@@ -18,6 +18,7 @@ class Pgr::AssignmentsController < ApplicationController
     @events       = current_team.events
   end
 
+  # create a new page
   def create
     build_broadcast
     save_broadcast or render('new')

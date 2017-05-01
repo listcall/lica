@@ -39,7 +39,7 @@ class Pgr::Util::GenBroadcast
   def generate_posts
     @posts ||= begin
       @broadcast.dialogs.each do |dialog|
-        opts = {
+        post_params = {
           type:            'Pgr::Post::StiMsg',
           author_action:   'posted',
           author_id:       @broadcast.sender_id,
@@ -49,7 +49,7 @@ class Pgr::Util::GenBroadcast
           short_body:      @broadcast.short_body,
           long_body:       @broadcast.long_body
         }
-        dialog.posts.first_or_create(opts)
+        dialog.posts.first_or_create(post_params)
       end
     end
   end

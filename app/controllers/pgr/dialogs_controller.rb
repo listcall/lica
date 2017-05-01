@@ -1,5 +1,5 @@
 # integration_test: features/pgr/reply
-# integration_test: requests/pgr/multi_partner
+# integration_test: requests/pgr/followup
 
 require 'ext/ar_proxy'
 
@@ -19,14 +19,12 @@ class Pgr::DialogsController < ApplicationController
 
   # send followup
   def create
-    @sid        = params[:b_id]
-    @assig      = current_team.pager_assignments.find_by_sequential_id(@sid)
+    @sid   = params[:a_sid]
+    @assig = current_team.pager_assignments.find_by_sequential_id(@sid)
     dev_log params.to_unsafe_h, @sid
     dev_log @assig.class
     followup    = FollowupVal.new(params.to_unsafe_h["fup"])
-    author_opts = {author_channel: "web"}
-    obj = Pgr::Util::GenFollowup.new(@assig, followup, author_opts) #.generate_all.deliver_all
-    binding.pry
+    obj = Pgr::Util::GenFollowup.new(@assig, followup).generate_all.deliver_all
     redirect_to "/paging/#{@sid}"
   end
 

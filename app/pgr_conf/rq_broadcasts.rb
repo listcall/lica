@@ -1,3 +1,5 @@
+# USE FOR TESTING!!
+
 class RqBroadcasts
 
   def paging_mail_opts(from, to)
@@ -39,11 +41,23 @@ class RqBroadcasts
     }
   end
 
-  def dialog_id()
+  def web_followup_opts(to)
+    {"fup" => {
+      member_recipients: {to.id.to_s => "on"},
+      short_body:        "web followup at #{Time.now}",
+      channels:          {"email" => "on", "sms" => "on"}
+    }}
+  end
+
+  def assignment_sid
+    Pgr::Assignment.first.sequential_id
+  end
+
+  def dialog_id
     Pgr::Dialog.first.id
   end
 
-  def broadcast_id()
+  def broadcast_id
     Pgr::Broadcast.first.id
   end
 

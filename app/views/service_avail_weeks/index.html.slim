@@ -1,5 +1,5 @@
 - content_for :page_js do
-  = javascript_include_tag 'service_avail_weeks/all_index'
+  = javascript_pack_tag 'avail_weeks/all_index'
 
 - content_for :services_header do
   = svc_breadcrumb ["services/#{@service.id}"], [@service.name, "Availability"]

@@ -1,7 +1,7 @@
 - # integration_test: features/events_new
 
 - content_for :page_js do
-  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9knuWFHshMUw5f9Vv6eaFEaU2oX-MDXA&sensor=false" type="text/javascript"
+  script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9knuWFHshMUw5f9Vv6eaFEaU2oX-MDXA" type="text/javascript"
   javascript:
     window.lclData = {};
     lclData.eTypes = '#{raw(@ev_times)}';

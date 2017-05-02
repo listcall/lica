@@ -5,7 +5,7 @@ require 'ext/ar_proxy'
 
 class Pgr::DialogsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_reserve!, :set_no_cache
 
   def index
     @assig   = load_assignment#.becomes(Pgr::Assignment::AsPagingFollowup)

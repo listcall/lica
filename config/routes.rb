@@ -62,8 +62,8 @@ Rails.application.routes.draw do
   get  '/paging'                 => 'pgr/assignments#index'
   get  '/paging/new'             => 'pgr/assignments#new'
   post '/paging'                 => 'pgr/assignments#create'
-  get  '/paging/:b_id'           => 'pgr/dialogs#index'
-  post '/paging/:a_sid'          => 'pgr/dialogs#create'
+  get  '/paging/:b_id'           => 'pgr/dialogs#index'       # show page
+  post '/paging/:a_sid'          => 'pgr/dialogs#create'      # create followup
   get  '/paging/:b_id/for/:d_id' => 'pgr/posts#index'
   post '/paging/:b_id/for/:d_id' => 'pgr/posts#create'
 

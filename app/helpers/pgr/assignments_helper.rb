@@ -1,6 +1,6 @@
 module Pgr::AssignmentsHelper
   def period_list(ev_input)
-    (start, fini) = [Time.now - 1.month, Time.now + 2.months]
+    (start, fini) = [Time.now - 1.day, Time.now + 2.months]
     events = ev_input.includes(:periods).between(start, fini)
     events.map do |event|
       period_hash = event.periods.map do |period|

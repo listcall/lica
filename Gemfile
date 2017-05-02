@@ -80,6 +80,7 @@ gem 'coffee-rails' , '~> 4.2.0'        # coffeescript support
 gem 'bh'           , '~> 1.3.6'        # bootstrap helpers
 
 # ----- javascript packages / gems -----
+gem 'jquery-rails'
 gem 'jquery-ui-rails'        , '4.2.1'    # jquery UI
 gem 'bootstrap-sass'         , '~> 3.3'   # bootstrap UI framework
 gem 'bootstrap-switch-rails' , '1.8.1'    # bootstrap on-off switch

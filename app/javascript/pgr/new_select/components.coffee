@@ -1,5 +1,5 @@
-RA = require("pgr/select/actions")
-RS = require("pgr/select/stores")
+RA = require("pgr/new_select/actions")
+RS = require("pgr/new_select/stores")
 RC = {}             # React Components
 RF = {}             # React Factories
 D  = React.DOM

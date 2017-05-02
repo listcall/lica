@@ -1,4 +1,4 @@
-RA = require("pgr/select/actions")
+RA = require("pgr/new_select/actions")
 RS = {}
 
 console.warn = ->

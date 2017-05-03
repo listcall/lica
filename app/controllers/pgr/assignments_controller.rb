@@ -17,13 +17,11 @@ class Pgr::AssignmentsController < ApplicationController
     @partners    = PageBot.new(current_team)
     @memberships = membership_scope
     @events      = current_team.events
-    binding.pry
   end
 
   # create a new page
   def create
-    @bcst_params = params.to_unsafe_h[:broadcast]
-    binding.pry
+    @bcst_params = params #.to_unsafe_h[:broadcast]
     build_broadcast
     save_broadcast or render('new')
   end

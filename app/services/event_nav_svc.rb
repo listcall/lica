@@ -32,9 +32,9 @@ class EventNavSvc
   end
 
   def self.team_url(team, env)
-    port = env['SERVER_PORT'].blank? ? '' : ":#{env["SERVER_PORT"]}"
+    port = ENV['SERVER_PORT'].blank? ? '' : ":#{ENV["SERVER_PORT"]}"
     port = '' if Rails.env.production?
-    orgd = calc_org_name(env['SERVER_NAME'])
+    orgd = calc_org_name(ENV['SERVER_NAME'])
     base = "#{team.subdomain}.#{orgd}".gsub(/^account./,'')
     "http://#{base}#{port}"
   end

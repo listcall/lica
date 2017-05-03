@@ -58,9 +58,7 @@ gem 'counter_culture'   # counter caches in parent objects
 gem 'active_type'       # extensions for ActiveModel
 
 # ----- view utilities -----
-# gem 'simple_form', '~> 3.2.0' # form generator
 gem 'simple_form'             # form generator
-# gem 'active_link_to'          # for creating bootstrap nav bars
 gem 'launchy'                 # static page launcher
  
 # ----- images and attachments -----

@@ -4,11 +4,11 @@ module Api
 
     helpers do
       def session
-        @session ||= env['rack.session'].to_hash
+        @session ||= ENV['rack.session'].to_hash
       end
 
       def domain
-        @domain ||= env['HTTP_HOST'].split('.').first
+        @domain ||= ENV['HTTP_HOST'].split('.').first
       end
 
       def current_team

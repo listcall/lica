@@ -1,4 +1,5 @@
 # integration_test: requests/pgr/multi_partner
+# integration_test: requests/pgr/interaction
 
 require 'ext/ar_proxy'
 
@@ -21,7 +22,7 @@ class Pgr::AssignmentsController < ApplicationController
 
   # create a new page
   def create
-    @bcst_params = params #.to_unsafe_h[:broadcast]
+    @bcst_params = params[:broadcast]
     build_broadcast
     save_broadcast or render('new')
   end
@@ -39,8 +40,9 @@ class Pgr::AssignmentsController < ApplicationController
   def new_broadcast_params(obj)
     return {} unless obj[:pg_action] == "RSVP"
     {
-      "action_attributes" => {"type" => "Pgr::Action::StiOpRsvp", "period_id" => "627"},
-      "member_recipients" => {"14" => "1", "12" => "1", "1" => "1"}
+      "action_attributes"  => {"type" => "Pgr::Action::StiOpRsvp", "period_id" => "627"},
+      "member_recipients"  => {"14" => "1", "12" => "1", "1" => "1"},
+      "partner_recipients" => ""
     }
   end
 

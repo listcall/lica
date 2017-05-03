@@ -8,7 +8,7 @@ module Api
       end
 
       def domain
-        @domain ||= ENV['HTTP_HOST'].split('.').first
+        @domain ||= env['HTTP_HOST'].split('.').first
       end
 
       def current_team

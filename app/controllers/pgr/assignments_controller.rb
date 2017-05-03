@@ -11,15 +11,19 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new
-    build_broadcast
-    @list_type    = cookie_list_type
-    @partners     = PageBot.new(current_team)
-    @memberships  = membership_scope
-    @events       = current_team.events
+    @bcst_params = new_broadcast_params(params.to_unsafe_h)
+    @broadcast   = build_broadcast
+    @list_type   = cookie_list_type
+    @partners    = PageBot.new(current_team)
+    @memberships = membership_scope
+    @events      = current_team.events
+    binding.pry
   end
 
   # create a new page
   def create
+    @bcst_params = params.to_unsafe_h[:broadcast]
+    binding.pry
     build_broadcast
     save_broadcast or render('new')
   end
@@ -34,21 +38,29 @@ class Pgr::AssignmentsController < ApplicationController
 
   # ----- broadcasts -----
 
+  def new_broadcast_params(obj)
+    return {} unless obj[:pg_action] == "RSVP"
+    {
+      "action_attributes" => {"type" => "Pgr::Action::StiOpRsvp", "period_id" => "627"},
+      "member_recipients" => {"14" => "1", "12" => "1", "1" => "1"}
+    }
+  end
+
   def build_broadcast
-    @broadcast ||= broadcast_scope.build
-    @broadcast.attributes = broadcast_params
+    @bcst ||= broadcast_scope.build
+    @bcst.attributes = broadcast_params
   end
 
   def save_broadcast
-    if @broadcast.save
+    if @bcst.save
       # TODO - run this in background !!!!!
-      Pgr::Util::GenBroadcast.new(@broadcast).generate_all.deliver_all
+      Pgr::Util::GenBroadcast.new(@bcst).generate_all.deliver_all
       redirect_to paging_path
     end
   end
 
   def broadcast_params
-    broadcast_params = generate_broadcast_params(params[:broadcast])
+    broadcast_params = generate_broadcast_params(@bcst_params)
     broadcast_params ? broadcast_params.permit(permitted_broadcast_params) : {}
   end
 

@@ -1,6 +1,7 @@
 class EventsController < ApplicationController
 
   before_action :authenticate_reserve!
+  before_action :set_no_cache
 
   def index
     response.headers['Cache-Control'] = 'no-cache, no-store, max-age=0, must-revalidate'

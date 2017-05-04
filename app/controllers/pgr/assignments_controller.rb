@@ -12,8 +12,7 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new
-    @bcst_params = new_broadcast_params(params.to_unsafe_h)
-    @broadcast   = build_broadcast
+    # build_broadcast
     @list_type   = cookie_list_type
     @partners    = PageBot.new(current_team)
     @memberships = membership_scope
@@ -22,7 +21,6 @@ class Pgr::AssignmentsController < ApplicationController
 
   # create a new page
   def create
-    @bcst_params = params[:broadcast]
     build_broadcast
     save_broadcast or render('new')
   end
@@ -60,7 +58,7 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def broadcast_params
-    broadcast_params = generate_broadcast_params(@bcst_params)
+    broadcast_params = generate_broadcast_params(params[:broadcast])
     broadcast_params ? broadcast_params.permit(permitted_broadcast_params) : {}
   end
 

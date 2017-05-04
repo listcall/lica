@@ -3,7 +3,7 @@
 - content_for :page_js do
   javascript:
     window.lclData = {};
-    lclData.newParams  = "#{@new_params.to_json}";
+    lclData.newParams  = '#{ raw @new_params.to_json }';
     lclData.selectList = #{ raw @partners.select_list };
   = javascript_pack_tag "pgr/new"
 

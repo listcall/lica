@@ -52,9 +52,10 @@ class Pgr::AssignmentsController < ApplicationController
     return {} unless params[:pg_action] == "RSVP"
     return {} unless params[:pg_opid].present?
     {
-      "action_type"   => "RSVP"    ,
-      "action_opid"   => 10        ,
-      "action_memids" => [2,3,4]
+      "action_type" => "RSVP"     ,
+      "action_opid" => 627        ,
+      "short_text"  => "Immediate Callout: Dilbert Search/OP1",
+      "recip_ids"   => [48, 49, 50, 51, 52]
     }
 
   end

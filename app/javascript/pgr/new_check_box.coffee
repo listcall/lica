@@ -2,7 +2,7 @@ require("./new_send_button")
 
 setSelectCount = -> $("#selectCount").text(memberCount())
 
-updateSelectCount = ->
+window.updateSelectCount = ->
   setSelectCount()
   $("#memCount").effect("highlight", {}, 1000)
   setLabelCount()

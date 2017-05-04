@@ -12,7 +12,7 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new
-    build_broadcast_for_new
+    @new_params  = new_params
     @list_type   = cookie_list_type
     @partners    = PageBot.new(current_team)
     @memberships = membership_scope
@@ -35,11 +35,6 @@ class Pgr::AssignmentsController < ApplicationController
 
   # ----- broadcasts -----
 
-  def build_broadcast_for_new
-    @bcst ||= broadcast_scope.build
-    @bcst.attributes = broadcast_new_params
-  end
-
   def build_broadcast_for_create
     @bcst ||= broadcast_scope.build
     @bcst.attributes = broadcast_create_params
@@ -53,9 +48,15 @@ class Pgr::AssignmentsController < ApplicationController
     end
   end
 
-  def broadcast_new_params
+  def new_params
     return {} unless params[:pg_action] == "RSVP"
-    return {} unless params[:pg_id].present?
+    return {} unless params[:pg_opid].present?
+    {
+      "action_type"   => "RSVP"    ,
+      "action_opid"   => 10        ,
+      "action_memids" => [2,3,4]
+    }
+
   end
 
   def broadcast_create_params

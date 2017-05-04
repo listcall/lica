@@ -12,7 +12,7 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new
-    # build_broadcast
+    build_broadcast_for_new
     @list_type   = cookie_list_type
     @partners    = PageBot.new(current_team)
     @memberships = membership_scope
@@ -21,7 +21,7 @@ class Pgr::AssignmentsController < ApplicationController
 
   # create a new page
   def create
-    build_broadcast
+    build_broadcast_for_create
     save_broadcast or render('new')
   end
 
@@ -35,18 +35,14 @@ class Pgr::AssignmentsController < ApplicationController
 
   # ----- broadcasts -----
 
-  def new_broadcast_params(obj)
-    return {} unless obj[:pg_action] == "RSVP"
-    {
-      "action_attributes"  => {"type" => "Pgr::Action::StiOpRsvp", "period_id" => "627"},
-      "member_recipients"  => {"14" => "1", "12" => "1", "1" => "1"},
-      "partner_recipients" => ""
-    }
+  def build_broadcast_for_new
+    @bcst ||= broadcast_scope.build
+    @bcst.attributes = broadcast_new_params
   end
 
-  def build_broadcast
+  def build_broadcast_for_create
     @bcst ||= broadcast_scope.build
-    @bcst.attributes = broadcast_params
+    @bcst.attributes = broadcast_create_params
   end
 
   def save_broadcast
@@ -57,8 +53,13 @@ class Pgr::AssignmentsController < ApplicationController
     end
   end
 
-  def broadcast_params
-    broadcast_params = generate_broadcast_params(params[:broadcast])
+  def broadcast_new_params
+    return {} unless params[:pg_action] == "RSVP"
+    return {} unless params[:pg_id].present?
+  end
+
+  def broadcast_create_params
+    broadcast_params = generate_broadcast_create_params(params[:broadcast])
     broadcast_params ? broadcast_params.permit(permitted_broadcast_params) : {}
   end
 
@@ -82,7 +83,7 @@ class Pgr::AssignmentsController < ApplicationController
     ]
   end
 
-  def generate_broadcast_params(params)
+  def generate_broadcast_create_params(params)
     return nil if params.blank?
     params[:assignments_attributes] = assignment_params(params)
     params[:recipient_ids]          = recipient_ids(params)

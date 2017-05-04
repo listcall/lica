@@ -25,7 +25,8 @@
           = member_help_button('events')
 
 css:
-  .select2wide { width: 350px; }
+  .select2wide { width: 350px;       }
+  .pCount      { margin-left: 10px;  }
 
 .container
   .row
@@ -48,7 +49,7 @@ css:
                 i.fa.fa-arrows-v.sortIcon
                 a href="/events/#{@event.event_ref}/periods/#{period.position}"
                   => "Period #{period.position}"
-                ' [ #{period.participants.count } ]
+                .badge.pCount data-toggle='tooltip' title='bing' #{period.participants.count }
               td
                 a<> target="_blank" href="/paging/new?pg_action=RSVP&pg_opid=#{period.id}" RSVP
                 | |

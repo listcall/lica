@@ -1,0 +1,1 @@
+require "positions/index_modal"

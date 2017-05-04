@@ -1,1 +1,1 @@
-require("../../pgr/_refresh")
+require "pgr/_refresh"

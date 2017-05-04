@@ -17,7 +17,7 @@ class Ajax::EventsController < ApplicationController
                     {field => value}
                   else
                     dev_log 'MULTI ENTITY UPDATE'
-                    params['event']
+                    params.to_unsafe_h['event']
                   end
     ar_event      = current_team.events.find(params[:id])
     ef_event      = EventForm.new.with_event(ar_event).update(select_vals)

@@ -4,7 +4,7 @@ module Api
 
     helpers do
       def session
-        @session ||= ENV['rack.session'].to_hash
+        @session ||= env['rack.session'].try(:to_hash)
       end
 
       def domain

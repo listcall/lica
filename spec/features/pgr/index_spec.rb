@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature '/paging'  do
+feature '/paging'  do #
 
   include_context "Integration Environment"
 

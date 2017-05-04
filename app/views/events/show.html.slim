@@ -8,7 +8,8 @@
     lclData.eSelect  = '#{raw(@select)}';
     lclData.parents  = #{raw @event_bot.potential_parent_events};
     lclData.children = #{raw @event_bot.potential_child_events};
-  = javascript_include_tag 'events/all_show'
+  /= javascript_include_tag 'events/all_show'
+  = javascript_pack_tag 'events/show'
 
 - content_for :subhead do
   .subhead

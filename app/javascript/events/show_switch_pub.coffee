@@ -1,5 +1,5 @@
 # note this ajax call relies on the CSRF token
-# being set in show_ajax.coffee...
+# being set in show_ajax.js.coffee...
 updateServer = (val)->
   $.ajax
     url: "/ajax/events/#{lclData.eventId}"

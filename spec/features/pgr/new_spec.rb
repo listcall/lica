@@ -10,7 +10,7 @@ feature 'pgr#new' do
       expect(pagr1).to be_present
     end
 
-    it 'renders /paging/new' do #
+    it 'renders /paging/new' do #.
       login_with mem1
       visit '/paging/new'
       expect(page.status_code).to be 200

@@ -49,6 +49,7 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new_params
+    return {} unless params[:pg_action].present?
     PgrNewVal.new(params).generate_new_params
   end
 

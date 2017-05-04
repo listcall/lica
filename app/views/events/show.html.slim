@@ -49,7 +49,7 @@ css:
                 i.fa.fa-arrows-v.sortIcon
                 a href="/events/#{@event.event_ref}/periods/#{period.position}"
                   => "Period #{period.position}"
-                .badge.pCount data-toggle='tooltip' title='bing' #{period.participants.count }
+                .badge.pCount data-toggle='tooltip' title='#{tooltip_text(period)}' #{period.participants.count }
               td
                 a<> target="_blank" href="/paging/new?pg_action=RSVP&pg_opid=#{period.id}" RSVP
                 | |

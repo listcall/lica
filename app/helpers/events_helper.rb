@@ -73,6 +73,13 @@ module EventsHelper
     period.event.event_periods_count
   end
 
+  def tooltip_text(period)
+    count = period.participants.count
+    return "no participants" if count == 0
+    names = period.participants.map {|p| p.membership.last_name}.sort.join(", ")
+    "#{count} participants: #{names}"
+  end
+
   def delete_event_period_button(period)
     if period.participants.count != 0 || num_siblings(period) < 2
       cls = 'btn btn-xs btn-disabled'

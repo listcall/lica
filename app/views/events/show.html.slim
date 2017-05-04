@@ -19,7 +19,7 @@
             = raw link_to "#{current_team.acronym} Events", "/events"
             '  > #{@event.event_ref}
         .col-xs-6.text-right
-          a.help-button href="/events/new"  Create New Event
+          a.help-button href="/events/new" Create New Event
           a.help-button href="/events/new?copy=#{@event.id}"  Copy This Event
           = raw event_delete_link(@event.event)
           = member_help_button('events')
@@ -36,7 +36,7 @@ css:
       table.table.table-condensed.table-bordered
         thead
           th Period
-          th # Participants
+          th Paging
           th.ar
             form action="/events/#{@event.event_ref}/periods" method="POST"
               input name="authenticity_token" type="hidden" value=form_authenticity_token /
@@ -47,9 +47,12 @@ css:
               td
                 i.fa.fa-arrows-v.sortIcon
                 a href="/events/#{@event.event_ref}/periods/#{period.position}"
-                  = "Period #{period.position}"
+                  => "Period #{period.position}"
+                ' [ #{period.participants.count } ]
               td
-                = period.participants.count
+                a<> target="_blank" href="/paging/new?pg_action=RSVP&pg_opid=#{period.id}" RSVP
+                | |
+                a<> target="_blank" href="/paging/new?pg_action=NOTIFY&pg_opid=#{period.id}" NOTIFY
               td.ar
                 = delete_event_period_button(period)
       small

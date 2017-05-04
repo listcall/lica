@@ -12,7 +12,7 @@ describe 'Pager Interaction', :focus do
     before(:each) { hydrate(mem1, mem2); request_login(mem1) }
 
     it 'handles a single message' do
-      post '/paging', params: req.paging_mail_opts(mem1, mem2)
+      post '/paging', params: req.paging_mail_opts(mem1, mem2) #
       expect(Pgr::Broadcast.count).to        eq(1)
       expect(Pgr::Dialog.count).to           eq(1)
       expect(Pgr::Post.count).to             eq(1)

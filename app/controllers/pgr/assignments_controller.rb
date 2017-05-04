@@ -49,15 +49,14 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new_params
-    return {} unless params[:pg_action] == "RSVP"
+    return {} unless %w(RSVP NOTIFY).include?(params[:pg_action])
     return {} unless params[:pg_opid].present?
     {
-      "action_type" => "RSVP"     ,
-      "action_opid" => 627        ,
+      "action_type" => params[:pg_action]       ,
+      "action_opid" => params[:pg_opid].to_i    ,
       "short_text"  => "Immediate Callout: Dilbert Search/OP1",
       "recip_ids"   => [48, 49, 50, 51, 52]
     }
-
   end
 
   def broadcast_create_params

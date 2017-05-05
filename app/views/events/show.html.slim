@@ -27,6 +27,7 @@
 css:
   .select2wide { width: 350px;       }
   .pCount      { margin-left: 10px;  }
+  .btn-group   { margin-top: 0; margin-bottom: 0; }
 
 .container
   .row
@@ -51,9 +52,9 @@ css:
                   => "Period #{period.position}"
                 .badge.pCount data-toggle='tooltip' title='#{tooltip_text(period)}' #{period.participants.count }
               td
-                a<> target="_blank" href="/paging/new?pg_action=RSVP&pg_opid=#{period.id}" RSVP
-                | |
-                a<> target="_blank" href="/paging/new?pg_action=NOTIFY&pg_opid=#{period.id}" NOTIFY
+                .btn-group.btn-group-xs role="group"
+                  a.btn.btn-default.btnRsvp   target="_blank" href="/paging/new?pg_action=RSVP&pg_opid=#{period.id}" RSVP
+                  a.btn.btn-default.btnNotify target="_blank" href="/paging/new?pg_action=NOTIFY&pg_opid=#{period.id}" NOTIFY
               td.ar
                 = delete_event_period_button(period)
       small

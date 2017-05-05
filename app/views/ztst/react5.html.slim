@@ -1,0 +1,24 @@
+- content_for :page_js do
+  = javascript_pack_tag 'ztst/react5'
+
+.container
+  = render :partial => 'shared_nav'
+
+css:
+  .box {
+    background: lightgray;
+    border:     1px solid black;
+    cursor:     pointer;
+  }
+
+  .over { background: yellow; }
+
+  .target { padding: 5px;    }
+
+.container
+  .row
+    .col-md-12
+      | THIS IS REACT 5
+      #ex1.target
+      #ex2.target
+      #ex3.target

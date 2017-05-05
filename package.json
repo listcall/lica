@@ -16,7 +16,8 @@
     ],
     "testRegex": "(/__tests__/.*|(\\.|/)(test|spec))\\.(jsx?|coffee)$",
     "transform": {
-      "coffee$": "./app/javascript/Util/jest_cs_transformer.js"
+      "coffee$": "./app/javascript/Util/jest_cs_transformer.js",
+      "jsx$": "babel-jest"
     },
     "testPathIgnorePatterns": [
       "/node_modules/",
@@ -63,6 +64,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "jest-cli": "^19.0.2",
+    "react-test-renderer": "^15.5.4",
     "regenerator-runtime": "^0.10.5",
     "webpack-dev-server": "^2.4.5",
     "webpack-validator": "^3.0.0"

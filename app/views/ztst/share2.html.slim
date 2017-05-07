@@ -1,0 +1,30 @@
+- content_for :page_js do
+  script src="//cdn.webrtc-experiment.com/getScreenId.js"
+  script src="//cdn.webrtc-experiment.com/screen.js"
+  = javascript_pack_tag 'ztst/share2'
+
+div.container
+  = render :partial => 'shared_nav'
+  |This is Share2
+
+  .row
+    .col-md-12
+      h2 See console for javascript output!
+      a#share-screen href='#' CLICK ME TO SHARE SCREEN
+      h2 Notes
+      | So - this isn't working.  See
+      a<> target="_blank" href="https://www.webrtc-experiment.com/Pluginfree-Screen-Sharing" here
+      | for more info.
+      h2 Alternate
+      | There is a
+      a<> target="_blank" href="https://chrome.google.com/webstore/detail/webrtc-desktop-sharing/nkemblooioekjnpfekmjhpgkackcajhg" chrome-extension for the same application
+      | which allows you share any tab/screen any time without opening this page.
+      h3 Suggestion
+      ul
+        li install the plugin
+        li configure so it opens using the 'bamru' page
+        li the sharing url will be <b>https://www.webrtc-experiment.com/!/?s=bamru </b>
+          (<a target="_blank" href="https://www.webrtc-experiment.com/!/?s=bamru">link</a>)
+        li share the full screen
+
+

@@ -12,7 +12,8 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new
-    @new_params  = new_params
+    @overview    = new_params["overview"]
+    @new_params  = new_params["base"]
     @list_type   = cookie_list_type
     @partners    = PageBot.new(current_team)
     @memberships = membership_scope
@@ -50,7 +51,7 @@ class Pgr::AssignmentsController < ApplicationController
 
   def new_params
     return {} unless params[:pg_action].present?
-    PgrNewVal.new(params).generate_new_params
+    @new_params ||= PgrNewVal.new(params).generate_new_params
   end
 
   def broadcast_create_params

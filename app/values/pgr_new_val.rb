@@ -5,19 +5,25 @@ class PgrNewVal
   def initialize(params)
     @action_type = params["pg_action"]
     @action_opid = params["pg_opid"]
-    dev_log "NEW", params.to_unsafe_h, @action_type, @action_opid
   end
 
   def generate_new_params
     {
-      "action_type" => @action_type,
-      "action_opid" => @action_opid.to_i,
-      "recip_ids"   => recip_ids   ,
-      "short_text"  => default_msg
+      "overview" => overview_text,
+      "base" => {
+        "action_type" => @action_type,
+        "action_opid" => @action_opid.to_i,
+        "recip_ids"   => recip_ids   ,
+        "short_text"  => default_msg
+      }
     }
   end
 
   private
+
+  def team_name
+    period.event.team.acronym
+  end
 
   def period
     @period ||= Event::Period.find(@action_opid.to_i)
@@ -33,6 +39,15 @@ class PgrNewVal
 
   def event_title
     period.try(:event).try(:title) || ""
+  end
+
+  def event_path
+    ref = period.try(:event).try(:event_ref)
+    "/events/#{ref}"
+  end
+
+  def period_path
+    "#{event_path}/periods/#{period_num}"
   end
 
   def participant_ids
@@ -65,5 +80,21 @@ class PgrNewVal
       when "RETURN" then "#{event_title}/OP#{period_num}: Have you returned home? "
       else "#{event_title}/OP#{sid} "
     end
+  end
+
+  def overview_text
+    case @action_type
+      when "RSVP"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
+      when "NOTIFY" then "This notification is addressed to all event participants.#{period_links}"
+      when "LEAVE"  then "This 'Left Home' message is addressed to all pending participants.#{period_links}"
+      when "RETURN" then "This 'Return Home' message is addressed to all pending participants.#{period_links}"
+      else "#{event_title}/OP#{sid} "
+    end
+  end
+
+  def period_links
+    ev_link = "<a href='#{event_path}' target='_blank'>#{event_title}</a>"
+    pd_link = "<a href='#{period_path}' target='_blank'>OP#{period_num}</a>"
+    "<br/>#{ev_link} | #{pd_link}"
   end
 end

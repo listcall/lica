@@ -11,7 +11,6 @@ opts =
   todayBtn: "linked"
 
 $(document).ready ->
-  console.log "DATEPICKER SETUP"
   $('#attrTable').datepicker(opts)
 
 # ----- event handleing -----

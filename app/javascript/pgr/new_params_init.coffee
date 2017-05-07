@@ -6,9 +6,15 @@ checkMembers = (memList) ->
       $("#broadcast_member_recipients_#{id}").prop('checked', true)
 
 setAction = (data) ->
-  unless data.action_type == "RSVP"
+  if data.action_type == "NOTIFY"
     return
-  LC.ra.optionSelect(data.action_type)
+  action = switch data.action_type
+    when "RSVP" then "RSVP"
+    when "LEAVE" then "Left Home"
+    when "RETURN" then "Returned Home"
+  console.log data.action_type
+  console.log data.action
+  LC.ra.optionSelect(action)
   LC.ra.periodSelect(data.action_opid)
   LC.ra.modalSave()
 

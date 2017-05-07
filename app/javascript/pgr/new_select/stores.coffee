@@ -24,7 +24,7 @@ Util =
         label = periods.periodLabelFor(value)
         """
           <b>Event Title:</b> #{title}<br/>
-          <b>Operational Period:</b> #{label}
+          <b>Operational Period:</b> #{label}<br/>
           <input type='hidden' name='#{periodName}' value='#{value}'/>
         """
       typeName = "broadcast[action_attributes][type]"
@@ -33,6 +33,7 @@ Util =
         <input type='hidden' name='#{typeName}' value='#{selected.class_name}'/>
         <br/>
         #{periodInput()}
+        <small><b>How it Works</b>: #{selected.about}</small>
       """
       $('#actionDisplay').html(html)
 
@@ -130,12 +131,10 @@ RS.selections = Reflux.createStore
   onOptionSelect: (option)->
     @data.label_new = option
     @data.savable    = @savable()
-    console.log "optionSelect", @data, @savable()
     @trigger(@data)
   onPeriodSelect: (period)->
     @data.period_new = period
     @data.savable    = @savable()
-    console.log "periodSelect", @data, @savable()
     @trigger(@data)
   onModalSave: ->
     @data.label_old = @data.label_new

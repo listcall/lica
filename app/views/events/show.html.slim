@@ -53,8 +53,10 @@ css:
                 .badge.pCount data-toggle='tooltip' title='#{tooltip_text(period)}' #{period.participants.count }
               td
                 .btn-group.btn-group-xs role="group"
-                  a.btn.btn-default.btnRsvp   target="_blank" href="/paging/new?pg_action=RSVP&pg_opid=#{period.id}" RSVP
-                  a.btn.btn-default.btnNotify target="_blank" href="/paging/new?pg_action=NOTIFY&pg_opid=#{period.id}" NOTIFY
+                  = event_page_link(period, :rsvp)
+                  = event_page_link(period, :notify)
+                  = event_page_link(period, :leave)
+                  = event_page_link(period, :return)
               td.ar
                 = delete_event_period_button(period)
       small

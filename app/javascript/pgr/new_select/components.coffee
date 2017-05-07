@@ -155,7 +155,6 @@ RC.TestButton = React.createClass
     Reflux.connect RS.selections, "selections"
   ]
   handleClick: ->
-    console.log "I WAS CALLED"
     "OK"
   render: ->
     D.button {ref:'tstBtn', onClick: @handleClick}, "Save"

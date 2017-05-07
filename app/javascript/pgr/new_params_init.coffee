@@ -20,6 +20,5 @@ initSetup = (data)->
 
 $(document).ready ->
   newParams = JSON.parse(lclData.newParams)
-  console.log newParams
   unless _.isEmpty?(newParams)
     initSetup(newParams)

@@ -39,10 +39,20 @@ class PgrNewVal
     period.participants.map {|participant| participant.membership.id}
   end
 
+  def pending_leave_participant_ids
+    period.participants.has_not_left.map {|participant| participant.membership.id}
+  end
+
+  def pending_return_participant_ids
+    period.participants.has_not_returned.map {|participant| participant.membership.id}
+  end
+
   def recip_ids
     case @action_type
       when "RSVP"   then "ALL"
       when "NOTIFY" then participant_ids
+      when "LEAVE"  then pending_leave_participant_ids
+      when "RETURN" then pending_return_participant_ids
       else []
     end
   end
@@ -51,6 +61,8 @@ class PgrNewVal
     case @action_type
       when "RSVP"   then "IMMEDIATE CALLOUT: #{event_title}/OP#{period_num} "
       when "NOTIFY" then "TEAM NOTIFICATION: #{event_title}/OP#{period_num} "
+      when "LEAVE"  then "#{event_title}/OP#{period_num}: Have you left home? "
+      when "RETURN" then "#{event_title}/OP#{period_num}: Have you returned home? "
       else "#{event_title}/OP#{sid} "
     end
   end

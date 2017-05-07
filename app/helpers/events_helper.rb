@@ -92,6 +92,26 @@ module EventsHelper
     end
   end
 
+  def event_page_link(period, type)
+
+    lbl  = type.to_s.upcase
+    path = "/paging/new?pg_action=#{lbl}&pg_opid=#{period.id}"
+    btyp = is_enabled?(period, type) ? "btn#{type.to_s.capitalize}" : ""
+    dopt = is_enabled?(period, type) ? "" : "disabled='disabled'"
+    clas = "btn btn-default #{btyp}"
+    raw "<a target='_blank' #{dopt} class='#{clas}' href='#{path}'>#{lbl}</a>"
+  end
+
+  def is_enabled?(period, type)
+    case type
+      when :rsvp   then Time.now < period.event.finish && period.participants.has_left.count == 0
+      when :notify then period.participants.count > 0
+      when :leave  then period.participants.count > 0 && period.participants.has_not_left.count > 0
+      when :return then period.participants.has_not_left.count == 0 && period.participants.has_not_returned.count > 0
+      else true
+    end
+  end
+
   # ----- delete participant -----
 
   def delete_participant_button(participant)

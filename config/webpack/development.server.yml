@@ -3,7 +3,7 @@
 default: &default
   enabled: true
   host: soak
-  port: 8080
+  port: 8090
 
 development:
   <<: *default

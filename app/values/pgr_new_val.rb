@@ -95,6 +95,6 @@ class PgrNewVal
   def period_links
     ev_link = "<a href='#{event_path}' target='_blank'>#{event_title}</a>"
     pd_link = "<a href='#{period_path}' target='_blank'>OP#{period_num}</a>"
-    "<br/>#{ev_link} | #{pd_link}"
+    " #{ev_link} | #{pd_link}"
   end
 end

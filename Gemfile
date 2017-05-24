@@ -10,7 +10,7 @@ git_source(:github) do |repo_name|
 end
 
 # ----- rails -----
-gem 'rails', '~> 5.1.0'   # rails
+gem 'rails', '~> 5.1.1'   # rails
 
 # ----- environment -----
 gem 'dotenv-rails'

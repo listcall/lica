@@ -154,12 +154,12 @@ group :development, :test do
 
   # ----- test runners - guard/spring -----
   gem 'guard'                       # auto test-runner
+  gem 'guard-rspec_min' , github: 'andyl/guard-rspec_min'
   gem 'spring'                      # rails pre-loader
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'listen'                      # guard listener
   gem 'rb-inotify'                  # file-system watcher used by guard
   gem 'spring-commands-rspec'       # 'spring rspec' command
-  gem 'guard-rspec_min' , github: 'andyl/guard-rspec_min'
 
   # ----- email testing -----
   gem 'ultrahook'       # for testing inbound mandrill mail on dev

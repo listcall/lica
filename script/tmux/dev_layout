@@ -17,7 +17,7 @@ create_new_session()
 
   tmux new-session -s $APP -n "RSPEC" -d
 
-  sendkeys 1.1 'script/run/specs'
+  sendkeys 1.1 'script/dev/specs'
 
   # ----- -----
 
@@ -29,7 +29,7 @@ create_new_session()
 
   tmux new-window -n "PUMA"
 
-  sendkeys 3.1 'script/run/server'
+  sendkeys 3.1 'script/dev/server'
 
   # ----- -----
 
@@ -41,7 +41,7 @@ create_new_session()
 
   tmux new-window -n "SIDEKIQ"
 
-  sendkeys 5.1 'script/run/sidekiq'
+  sendkeys 5.1 'script/dev/sidekiq'
 
   # ----- -----
 

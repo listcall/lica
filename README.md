@@ -54,7 +54,7 @@ Follow these steps to bootstrap the app in your development environment.
 
 3. Import the seed data `script/seed/import` 
 
-4. Start the development console `script/run/console`
+4. Start the development dashboard `script/run/dashboard`
 
 5. On your host machine, browse to `http://bamru.smso.vbox:3000`
 

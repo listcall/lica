@@ -6,7 +6,7 @@ SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
 
 clear
-echo "script/run/sidekiq"
+echo "script/dev/sidekiq"
 reset
 bundle exec sidekiq -C config/sidekiq.yml
 reset

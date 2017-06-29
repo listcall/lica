@@ -29,13 +29,13 @@ create_new_session()
 
   tmux new-window -n "PUMA"
 
-  sendkeys 3.1 'script/dev/server'
+  sendkeys 3.1 'script/dev/puma'
 
   # ----- -----
 
   tmux new-window -n "WEBPACK"
 
-  sendkeys 4.1 'clear ; webpack-dev-server --host 0.0.0.0 --public soak:8080'
+  sendkeys 4.1 'script/dev/webpack'
 
   # ----- -----
 

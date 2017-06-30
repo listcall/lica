@@ -7,42 +7,39 @@ ListCall (lica) - Team Alerting and Checklists
 This is a private repo - for BAMRU members only.  Do not fork or download w/o
 permission.  See LICENSE.txt and CLA.txt for more info.
 
-## VM Configuration
+## Development VM Configuration
 
 Follow these steps to set up a working development environment running on an
 Ubuntu Virtual machine.
 
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
-2. Run `vagrant init` to create a vagrant file
+2. Download the dev-machine Vagrantfile 
+   `wget raw.githubusercontent.com/listcall/lica/script/dev/Vagrantfile`
 
-3. Edit `Vagrantfile` - change `base` box to `ubuntu/xenial64`.
+3. Run `vagrant up` to create a virtual machine.
 
-4. Run `vagrant up` to create a virtual machine.
+4. Login to your virtual machine using `vagrant ssh`
 
-5. On your host machine, set the `/etc/hosts` VM IP to `bamru.smso.vbox`.
+5. Write down the VM IP address `ifconfig`  
 
-6. Login to your virtual machine using `vagrant ssh`
+## Development Environment Provisioning
 
-7. Clone the repo `mkdir lr; cd lr; git clone https://github.com/listcall/lica.git`
+On the new VM:
 
-8. CD to the repo directory `cd ~/lr/Lica`
+1. Clone the repo `mkdir lr; cd lr; git clone https://github.com/listcall/lica.git`
 
-9. Install ansible `script/provision/install_ansible`
+2. CD to the repo directory `cd ~/lr/lica`
 
-10. Install ansible roles `script/provision/install_roles`
+3. Get the dev branch `g pull dev origin`
 
-11. Provision the dev machine `script/provision/localhost`
+3. Install ansible `script/dev/provision/install_ansible`
 
-12. Check process status: `systemctl status postgresql redis-server memcached`
+4. Install ansible roles `script/dev/provision/install_roles`
 
-## Shared Server
+5. Provision the dev machine `script/dev/provision/localhost`
 
-For data sharing, SSH forwarding and pair programming, we use a shared server.
-The IP address is defined in the file `script/pair/proxy_ip`.  See Andy for the
-SSH password.
-
-1. Copy your SSH public key `script/pair/keycopy` 
+6. Check process status: `systemctl status postgresql redis-server memcached`
 
 ## Application Bootstrap
 
@@ -54,31 +51,37 @@ Follow these steps to bootstrap the app in your development environment.
 
 3. Import the seed data `script/seed/import` 
 
-4. Start the development dashboard `script/run/dashboard`
+4. Start the development dashboard `script/dev/dashboard`
 
-5. On your host machine, browse to `http://bamru.smso.vbox:3000`
+## Host Web Access
 
-## Pair Programming
+1. On your host machine, add the VM IP Address to `/etc/hosts`
 
-Remote collaboration is done using the shared server with SSH port forwarding
-and Tmux/Wemux.
+2. On your host machine, browse to `http://bamru.smso.vbox:3000`
 
-SSH Port Forwarding
+## Online Collaboration
 
-- to enable: `script/pair/portfwd 2222 22`
-- remote ssh access (from the command line): 
-    `ssh vagrant@<PROXY>`
-    `ssh -p 2222 <username>@localhost`
+### SSH-Chat
 
-HTML Remote Access
+Connect to the SSH-Chat server from the command line.
+`ssh listcall.net -p 2022`
 
-- to enable: `script/pair/portfwd 3000 3000`
-- remote access (from the browser): `http://<PROXY>:3000`
+### Remote Pairing
 
-Shared TMUX Session
+Session host:
+- type `script/dev/tmate`
+- the remote access token is published onto SSH-Chat
 
-- starting a session: `wemux`
-- remote access:
-    > ssh to to virtual machine
-    > type `wemux`
+Session participant:
+- enter the tmate command with session token on your command line
 
+### File Transfer
+
+Sender: 
+- type `wormhole send <filename>`
+- note the wormhole code
+
+Receiver:
+- get the wormhole code from the sender
+- type `wormhole receive`
+- enter the wormhole code

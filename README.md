@@ -39,9 +39,11 @@ On the new VM:
 
 6. Install ansible roles `script/dev/provision/install_roles`
 
-7. Provision the dev machine `script/dev/provision/devhost`
+7. Install a ruby interpreter `sudo apt-get install ruby`
 
-8. Check process status: `systemctl status postgresql redis-server memcached`
+8. Provision the dev machine `script/dev/provision/devhost`
+
+9. Check process status: `systemctl status postgresql redis-server memcached`
 
 ## Application Bootstrap
 

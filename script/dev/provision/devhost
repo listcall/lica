@@ -3,7 +3,7 @@
 # Run ansible on localhost
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $SCRIPTDIR/../../..
+cd $SCRIPTDIR
 
-ansible-playbook -i "localhost," -c local config/provision/lica_development.yml
+ansible-playbook -i "localhost," -c local ~/dev/lica/config/provision/lica_development.yml
 

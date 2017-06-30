@@ -39,7 +39,7 @@ On the new VM:
 
 6. Install ansible roles `script/dev/provision/install_roles`
 
-7. Provision the dev machine `script/dev/provision/localhost`
+7. Provision the dev machine `script/dev/provision/devhost`
 
 8. Check process status: `systemctl status postgresql redis-server memcached`
 

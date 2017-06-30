@@ -33,6 +33,7 @@
     - Ruby/gems
     - CLI/util
     - CLI/pdev
+    - pip
     - tmux
     - nodejs
     - postgres

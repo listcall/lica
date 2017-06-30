@@ -49,13 +49,17 @@ On the new VM:
 
 Follow these steps to bootstrap the app in your development environment.
 
-1. Install the ruby gems `bash; gem install bundler; bundle install`
+1. Setup ruby paths `cat script/dev/provision/bashrc.txt >> ~/.bashrc`
 
-2. Download the seed data `script/seed/download` 
+2. Start a new bash shell `bash`
 
-3. Import the seed data `script/seed/import` 
+3. Install the ruby gems `gem install bundler; bundle install`
 
-4. Start the development dashboard `script/dev/dashboard`
+4. Download the seed data `script/seed/download` 
+
+5. Import the seed data `script/seed/import` 
+
+6. Start the development dashboard `script/dev/dashboard`
 
 ## Host Web Access
 

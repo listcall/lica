@@ -5,7 +5,7 @@
 # Abort if the ansible executable is found
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $SCRIPTDIR/../..
+cd $SCRIPTDIR/../../..
 
 echo "=== ANSIBLE INSTALL ====================================="
 echo "Installing Python Dependencies"

@@ -27,7 +27,7 @@ Ubuntu Virtual machine.
 
 On the new VM:
 
-1. Clone the repo `mkdir lr; cd lr; git clone https://github.com/listcall/lica.git`
+1. Clone the repo `mkdir dev; cd dev; git clone https://github.com/listcall/lica.git`
 
 2. CD to the repo directory `cd ~/lr/lica`
 

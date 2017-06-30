@@ -3,12 +3,12 @@
 # Installs ansible roles on the local machine
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd $SCRIPTDIR/../..
+cd $SCRIPTDIR/../../..
 
 echo "=== ANSIBLE ROLES INSTALL ==============================="
 cd ~
-mkdir -f g
-cd g
+mkdir -f git
+cd git
 if [[ -d x-ansible ]] ; then
   echo "Updating roles"
   cd x-ansible

@@ -7,7 +7,7 @@ cd $SCRIPTDIR/../../..
 
 echo "=== ANSIBLE ROLES INSTALL ==============================="
 cd ~
-mkdir -f git
+mkdir -p git
 cd git
 if [[ -d x-ansible ]] ; then
   echo "Updating roles"

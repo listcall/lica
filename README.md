@@ -15,7 +15,7 @@ Ubuntu Virtual machine.
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
-   `wget raw.githubusercontent.com/listcall/lica/script/dev/Vagrantfile`
+   `wget raw.githubusercontent.com/listcall/lica/script/dev/vm/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
 
@@ -29,17 +29,19 @@ On the new VM:
 
 1. Clone the repo `mkdir dev; cd dev; git clone https://github.com/listcall/lica.git`
 
-2. CD to the repo directory `cd ~/lr/lica`
+2. CD to the repo directory `cd ~/dev/lica`
 
-3. Get the dev branch `g pull dev origin`
+3. Get the dev branch `git checkout -B dev ; git pull origin dev`
 
-3. Install ansible `script/dev/provision/install_ansible`
+4. Upgrade the machine `script/dev/provision/system_update`
 
-4. Install ansible roles `script/dev/provision/install_roles`
+5. Install ansible `script/dev/provision/install_ansible`
 
-5. Provision the dev machine `script/dev/provision/localhost`
+6. Install ansible roles `script/dev/provision/install_roles`
 
-6. Check process status: `systemctl status postgresql redis-server memcached`
+7. Provision the dev machine `script/dev/provision/localhost`
+
+8. Check process status: `systemctl status postgresql redis-server memcached`
 
 ## Application Bootstrap
 

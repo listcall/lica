@@ -15,7 +15,7 @@ Ubuntu Virtual machine.
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
-   `wget raw.githubusercontent.com/listcall/lica/script/dev/vm/Vagrantfile`
+   `wget raw.githubusercontent.com/listcall/lica/script/dev/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
 
@@ -27,39 +27,36 @@ Ubuntu Virtual machine.
 
 On the new VM:
 
-1. Clone the repo `mkdir dev; cd dev; git clone https://github.com/listcall/lica.git`
+1. Clone the repo `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
 
-2. CD to the repo directory `cd ~/dev/lica`
+2. CD to the repo directory `cd ~/lr/lica`
 
-3. Get the dev branch `git checkout -B dev ; git pull origin dev`
+3. Create a dev branch `git checkout -B dev`
 
-4. Upgrade the machine `script/dev/provision/system_update`
+3. Pull the dev branch `git pull origin dev`
 
-5. Install ansible `script/dev/provision/install_ansible`
+3. Install ansible `script/dev/provision/install_ansible`
 
-6. Install ansible roles `script/dev/provision/install_roles`
+4. Install ansible roles `script/dev/provision/install_roles`
 
-7. Install a ruby interpreter `sudo apt-get install ruby`
+5. Provision the dev machine `script/dev/provision/localhost`
 
-8. Provision the dev machine `script/dev/provision/devhost`
+6. Check database status: `systemctl status postgresql`
 
-9. Check process status: `systemctl status postgresql redis-server memcached`
 
 ## Application Bootstrap
 
 Follow these steps to bootstrap the app in your development environment.
 
-1. Setup ruby paths `cat script/dev/provision/bashrc.txt >> ~/.bashrc`
+1. Install the ruby gems `bash; gem install bundler; bundle install`
 
-2. Start a new bash shell `bash`
+2. Download the seed data `script/seed/download_data` 
 
-3. Install the ruby gems `gem install bundler; bundle install`
+3. Download the seed files `script/seed/download_files` 
 
-4. Download the seed data `script/seed/download` 
+4. Import the seed data `script/seed/import` 
 
-5. Import the seed data `script/seed/import` 
-
-6. Start the development dashboard `script/dev/dashboard`
+5. Start the development dashboard `script/dev/dashboard`
 
 ## Host Web Access
 
@@ -74,14 +71,17 @@ Follow these steps to bootstrap the app in your development environment.
 Connect to the SSH-Chat server from the command line.
 `ssh listcall.net -p 2022`
 
+or `script/util/sshchat`
+
 ### Remote Pairing
 
 Session host:
-- type `script/dev/tmate`
-- the remote access token is published onto SSH-Chat
+- start a tmate session `script/tmate/start`
+- publish a session token `script/tmate/token`
+  the remote access token is published onto SSH-Chat
 
 Session participant:
-- enter the tmate command with session token on your command line
+- enter the ssh command with session token on your command line
 
 ### File Transfer
 

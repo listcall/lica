@@ -16,6 +16,7 @@
 /wiki/
 /script/dev/.vagrant/
 /script/dev/*log
+/script/dev/vm/*log
 /db/test*
 /db/backups*
 /db/backups/*

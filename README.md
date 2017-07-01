@@ -50,11 +50,13 @@ Follow these steps to bootstrap the app in your development environment.
 
 1. Install the ruby gems `bash; gem install bundler; bundle install`
 
-2. Download the seed data `script/seed/download_data` 
+STEPS 2,3,4 ARE UNDER CONSTRUCTION.  CONTACT ANDY.  1 Jul 2017
 
-3. Download the seed files `script/seed/download_files` 
+    2. Download the seed data `script/seed/download_data` 
 
-4. Import the seed data `script/seed/import` 
+    3. Download the seed files `script/seed/download_files` 
+
+    4. Import the seed data `script/seed/import` 
 
 5. Start the development dashboard `script/dev/dashboard`
 
@@ -75,11 +77,11 @@ Connect to the SSH-Chat server from the command line.
 
 Session host:
 - start a tmate session `script/tmate/start`
-- publish a session token `script/tmate/token`
-  the remote access token is published onto SSH-Chat
+- publish the session address `script/tmate/address`
+  the session address is published onto SSH-Chat
 
 Session participant:
-- enter the ssh command with session token on your command line
+- enter the ssh command with session address on your command line
 
 ### File Transfer
 

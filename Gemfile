@@ -10,7 +10,7 @@ git_source(:github) do |repo_name|
 end
 
 # ----- rails -----
-gem 'rails', '~> 5.1.0'   # rails
+gem 'rails', '~> 5.1.1'   # rails
 
 # ----- environment -----
 gem 'dotenv-rails'
@@ -58,9 +58,7 @@ gem 'counter_culture'   # counter caches in parent objects
 gem 'active_type'       # extensions for ActiveModel
 
 # ----- view utilities -----
-# gem 'simple_form', '~> 3.2.0' # form generator
 gem 'simple_form'             # form generator
-# gem 'active_link_to'          # for creating bootstrap nav bars
 gem 'launchy'                 # static page launcher
  
 # ----- images and attachments -----
@@ -80,6 +78,7 @@ gem 'coffee-rails' , '~> 4.2.0'        # coffeescript support
 gem 'bh'           , '~> 1.3.6'        # bootstrap helpers
 
 # ----- javascript packages / gems -----
+gem 'jquery-rails'
 gem 'jquery-ui-rails'        , '4.2.1'    # jquery UI
 gem 'bootstrap-sass'         , '~> 3.3'   # bootstrap UI framework
 gem 'bootstrap-switch-rails' , '1.8.1'    # bootstrap on-off switch
@@ -155,12 +154,12 @@ group :development, :test do
 
   # ----- test runners - guard/spring -----
   gem 'guard'                       # auto test-runner
+  gem 'guard-rspec_min' , github: 'andyl/guard-rspec_min'
   gem 'spring'                      # rails pre-loader
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'listen'                      # guard listener
   gem 'rb-inotify'                  # file-system watcher used by guard
   gem 'spring-commands-rspec'       # 'spring rspec' command
-  gem 'guard-rspec_min' , github: 'andyl/guard-rspec_min'
 
   # ----- email testing -----
   gem 'ultrahook'       # for testing inbound mandrill mail on dev

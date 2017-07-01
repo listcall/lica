@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+# run the development server
+
+SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+cd $SCRIPTDIR/../..
+
+export APP="ListCall"
+
+clear
+echo "script/dev/server"
+# webpack-dev-server --host soak --public soak --port 9090
+webpack-dev-server --host soak --port 9090

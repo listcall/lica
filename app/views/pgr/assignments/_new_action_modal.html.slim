@@ -1,0 +1,41 @@
+- # integration_test: features/pgr/new
+
+javascript:
+  optionLst = '#{raw Pgr::Action.option_list.to_json}';
+  periodLst = '#{raw period_list(@events).to_json}';
+  window.OptionList = JSON.parse(optionLst);
+  window.PeriodList = JSON.parse(periodLst);
+  console.log
+
+css:
+  .strikeout {
+    text-decoration: line-through;
+  }
+  .btn-ts {
+    padding: 0 3px 0 3px;
+    font-size: 10px;
+    margin-right: 3px;
+    margin-left: 3px;
+  }
+  td {
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+= modal 'actionModal', 'Select an Action' do
+  .modal-body
+    .row
+      .col-ms-4.ac
+        b Actions
+        p
+        #LCrcOptionList
+      .col-ms-8
+        #LCrcOptionDisplay
+
+  .modal-footer
+    .pull-right
+      table
+        tr
+          td
+            #LCrcSaveButton
+          td
+            #LCrcCloseButton

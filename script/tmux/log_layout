@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# should be called from tmux_console
+# should be called from tmux_dashboard
 
 export APP="LOGVIEW"
 

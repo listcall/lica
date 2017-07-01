@@ -1,4 +1,5 @@
 # integration_test: requests/pgr/multi_partner
+# integration_test: requests/pgr/interaction
 
 require 'ext/ar_proxy'
 
@@ -11,16 +12,17 @@ class Pgr::AssignmentsController < ApplicationController
   end
 
   def new
-    build_broadcast
-    @list_type    = cookie_list_type
-    @partners     = PageBot.new(current_team)
-    @memberships  = membership_scope
-    @events       = current_team.events
+    @overview    = new_params["overview"]
+    @new_params  = new_params["base"]
+    @list_type   = cookie_list_type
+    @partners    = PageBot.new(current_team)
+    @memberships = membership_scope
+    @events      = current_team.events
   end
 
   # create a new page
   def create
-    build_broadcast
+    build_broadcast_for_create
     save_broadcast or render('new')
   end
 
@@ -34,21 +36,26 @@ class Pgr::AssignmentsController < ApplicationController
 
   # ----- broadcasts -----
 
-  def build_broadcast
-    @broadcast ||= broadcast_scope.build
-    @broadcast.attributes = broadcast_params
+  def build_broadcast_for_create
+    @bcst ||= broadcast_scope.build
+    @bcst.attributes = broadcast_create_params
   end
 
   def save_broadcast
-    if @broadcast.save
+    if @bcst.save
       # TODO - run this in background !!!!!
-      Pgr::Util::GenBroadcast.new(@broadcast).generate_all.deliver_all
+      Pgr::Util::GenBroadcast.new(@bcst).generate_all.deliver_all
       redirect_to paging_path
     end
   end
 
-  def broadcast_params
-    broadcast_params = generate_broadcast_params(params[:broadcast])
+  def new_params
+    return {} unless params[:pg_action].present?
+    @new_params ||= PgrNewVal.new(params).generate_new_params
+  end
+
+  def broadcast_create_params
+    broadcast_params = generate_broadcast_create_params(params[:broadcast])
     broadcast_params ? broadcast_params.permit(permitted_broadcast_params) : {}
   end
 
@@ -72,7 +79,7 @@ class Pgr::AssignmentsController < ApplicationController
     ]
   end
 
-  def generate_broadcast_params(params)
+  def generate_broadcast_create_params(params)
     return nil if params.blank?
     params[:assignments_attributes] = assignment_params(params)
     params[:recipient_ids]          = recipient_ids(params)

@@ -73,6 +73,13 @@ module EventsHelper
     period.event.event_periods_count
   end
 
+  def tooltip_text(period)
+    count = period.participants.count
+    return "no participants" if count == 0
+    names = period.participants.map {|p| p.membership.last_name}.sort.join(", ")
+    "#{count} participants: #{names}"
+  end
+
   def delete_event_period_button(period)
     if period.participants.count != 0 || num_siblings(period) < 2
       cls = 'btn btn-xs btn-disabled'
@@ -82,6 +89,26 @@ module EventsHelper
       msg = {confirm: 'Are you sure?'}
       cls = 'btn btn-xs btn-danger'
       link_to 'Delete', url, method: :delete, data: msg, class: cls
+    end
+  end
+
+  def event_page_link(period, type)
+
+    lbl  = type.to_s.upcase
+    path = "/paging/new?pg_action=#{lbl}&pg_opid=#{period.id}"
+    btyp = is_enabled?(period, type) ? "btn#{type.to_s.capitalize}" : ""
+    dopt = is_enabled?(period, type) ? "" : "disabled='disabled'"
+    clas = "btn btn-default #{btyp}"
+    raw "<a target='_blank' #{dopt} class='#{clas}' href='#{path}'>#{lbl}</a>"
+  end
+
+  def is_enabled?(period, type)
+    case type
+      when :rsvp   then Time.now < period.event.finish && period.participants.has_left.count == 0
+      when :notify then period.participants.count > 0
+      when :leave  then period.participants.count > 0 && period.participants.has_not_left.count > 0
+      when :return then period.participants.has_not_left.count == 0 && period.participants.has_not_returned.count > 0
+      else true
     end
   end
 

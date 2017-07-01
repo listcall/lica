@@ -8,7 +8,7 @@
     lclData.eSelect  = '#{raw(@select)}';
     lclData.parents  = #{raw @event_bot.potential_parent_events};
     lclData.children = #{raw @event_bot.potential_child_events};
-  = javascript_include_tag 'events/all_show'
+  = javascript_pack_tag 'events/show'
 
 - content_for :subhead do
   .subhead
@@ -19,13 +19,15 @@
             = raw link_to "#{current_team.acronym} Events", "/events"
             '  > #{@event.event_ref}
         .col-xs-6.text-right
-          a.help-button href="/events/new"  Create New Event
+          a.help-button href="/events/new" Create New Event
           a.help-button href="/events/new?copy=#{@event.id}"  Copy This Event
           = raw event_delete_link(@event.event)
           = member_help_button('events')
 
 css:
-  .select2wide { width: 350px; }
+  .select2wide { width: 350px;       }
+  .pCount      { margin-left: 10px;  }
+  .btn-group   { margin-top: 0; margin-bottom: 0; }
 
 .container
   .row
@@ -33,10 +35,10 @@ css:
       = render 'event_overview'
 
     .col-md-6
-      table.table.table-condensed.table-bordered
+      table.table.table-condensed.table-bordered.table-hover
         thead
           th Period
-          th # Participants
+          th Paging
           th.ar
             form action="/events/#{@event.event_ref}/periods" method="POST"
               input name="authenticity_token" type="hidden" value=form_authenticity_token /
@@ -47,9 +49,14 @@ css:
               td
                 i.fa.fa-arrows-v.sortIcon
                 a href="/events/#{@event.event_ref}/periods/#{period.position}"
-                  = "Period #{period.position}"
+                  => "Period #{period.position}"
+                .badge.pCount data-toggle='tooltip' title='#{tooltip_text(period)}' #{period.participants.count }
               td
-                = period.participants.count
+                .btn-group.btn-group-xs role="group"
+                  = event_page_link(period, :rsvp)
+                  = event_page_link(period, :notify)
+                  = event_page_link(period, :leave)
+                  = event_page_link(period, :return)
               td.ar
                 = delete_event_period_button(period)
       small

@@ -25,7 +25,7 @@ feature 'Avail/Days', :capy do
       end
     end
 
-    context 'with factory user' do
+    context 'with factory user' do #
       it 'renders indx_path' do
         login_with mem1
         visit indx_path

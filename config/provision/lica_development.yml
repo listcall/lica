@@ -5,7 +5,8 @@
 # - vagrant provision  
 - vars:
     - rem_host:     all           
-    - rem_user:     vagrant      
+    - rem_user:     "{{lookup('env', 'USER') }}"
+    # - rem_user:     vagrant      
     # - rem_host:     lch1
     # - rem_user:     deploy
     - lcl_user:     "{{ lookup('env', 'USER') }}"
@@ -23,8 +24,6 @@
   roles:
     - Vars/predicates
     - Vars/lclhost
-    - Vars/env
-    - Vars/dump
     - CLI/user
     - CLI/base
     - CLI/tzone
@@ -34,6 +33,7 @@
     - Ruby/gems
     - CLI/util
     - CLI/pdev
+    - pip
     - tmux
     - nodejs
     - postgres

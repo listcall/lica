@@ -1,8 +1,8 @@
 - content_for :page_js do
   javascript:
-    window.lclData    = {};
-    lclData.rails_env = "#{Rails.env}";
-  = javascript_include_tag "pgr/all_dialog"
+    window.lclData   = {};
+    lclData.railsEnv = "#{Rails.env}";
+  = javascript_pack_tag "pgr/dialog"
 
 - content_for :subhead do
   .subhead

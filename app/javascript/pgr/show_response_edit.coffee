@@ -17,6 +17,7 @@ showPopover = (el)->
     placement : 'auto'
     container : 'body'
   $el.popover(opts).popover('show')
+  console.log "BNIG BONG"
   $('.closePop').click resetPopover
 
 resetPopover = ->

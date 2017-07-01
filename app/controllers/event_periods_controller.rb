@@ -1,6 +1,7 @@
 class EventPeriodsController < ApplicationController
 
   before_action :authenticate_reserve!
+  before_action :set_no_cache
 
   def index
     ctx = {user: current_user, env: request.env}

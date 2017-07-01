@@ -14,6 +14,9 @@
 /doc/
 /data/
 /wiki/
+/script/dev/.vagrant/
+/script/dev/*log
+/script/dev/vm/*log
 /db/test*
 /db/backups*
 /db/backups/*
@@ -21,6 +24,7 @@
 /db/backups*
 /node_modules/
 /jsn/node_modules/
+/public/packs-tests/
 /public/assets/
 /public/system/
 /public/system*/

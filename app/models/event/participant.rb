@@ -37,6 +37,7 @@ class Event::Participant < ActiveRecord::Base
   scope :has_left    , ->     { where('departed_at is not NULL')         }
   scope :is_departed , ->     { has_left.where('returned_at is NULL')    }
   scope :has_returned, ->     { where('returned_at is not NULL')         }
+  scope :has_not_returned, -> { where('returned_at is NULL')             }
   scope :sans_period , ->     { where('event_period_id is NULL')         }
   scope :by_mem_id   , ->(id) { where(membership_id: id)                 }
 

@@ -11,7 +11,7 @@
 # GO AFTER THE REQUIRES BELOW.
 #
 #= require jquery
-## require jquery_ujs
+#= require jquery_ujs 
 #= require jquery.ui.all
 #= require jquery-cookie
 #= require modernizr
@@ -31,7 +31,6 @@
 #= require jquery.tablesorter/jquery.tablesorter.widgets
 #= require sweetalert
 #= require react/react-with-addons
-## require react_ujs
 #= require react-bootstrap
 #= require radium
 #= require util/react_popover

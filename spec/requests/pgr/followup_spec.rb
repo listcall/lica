@@ -29,7 +29,7 @@ describe 'Pager Forwarding', :focus do
       expect(Pgr::Post.count).to             eq(2)
       expect(Pgr::Outbound.count).to         eq(6)
       expect(Pgr::Outbound.pending.count).to eq(2)
-      expect(Inbound.count).to               eq(0)
+      expect(Inbound.count).to               eq(0) #
     end
   end
 end

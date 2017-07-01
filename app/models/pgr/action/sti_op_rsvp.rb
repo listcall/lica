@@ -37,10 +37,10 @@ class Pgr::Action::StiOpRsvp < Pgr::Action
 
     def about
       <<-EOF.gsub('      ','').gsub("\n", ' ')
-        An RSVP action allows the page recipient to reply with a
-        yes/no/maybe response.  RSVPs are associated with
+        An RSVP allows the page recipient to reply with a
+        YES/NO/MAYBE response.  RSVPs are associated with
         a single operational period.  When someone replies with
-        a yes, they are automatically added to the roster for
+        a YES, they are automatically added to the roster for
         that operational period.
       EOF
     end

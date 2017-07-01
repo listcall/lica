@@ -13,7 +13,7 @@ class Admin::TeamNamesController < ApplicationController
     @team = Team.find id
     @team.update_attributes attrs.permit(:name, :logo_text, :altdomain, :subdomain, :icon)
     if @team.valid?
-      port = env['SERVER_PORT'].blank? ? '' : ":#{env["SERVER_PORT"]}"
+      port = ENV['SERVER_PORT'].blank? ? '' : ":#{ENV["SERVER_PORT"]}"
       new_url = "http://#{@team.subdomain}.#{@team.org.domain}#{port}/admin/team_names"
       redirect_to new_url, :notice => 'Successful Update'
     else

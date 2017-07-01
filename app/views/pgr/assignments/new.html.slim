@@ -3,6 +3,7 @@
 - content_for :page_js do
   javascript:
     window.lclData = {};
+    lclData.newParams  = '#{ raw @new_params.to_json }';
     lclData.selectList = #{ raw @partners.select_list };
   = javascript_pack_tag "pgr/new"
 
@@ -25,6 +26,8 @@ css:
   form.form-horizontal action="/paging" method="post" role="form"
     .row
       #rightCol.col-ms-6.col-ms-push-6
+        - if @overview
+          <b>#{raw @overview}</b><br/>
         p
         input name="authenticity_token"        type="hidden" value=form_authenticity_token
         input name="broadcast[sender_action]"  type="hidden" value="sent page"
@@ -112,4 +115,4 @@ css:
         br
         p
 
-= render partial: "action_modal"
+= render partial: "new_action_modal"

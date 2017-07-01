@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# call from tmux_console
+# call from tmux_dashboard
 
 export APP="LICA-DEV"
 
@@ -17,7 +17,7 @@ create_new_session()
 
   tmux new-session -s $APP -n "RSPEC" -d
 
-  sendkeys 1.1 'script/run/specs'
+  sendkeys 1.1 'script/dev/specs'
 
   # ----- -----
 
@@ -29,19 +29,19 @@ create_new_session()
 
   tmux new-window -n "PUMA"
 
-  sendkeys 3.1 'script/run/server'
+  sendkeys 3.1 'script/dev/puma'
 
   # ----- -----
 
   tmux new-window -n "WEBPACK"
 
-  sendkeys 4.1 'clear ; webpack-dev-server --host 0.0.0.0 --public soak:8080'
+  sendkeys 4.1 'script/dev/webpack'
 
   # ----- -----
 
   tmux new-window -n "SIDEKIQ"
 
-  sendkeys 5.1 'script/run/sidekiq'
+  sendkeys 5.1 'script/dev/sidekiq'
 
   # ----- -----
 

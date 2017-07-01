@@ -1,5 +1,5 @@
 - content_for :page_js do
-  = javascript_include_tag 'positions/all_show'
+  = javascript_pack_tag 'positions/show'
 
 - content_for :positions_header do
   = pos_breadcrumb "positions", ["#{current_team.acronym} Positions", @position.name]
@@ -8,12 +8,12 @@
     div style='float: right; padding-top: 10px;'
       span style='margin-right: 80px;'
         - if not_current_quarter(@quarter)
-          a.pn> href="/positions/#{@position.role.acronym}#{homelnk(@tab)}"
+          a.pn> href="/app/javascript/all_packs/positions/positions/#{@position.role.acronym}#{homelnk(@tab)}"
             i.fa.fa-home style='margin-right: 10px;' data-toggle='tooltip' title='current quarter'
-        a.pn> href="/positions/#{@position.role.acronym}#{prevlnk(@quarter, @tab)}"
+        a.pn> href="/app/javascript/all_packs/positions/positions/#{@position.role.acronym}#{prevlnk(@quarter, @tab)}"
           i.fa.fa-chevron-left data-toggle='tooltip' title='previous quarter'
         b> #{@quarter[:year]} Q#{@quarter[:quarter]}
-        a.pn> href="/positions/#{@position.role.acronym}#{nextlnk(@quarter, @tab)}"
+        a.pn> href="/app/javascript/all_packs/positions/positions/#{@position.role.acronym}#{nextlnk(@quarter, @tab)}"
           i.fa.fa-chevron-right data-toggle='tooltip' title="next quarter"
 
       small

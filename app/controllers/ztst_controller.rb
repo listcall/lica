@@ -20,6 +20,8 @@ class ZtstController < ApplicationController
   def chat    ;   end
   def pack1   ;   end
   def pack2   ;   end
+  def share  ;   end
+  def share2  ;   end
 
   def handle
     @col1 = %w(hello handle)

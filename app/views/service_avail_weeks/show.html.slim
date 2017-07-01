@@ -3,7 +3,7 @@
     window.lclData     = {}
     lclData.serviceId  = JSON.parse(#{@service.id})
     lclData.memberName = "#{@member.user_name}"
-  = javascript_include_tag 'service_avail_weeks/all_show'
+  = javascript_pack_tag 'avail_weeks/all_show'
 
 - content_for :services_header do
   = svc_breadcrumb ["services/#{@service.id}", "avail_weeks"], \

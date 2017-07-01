@@ -22,8 +22,8 @@ User=deploy
 Group=deploy
 Type=simple
 
-WorkingDirectory=/home/deploy/a/lica/current
-EnvironmentFile=/home/deploy/a/lica/current/.env
+WorkingDirectory=/home/deploy/app/lica/current
+EnvironmentFile=/home/deploy/app/lica/current/.env
 ExecStart=/bin/bash -lc 'bin/puma -p <%= fetch(:web_port) %> -C config/puma.rb -e production -S $USR_HOME/.LICA_Puma_State'
 
 Restart=always

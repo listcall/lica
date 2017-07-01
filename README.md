@@ -69,9 +69,7 @@ Follow these steps to bootstrap the app in your development environment.
 ### SSH-Chat
 
 Connect to the SSH-Chat server from the command line.
-`ssh listcall.net -p 2022`
-
-or `script/util/sshchat`
+`script/util/sshchat`
 
 ### Remote Pairing
 

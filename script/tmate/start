@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+# tmate/start
+
+tmate
+

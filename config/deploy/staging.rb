@@ -12,6 +12,6 @@ set :branch,    'dev'
 
 set :rails_env, 'staging'
 
-role :app, ['deploy@smso.vbox']
-role :db,  ['deploy@smso.vbox']
-role :web, ['deploy@smso.vbox']
+role :app, ['deploy@tstlica']
+role :db,  ['deploy@tstlica']
+role :web, ['deploy@tstlica']

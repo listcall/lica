@@ -1,7 +1,10 @@
 class Org < ActiveRecord::Base
 
   ALT_DOMAINS ||= {
-    'listcall.net' => %w(smesb.com smso.dev smso.vbox lica.dev)
+    # VM hostnames: devlica (development), tstlica (staging)
+    # use smso.dev, lica.dev, lica.vdev for development
+    # use smso.tst, lica.tst, lica.vtst for staging
+    'listcall.net' => %w(smso.dev smso.tst lica.dev lica.tst lica.vdev lica.vtst)
   }
 
   # for development - a mapping of dev domains with their production equivalents

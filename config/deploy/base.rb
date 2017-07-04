@@ -7,7 +7,7 @@ set :application,    'lica'
 set :log_level,      :error                 # use :error, :warn, :info, or :debug
 set :format_options, command_output: false  # :stdout, :stderr, true, false
 
-set :deploy_to,   -> { "/home/#{fetch(:user)}/app/#{fetch(:application).downcase}" }
+set :deploy_to,   -> { "/home/#{fetch(:user)}/alp/#{fetch(:application).downcase}" }
 
 # ===== Nginx Config =====
 
@@ -53,10 +53,6 @@ namespace :deploy do
       debug ' RESTART '.center(80,'-')
       debug ' TODO: FIX THE BROKEN KILL SIGNALS '.center(80,'-')
       # restart PUMA
-      # execute "(kill -s SIGUSR1 $(ps -C ruby -F | grep '/puma' | awk {'print $2'})) || sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
-      # restart SIDEKIQ
-      # execute "(kill -s TERM $(ps -C ruby -F | grep 'sidekiq' | awk {'print $2'})) || sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
-      # execute "sudo restart #{fetch(:application)} || sudo start #{fetch(:application)}"
       execute "sudo systemctl restart lica"
       execute "sudo systemctl restart sidekiq"
     end

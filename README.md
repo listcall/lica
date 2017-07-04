@@ -64,7 +64,7 @@ STEPS 2,3,4 ARE UNDER CONSTRUCTION.  CONTACT ANDY.  1 Jul 2017
 
 1. On your host machine, add the VM IP Address to `/etc/hosts`
 
-2. On your host machine, browse to `http://bamru.smso.vbox:3000`
+2. On your host machine, browse to `http://bamru.smso.dev:3000`
 
 ## Online Collaboration
 

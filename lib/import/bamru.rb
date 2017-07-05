@@ -165,8 +165,6 @@ module Import
       end
     end
 
-    # /home/aleak/lr/Lica/lib/import/system/certs/1/original/Wayne_Med_Cert006.pdf
-
     def self.attachment_path(path)
       return '' if path == '/certs/original/missing.png'
       return '' if path.blank?

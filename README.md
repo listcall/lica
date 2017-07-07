@@ -29,7 +29,7 @@ On the new VM:
 
 1. Clone the repo `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
 
-2. CD to the repo directory `cd ~/lr/lica`
+2. CD to the repo directory `cd ~/src/lica`
 
 3. Create a dev branch `git checkout -B dev`
 

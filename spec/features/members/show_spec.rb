@@ -29,20 +29,20 @@ feature 'members#show'  do
       end
 
       context 'when editing the member name', :js do
-        it 'brings up the edit dialog' do
-          visit path1
-          page.find('#fullEdit').click
-          expect(page).to have_content('Required')
-        end
+        # it 'brings up the edit dialog' do
+        #   visit path1
+        #   page.find('#fullEdit').click
+        #   expect(page).to have_content('Required')
+        # end
 
-        it 'updates and saves the name' do
-          visit path1
-          expect(page).to_not have_content('Joe')
-          page.find('#fullEdit').click
-          fill_in 'First:', with: 'Joe'
-          page.find('.glyphicon-ok').click
-          expect(page).to have_content('Joe')
-        end
+        # it 'updates and saves the name' do
+        #   visit path1
+        #   expect(page).to_not have_content('Joe')
+        #   page.find('#fullEdit').click
+        #   fill_in 'First:', with: 'Joe'
+        #   page.find('.glyphicon-ok').click
+        #   expect(page).to have_content('Joe')
+        # end
       end
 
       # FIXME ALT

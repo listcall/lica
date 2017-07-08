@@ -51,35 +51,35 @@ feature 'Avail/Days', :capy do
     end
 
     context 'when clicking first avail', :js do
-      it 'modifies one record' do
-        first('.avail').click
-        wait_for_ajax
-        expect(Avail::Week.avail.count).to eq(1)
-      end
+      # it 'modifies one record' do
+      #   first('.avail').click
+      #   wait_for_ajax
+      #   expect(Avail::Week.avail.count).to eq(1)
+      # end
     end
 
     context 'when clicking first unavail', :js do
-      it 'modifies one record' do
-        first('.unava').click
-        wait_for_ajax
-        expect(Avail::Week.unavail.count).to eq(1)
-      end
+      # it 'modifies one record' do
+      #   first('.unava').click
+      #   wait_for_ajax
+      #   expect(Avail::Week.unavail.count).to eq(1)
+      # end
     end
 
     context 'when clicking all avail', :js do
-      it 'modifies all records' do
-        first('#allAvail').click
-        wait_for_ajax
-        expect(Avail::Week.avail.count).to eq(13)
-      end
+      # it 'modifies all records' do
+      #   first('#allAvail').click
+      #   wait_for_ajax
+      #   expect(Avail::Week.avail.count).to eq(13)
+      # end
     end
 
     context 'when clicking all unavail', :js do
-      it 'modifies all records' do
-        first('#allUnava').click
-        wait_for_ajax
-        expect(Avail::Week.unavail.count).to eq(13)
-      end
+      # it 'modifies all records' do
+      #   first('#allUnava').click
+      #   wait_for_ajax
+      #   expect(Avail::Week.unavail.count).to eq(13)
+      # end
     end
   end
 

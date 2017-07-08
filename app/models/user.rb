@@ -24,6 +24,7 @@ class User < ActiveRecord::Base
     has_many :other_infos        , -> { order('position ASC') }
     has_many :emergency_contacts , -> { order('position ASC') }
     has_many :user_certs
+    has_many :cert_users
   end
 
   PW_REGEXP = /\A[A-z0-9~!@#$%^&*()_+`={}:";'<>,.?\-\[\]\/]+\z/

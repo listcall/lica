@@ -43,6 +43,8 @@ class Team < ActiveRecord::Base
     has_many :inbounds
     has_many :ranks, -> { order(:sort_key) }, class_name: 'Team::Rank'
     has_many :roles, -> { order(:sort_key) }, class_name: 'Team::Role'
+    has_many :cert_specs
+    has_many :acc_roles
   end
 
   has_many :rank_assignments, :through => :ranks, class_name: 'Team::RankAssignment'

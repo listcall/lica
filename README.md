@@ -50,9 +50,11 @@ Follow these steps to bootstrap the app in your development environment.
 
 1. Install ruby gems `bash; gem install bundler; bundle install`
 
-2. Install NPM components: `sudo npm install yarn; yarn install`
+2. Install Yarn: `sudo npm install yarn`
 
-3. Get seed data from a partner:
+3. Install NPM components: `sudo chown -R <user>:<user> node_modules; yarn install`
+
+4. Get seed data from a partner:
 
 |----------------------------|--------------------------|
 | PARTNER COMMAND            | YOUR COMMAND             |
@@ -62,9 +64,9 @@ Follow these steps to bootstrap the app in your development environment.
 | `script/seed/share_sysdir` | `script/seed/get_sysdir` |
 |----------------------------|--------------------------|
 
-4. Import the seed db `script/seed/import_db`
+5. Import the seed db `script/seed/import_db`
 
-5. Start the development dashboard `script/dev/dashboard`
+6. Start the development dashboard `script/dev/dashboard`
 
 ## Host Web Access
 

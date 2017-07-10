@@ -30,9 +30,9 @@ class Membership < ActiveRecord::Base
   belongs_to  :user, touch: true
   belongs_to  :team, touch: true
   with_options :dependent => :destroy do
-    has_many    :forum_subscriptions
-    has_many    :forum_topic_subscriptions
-    has_many    :membership_certs
+    # has_many    :forum_subscriptions
+    # has_many    :forum_topic_subscriptions
+    # has_many    :membership_certs
     has_many    :participations   , class_name: 'Event::Participant'
     has_many    :avail_days       , class_name: 'Avail::Day'
     has_many    :avail_weeks      , class_name: 'Avail::Week'

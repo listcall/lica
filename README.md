@@ -50,15 +50,19 @@ Follow these steps to bootstrap the app in your development environment.
 
 1. Install the ruby gems `bash; gem install bundler; bundle install`
 
-STEPS 2,3,4 ARE UNDER CONSTRUCTION.  CONTACT ANDY.  1 Jul 2017
+2. Work with a partner to get the seed data
 
-    2. Download the seed data `script/seed/download_data` 
+|----------------------------|--------------------------|
+| PARTNER COMMAND            | YOUR COMMAND             |
+|----------------------------|--------------------------|
+| `script/seed/share_env`    | `script/seed/get_env`    |
+| `script/seed/share_db`     | `script/seed/get_db`     |
+| `script/seed/share_sysdir` | `script/seed/get_sysdir` |
+|----------------------------|--------------------------|
 
-    3. Download the seed files `script/seed/download_files` 
+3. Import the seed db `script/seed/import_db`
 
-    4. Import the seed data `script/seed/import` 
-
-5. Start the development dashboard `script/dev/dashboard`
+4. Start the development dashboard `script/dev/dashboard`
 
 ## Host Web Access
 

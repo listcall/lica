@@ -50,7 +50,7 @@ Follow these steps to bootstrap the app in your development environment.
 
 1. Install ruby gems `bash; gem install bundler; bundle install`
 
-2. Install Yarn: `sudo npm install yarn`
+2. Install Yarn: `sudo npm install yarn -g`
 
 3. Install NPM components: `sudo chown -R <user>:<user> node_modules; yarn install`
 

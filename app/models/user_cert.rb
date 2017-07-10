@@ -2,7 +2,7 @@ require 'app_auth/methods'
 
 class UserCert < ActiveRecord::Base
 
-  self.table_name = "x_user_certs"
+  # self.table_name = "x_user_certs"
 
   # ----- Attributes -----
   has_attached_file :attachment,

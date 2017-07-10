@@ -1,4 +1,5 @@
 .env
+*.save
 /.env
 /.env-chruby
 /.bundle

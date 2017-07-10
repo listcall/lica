@@ -9,10 +9,11 @@ echo ------- start import -------
 date
 echo -----------------------------
 killall ruby > /dev/null 2&>1
-echo "Import development database"
-bundle exec rake db:drop data:db:import db:migrate > /dev/null 2>&1
-echo "Import test database"
-RAILS_ENV=test bundle exec rake db:drop data:db:import db:migrate > /dev/null 2>&1
+echo ">>>>> Import development database"
+bundle exec rake db:drop data:db:import db:migrate 
+echo ">>>>> Import test database"
+RAILS_ENV=test bundle exec rake db:drop data:db:import db:migrate 
+echo ">>>>> Clean test database"
 mv public/system public/system.bak
 RAILS_ENV=test bundle exec rails runner "TestClean.all"
 mv public/system.bak public/system

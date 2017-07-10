@@ -51,7 +51,7 @@ class Membership < ActiveRecord::Base
   has_many    :created_topics  , :class_name => 'Topics'         , :foreign_key => 'creator_id'
   has_many    :assigned_topics , :class_name => 'Topics'         , :foreign_key => 'assignee_id'
 
-  has_many    :svc_participations , :class_name => 'Svc::Participant', :foreign_key => 'membership_id', :dependent => :destroy
+  # has_many    :svc_participations , :class_name => 'Svc::Participant', :foreign_key => 'membership_id', :dependent => :destroy
 
   # ----- Delegated Methods -----
   def_delegators :user, :user_name,  :full_name, :first_name, :last_name,

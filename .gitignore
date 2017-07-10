@@ -17,8 +17,12 @@
 /doc/
 /data/
 /wiki/
+script/dev/vm/.vagrant
+script/dev/vm/.vagrant/
+script/dev/vm/.vagrant/*
 /script/dev/vm/.vagrant/
 /script/dev/vm/.vagrant/*
+/script/dev/vm/.vagrant/machines/
 /script/dev/*log
 /script/dev/vm/*log
 /db/test*

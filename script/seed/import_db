@@ -8,7 +8,7 @@ cd $SCRIPTDIR/../..
 echo ------- start import -------
 date
 echo -----------------------------
-killall ruby > /dev/null 2&>1
+killall ruby > /dev/null 2>&1
 echo ">>>>> Import development database"
 bundle exec rake db:drop data:db:import db:migrate 
 echo ">>>>> Import test database"

@@ -50,7 +50,7 @@ Follow these steps to bootstrap the app in your development environment.
 
 1. Install the ruby gems `bash; gem install bundler; bundle install`
 
-2. Work with a partner to get the seed data
+2. Get seed data from a partner with a working development environment.
 
 |----------------------------|--------------------------|
 | PARTNER COMMAND            | YOUR COMMAND             |

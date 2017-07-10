@@ -48,9 +48,11 @@ On the new VM:
 
 Follow these steps to bootstrap the app in your development environment.
 
-1. Install the ruby gems `bash; gem install bundler; bundle install`
+1. Install ruby gems `bash; gem install bundler; bundle install`
 
-2. Get seed data from a partner with a working development environment.
+2. Install NPM components: `sudo npm install yarn; yarn install`
+
+3. Get seed data from a partner:
 
 |----------------------------|--------------------------|
 | PARTNER COMMAND            | YOUR COMMAND             |
@@ -60,9 +62,9 @@ Follow these steps to bootstrap the app in your development environment.
 | `script/seed/share_sysdir` | `script/seed/get_sysdir` |
 |----------------------------|--------------------------|
 
-3. Import the seed db `script/seed/import_db`
+4. Import the seed db `script/seed/import_db`
 
-4. Start the development dashboard `script/dev/dashboard`
+5. Start the development dashboard `script/dev/dashboard`
 
 ## Host Web Access
 

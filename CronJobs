@@ -26,17 +26,17 @@ if dev_host?
   end
 
   every 7.days do
-    run_scripts 'util/backup_keys', app: "LICA"
+    run_scripts 'backup/keys', app: "LICA"
   end
 end
 
 if rails_production? 
   every 1.day, at: "00:30 am" do
-    run_scripts 'util/backup_db', app: "LICA", rails_env: "production"
+    run_scripts 'backup/db', app: "LICA", rails_env: "production"
   end
 
   every 4.days, at: "01:30 am"do
-    run_scripts 'util/backup_sysdir', app: "LICA", rails_env: "production"
+    run_scripts 'backup/sysdir', app: "LICA", rails_env: "production"
   end
 end
 

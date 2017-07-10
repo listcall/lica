@@ -83,7 +83,7 @@ namespace :data do
 
     desc 'Import Postgres Data'
     task :import => ['db:drop', 'db:create'] do
-      puts "importing from 'db/data.psql'"
+      puts "importing from 'db/backups/data.psql'"
       verbose(false) do
         sh "mkdir -p db/backups"
         cmd = "psql -U #{dbenv("username")} -d lica_#{Rails.env.to_s} -f db/backups/data.psql > /dev/null"

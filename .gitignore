@@ -5,6 +5,7 @@
 /.idea/
 /.certs/
 /.vagrant/
+/.vagrant/*
 /.erdconfig
 /*.pdf
 /*.log
@@ -15,7 +16,8 @@
 /doc/
 /data/
 /wiki/
-/script/dev/.vagrant/
+/script/dev/vm/.vagrant/
+/script/dev/vm/.vagrant/*
 /script/dev/*log
 /script/dev/vm/*log
 /db/test*

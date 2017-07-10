@@ -15,7 +15,7 @@ Ubuntu Virtual machine.
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
-   `wget raw.githubusercontent.com/listcall/lica/script/dev/Vagrantfile`
+   `wget raw.githubusercontent.com/listcall/lica/script/dev/vm/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
 

@@ -17,5 +17,5 @@ sudo apt-get update
 echo "Install Ansible"
 sudo apt-get install ansible -y -q
 echo "Install Ansible config file"
-cat script/provision/ansible.cfg | sed -e's/ANSIBLEUSR/$USER/g' > ~/.ansible.cfg
+cat script/dev/provision/ansible.cfg > ~/.ansible.cfg
 echo "DONE."

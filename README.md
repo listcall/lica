@@ -99,6 +99,21 @@ Receiver:
 - type `wormhole receive`
 - enter the wormhole code
 
-### Screen Sharing
+### Desktop Sharing
 
-Use Google Hangouts.  Instructions TBD.
+Visit this url:
+
+https://www.webrtc-experiment.com/desktop-sharing
+
+- Install the desktop-sharing plugin on Chrome
+- Share the desktop or application window
+- Use `script/util/sshchat` to publish the connection url 
+
+Pro Tips:
+
+- Configure desktop-sharing with a fixed room name (like "LICA").  This will
+  make it possible for team members to bookmark the room, and will enable
+  remote sessions to auto-reconnect if a stream is interrupted.
+
+- Share the entire desktop, not an application window.  The reason is that the
+  app-window sharing seems to crop incorrectly.

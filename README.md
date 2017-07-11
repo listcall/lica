@@ -12,6 +12,17 @@ permission.  See LICENSE.txt and CLA.txt for more info.
 Follow these steps to set up a working development environment running on an
 Ubuntu Virtual machine.
 
+NOTE: this configuration process will install many packages and will make
+changes to your user configuration, including:
+- rename `.bashrc` to `.bashrc.old` and drop in a new `.bashrc`
+- adding your UserID to `sudoers`
+- etc.
+
+If you want to preserve your user settings, perform this configuration under a
+new userid.
+
+Let's get started:
+
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
@@ -42,7 +53,7 @@ On the new VM:
 
 7. Check database status: `systemctl status postgresql`
 
-8. Start a new shell: `bash`
+8. Start a new shell: `bash` (required to load your new user configuration)
 
 ## Application Bootstrap
 

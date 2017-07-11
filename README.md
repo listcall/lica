@@ -95,8 +95,8 @@ Sender:
 - note the wormhole code
 
 Receiver:
-- get the wormhole code from the sender
 - type `wormhole receive`
+- get the wormhole code from the sender
 - enter the wormhole code
 
 ### Desktop Sharing
@@ -111,9 +111,12 @@ https://www.webrtc-experiment.com/desktop-sharing
 
 Pro Tips:
 
-- Configure desktop-sharing with a fixed room name (like "LICA").  This will
-  make it possible for team members to bookmark the room, and will enable
-  remote sessions to auto-reconnect if a stream is interrupted.
+- Configure the desktop-sharing plugin with a fixed room name (like "LICA").
+  This will make it possible for team members to bookmark the room, and will
+  enable remote sessions to auto-reconnect if a stream is interrupted.
 
 - Share the entire desktop, not an application window.  The reason is that the
-  app-window sharing seems to crop incorrectly.
+  app-window sharing seems to resize/crop incorrectly.
+
+- The viewer should experiment with full-screen (F11) or normal browser sizing
+  to get the best image.

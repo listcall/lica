@@ -9,5 +9,4 @@ export APP="ListCall"
 
 clear
 echo "script/dev/server"
-# webpack-dev-server --host soak --public soak --port 9090
-webpack-dev-server --host soak --port 9090
+webpack-dev-server --host $SYSNAME --port 9090

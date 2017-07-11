@@ -31,19 +31,17 @@ On the new VM:
 
 2. CD to the repo directory `cd ~/src/lica`
 
-3. Create a dev branch `git checkout -B dev`
+3. Checkout the dev branch `git checkout -b dev origin/dev`
 
-4. Pull the dev branch `git pull origin dev`
+4. Install ansible `script/dev/provision/install_ansible`
 
-5. Install ansible `script/dev/provision/install_ansible`
+5. Install ansible roles `script/dev/provision/install_roles`
 
-6. Install ansible roles `script/dev/provision/install_roles`
+6. Provision the dev machine `script/dev/provision/localhost`
 
-7. Provision the dev machine `script/dev/provision/localhost`
+7. Check database status: `systemctl status postgresql`
 
-8. Check database status: `systemctl status postgresql`
-
-9. Start a new shell: `bash`
+8. Start a new shell: `bash`
 
 ## Application Bootstrap
 

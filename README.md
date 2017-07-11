@@ -27,7 +27,8 @@ Ubuntu Virtual machine.
 
 On the new VM:
 
-1. Clone the repo `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
+1. Clone the repo 
+   `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
 
 2. CD to the repo directory `cd ~/src/lica`
 
@@ -65,6 +66,8 @@ Follow these steps to bootstrap the app in your development environment.
 
 5. Start the development dashboard `script/dev/dashboard`
 
+   A cheat-sheet for dashboard navigation is in `~/.tmux.conf`.
+
 ## Host Web Access
 
 1. On your host machine, add the VM IP Address to `/etc/hosts`
@@ -78,16 +81,6 @@ Follow these steps to bootstrap the app in your development environment.
 Connect to the SSH-Chat server from the command line.
 `script/util/sshchat`
 
-### Remote Pairing
-
-Session host:
-- start a tmate session `script/tmate/start`
-- publish the session address `script/tmate/address`
-  the session address is published onto SSH-Chat
-
-Session participant:
-- enter the ssh command with session address on your command line
-
 ### File Transfer
 
 Sender: 
@@ -98,6 +91,16 @@ Receiver:
 - type `wormhole receive`
 - get the wormhole code from the sender
 - enter the wormhole code
+
+### Terminal Sharing
+
+Session host:
+- start a tmate session `script/tmate/start`
+- publish the session address `script/tmate/address`
+  the session address is published onto SSH-Chat
+
+Session participant:
+- enter the ssh command with session address on your command line
 
 ### Desktop Sharing
 
@@ -118,5 +121,5 @@ Pro Tips:
 - Share the entire desktop, not an application window.  The reason is that the
   app-window sharing seems to resize/crop incorrectly.
 
-- The viewer should experiment with full-screen (F11) or normal browser sizing
-  to get the best image.
+- The session participant should experiment with full-screen (F11) or normal
+  browser sizing to get the best image.

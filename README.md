@@ -48,13 +48,11 @@ On the new VM:
 
 Follow these steps to bootstrap the app in your development environment.
 
-1. Install ruby gems `bash; gem install bundler; bundle install`
+1. Install ruby gems `gem install bundler; bundle install`
 
-2. Install Yarn: `sudo npm install yarn -g`
+2. Install NPM components: `yarn install`
 
-3. Install NPM components: `sudo chown -R <user>:<user> node_modules; yarn install`
-
-4. Get seed data from a partner:
+3. Get seed data from a partner:
 
 |----------------------------|--------------------------|
 | PARTNER COMMAND            | YOUR COMMAND             |
@@ -64,9 +62,9 @@ Follow these steps to bootstrap the app in your development environment.
 | `script/seed/share_sysdir` | `script/seed/get_sysdir` |
 |----------------------------|--------------------------|
 
-5. Import the seed db `script/seed/import_db`
+4. Import the seed db `script/seed/import_db`
 
-6. Start the development dashboard `script/dev/dashboard`
+5. Start the development dashboard `script/dev/dashboard`
 
 ## Host Web Access
 
@@ -101,3 +99,7 @@ Receiver:
 - get the wormhole code from the sender
 - type `wormhole receive`
 - enter the wormhole code
+
+### Screen Sharing
+
+Use Google Hangouts.  Instructions TBD.

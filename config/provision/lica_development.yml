@@ -26,6 +26,7 @@
     - Vars/lclhost
     - CLI/user
     - CLI/base
+    - CLI/util
     - CLI/tzone
     - Ruby/sysruby
     - Ruby/chruby

@@ -33,16 +33,17 @@ On the new VM:
 
 3. Create a dev branch `git checkout -B dev`
 
-3. Pull the dev branch `git pull origin dev`
+4. Pull the dev branch `git pull origin dev`
 
-3. Install ansible `script/dev/provision/install_ansible`
+5. Install ansible `script/dev/provision/install_ansible`
 
-4. Install ansible roles `script/dev/provision/install_roles`
+6. Install ansible roles `script/dev/provision/install_roles`
 
-5. Provision the dev machine `script/dev/provision/localhost`
+7. Provision the dev machine `script/dev/provision/localhost`
 
-6. Check database status: `systemctl status postgresql`
+8. Check database status: `systemctl status postgresql`
 
+9. Start a new shell: `bash`
 
 ## Application Bootstrap
 

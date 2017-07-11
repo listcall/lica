@@ -134,3 +134,10 @@ Pro Tips:
 
 - The session participant should experiment with full-screen (F11) or normal
   browser sizing to get the best image.
+
+## TBD
+
+- Fix the wget URL for the Vagrantfile (dev branch)
+- Install Firefox on VirtualBox
+- Email testing
+- Port configuration in Vagrant file

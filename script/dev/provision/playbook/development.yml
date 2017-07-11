@@ -1,12 +1,9 @@
 ---
 # sets up a development environment on the target host
 #
-# to run:
-# - vagrant provision  
 - vars:
     - rem_host:     all           
     - rem_user:     "{{lookup('env', 'USER') }}"
-    # - rem_user:     vagrant      
     # - rem_host:     lch1
     # - rem_user:     deploy
     - lcl_user:     "{{ lookup('env', 'USER') }}"

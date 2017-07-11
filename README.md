@@ -109,7 +109,7 @@ Visit this url:
 https://www.webrtc-experiment.com/desktop-sharing
 
 - Install the desktop-sharing plugin on Chrome
-- Share the desktop or application window
+- Share the desktop 
 - Use `script/util/sshchat` to publish the connection url 
 
 Pro Tips:

@@ -18,8 +18,8 @@ changes to your user configuration, including:
 - adding your UserID to `sudoers`
 - etc.
 
-If you want to preserve your user settings, perform this configuration under a
-new userid.
+If you want to preserve your user settings, perform this VM configuration under
+a separate userid.
 
 Let's get started:
 
@@ -32,28 +32,26 @@ Let's get started:
 
 4. Login to your virtual machine using `vagrant ssh`
 
-5. Write down the VM IP address `ifconfig`  
+5. Clone the repo 
+   `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
+
+6. CD to the repo directory `cd ~/src/lica`
 
 ## Development Environment Provisioning
 
 On the new VM:
 
-1. Clone the repo 
-   `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
+1. Checkout the dev branch `git checkout -b dev origin/dev`
 
-2. CD to the repo directory `cd ~/src/lica`
+2. Install ansible `script/dev/provision/install_ansible`
 
-3. Checkout the dev branch `git checkout -b dev origin/dev`
+3. Install ansible roles `script/dev/provision/install_roles`
 
-4. Install ansible `script/dev/provision/install_ansible`
+4. Provision the dev machine `script/dev/provision/localhost`
 
-5. Install ansible roles `script/dev/provision/install_roles`
+5. Check database status: `systemctl status postgresql`
 
-6. Provision the dev machine `script/dev/provision/localhost`
-
-7. Check database status: `systemctl status postgresql`
-
-8. Start a new shell: `bash` (required to load your new user configuration)
+6. Start a new shell: `bash` (required to load your new user configuration)
 
 ## Application Bootstrap
 
@@ -81,9 +79,11 @@ Follow these steps to bootstrap the app in your development environment.
 
 ## Host Web Access
 
-1. On your host machine, add the VM IP Address to `/etc/hosts`
+1. Get the ggVM IP address `ifconfig`  
 
-2. On your host machine, browse to `http://bamru.smso.dev:3000`
+2. On your host machine, add the VM IP Address to `/etc/hosts`
+
+3. On your host machine, browse to `http://bamru.smso.dev:3000`
 
 ## Online Collaboration
 

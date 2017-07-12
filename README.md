@@ -79,7 +79,7 @@ Follow these steps to bootstrap the app in your development environment.
 
 ## Host Web Access
 
-1. Get the ggVM IP address `ifconfig`  
+1. Get the VM IP address `ifconfig`  
 
 2. On your host machine, add the VM IP Address to `/etc/hosts`
 

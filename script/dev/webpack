@@ -9,4 +9,5 @@ export APP="ListCall"
 
 clear
 echo "script/dev/server"
-webpack-dev-server --host $SYSNAME --port 9090
+webpack-dev-server --port 9090
+#webpack-dev-server --host bamru.smso.dev --port 8080 #FIXME

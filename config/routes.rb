@@ -272,6 +272,26 @@ Rails.application.routes.draw do
   get 'ytst' => 'ytst#index'
 
   # ----- Test Pages -----
+
+  zcst_pgs = %w(index icons react0 become_do temp_do initiate_callout wip)
+  info_pgs = %w(not_authorized domain_not_found page_not_found inactive no_access no_feature not_member)
+  ZCST_PAGES = zcst_pgs    unless defined?(ZCST_PAGES)
+  HOME_PAGES = %w(index)   unless defined?(HOME_PAGES)
+  INFO_PAGES = info_pgs    unless defined?(INFO_PAGES)
+
+  def get_pages(page_list, controller)
+    page_list.each do |page|
+      get "/#{controller}/#{page}" => "#{controller}##{page}"
+    end
+  end
+
+  get 'zcst' => 'zcst#index'
+  get_pages ZCST_PAGES, 'zcst'
+  get_pages HOME_PAGES, 'home'
+  get_pages INFO_PAGES, 'info'
+
+  get 'zcst/handle/:template' => 'zcst#handle'
+
   ztst_pgs = %w(index icons react0 react1 react2 react3 react4 react5 chat pack1 pack2 share1 share2)
   info_pgs = %w(not_authorized domain_not_found page_not_found inactive no_access no_feature not_member)
   ZTST_PAGES = ztst_pgs    unless defined?(ZTST_PAGES)

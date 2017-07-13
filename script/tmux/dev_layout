@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# call from tmux_dashboard
+# call from tmux_session
 
 export APP="LICA-DEV"
 

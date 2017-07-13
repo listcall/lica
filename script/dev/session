@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# DEVELOPMENT DASHBOARD
+# START A MULTI-PROCESS DEVELOPMENT SESSION IN TMUX 
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
@@ -19,7 +19,7 @@ devdash_msg()
 devdash_run() 
 {
   server=$1
-  cmd="script/tmux/dashboard_base script/tmux/dev_layout"
+  cmd="script/tmux/session_base script/tmux/dev_layout"
   if [ ! -z $server ] ; then
     cmd="ssh -t $server '$cmd'"
   fi

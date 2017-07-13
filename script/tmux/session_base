@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
-# creates a tmux dashboard that can be shared across multiple clients
+# creates a tmux session that can be shared across multiple clients
 
-# the dashboard is defined in a setup file, referenced by $1
+# the session is defined in a setup file, referenced by $1
 # the setup file must define '$APP' and 'create_new_session()'
-# if no args are given, a default dashboard is rendered
+# if no args are given, a default session is rendered
 
 if [ -z $1 ] ; then
-  export APP="dashboard"
+  export APP="session"
   create_new_session()
   {
     tmux new-session -s $APP -d    

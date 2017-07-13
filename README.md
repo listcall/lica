@@ -137,6 +137,7 @@ Pro Tips:
 
 ## TBD
 
+- Rename the dashboard script
 - Fix the wget URL for the Vagrantfile (dev branch)
 - Install Firefox on VirtualBox
 - Email testing

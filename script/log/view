@@ -19,7 +19,7 @@ devcon_msg()
 devcon_run() 
 {
   server=$1
-  cmd="script/tmux/dashboard_base script/tmux/log_layout"
+  cmd="script/tmux/session_base script/tmux/log_layout"
   if [ ! -z $server ] ; then
     cmd="ssh -t $server '$cmd'"
   fi

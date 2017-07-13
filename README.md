@@ -12,6 +12,17 @@ permission.  See LICENSE.txt and CLA.txt for more info.
 Follow these steps to set up a working development environment running on an
 Ubuntu Virtual machine.
 
+NOTE: this configuration process will install many packages and will make
+changes to your user configuration, including:
+- rename `.bashrc` to `.bashrc.old` and drop in a new `.bashrc`
+- adding your UserID to `sudoers`
+- etc.
+
+If you want to preserve your user settings, perform this VM configuration under
+a separate userid.
+
+Let's get started:
+
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
 2. Download the dev-machine Vagrantfile 
@@ -21,28 +32,26 @@ Ubuntu Virtual machine.
 
 4. Login to your virtual machine using `vagrant ssh`
 
-5. Write down the VM IP address `ifconfig`  
+5. Clone the repo 
+   `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
+
+6. CD to the repo directory `cd ~/src/lica`
 
 ## Development Environment Provisioning
 
 On the new VM:
 
-1. Clone the repo 
-   `mkdir src; cd src; git clone https://github.com/listcall/lica.git`
+1. Checkout the dev branch `git checkout -b dev origin/dev`
 
-2. CD to the repo directory `cd ~/src/lica`
+2. Install ansible `script/dev/provision/install_ansible`
 
-3. Checkout the dev branch `git checkout -b dev origin/dev`
+3. Install ansible roles `script/dev/provision/install_roles`
 
-4. Install ansible `script/dev/provision/install_ansible`
+4. Provision the dev machine `script/dev/provision/localhost`
 
-5. Install ansible roles `script/dev/provision/install_roles`
+5. Check database status: `systemctl status postgresql`
 
-6. Provision the dev machine `script/dev/provision/localhost`
-
-7. Check database status: `systemctl status postgresql`
-
-8. Start a new shell: `bash`
+6. Start a new shell: `bash` (required to load your new user configuration)
 
 ## Application Bootstrap
 
@@ -64,15 +73,17 @@ Follow these steps to bootstrap the app in your development environment.
 
 4. Import the seed db `script/seed/import_db`
 
-5. Start the development dashboard `script/dev/dashboard`
+5. Start the tmux development session `script/dev/session`
 
-   A cheat-sheet for dashboard navigation is in `~/.tmux.conf`.
+   A cheat-sheet for tmux navigation is in `~/.tmux.conf`.
 
 ## Host Web Access
 
-1. On your host machine, add the VM IP Address to `/etc/hosts`
+1. Get the VM IP address `ifconfig`  
 
-2. On your host machine, browse to `http://bamru.smso.dev:3000`
+2. On your host machine, add the VM IP Address to `/etc/hosts`
+
+3. On your host machine, browse to `http://bamru.smso.dev:3000`
 
 ## Online Collaboration
 
@@ -123,3 +134,10 @@ Pro Tips:
 
 - The session participant should experiment with full-screen (F11) or normal
   browser sizing to get the best image.
+
+## TBD
+
+- Fix the wget URL for the Vagrantfile (dev branch)
+- Install Firefox on VirtualBox
+- Email testing
+- Port configuration in Vagrant file

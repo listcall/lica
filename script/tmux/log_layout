@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# should be called from tmux_dashboard
+
+# should be called from tmux_session
 
 export APP="LOGVIEW"
 

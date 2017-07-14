@@ -11,6 +11,8 @@ class EventsController < ApplicationController
     @upcoming_events = current_team.events.upcoming
     @recent_events   = current_team.events.recent
     @all_events      = current_team.events.ordered
+
+    @view = params[:view]
   end
 
   def show
@@ -23,6 +25,15 @@ class EventsController < ApplicationController
       @ev_times = current_team.event_types.to_data.to_json
       @select   = current_team.event_types.to_data.values.map {|x| {value: x[:acronym], text: x[:name]}}.to_json
       @event_bot = EventBot.new(@event.event)
+
+      # grab page log
+      temp_assig = VwAssignments.new(current_team).assignments
+      period_ids = @event.periods.map {|period| period.id}.flatten
+      #FIXME: Convert to DB call
+      @assignments = temp_assig.select do |assig|
+        pid = assig.broadcast.try(:action).try(:period_id).to_i
+        period_ids.include?(pid)
+      end
     end
   end
 

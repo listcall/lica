@@ -12,15 +12,19 @@
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-6
           b
-            = raw link_to "#{current_team.acronym} Events", "/events"
-            '  > #{@event.event_ref}
+            = render :partial => 'team_title'
+            | > #{@event.event_ref}
         .col-xs-6.text-right
-          a.help-button href="/events/new" Create New Event
-          a.help-button href="/events/new?copy=#{@event.id}"  Copy This Event
+          a.help-button href="/events/new"
+            span.glyphicon.glyphicon-plus
+            |  Create Event
+          a.help-button href="/events/new?copy=#{@event.id}"
+            span.glyphicon.glyphicon-duplicate
+            |  Copy Event
           = raw event_delete_link(@event.event)
           = member_help_button('events')
 
@@ -53,13 +57,20 @@ css:
                 .badge.pCount data-toggle='tooltip' title='#{tooltip_text(period)}' #{period.participants.count }
               td
                 .btn-group.btn-group-xs role="group"
-                  = event_page_link(period, :rsvp)
-                  = event_page_link(period, :notify)
-                  = event_page_link(period, :leave)
-                  = event_page_link(period, :return)
+                  .btn-group.btn-group-xs role="rsvp"
+                    button.btn.btn-default.dropdown-toggle.btnRSVP type="button" data-toggle="dropdown"
+                      | RSVP
+                      span.caret<
+                    ul.dropdown-menu role="rsvp"
+                        li = event_page_link(period, :Heads_Up)
+                        li = event_page_link(period, :Immediate_Callout)
+                        li = event_page_link(period, :Delayed_Callout)
+                  = event_page_link(period, :Notify)
+                  = event_page_link(period, :Leave)
+                  = event_page_link(period, :Return)
               td.ar
                 = delete_event_period_button(period)
-      small
+      /small
         div style=("margin-bottom: 8px;")
           b= participating_teams_title(@event.event)
           div style=("display: inline-block; float: right;")
@@ -79,11 +90,12 @@ css:
             = child_team(child_event)
           = child_periods(@event.event)
   .row
-    .col-xs-12
-      b Event Description:
-      br/
-      small#descShow.display_edit
-        = raw(@event.description.blank? ? "TBD" : @event.description)
-      a#descEdit.inline.areaEditable data-mode="inline" data-name="description" data-type="textarea" href="#" style=("display: none; width: 100%;")
-        = @event.description
-= render 'geopicker_modal'
+    .container
+      .row
+        .col-xs-12
+          .panel-group#accordion
+            = render "event_description"
+            = render "callout_checklist"
+            = render "paging_log" 
+
+  = render 'geopicker_modal'

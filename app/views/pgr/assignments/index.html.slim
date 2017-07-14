@@ -6,17 +6,13 @@
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-6
           b
-            = current_team.acronym
-            |  Paging
-        .col-xs-4.text-center
+            = render :partial => 'pgr/team_title'
+        .col-xs-6.text-right
           small = Time.now.strftime("%a %b %d %H:%M")
-        .col-xs-2.text-right
-          small = link_to "Create New Page", paging_new_path
-          = member_help_button('paging')
 
 .container
   .row

@@ -1,0 +1,40 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title style="text-align:center"
+      a data-toggle="collapse" data-parent="#accordion" href="#collapsePL"
+        span.glyphicon.glyphicon-align-justify.text-primary
+
+        |  Event Pager Log
+  .panel-collapse.collapse#collapsePL
+    .panel-body
+      .container
+        .row
+          .col-md-12
+            table.table.table-compact
+              thead
+                th ID
+                th From
+                th Message Text
+                th Sent
+                th Read
+                th Replies
+                th Action
+              tbody
+                - @assignments.each do |assig|
+                  tr
+                    td = assig.sequential_id
+                    td
+                      => avatar_path(assig.sender_user)
+                      => link_to assig.sender_name, assig.sender_path, target: "_blank"
+                      => team_icon_path(assig.sender)
+                    td = link_to truncate(assig.short_body), assig.broadcast_path
+                    td = assig.created_at.strftime("%m-%d %H:%M")
+                    td
+                      => assig.read_count
+                      ' of
+                      => assig.recipient_count
+                    td
+                      => raw assig.reply_count_link
+                      => raw assig.comment_icon_for(current_membership)
+                    td
+                      = raw assig.action_status

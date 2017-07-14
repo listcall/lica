@@ -1,0 +1,12 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title style="text-align:center"
+      a data-toggle="collapse" data-parent="#accordion" href="#collapseED"
+        span.glyphicon.glyphicon-eye-open.text-primary
+        |  Event Description
+  .panel-collapse.collapse#collapseED
+    .panel-body
+      small#descShow.display_edit
+        = raw(@event.description.blank? ? "TBD" : @event.description)
+      a#descEdit.inline.areaEditable data-mode="inline" data-name="description" data-type="textarea" href="#" style=("display: none; width: 100%;")
+        = @event.description

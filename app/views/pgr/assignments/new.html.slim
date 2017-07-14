@@ -12,14 +12,16 @@ css:
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
-        .col-xs-8
+        .col-xs-6
           b
             = render :partial => 'pgr/team_title'
             | > Create New Page
-        .col-xs-4.text-right
-          small = link_to "Index", paging_path
+        .col-xs-6.text-right
+          a.help-button href="/events/new"
+            span.glyphicon.glyphicon-list
+            |  Paging Log
           = member_help_button('paging')
 
 .container
@@ -55,9 +57,22 @@ css:
             textarea#txtLong.pageTxt.form-control name="broadcast[long_body]"  type="email"
         .row
           .col-ms-8
-            #actionBtn.btn.btn-xs.btn-default> Select Action
-            p
-            #actionDisplay
+            /FIXME: add links and tool tips
+            .btn-group.btn-group-xs role="group"
+              .btn-group.btn-group-xs role="rsvp"
+                button.btn.btn-default.dropdown-toggle.btnRSVP type="button" data-toggle="dropdown"
+                  | RSVP
+                  span.caret<
+                ul.dropdown-menu role="rsvp"
+                    li Heads_Up
+                    li Immediate_Callout
+                    li Delayed_Callout
+              .btn.btn-default Notify
+              .btn.btn-default Leave
+              .btn.btn-default Return
+              #actionBtn.btn.btn-xs.btn-default> Select Action
+              p
+              #actionDisplay
           .col-ms-4.ar
             button#sendButton.btn.btn-primary type="submit"  Send
       #leftCol.col-ms-6.col-ms-pull-6

@@ -1,14 +1,13 @@
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-4
           b #{current_team.acronym} Availability
-        .col-xs-4.text-center
-          small
-            a href='/avail/days/#{current_membership.user_name}'
-              | update your availability
-        .col-xs-4.text-right
+        .col-xs-8.text-right
+          a.help-button href='/avail/days/#{current_membership.user_name}'
+            span.glyphicon.glyphicon-plus
+            |  Update Availability
           = member_help_button('avail_days')
 
 .container

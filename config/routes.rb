@@ -113,6 +113,10 @@ Rails.application.routes.draw do
   get 'hreports/:title' => 'reports#show_historical_report'
   get 'reps/:id'        => 'reps#show'
 
+  # ----- Work in progress -----
+
+  get 'wip'             => 'wip#index'
+
   # ----- Team Admin -----
 
   get '/admin' => 'admin#index'

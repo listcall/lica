@@ -6,15 +6,14 @@
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-4
           b #{current_team.acronym} Availability for #{current_user.full_name}
-        .col-xs-4.text-center
-          small
-            a href='/avail/days'
-              | team availability
-        .col-xs-4.text-right
+        .col-xs-8.text-right
+          a.help-button href='/avail/days'
+            span.fa.fa-users
+            |  Team Availability
           = member_help_button('avail_days')
 
 .container

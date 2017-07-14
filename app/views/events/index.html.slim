@@ -5,18 +5,25 @@ css:
   }
 
 - content_for :page_js do
+  javascript:
+    if ("all" == "#{@view}") {
+      $(window).load(function () {
+        $('.nav-tabs a[href="#allEvents"]').tab('show');
+       })
+    }
   = javascript_include_tag 'events/all_events_index'
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-6
           b
-            = current_team.acronym
-            |  Events
+            = render :partial => 'team_title'
         .col-xs-6.text-right
-          a.help-button href="/events/new" Create New Event
+          a.help-button href="/events/new"
+            span.glyphicon.glyphicon-plus
+            |  Create Event
           = member_help_button('events')
 
 .container
@@ -27,10 +34,10 @@ css:
           a href="#currentEvents" Current Events
         li
           a href="#allEvents" All Events
-        small#timeBlock = Time.now.strftime("%a %Y-%b-%d @ %H:%M")
+        small#timeBlock.text-primary = Time.now.strftime("%a %Y-%b-%d @ %H:%M")
       p
       .tab-content
-        #currentEvents.tab-pane
+        .tab-pane#currentEvents
           - cache [current_team, "current_events"] do
             - if @current_events.count.zero?
               | <small>There are no events happening right now...</small><br/><p></p>
@@ -46,6 +53,7 @@ css:
                 |.<br>
                 = event_summary_stats
 
-        #allEvents.tab-pane
+        .tab-pane#allEvents
           - cache [current_team, "all_events"] do
             = render partial: 'event_table', locals: {events: @all_events}
+

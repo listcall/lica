@@ -1,0 +1,59 @@
+css:
+  .navbar-nav.navbar-right:last-child {
+    margin-right: 0;
+  }
+
+= navbar do
+  = vertical do
+    = raw team_logo
+  = horizontal do
+    = nav class: 'navbar-right' do
+      = link_to 'Home', '/zcst'
+      li.dropdown
+        a.dropdown-toggle href='#' data-toggle='dropdown' role='button'
+          ' Event
+          span.caret
+        ul.dropdown-menu role='menu'
+          li = link_to 'Create new event', '/events/new'
+          li = link_to 'Current events', '/events'
+          li = link_to 'All events', '/events'
+      li.dropdown
+        a.dropdown-toggle href='#' data-toggle='dropdown' role='button'
+          ' Team
+          span.caret
+        ul.dropdown-menu role='menu'
+          li = link_to 'Roster', '/members'
+          li = link_to 'Availability', '/avail/days'
+          li = link_to 'Certifications', '/quals'
+      li.dropdown
+        a.dropdown-toggle href='#' data-toggle='dropdown' role='button'
+          ' Library
+          / Resource
+          span.caret
+        ul.dropdown-menu role='menu'
+          li = link_to 'Reports', '/reports'
+          li = link_to 'Wiki', '/zcst/wip'
+          li = link_to 'Forum posts', '/zcst/wip'
+          li = link_to 'Logs', '/zcst/wip'
+          li = link_to 'Files', '/zcst/wip'
+          li = link_to 'Quarterly DO schedule', '/zcst/wip'
+      li.dropdown
+        a.dropdown-toggle href='#' data-toggle='dropdown' role='button'
+          ' Action
+          span.caret
+        ul.dropdown-menu role='menu'
+          li = link_to 'Becoming DO', '/zcst/wip'
+          li = link_to 'Temporary DO change', '/zcst/wip'
+          li = link_to 'Initiate a callout', '/zcst/wip'
+          li = link_to 'Perform admin tasks', '/admin'
+      li.dropdown
+        a.dropdown-toggle href='#' data-toggle='dropdown' role='button'
+          = current_user.user_name
+          span.caret
+        ul.dropdown-menu role='menu'
+          li = link_to 'Inbox (n)', '/zcst/wip'
+          li = link_to 'Busy periods', "/avail/days/#{current_user.user_name}"
+          li = link_to 'Certifications', 'quals'
+          li = link_to 'Settings', "/members/#{current_user.user_name}"
+          = raw NavBarSvc.team_nav(current_user, current_team, request.env)
+          li = link_to 'Log out', '/logout'

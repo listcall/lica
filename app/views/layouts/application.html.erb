@@ -8,6 +8,11 @@
   <%= stylesheet_link_tag    "application" %>
   <script src="https://use.fontawesome.com/5fb07bfd2c.js"></script>
   <%= csrf_meta_tags %>
+  <style>
+    i.icon {
+      width:15px;
+    }
+  </style>
 </head>
 
 <body>
@@ -27,64 +32,68 @@
         <ul id='headerNav' class='nav navbar-nav navbar-right'>
 
           <li>
-            <a href="/"><i class="fa fa-home"></i> Home</a>
+            <a href="/"><i class="fa fa-home"></i>  Home</a>
           </li>
             <li class="dropdown">
-              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown"><i class="fa fa-calendar-check-o"></i> Event <b class="fa fa-caret-down"></b></a>
+              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
+                <i class="icon fa fa-calendar-check-o"></i>  Event <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
-                <li><a href="/events/new"><i class="fa fa-pencil"></i> Create new event</a></li>
-                <li><a href="/events"><i class="fa fa-calendar"></i> Current events</a></li>
-                <li><a href="/events"><i class="fa fa-calendar"></i> All events</a></li>
+                <li><a href="/events/new"><i class="icon fa fa-pencil"></i>  Create new event</a></li>
+                <li><a href="/events?view=current"><i class="icon fa fa-calendar"></i>  Current events</a></li>
+                <li><a href="/events?view=all"><i class="icon fa fa-calendar"></i>  All events</a></li>
               </ul>
             </li>
           
             <li class="dropdown">
               <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
-                <i class="fa fa-users"></i> Team <b class="fa fa-caret-down"></b></a>
+                <i class="fa fa-users"></i>  Team <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
-                <li><a href="/members"><i class="fa fa-address-book"></i> Roster</a></li>
-                <li><a href="/avail/days"><i class="fa fa-calendar"></i> Availability</a></li>
-                <li><a href="/quals"><i class="fa fa-certificate"></i> Certifications</a></li>
-                <li><a href="/members/photos"><i class="fa fa-camera-retro"></i> Member photos</a></li>
-                <li><a href="/paging/new"><i class="fa fa-camera-retro"></i> Page team</a></li>
+                <li><a href="/members"><i class="icon fa fa-address-book"></i>  Roster</a></li>
+                <li><a href="/avail/days"><i class="icon fa fa-calendar"></i>  Availability</a></li>
+                <li><a href="/quals"><i class="icon fa fa-certificate"></i>  Certifications</a></li>
+                <li><a href="/wip"><i class="icon fa fa-camera-retro"></i>  Member photos</a></li>
+                <li><a href="/paging/new"><i class="icon fa fa-bullhorn"></i>  Page team</a></li>
               </ul>
             </li>
           
             <li class="dropdown">
               <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
-                <i class="fa fa-book"></i> Library <b class="fa fa-caret-down"></b>
+                <i class="fa fa-book"></i>  Library <b class="fa fa-caret-down"></b>
               </a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
-                <li><a href="/reports"><i class="fa fa-file-text"></i> Reports</a></li>
-                <li><a href="http://wiki.bamru.net/?username=Craig.Taylor"><i class="fa fa-wikipedia-w"></i> Wiki</a></li>
-                <li><a href="https://groups.yahoo.com/neo/groups/BAMRU/info"><i class="fa fa-yahoo"></i> Forum posts</a></li>
-                <li><a href="/zcst/wip"><i class="fa fa-upload"></i> Files</a></li>
-                <li><a href="/zcst/wip"><i class="fa fa-calendar"></i> Quarterly DO schedule</a></li>
+                <li><a href="/reports"><i class="icon fa fa-file-text"></i>  Reports</a></li>
+                <li><a href="http://wiki.bamru.net/?username=Craig.Taylor" target="_blank">
+                    <i class="icon fa fa-wikipedia-w"></i>  Wiki</a></li>
+                <li><a href="https://groups.yahoo.com/neo/groups/BAMRU/info" target="_blank">
+                    <i class="icon fa fa-yahoo"></i>  Forum posts</a></li>
+                <li><a href="/wip"><i class="icon fa fa-upload"></i>  Files</a></li>
+                <li><a href="/wip"><i class="icon fa fa-calendar"></i>  Quarterly DO schedule</a></li>
+                <li><a href="/paging"><i class="icon fa fa-list"></i>  Paging log</a></li>
               </ul>
             </li>
           
             <li class="dropdown">
               <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
-                <i class="fa fa-bolt"></i> Action <b class="fa fa-caret-down"></b></a>
+                <i class="fa fa-bolt"></i>  Action <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
-                <li><a href="/zcst/initiate_callout"><i class="fa fa-bolt"></i> Initiate a callout</a></li>
-                <li><a href="/zcst/become_do"><i class="fa fa-bolt"></i> Becoming DO</a></li>
-                <li><a href="/zcst/temp_do"><i class="fa fa-bolt"></i> Temporary DO change</a></li>
-                <li><a href="/admin"><i class="fa fa-edit"></i> Perform admin tasks</a></li>
+                <li><a href="/zcst/initiate_callout"><i class="icon fa fa-bolt"></i>  Initiate a callout</a></li>
+                <li><a href="/zcst/become_do"><i class="icon fa fa-bolt"></i>  Becoming DO</a></li>
+                <li><a href="/wip"><i class="icon fa fa-bolt"></i>  Temporary DO change</a></li>
+                <li><a href="/admin"><i class="icon fa fa-edit" style="width: 15px"></i>  Perform admin tasks</a></li>
               </ul>
             </li>
           
             <%#= raw NavBarSvc.header_nav(current_user, current_team, request.path) %>
             <li class="dropdown">
               <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
-                <i class="fa fa-user-circle"></i> <%= current_user.user_name %> <b class="fa fa-caret-down"></b></a>
+                <i class="fa fa-user-circle"></i>  <%= current_user.user_name %> <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
-                <li><a href="/zcst/react0"><i class="fa fa-envelope-open-o"></i> Inbox (n)</a></li>
-                <li><a href="/avail/days/<%= current_user.user_name %>"><i class="fa fa-calendar"></i> Busy periods</a></li>
-                <li><a href="/members/<%= current_user.user_name %>"><i class="fa fa-certificate"></i> Certifications</a></li>
-                <li><a href="/members/<%= current_user.user_name %>"><i class="fa fa-cogs"></i> settings</a></li>
+                <li><a href="/wip"><i class="icon fa fa-envelope-open-o"></i>  Inbox (n)</a></li>
+                <li><a href="/avail/days/<%= current_user.user_name %>"><i class="icon fa fa-calendar"></i>  Busy periods</a></li>
+                <li><a href="/members/<%= current_user.user_name %>"><i class="icon fa fa-certificate"></i>  Certifications</a></li>
+                <li><a href="/members/<%= current_user.user_name %>"><i class="icon fa fa-cogs"></i>  Settings</a></li>
                 <%= raw NavBarSvc.team_nav(current_user, current_team, request.env) %>
-                <li><a href="/logout"><i class='fa fa-sign-out'></i> log out</a></li>
+                <li><a href="/logout"><i class='fa fa-sign-out'></i>  log out</a></li>
               </ul>
             </li>
           </ul>

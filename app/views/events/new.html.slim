@@ -10,12 +10,12 @@
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-6
           b
-            = raw link_to "#{current_team.acronym} Events", "/events"
-            |  > Create New Event
+            = render :partial => 'team_title'
+            |  > Create Event
         .col-xs-6.text-right
           = member_help_button('events')
 

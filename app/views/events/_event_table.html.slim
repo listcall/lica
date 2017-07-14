@@ -13,7 +13,7 @@ table.table.table-condensed.table-bordered.table-hover
     - cache [event, "eventrow"] do
       tr
         td width="40%" = raw link_to event.title, "/events/#{event.event_ref}"
-        td = event.typ_name
+        td width="10%" = event.typ_name
         td = event.event_periods_count
         td = event.event_participants_count
         td = event.start.strftime("%y-%m-%d")

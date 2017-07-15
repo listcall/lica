@@ -1,0 +1,70 @@
+- content_for :page_js do
+  /FIXME remove extra js files
+  /= javascript_include_tag 'members/all_index'
+  /script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript" 
+  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" type="text/javascript" 
+  javascript:
+    $(document).ready(function() {
+        $('table.display').DataTable( {
+            "paging":   false,
+            "info":     false
+        } );
+    } );
+
+link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css" /
+
+- content_for :page_js do
+  = javascript_include_tag 'reports/all_reports'
+.container
+  .row
+    .col-md-12
+      div style=("text-align: center;") width="100%" 
+        b Current Reports
+      /table#myTable1.table.table-condensed.table-bordered
+      table#myTable1.display cellspacing="0" width="100%" 
+        thead
+          tr
+            th width="65"  Category
+            th Name
+            th width="50"  Type
+            th Description
+            th Action
+        tbody
+          - @current_report_list.each do |report|
+            tr
+              td= report[0]
+              td= report[1]
+              td
+                = report_format(report)
+              td= report_description(report)
+              td
+                = download_link(report)
+      div style=("text-align: center;") width="100%" 
+        b Historical Reports
+      /table#myTable2.table.table-condensed.table-bordered
+      table#myTable2.display cellspacing="0" width="100%" 
+        thead
+          tr
+            th Name
+            th Description
+            th Set Date Range
+            th Start
+            th End
+            th View
+        tbody
+          - @historical_report_list.each do |report|
+            tr
+              td= report[0]
+              td= report[1]
+              td
+                i.fa.faIcon.fa-yen.faYTD id="#{report[0]}-#{report[2]}_YTD" 
+                i.fa.faIcon.fa-circle.fa12m id="#{report[0]}-#{report[2]}_12m" 
+                i.fa.faIcon.fa-adjust.fa6m id="#{report[0]}-#{report[2]}_6m" 
+                i.fa.faIcon.fa-circle-o.fa3m id="#{report[0]}-#{report[2]}_3m" 
+              td
+                input.inp id="#{report[0]}-#{report[2]}_start" style=("font-size: 8pt;") type="text" value="#{(Time.now).strftime("%Y")}-01-01" /
+              td
+                input.inp id="#{report[0]}-#{report[2]}_finish" style=("font-size: 8pt;") type="text" value="#{(Time.now).strftime("%Y-%m-%d")}" /
+              td
+                a.hRep data-type="#{report[2]}" href="/hreports/#{report[0]}.html" id="#{report[0]}-#{report[2]}_link" target="_blank"  HTML
+ 

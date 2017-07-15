@@ -1,5 +1,17 @@
 - content_for :page_js do
+  /FIXME remove extra js files
   = javascript_include_tag 'members/all_index'
+  /script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript" 
+  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" type="text/javascript" 
+  javascript:
+    $(document).ready(function() {
+        $('#example').DataTable( {
+            "paging":   false,
+            "info":     false
+        } );
+    } );
+
+link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css" /
 
 - content_for :subhead do
   div ng-app="memberApp"
@@ -7,20 +19,22 @@
       .container.text-primary
         .row style=("vertical-align: middle;")
           .col-ms-8
+            /FIXME: check responsive behavior
             b.vmid.visible-sm-and-above
               => current_team.name
               | Members
             b.vmid.visible-ms-and-below
               => current_team.acronym
               | Members
-          .col-ms-4.text-right
+          /.col-ms-4.text-right
             button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button"  reset
 
 - cache ['members', current_team, @list_type, current_user] do
   .container
     .row
       .table-responsive ng-controller="MemberController"
-        table.table.table-striped.table-hover
+        /table.table.table-striped.table-hover
+        table#example.display cellspacing="0" width="100%" 
           thead
             th.hidden-xs
               | Name

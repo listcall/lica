@@ -74,21 +74,25 @@ class PgrNewVal
 
   def default_msg
     case @action_type
-      when "RSVP"   then "IMMEDIATE CALLOUT: #{event_title}/OP#{period_num} "
+      when "HEADS_UP"   then "HEADS UP: #{event_title}/OP#{period_num} Would you be available?"
+      when "IMMEDIATE_CALLOUT"   then "IMMEDIATE CALLOUT: #{event_title}/OP#{period_num} "
+      when "DELAYED_CALLOUT"   then "DELAYED CALLOUT: #{event_title}/OP#{period_num} "
       when "NOTIFY" then "TEAM NOTIFICATION: #{event_title}/OP#{period_num} "
       when "LEAVE"  then "#{event_title}/OP#{period_num}: Have you left home? "
       when "RETURN" then "#{event_title}/OP#{period_num}: Have you returned home? "
-      else "#{event_title}/OP#{sid} "
+      else "#{event_title}/OP#{sid} "  #FIXME: Is side defined?
     end
   end
 
   def overview_text
     case @action_type
-      when "RSVP"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
+      when "HEADS_UP"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
+      when "IMMEDIATE_CALLOUT"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
+      when "DELAYED_CALLOUT"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
       when "NOTIFY" then "This notification is addressed to all event participants.#{period_links}"
       when "LEAVE"  then "This 'Left Home' message is addressed to all pending participants.#{period_links}"
       when "RETURN" then "This 'Return Home' message is addressed to all pending participants.#{period_links}"
-      else "#{event_title}/OP#{sid} "
+      else "#{event_title}/OP#{sid} "  #FIXME: Is side defined?
     end
   end
 

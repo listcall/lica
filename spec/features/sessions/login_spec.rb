@@ -41,7 +41,7 @@ feature 'Session login', :capy do
   it 'handles logout via button' do
     lcl_user = capy_user_login
     expect(page).to have_content lcl_user.user_name
-    page.find('#navDrop').click()
+    page.find('#navDrop-user').click()
     expect(page).to have_content 'log out'
     click_link 'log out'
     expect(page).not_to have_content lcl_user.user_name

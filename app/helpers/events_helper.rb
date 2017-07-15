@@ -98,9 +98,9 @@ module EventsHelper
     lbl  = type.to_s
     path = "/paging/new?pg_action=#{lbl.upcase}&pg_opid=#{period.id}"
     btyp = is_enabled?(period, type) ? "btn#{type.to_s.capitalize}" : ""
-    dopt = is_enabled?(period, type) ? "" : "disabled='disabled'"
+    dopt = is_enabled?(period, type) ? "" : "disabled=\"disabled\""
     clas = "btn btn-default #{btyp}"
-    raw "<a target='_blank' #{dopt} class='#{clas}' href='#{path}'>#{lbl}</a>"
+    raw "<a #{dopt} class='#{clas}' href='#{path}'>#{lbl.gsub('_'," ")}</a>"
   end
 
   def is_enabled?(period, type)

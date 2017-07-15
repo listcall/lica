@@ -35,7 +35,7 @@
             <a href="/"><i class="fa fa-home"></i>  Home</a>
           </li>
             <li class="dropdown">
-              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
+              <a href="#" id="navDrop-event" class="dropdown-toggle active" data-toggle="dropdown">
                 <i class="icon fa fa-calendar-check-o"></i>  Event <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
                 <li><a href="/events/new"><i class="icon fa fa-pencil"></i>  Create new event</a></li>
@@ -45,7 +45,7 @@
             </li>
           
             <li class="dropdown">
-              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
+              <a href="#" id="navDrop-team" class="dropdown-toggle active" data-toggle="dropdown">
                 <i class="fa fa-users"></i>  Team <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
                 <li><a href="/members"><i class="icon fa fa-address-book"></i>  Roster</a></li>
@@ -57,7 +57,7 @@
             </li>
           
             <li class="dropdown">
-              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
+              <a href="#" id="navDrop-library" class="dropdown-toggle active" data-toggle="dropdown">
                 <i class="fa fa-book"></i>  Library <b class="fa fa-caret-down"></b>
               </a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
@@ -73,7 +73,7 @@
             </li>
           
             <li class="dropdown">
-              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
+              <a href="#" id="navDrop-action" class="dropdown-toggle active" data-toggle="dropdown">
                 <i class="fa fa-bolt"></i>  Action <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
                 <li><a href="/zcst/initiate_callout"><i class="icon fa fa-bolt"></i>  Initiate a callout</a></li>
@@ -85,7 +85,7 @@
           
             <%#= raw NavBarSvc.header_nav(current_user, current_team, request.path) %>
             <li class="dropdown">
-              <a href="#" id="navDrop" class="dropdown-toggle active" data-toggle="dropdown">
+              <a href="#" id="navDrop-user" class="dropdown-toggle active" data-toggle="dropdown">
                 <i class="fa fa-user-circle"></i>  <%= current_user.user_name %> <b class="fa fa-caret-down"></b></a>
               <ul id='userDrop' class="dropdown-menu pull-right" role="menu">
                 <li><a href="/wip"><i class="icon fa fa-envelope-open-o"></i>  Inbox (n)</a></li>

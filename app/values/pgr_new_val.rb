@@ -80,7 +80,7 @@ class PgrNewVal
       when "NOTIFY" then "TEAM NOTIFICATION: #{event_title}/OP#{period_num} "
       when "LEAVE"  then "#{event_title}/OP#{period_num}: Have you left home? "
       when "RETURN" then "#{event_title}/OP#{period_num}: Have you returned home? "
-      else "#{event_title}/OP#{sid} "  #FIXME: Is side defined?
+      else "#{event_title}/OP#{sid} "  #FIXME: Is sid defined?
     end
   end
 
@@ -92,7 +92,7 @@ class PgrNewVal
       when "NOTIFY" then "This notification is addressed to all event participants.#{period_links}"
       when "LEAVE"  then "This 'Left Home' message is addressed to all pending participants.#{period_links}"
       when "RETURN" then "This 'Return Home' message is addressed to all pending participants.#{period_links}"
-      else "#{event_title}/OP#{sid} "  #FIXME: Is side defined?
+      else "#{event_title}/OP#{sid} "  #FIXME: Is sid defined?
     end
   end
 

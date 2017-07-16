@@ -1,21 +1,19 @@
 - content_for :page_js do
-  /FIXME
-  /= javascript_include_tag 'events/all_events_index'
-  /script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript" 
-  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.js" type="text/javascript" 
+  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"
+  script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"
+
   javascript:
     $(document).ready(function() {
         $('table.display').DataTable( {
             "paging":   false,
-            "info":     false
+            "info":     false,
+            "order": [[ 4, "desc" ]],
+            "fixedHeader": {
+              "header": true,
+              "footer": true,
+              }
         } );
     } );
-  javascript:
-    if ("all" == "#{@view}") {
-      $(window).load(function () {
-        $('.nav-tabs a[href="#allEvents"]').tab('show');
-       })
-    }
 
 link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css"
 
@@ -42,22 +40,23 @@ css:
   .row
     - if "all" == "#{@view}"
       - cache [current_team, "all_events"] do
-        = render partial: 'event_table', locals: {events: @all_events, id: "alltbl"}
+        /FIXME: presorted to current date but may want to reverse for upcoming
+        = render partial: 'event_table', locals: {events: @all_events, id: "allTbl"}
     - else
       - cache [current_team, "current_events"] do
-       = render partial: 'event_table', locals: {events: @current_events,  title: "Happening Now", id: "nowtbl"}
-       - if @current_events.count.zero?
-         | <small>There are no events happening right now</small>
-       p
-       = render partial: 'event_table', locals: {events: @upcoming_events, id: "upcomingtbl",
-         title: "Upcoming Events (#{sdate(Time.now - 1.day)} to #{sdate(Event.upcoming_finish)})" }
-       p
-       = render partial: 'event_table', locals: {events: @recent_events, id: "recenttbl",
-         title: "Recent Events (#{sdate(Event.recent_start)} to #{sdate(Time.now + 1.day)})"}
-       p
-         small
-           | There are <b>#{current_team.events.count}</b> #{current_team.acronym} events in the database
-           - if current_team.events.count > 0
-             |, from #{first_start} to #{last_finish}
-           |.<br>
-           = event_summary_stats
+        = render partial: 'event_table', locals: {events: @current_events,  title: "Happening Now", id: "nowTbl"}
+        - if @current_events.count.zero?
+          small There are no events happening right now
+        p
+        = render partial: 'event_table', locals: {events: @upcoming_events, id: "upcomingTbl",
+          title: "Upcoming Events (#{sdate(Time.now - 1.day)} to #{sdate(Event.upcoming_finish)})" }
+        p
+        = render partial: 'event_table', locals: {events: @recent_events, id: "recentTbl",
+          title: "Recent Events (#{sdate(Event.recent_start)} to #{sdate(Time.now + 1.day)})"}
+        p
+    small
+      | There are <b>#{current_team.events.count}</b> #{current_team.acronym} events in the database
+      - if current_team.events.count > 0
+        |, from #{first_start} to #{last_finish}
+      br
+      = event_summary_stats

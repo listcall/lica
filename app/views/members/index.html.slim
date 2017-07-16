@@ -1,17 +1,27 @@
 - content_for :page_js do
   /FIXME remove extra js files
-  = javascript_include_tag 'members/all_index'
-  /script src="https://code.jquery.com/jquery-1.12.4.js" type="text/javascript" 
-  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js" type="text/javascript" 
+  /= javascript_include_tag 'members/all_index'
+  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"
+  script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"
+  script src="assets/members/index_reserves"
+
   javascript:
     $(document).ready(function() {
-        $('#example').DataTable( {
+        $('#memberTbl').DataTable( {
             "paging":   false,
-            "info":     false
+            "info":     false,
+            "order": [[ 2, "desc" ]],
+            "fixedHeader": {
+              "header": true,
+                //footer: true
+              }
         } );
     } );
 
-link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css" /
+link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css"
+
+/FIXME: Add summary at bottom of page, similar to reports
+/FIXME: Add scrolling header for members and all events
 
 - content_for :subhead do
   div ng-app="memberApp"
@@ -19,29 +29,29 @@ link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="s
       .container.text-primary
         .row style=("vertical-align: middle;")
           .col-ms-8
-            /FIXME: check responsive behavior
+            /FIXME: responsive behavior
             b.vmid.visible-sm-and-above
               => current_team.name
               | Members
             b.vmid.visible-ms-and-below
               => current_team.acronym
               | Members
-          /.col-ms-4.text-right
-            button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button"  reset
+          .col-ms-4.text-right
+            = members_reserve_checkbox(current_team)
 
 - cache ['members', current_team, @list_type, current_user] do
   .container
     .row
       .table-responsive ng-controller="MemberController"
-        /table.table.table-striped.table-hover
-        table#example.display cellspacing="0" width="100%" 
+        /FIXME: add responsive code to new table
+        table#memberTbl.display.table-bordered cellspacing="0" width="100%" 
           thead
-            th.hidden-xs
+            th
               | Name
             th.hidden-xs Rank
             th.hidden-xs Role
-            th.hidden-xs Phone
-            th.hidden-xs eMail
+            th Phone
+            th eMail
           tbody
             - @members.each do |mem|
               - cache ['mem_row_user', mem.user, current_team, current_user] do
@@ -52,12 +62,11 @@ link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="s
                       strong.name-lbl= mem.full_name
                       strong.user-lbl
                         | @#{mem.user_name}
-                    small.username
-                      | @#{mem.user_name}
-                  td.visible-ms-and-above data-sort=mem.rank_score = mem.rank
-                  td.hidden-xs data-sort=mem.role_score = mem.ordered_roles.join(', ')
+                  td.hidden-xs data-sort=mem.rank_score
+                    = mem.rank
+                  td.hidden-xs data-sort=mem.role_score
+                    = mem.ordered_roles.join(', ')
                   td.phoneDat data-number=phone_display(mem) data-sort=mem.user.phones.first.try(:number)
+                    = mem.user.phones.first.try(:number)
                   td.emailDat data-address=email_display(mem) data-sort=mem.user.emails.first.try(:address)
-= members_reserve_checkbox(current_team)
-br
-p
+                    = mem.user.emails.first.try(:address)

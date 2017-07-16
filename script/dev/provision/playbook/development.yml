@@ -28,7 +28,7 @@
     - Ruby/chruby
     - Ruby/install
     - Ruby/gems
-    - CLI/util
+    - CLI/util_base
     - pip
     - tmux
     - nodejs

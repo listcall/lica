@@ -1,8 +1,8 @@
 - title ||= "Title"
 
 /table.table.table-condensed.table-bordered.table-hover
-table#example.display cellspacing="0" width="100%" 
-  tr
+table.display cellspacing="0" width="100%" id="#{id}"
+  thead
     th = title
     th Type
     th Periods
@@ -10,13 +10,14 @@ table#example.display cellspacing="0" width="100%"
     th Start Date
     th Tags
     th Published
-  - events.each do |event|
-    - cache [event, "eventrow"] do
-      tr
-        td width="40%" = raw link_to event.title, "/events/#{event.event_ref}"
-        td width="10%" = event.typ_name
-        td = event.event_periods_count
-        td = event.event_participants_count
-        td = event.start.strftime("%y-%m-%d")
-        td = event.tags.join(', ')
-        td = event.published
+  tbody
+    - events.each do |event|
+      - cache [event, "eventrow"] do
+        tr
+          td width="40%" = raw link_to event.title, "/events/#{event.event_ref}"
+          td width="10%" = event.typ_name
+          td = event.event_periods_count
+          td = event.event_participants_count
+          td = event.start.strftime("%y-%m-%d")
+          td = event.tags.join(', ')
+          td = event.published

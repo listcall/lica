@@ -21,8 +21,8 @@
   roles:
     - Vars/predicates
     - Vars/lclhost
+    - CLI/pkg
     - CLI/user
-    - CLI/base
     - CLI/tzone
     - Ruby/sysruby
     - Ruby/chruby

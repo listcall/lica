@@ -7,7 +7,7 @@ set :application,    'lica'
 set :log_level,      :error                 # use :error, :warn, :info, or :debug
 set :format_options, command_output: false  # :stdout, :stderr, true, false
 
-set :deploy_to,   -> { "/home/#{fetch(:user)}/alp/#{fetch(:application).downcase}" }
+set :deploy_to,   -> { "/home/#{fetch(:user)}/run/#{fetch(:application).downcase}" }
 
 # ===== Nginx Config =====
 

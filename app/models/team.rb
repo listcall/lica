@@ -12,9 +12,9 @@ class Team < ActiveRecord::Base
 
   # ----- team configurations -----
   config_accessor :team_features
-  config_accessor :team_nav_hdrs , :team_nav_ftrs , :team_nav_homes
-  config_accessor :member_ranks  , :member_roles  , :member_attributes
-  config_accessor :event_types   , :event_roles   , :event_attributes
+  config_accessor :team_nav_hdrs, :team_nav_ftrs, :team_nav_homes
+  config_accessor :member_ranks, :member_roles, :member_attributes
+  config_accessor :event_types, :event_roles, :event_attributes
   config_accessor :qual_ctypes
 
   store_accessor :docfields, :public_website_url, :description
@@ -34,12 +34,12 @@ class Team < ActiveRecord::Base
     has_many :memberships
     has_many :events
     has_many :avail_weeks, class_name: 'Avail::Week', foreign_key: 'team_id'
-    has_many :quals             , ->{ order(:position) }
-    has_many :qual_ctypes       , ->{ order(:position) }
-    has_many :positions         , ->{ order(:sort_key) }
-    has_many :position_partners , ->{ order(:sort_key) }, :foreign_key => :partner_id, :class_name => 'Position::Partner'
-    has_many :pgr_templates     , ->{ order(:position) }, :class_name  => 'Pgr::Template'
-    has_one  :pgr
+    has_many :quals, -> { order(:position) }
+    has_many :qual_ctypes, -> { order(:position) }
+    has_many :positions, -> { order(:sort_key) }
+    has_many :position_partners, -> { order(:sort_key) }, :foreign_key => :partner_id, :class_name => 'Position::Partner'
+    has_many :pgr_templates, -> { order(:position) }, :class_name => 'Pgr::Template'
+    has_one :pgr
     has_many :inbounds
     has_many :ranks, -> { order(:sort_key) }, class_name: 'Team::Rank'
     has_many :roles, -> { order(:sort_key) }, class_name: 'Team::Role'
@@ -49,44 +49,44 @@ class Team < ActiveRecord::Base
 
   has_many :rank_assignments, :through => :ranks, class_name: 'Team::RankAssignment'
   has_many :role_assignments, :through => :roles, class_name: 'Team::RoleAssignment'
-  has_many :users           , :through => :memberships
+  has_many :users, :through => :memberships
 
   alias_method :members, :memberships
 
-  has_many   :event_periods, :through => :events
+  has_many :event_periods, :through => :events
 
-  has_many   :team_partnerships        , :dependent => :destroy
-  has_many   :accepted_partnerships    , -> { where(status: 'accepted')  }           , class_name: 'TeamPartnership'
-  has_many   :requested_partnerships   , -> { where(status: 'requested') }           , class_name: 'TeamPartnership'
-  has_many   :pending_partnerships     , -> { where(status: 'pending')   }           , class_name: 'TeamPartnership'
-  has_many   :unconfirmed_partnerships , -> { where(status: %w(requested pending)) } , class_name: 'TeamPartnership'
+  has_many :team_partnerships, :dependent => :destroy
+  has_many :accepted_partnerships, -> { where(status: 'accepted') }, class_name: 'TeamPartnership'
+  has_many :requested_partnerships, -> { where(status: 'requested') }, class_name: 'TeamPartnership'
+  has_many :pending_partnerships, -> { where(status: 'pending') }, class_name: 'TeamPartnership'
+  has_many :unconfirmed_partnerships, -> { where(status: %w(requested pending)) }, class_name: 'TeamPartnership'
 
-  has_many :all_partners         , :through => :team_partnerships        , :source => :partner
-  has_many :partners             , :through => :accepted_partnerships    , :source => :partner
-  has_many :accepted_partners    , :through => :accepted_partnerships    , :source => :partner
-  has_many :requested_partners   , :through => :requested_partnerships   , :source => :partner
-  has_many :pending_partners     , :through => :pending_partnerships     , :source => :partner
-  has_many :unconfirmed_partners , :through => :unconfirmed_partnerships , :source => :partner
+  has_many :all_partners, :through => :team_partnerships, :source => :partner
+  has_many :partners, :through => :accepted_partnerships, :source => :partner
+  has_many :accepted_partners, :through => :accepted_partnerships, :source => :partner
+  has_many :requested_partners, :through => :requested_partnerships, :source => :partner
+  has_many :pending_partners, :through => :pending_partnerships, :source => :partner
+  has_many :unconfirmed_partners, :through => :unconfirmed_partnerships, :source => :partner
 
-  alias_method :periods      , :event_periods
+  alias_method :periods, :event_periods
 
   # ----- Delegated Methods -----
-  def_delegator  :pgr , :assignments , :pager_assignments
-  def_delegator  :pgr , :assignments , :pager_broadcasts
-  def_delegators :org , :domain, :domain_with_port
+  def_delegator :pgr, :assignments, :pager_assignments
+  def_delegator :pgr, :assignments, :pager_broadcasts
+  def_delegators :org, :domain, :domain_with_port
 
   # ----- Validations -----
   validates :typ, :presence => true
-  validates :typ, :format   => { :with => /support|field/ }
+  validates :typ, :format => {:with => /support|field/}
 
-  validates_presence_of    :acronym , :name , :subdomain , :logo_text
-  validates_uniqueness_of  :acronym , :name , :subdomain , :logo_text , :scope => :org_id , :case_sensitive => false
+  validates_presence_of :acronym, :name, :subdomain, :logo_text
+  validates_uniqueness_of :acronym, :name, :subdomain, :logo_text, :scope => :org_id, :case_sensitive => false
 
-  validates_uniqueness_of  :altdomain , allow_blank: true   , case_sensitive: false
-  validates_format_of      :altdomain , with: /\Ahttp:\/\// , message: "Must be a valid URL (like 'http://your_domain.com')" , allow_blank: true
+  validates_uniqueness_of :altdomain, allow_blank: true, case_sensitive: false
+  validates_format_of :altdomain, with: /\Ahttp:\/\//, message: "Must be a valid URL (like 'http://your_domain.com')", allow_blank: true
 
-  validates_format_of      :acronym   , with: /\A[a-zA-Z0-9\.\-]+\z/ , message: 'can only contain letters , numbers or a dash'
-  validates_format_of      :subdomain , with: /\A[a-zA-Z0-9\.\-]+\z/ , message: 'can only contain letters , numbers or a dash'
+  validates_format_of :acronym, with: /\A[a-zA-Z0-9\.\-]+\z/, message: 'can only contain letters , numbers or a dash'
+  validates_format_of :subdomain, with: /\A[a-zA-Z0-9\.\-]+\z/, message: 'can only contain letters , numbers or a dash'
 
   validates_with AccountDomainValidator
 
@@ -96,9 +96,9 @@ class Team < ActiveRecord::Base
   before_validation :set_default_typ
 
   # ----- Scopes -----
-  scope :field     , -> { where(typ: 'field').order(:acronym)    }
-  scope :support   , -> { where(typ: 'support').order(:acronym)  }
-  scope :published , -> { where(published: true).order(:acronym) }
+  scope :field, -> { where(typ: 'field').order(:acronym) }
+  scope :support, -> { where(typ: 'support').order(:acronym) }
+  scope :published, -> { where(published: true).order(:acronym) }
 
   # ----- Class Methods ----
   def self.by_fqdn(fqdn)
@@ -180,9 +180,12 @@ class Team < ActiveRecord::Base
   def icon_path
     if self.typ == 'support'
       case self.org.typ
-        when 'system'  then '/icons/ac_red.ico'
-        when 'hosting' then '/icons/ac_green.ico'
-        else '/icons/ac_blue.ico'
+        when 'system' then
+          '/icons/ac_red.ico'
+        when 'hosting' then
+          '/icons/ac_green.ico'
+        else
+          '/icons/ac_blue.ico'
       end
     else
       self.icon.blank? ? '/icons/default.ico' : self.icon.url
@@ -195,8 +198,8 @@ class Team < ActiveRecord::Base
   def reset_membership_assignments
     migrate_ranks_and_roles
     members.all.each do |mem|
-      mem.rank_assignments.all.each {|x| x.destroy}
-      mem.role_assignments.all.each {|x| x.destroy}
+      mem.rank_assignments.all.each { |x| x.destroy }
+      mem.role_assignments.all.each { |x| x.destroy }
       rank = get_rank(mem.rank)
       mem.update_column(:rank, rank.acronym) if rank.acronym != mem.rank
       raise "BAD RANK #{mem.user_name} / #{mem.rank} / #{acronym}" if rank.blank?
@@ -230,18 +233,18 @@ class Team < ActiveRecord::Base
   # TODO: delete after migration
   def migrate_ranks_and_roles
     reset_ranks_and_roles
-    member_ranks.to_a.sort {|x| -1 * x.position}.each_with_index do |x, idx|
+    member_ranks.to_a.sort { |x| -1 * x.position }.each_with_index do |x, idx|
       Team::Rank.create(x.rank_params.merge({team_id: self.id, sort_key: idx + 1}))
     end
-    member_roles.to_a.sort {|x| -1 * x.position}.each_with_index do |x, idx|
-      Team::Role.create(x.role_params.merge({team_id:  self.id, sort_key: idx + 1}))
+    member_roles.to_a.sort { |x| -1 * x.position }.each_with_index do |x, idx|
+      Team::Role.create(x.role_params.merge({team_id: self.id, sort_key: idx + 1}))
     end
   end
 
   # TODO: delete after migration
   def reset_ranks_and_roles
-    ranks.all.each {|x| x.destroy}
-    roles.all.each {|x| x.destroy}
+    ranks.all.each { |x| x.destroy }
+    roles.all.each { |x| x.destroy }
   end
 end
 

@@ -9,7 +9,6 @@ ARGS = [/Team$/, /^Cert/, /^Access/, /^Membership$/, /^User$/]
 
 def klasses
   kn1 = ActiveRecord::Base.descendants.map {|x| x.name}.uniq
-  puts kn1
   kn2 = kn1.select {|x| ARGS.any?{|y| y.match(x)}}
   kn3 = kn2.select {|x| ! /::As[A-Z]/.match(x)}
   kn3.join(',')
@@ -35,6 +34,8 @@ exclude: null
 only: #{klasnames}
 "
 end
+
+puts klasses
 
 File.open("./.erdconfig", "w") { |f| f.puts cfg_file(klasses) }
 

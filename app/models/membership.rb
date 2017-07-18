@@ -38,7 +38,7 @@ class Membership < ActiveRecord::Base
     has_many    :avail_weeks      , class_name: 'Avail::Week'
     has_many    :rank_assignments , class_name: 'Team::RankAssignment'
     has_many    :role_assignments , class_name: 'Team::RoleAssignment'
-    # has_many    :cert_assignments
+    has_many    :cert_assignments
   end
 
   has_many :zdays, ->(start, finish) { between(start, finish) }, class_name: 'Avail::Day'

@@ -61,13 +61,11 @@ Follow these steps to bootstrap the app in your development environment.
 
 3. Get seed data from a partner:
 
-|----------------------------|--------------------------|
 | PARTNER COMMAND            | YOUR COMMAND             |
 |----------------------------|--------------------------|
 | `script/seed/share_env`    | `script/seed/get_env`    |
 | `script/seed/share_db`     | `script/seed/get_db`     |
 | `script/seed/share_sysdir` | `script/seed/get_sysdir` |
-|----------------------------|--------------------------|
 
 4. Import the seed db `script/seed/import_db`
 

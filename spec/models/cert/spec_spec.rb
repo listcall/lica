@@ -6,13 +6,14 @@ describe Cert::Spec do
   let(:subject)     { klas.new(base_params)    }
 
   describe 'Attributes' do
-    # it { should respond_to :team_id            }
-    # it { should respond_to :membership_id      }
-    # it { should respond_to :status             }
-    # it { should respond_to :comment            }
-    # it { should respond_to :year               }
-    # it { should respond_to :quarter            }
-    # it { should respond_to :week               }
+    it { should respond_to :team_id            }
+    it { should respond_to :name               }
+    it { should respond_to :rname              }
+    it { should respond_to :expirable          }
+    it { should respond_to :commentable        }
+    it { should respond_to :xfields            }
+    it { should respond_to :ev_types           }
+    it { should respond_to :position           }
   end
 
   describe 'Associations' do
@@ -21,17 +22,16 @@ describe Cert::Spec do
     it { should respond_to :team                }
   end
 
-  # describe 'Object Creation' do
-  #   it 'handles object creation' do
-  #   it 'handles object creation' do
-  #     expect(subject).to be_valid
-  #   end
-  #
-  #   it 'saves the object to the database' do
-  #     subject.save
-  #     expect(subject).to be_valid
-  #   end
-  # end
+  describe 'Object Creation' do
+    it 'handles object creation' do
+      expect(subject).to be_valid
+    end
+
+    it 'saves the object to the database' do
+      subject.save
+      expect(subject).to be_valid
+    end
+  end
 end
 
 # == Schema Information

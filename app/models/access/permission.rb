@@ -1,4 +1,6 @@
-class Acc::Permission < ActiveRecord::Base
+class Access::Permission < ActiveRecord::Base
+
+  self.table_name = "access_permissions"
 
   # ----- Attributes -----
 
@@ -6,7 +8,7 @@ class Acc::Permission < ActiveRecord::Base
 
   # ----- Associations -----
 
-  belongs_to :acc_role
+  belongs_to :access_role
   # has_many   :assignments, :foreign_key => 'team_role_id', :class_name => 'Team::RoleAssignment'
   # has_one    :position   , :foreign_key => 'team_role_id', :class_name => 'Position', :dependent => :destroy
 

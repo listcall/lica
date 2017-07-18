@@ -2,13 +2,16 @@
 
 class Cert::Assignment < ActiveRecord::Base
 
+  self.table_name = 'cert_assignments'
+
   # extend Forwardable
 
   # ----- Attributes -----
 
   # ----- Associations -----
   with_options :touch => true do
-    belongs_to :cert_user
+    belongs_to :membership
+    belongs_to :cert_exhibit
     belongs_to :cert_spec
   end
 

@@ -3,6 +3,8 @@
 
 class Cert::Spec < ActiveRecord::Base
 
+  self.table_name = "cert_specs"
+
   # extend Forwardable
   # has_paper_trail
 
@@ -15,8 +17,9 @@ class Cert::Spec < ActiveRecord::Base
 
   # ----- Associations -----
   with_options :dependent => :destroy do
-    has_many   :membership_certs, ->{ order(:position) }
+    has_many   :cert_assignments, ->{ order(:position) }
   end
+  has_many   :access_roles
   belongs_to :team              ,  :touch     => true
   # has_many   :quals             ,  :through   => :qual_assignments
   #

@@ -1,4 +1,6 @@
-class Acc::Role < ActiveRecord::Base
+class Access::Role < ActiveRecord::Base
+
+  self.table_name = "access_roles"
 
   acts_as_list :scope => :team_id, :column => :sort_key
 
@@ -10,7 +12,7 @@ class Acc::Role < ActiveRecord::Base
 
   belongs_to :team
   belongs_to :cert_spec
-  has_many   :acc_permissions
+  has_many   :access_permissions
 
   # ----- Validations -----
   # VALID_RIGHTS = %w(owner manager active)

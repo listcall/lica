@@ -80,7 +80,7 @@ end
 #  name        :string(255)
 #  domain      :string(255)
 #  org_team_id :integer
-#  fallback    :boolean          default("false")
+#  fallback    :boolean          default(FALSE)
 #  created_at  :datetime
 #  updated_at  :datetime
 #

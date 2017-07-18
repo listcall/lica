@@ -165,13 +165,13 @@ end
 #  middle_name                :string(255)
 #  last_name                  :string(255)
 #  title                      :string(255)
-#  superuser                  :boolean          default("false")
-#  developer                  :boolean          default("false")
+#  superuser                  :boolean          default(FALSE)
+#  developer                  :boolean          default(FALSE)
 #  avatar_file_name           :string(255)
 #  avatar_content_type        :string(255)
 #  avatar_file_size           :integer
 #  avatar_updated_at          :integer
-#  sign_in_count              :integer          default("0")
+#  sign_in_count              :integer          default(0)
 #  password_digest            :string(255)
 #  remember_me_token          :string(255)
 #  forgot_password_token      :string(255)

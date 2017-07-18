@@ -38,7 +38,7 @@ end
 #  reviewer_id   :integer
 #  reviewed_at   :string(255)
 #  external_id   :string(255)
-#  xfields       :hstore           default("")
+#  xfields       :hstore           default({})
 #  created_at    :datetime
 #  updated_at    :datetime
 #  title         :string(255)

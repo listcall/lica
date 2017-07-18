@@ -38,7 +38,7 @@ end
 #  ninety_day_notice_sent_at :datetime
 #  thirty_day_notice_sent_at :datetime
 #  expired_notice_sent_at    :datetime
-#  xfields                   :hstore           default("")
+#  xfields                   :hstore           default({})
 #  created_at                :datetime
 #  updated_at                :datetime
 #

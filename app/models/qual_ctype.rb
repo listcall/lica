@@ -132,11 +132,11 @@ end
 #  team_id     :integer
 #  name        :string(255)
 #  rname       :string(255)
-#  expirable   :boolean          default("true")
-#  xfields     :hstore           default("")
+#  expirable   :boolean          default(TRUE)
+#  xfields     :hstore           default({})
 #  position    :integer
 #  created_at  :datetime
 #  updated_at  :datetime
-#  ev_types    :text             default("{}"), is an Array
-#  commentable :boolean          default("true")
+#  ev_types    :text             default([]), is an Array
+#  commentable :boolean          default(TRUE)
 #

@@ -24,9 +24,9 @@ end
 #  short_body    :text
 #  long_body     :text
 #  deliver_at    :datetime
-#  recipient_ids :integer          default("{}"), is an Array
-#  xfields       :hstore           default("")
-#  jfields       :jsonb            default("{}")
+#  recipient_ids :integer          default([]), is an Array
+#  xfields       :hstore           default({})
+#  jfields       :jsonb
 #  created_at    :datetime
 #  updated_at    :datetime
 #

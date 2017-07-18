@@ -45,8 +45,8 @@ end
 #  event_period_id :integer
 #  title           :string(255)
 #  position        :integer
-#  data            :hstore           default("")
-#  published       :boolean          default("false")
+#  data            :hstore           default({})
+#  published       :boolean          default(FALSE)
 #  created_at      :datetime
 #  updated_at      :datetime
 #

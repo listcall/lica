@@ -34,16 +34,9 @@ end
 
 # == Schema Information
 #
-# Table name: avail_weeks
+# Table name: access_permissions
 #
-#  id            :integer          not null, primary key
-#  team_id       :integer
-#  membership_id :integer
-#  year          :integer
-#  quarter       :integer
-#  week          :integer
-#  status        :string(255)
-#  comment       :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
+#  id             :integer          not null, primary key
+#  access_role_id :integer
+#  label          :string
 #

@@ -44,15 +44,15 @@ end
 #  lon                      :decimal(7, 4)
 #  start                    :datetime
 #  finish                   :datetime
-#  all_day                  :boolean          default("true")
-#  published                :boolean          default("false")
-#  xfields                  :hstore           default("")
+#  all_day                  :boolean          default(TRUE)
+#  published                :boolean          default(FALSE)
+#  xfields                  :hstore           default({})
 #  external_id              :string(255)
 #  signature                :string(255)
 #  created_at               :datetime
 #  updated_at               :datetime
 #  ancestry                 :string(255)
-#  event_periods_count      :integer          default("0"), not null
-#  event_participants_count :integer          default("0"), not null
-#  tags                     :text             default("{}"), is an Array
+#  event_periods_count      :integer          default(0), not null
+#  event_participants_count :integer          default(0), not null
+#  tags                     :text             default([]), is an Array
 #

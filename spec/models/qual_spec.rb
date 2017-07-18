@@ -42,7 +42,7 @@ end
 #  name       :string(255)
 #  rname      :string(255)
 #  position   :integer
-#  xfields    :hstore           default("")
+#  xfields    :hstore           default({})
 #  created_at :datetime
 #  updated_at :datetime
 #

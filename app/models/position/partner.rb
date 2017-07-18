@@ -33,8 +33,8 @@ end
 #  position_id :integer
 #  partner_id  :integer
 #  sort_key    :integer
-#  xfields     :hstore           default("")
-#  jfields     :jsonb            default("{}")
+#  xfields     :hstore           default({})
+#  jfields     :jsonb
 #  created_at  :datetime
 #  updated_at  :datetime
 #

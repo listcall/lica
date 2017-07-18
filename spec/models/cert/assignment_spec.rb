@@ -36,16 +36,21 @@ end
 
 # == Schema Information
 #
-# Table name: avail_weeks
+# Table name: cert_assignments
 #
-#  id            :integer          not null, primary key
-#  team_id       :integer
-#  membership_id :integer
-#  year          :integer
-#  quarter       :integer
-#  week          :integer
-#  status        :string(255)
-#  comment       :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
+#  id              :integer          not null, primary key
+#  membership_id   :integer
+#  cert_spec_id    :integer
+#  cert_exhibit_id :integer
+#  title           :string
+#  position        :integer
+#  status          :string
+#  ev_type         :string
+#  reviewer_id     :integer
+#  reviewed_at     :string
+#  external_id     :string
+#  xfields         :hstore           default({})
+#  mc_expires_at   :datetime
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
 #

@@ -65,8 +65,8 @@ end
 #  picker_team_id     :integer
 #  rep_template_db_id :integer
 #  sort_key           :integer
-#  xfields            :hstore           default("")
-#  jfields            :jsonb            default("{}")
+#  xfields            :hstore           default({})
+#  jfields            :jsonb
 #  created_at         :datetime
 #  updated_at         :datetime
 #

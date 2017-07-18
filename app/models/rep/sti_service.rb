@@ -55,9 +55,9 @@ end
 #  fork_template_id :text
 #  visibility       :string
 #  sort_key         :integer
-#  values           :hstore           default("")
-#  xfields          :hstore           default("")
-#  jfields          :jsonb            default("{}")
+#  values           :hstore           default({})
+#  xfields          :hstore           default({})
+#  jfields          :jsonb
 #  created_at       :datetime
 #  updated_at       :datetime
 #

@@ -164,7 +164,7 @@ end
 #
 #  id                :integer          not null, primary key
 #  uuid              :uuid
-#  _config           :json             default("{}")
+#  _config           :json
 #  org_id            :integer
 #  typ               :string(255)
 #  acronym           :string(255)
@@ -176,10 +176,10 @@ end
 #  icon_content_type :string(255)
 #  icon_file_size    :integer
 #  icon_updated_at   :integer
-#  enc_members       :text             default("{}"), is an Array
+#  enc_members       :text             default([]), is an Array
 #  enc_pw_hash       :text
 #  created_at        :datetime
 #  updated_at        :datetime
-#  docfields         :hstore           default("")
-#  published         :boolean          default("false")
+#  docfields         :hstore           default({})
+#  published         :boolean          default(FALSE)
 #

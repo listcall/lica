@@ -48,5 +48,5 @@ end
 #  position     :integer
 #  created_at   :datetime
 #  updated_at   :datetime
-#  visible      :boolean          default("true")
+#  visible      :boolean          default(TRUE)
 #

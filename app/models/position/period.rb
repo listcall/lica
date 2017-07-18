@@ -53,8 +53,8 @@ end
 #  year        :integer
 #  quarter     :integer
 #  week        :integer
-#  jfields     :jsonb            default("{}")
-#  xfields     :hstore           default("")
+#  jfields     :jsonb
+#  xfields     :hstore           default({})
 #  created_at  :datetime
 #  updated_at  :datetime
 #

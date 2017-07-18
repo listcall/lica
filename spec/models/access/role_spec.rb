@@ -36,16 +36,17 @@ end
 
 # == Schema Information
 #
-# Table name: avail_weeks
+# Table name: access_roles
 #
-#  id            :integer          not null, primary key
-#  team_id       :integer
-#  membership_id :integer
-#  year          :integer
-#  quarter       :integer
-#  week          :integer
-#  status        :string(255)
-#  comment       :string(255)
-#  created_at    :datetime
-#  updated_at    :datetime
+#  id           :integer          not null, primary key
+#  team_id      :integer
+#  cert_spec_id :integer
+#  name         :string
+#  acronym      :string
+#  description  :string
+#  sort_key     :integer
+#  xfields      :hstore           default({})
+#  jfields      :jsonb
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #

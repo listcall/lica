@@ -87,8 +87,8 @@ end
 #  unauth_action_token      :string
 #  unauth_action_expires_at :datetime
 #  action_response          :string
-#  xfields                  :hstore           default("")
-#  jfields                  :jsonb            default("{}")
+#  xfields                  :hstore           default({})
+#  jfields                  :jsonb
 #  created_at               :datetime
 #  updated_at               :datetime
 #

@@ -66,8 +66,8 @@ end
 #  target_channel :string
 #  origin_address :string
 #  target_address :string
-#  bounced        :boolean          default("false")
-#  xfields        :hstore           default("")
+#  bounced        :boolean          default(FALSE)
+#  xfields        :hstore           default({})
 #  sent_at        :datetime
 #  read_at        :datetime
 #  created_at     :datetime

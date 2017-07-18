@@ -18,7 +18,7 @@ end
 #  position    :integer
 #  name        :string
 #  description :string
-#  xfields     :hstore           default("")
+#  xfields     :hstore           default({})
 #  created_at  :datetime
 #  updated_at  :datetime
 #

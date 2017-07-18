@@ -45,12 +45,12 @@ end
 #  proxy            :string
 #  subject          :string
 #  fm               :string
-#  to               :string           default("{}"), is an Array
-#  headers          :hstore           default("")
+#  to               :string           default([]), is an Array
+#  headers          :hstore           default({})
 #  text             :text
 #  destination_type :string
 #  destination_id   :integer
-#  xfields          :hstore           default("")
+#  xfields          :hstore           default({})
 #  created_at       :datetime
 #  updated_at       :datetime
 #

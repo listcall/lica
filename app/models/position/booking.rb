@@ -34,8 +34,8 @@ end
 #  id                 :integer          not null, primary key
 #  position_period_id :integer
 #  membership_id      :integer
-#  xfields            :hstore           default("")
-#  jfields            :jsonb            default("{}")
+#  xfields            :hstore           default({})
+#  jfields            :jsonb
 #  created_at         :datetime
 #  updated_at         :datetime
 #

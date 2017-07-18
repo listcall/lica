@@ -21,7 +21,7 @@ end
 #  id               :integer          not null, primary key
 #  pgr_broadcast_id :integer
 #  type             :string
-#  xfields          :hstore           default("")
+#  xfields          :hstore           default({})
 #  created_at       :datetime
 #  updated_at       :datetime
 #

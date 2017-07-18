@@ -174,11 +174,11 @@ end
 #  user_id      :integer
 #  team_id      :integer
 #  rank         :string(255)
-#  roles        :text             default("{}"), is an Array
-#  xfields      :hstore           default("")
+#  roles        :text             default([]), is an Array
+#  xfields      :hstore           default({})
 #  created_at   :datetime
 #  updated_at   :datetime
-#  rights_score :integer          default("0")
-#  rank_score   :integer          default("100")
-#  role_score   :integer          default("0")
+#  rights_score :integer          default(0)
+#  rank_score   :integer          default(100)
+#  role_score   :integer          default(0)
 #

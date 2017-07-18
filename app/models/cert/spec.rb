@@ -128,17 +128,17 @@ end
 
 # == Schema Information
 #
-# Table name: qual_ctypes
+# Table name: cert_specs
 #
 #  id          :integer          not null, primary key
 #  team_id     :integer
-#  name        :string(255)
-#  rname       :string(255)
-#  expirable   :boolean          default("true")
-#  xfields     :hstore           default("")
+#  name        :string
+#  rname       :string
+#  expirable   :boolean          default(TRUE)
+#  commentable :boolean          default(TRUE)
+#  xfields     :hstore           default({})
+#  ev_types    :text             default([]), is an Array
 #  position    :integer
-#  created_at  :datetime
-#  updated_at  :datetime
-#  ev_types    :text             default("{}"), is an Array
-#  commentable :boolean          default("true")
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
 #

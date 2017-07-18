@@ -67,19 +67,17 @@ end
 
 # == Schema Information
 #
-# Table name: team_roles
+# Table name: access_roles
 #
-#  id          :integer          not null, primary key
-#  team_id     :integer
-#  name        :string
-#  acronym     :string
-#  description :string
-#  rights      :string
-#  status      :string
-#  has         :string
-#  sort_key    :integer
-#  xfields     :hstore           default("")
-#  jfields     :jsonb            default("{}")
-#  created_at  :datetime
-#  updated_at  :datetime
+#  id           :integer          not null, primary key
+#  team_id      :integer
+#  cert_spec_id :integer
+#  name         :string
+#  acronym      :string
+#  description  :string
+#  sort_key     :integer
+#  xfields      :hstore           default({})
+#  jfields      :jsonb
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #

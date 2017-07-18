@@ -38,15 +38,16 @@ end
 #
 # Table name: cert_specs
 #
-#  id          :integer          not null, primary key
-#  team_id     :integer
-#  name        :string
-#  rname       :string
-#  expirable   :boolean          default(TRUE)
-#  commentable :boolean          default(TRUE)
-#  xfields     :hstore           default({})
-#  ev_types    :text             default([]), is an Array
-#  position    :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id           :integer          not null, primary key
+#  team_id      :integer
+#  cert_role_id :integer
+#  name         :string
+#  rname        :string
+#  expirable    :boolean          default(TRUE)
+#  commentable  :boolean          default(TRUE)
+#  xfields      :hstore           default({})
+#  ev_types     :text             default([]), is an Array
+#  position     :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #

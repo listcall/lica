@@ -125,17 +125,13 @@ end
 
 # == Schema Information
 #
-# Table name: cert_specs
+# Table name: cert_groups
 #
-#  id          :integer          not null, primary key
-#  team_id     :integer
-#  name        :string
-#  rname       :string
-#  expirable   :boolean          default(TRUE)
-#  commentable :boolean          default(TRUE)
-#  xfields     :hstore           default({})
-#  ev_types    :text             default([]), is an Array
-#  position    :integer
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
+#  id         :integer          not null, primary key
+#  team_id    :integer
+#  name       :string
+#  xfields    :hstore           default({})
+#  jfields    :jsonb
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
 #

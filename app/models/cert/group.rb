@@ -1,9 +1,9 @@
 # require 'forwardable'
 # require 'ext/fixnum'
 
-class Cert::Spec < ActiveRecord::Base
+class Cert::Group < ActiveRecord::Base
 
-  self.table_name = "cert_specs"
+  self.table_name = "cert_groups"
 
   # extend Forwardable
   # has_paper_trail
@@ -16,11 +16,8 @@ class Cert::Spec < ActiveRecord::Base
   # xfield_accessor :attendance_rule
 
   # ----- Associations -----
-  with_options :dependent => :destroy do
-    has_many   :cert_assignments, ->{ order(:position) }
-  end
-  has_many   :access_roles, :class_name => 'Access::Role'
-  belongs_to :team        , :touch      => true
+  has_many   :cert_specs, class_name: 'Cert::Spec'
+  belongs_to :team      , :touch => true
   # has_many   :quals             ,  :through   => :qual_assignments
   #
   # alias_method :assignments      ,  :qual_assignments

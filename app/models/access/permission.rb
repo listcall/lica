@@ -8,7 +8,7 @@ class Access::Permission < ActiveRecord::Base
 
   # ----- Associations -----
 
-  belongs_to :access_role
+  belongs_to :access_role, class_name: 'Access::Role'
   # has_many   :assignments, :foreign_key => 'team_role_id', :class_name => 'Team::RoleAssignment'
   # has_one    :position   , :foreign_key => 'team_role_id', :class_name => 'Position', :dependent => :destroy
 

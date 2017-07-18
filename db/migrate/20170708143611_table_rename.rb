@@ -44,22 +44,35 @@ class TableRename < ActiveRecord::Migration[5.1]
 
     create_table 'cert_specs' do |t|
       t.integer 'team_id'
+      t.integer 'cert_role_id'
       t.string  'name'
       t.string  'rname'
-      t.boolean 'expirable', default: true
-      t.boolean 'commentable', default: true
-      t.hstore  'xfields', default: {}
+      t.boolean 'expirable'   , default: true
+      t.boolean 'commentable' , default: true
+      t.hstore  'xfields' , default: {}
       t.text    'ev_types', default: [], array: true
       t.integer 'position'
       t.timestamps
     end
     add_index :cert_specs, :team_id
+    add_index :cert_specs, :cert_role_id
     add_index :cert_specs, :rname
     add_index :cert_specs, :expirable
     add_index :cert_specs, :commentable
-    add_index :cert_specs, :xfields, :using => :gin
+    add_index :cert_specs, :xfields , :using => :gin
     add_index :cert_specs, :ev_types, :using => :gin
     add_index :cert_specs, :position
+
+    create_table 'cert_groups' do |t|
+      t.integer 'team_id'
+      t.string  'name'
+      t.hstore  'xfields', default: {}
+      t.jsonb   'jfields', default: {}
+      t.timestamps
+    end
+    add_index :cert_groups, :xfields , :using => :gin
+    add_index :cert_groups, :jfields , :using => :gin
+    add_index :cert_groups, :team_id
 
     create_table :access_roles do |t|
       t.integer 'team_id'

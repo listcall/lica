@@ -11,8 +11,8 @@ class Access::Role < ActiveRecord::Base
   # ----- Associations -----
 
   belongs_to :team
-  belongs_to :cert_spec
-  has_many   :access_permissions
+  belongs_to :cert_spec         , class_name: 'Cert::Spec'
+  has_many   :access_permissions, class_name: 'Access::Permission'
 
   # ----- Validations -----
   # VALID_RIGHTS = %w(owner manager active)

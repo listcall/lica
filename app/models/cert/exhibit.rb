@@ -18,8 +18,8 @@ class Cert::Exhibit < ActiveRecord::Base
   # before_post_process :cleanup_attachment_file_name
 
   # ----- Associations -----
-  belongs_to :user             ,  :touch => true
-  has_many   :cert_assignments ,  :dependent => :destroy
+  belongs_to :user            , :touch => true
+  has_many   :cert_assignments, :class_name => 'Cert::Assignment', :dependent => :destroy
 
   # ----- Validations -----
 

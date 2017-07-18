@@ -11,8 +11,8 @@ class Cert::Assignment < ActiveRecord::Base
   # ----- Associations -----
   with_options :touch => true do
     belongs_to :membership
-    belongs_to :cert_exhibit
-    belongs_to :cert_spec
+    belongs_to :cert_exhibit  , class_name: 'Cert::Exhibit'
+    belongs_to :cert_spec     , class_name: 'Cert::Spec'
   end
 
   # alias_method :ctype, :qual_ctype

@@ -1,0 +1,11 @@
+#!/usr/bin/env ruby
+
+require './config/environment'
+
+Cert::Exhibit.destroy_all
+Cert::Assignment.destroy_all
+Cert::Spec.destroy_all
+Cert::Group.destroy_all
+Access::Role.destroy_all
+Access::Permission.destroy_all
+

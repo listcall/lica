@@ -17,7 +17,7 @@ class Cert::Spec < ActiveRecord::Base
 
   # ----- Associations -----
   with_options :dependent => :destroy do
-    has_many   :cert_assignments, ->{ order(:position) }
+    has_many   :cert_assignments, class_name: 'Cert::Assignment', foreign_key: "cert_spec_id"#, ->{ order(:position) }
   end
   has_many   :access_roles, :class_name => 'Access::Role'
   belongs_to :team        , :touch      => true

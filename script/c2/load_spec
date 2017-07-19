@@ -1,0 +1,42 @@
+#!/usr/bin/env ruby
+
+require './config/environment'
+
+team = Team.find_by_acronym("BAMRU")
+
+opts = [
+  {
+    team: team,
+    name: "asdf1"
+  },
+
+  {
+    team: team,
+    name: "asdf2"
+  },
+
+  {
+    team: team,
+    name: "asdf3"
+  },
+
+  {
+    team: team,
+    name: "asdf3"
+  },
+
+  {
+    team: team,
+    name: "asdf5"
+  },
+
+  {
+    team: team,
+    name: "asdf6"
+  }
+
+]
+
+Cert::Spec.create opts
+
+puts Cert::Spec.count

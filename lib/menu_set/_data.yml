@@ -1,0 +1,20 @@
+---
+- name: Membership
+  admin_links:
+    - label: membership
+      title: Team Names and URL's
+      desc:  Do this and that
+      path:  /admin/membership
+      icon:  dingdong
+  user_links:
+    - label: membership
+      title: Team Names and URL's
+      desc:  Do this and that
+      path:  /admin/membership
+      icon:  dingdong
+  alt_permissions:
+    - updateThis
+    - updateThat
+
+
+

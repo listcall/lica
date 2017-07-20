@@ -1,4 +1,4 @@
-module Feature
+module MenuSet
 
   class Collection
 

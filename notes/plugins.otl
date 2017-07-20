@@ -1,0 +1,22 @@
+Plugin
+	Member
+	Event
+	Drive
+	Paging
+	Position
+	Equipment
+	Certs
+	Reports
+	Docs
+	Wiki
+Model
+	namespace: <string>
+	user_pages:
+		name: <string>
+	admin_pages:
+		name: <string>
+	  	
+
+
+
+

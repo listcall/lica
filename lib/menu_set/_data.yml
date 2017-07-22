@@ -7,14 +7,48 @@
       path:  /admin/membership
       icon:  dingdong
   user_links:
-    - label: membership
-      title: Team Names and URL's
-      desc:  Do this and that
-      path:  /admin/membership
-      icon:  dingdong
+    - label: members
+      title: Members
+      desc:  Member roster, photo gallery and data export
+      path:  /members
+      icon:  tbd
   alt_permissions:
     - updateThis
     - updateThat
+- name: Availability
+  user_links:
+    - label: availability
+      title: Availability
 
 
 
+
+
+      avail_des = 'Member availability'
+      event_des = 'Team events with rosters, time-tracking, attachments and reporting'
+      posit_des = 'Recurring positions: scheduling and execution'
+      pagng_des = 'Team Paging via Email / SMS'
+      quals_des = 'Member Training Qualifications Tracking'
+      repor_des = 'Database Reports'
+      proto_des = 'Prototype: Under Construction'
+
+      membr_men = [Feature::Menu.new('Members'         , '/members'               )]
+      avail_men = [Feature::Menu.new('Availability'    , '/avail/days'            )]
+      event_men = [Feature::Menu.new('Events'          , '/events'                )]
+      posit_men = [Feature::Menu.new('Positions'       , '/positions'             )]
+      pagng_men = [Feature::Menu.new('Paging'          , '/paging'                )]
+      quals_men = [Feature::Menu.new('Qualifications'  , '/quals'                 )]
+      repor_men = [Feature::Menu.new('Reports'         , '/reports'               )]
+      proto_men = [Feature::Menu.new('Prototype'       , '/prototype'             )]
+
+      objs = []
+      objs << Feature::Model.new( label: 'Lica_Members'         , name: 'Members'         , description: membr_des , menus: membr_men )
+      objs << Feature::Model.new( label: 'Lica_Availability'    , name: 'Availability'    , description: avail_des , menus: avail_men )
+      objs << Feature::Model.new( label: 'Lica_Paging'          , name: 'Paging'          , description: pagng_des , menus: pagng_men )
+      objs << Feature::Model.new( label: 'Lica_Events'          , name: 'Events'          , description: event_des , menus: event_men )
+      objs << Feature::Model.new( label: 'Lica_Positions'       , name: 'Positions'       , description: posit_des , menus: posit_men )
+      objs << Feature::Model.new( label: 'Lica_Qualifications'  , name: 'Qualifications'  , description: quals_des , menus: quals_men )
+      objs << Feature::Model.new( label: 'Lica_Reports'         , name: 'Reports'         , description: repor_des , menus: repor_men )
+      objs << Feature::Model.new( label: 'Lica_Prototype'       , name: 'Prototype'       , description: proto_des , menus: proto_men )
+      objs        #
+    end

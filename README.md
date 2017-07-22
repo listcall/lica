@@ -23,8 +23,8 @@ Let's get started:
 
 1. Install VirtualBox and Vagrant on your host machine (Linux, Win, Mac OK)
 
-2. Download the dev-machine Vagrantfile 
-   `wget raw.githubusercontent.com/listcall/lica/script/dev/vm/Vagrantfile`
+2. Download the Vagrantfile 
+   `wget raw.githubusercontent.com/listcall/lica/Vagrantfile`
 
 3. Run `vagrant up` to create a virtual machine.
 

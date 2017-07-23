@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# start the spec runner
+# start the rspec runner
 
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd $SCRIPTDIR/../..
@@ -9,5 +9,5 @@ export APP="ListCall"
 export DISABLE_DATABASE_ENVIRONMENT_CHECK=1
 
 clear
-echo "script/dev/specs"
+echo "script/dev/rspec"
 RUBYOPT=W0 bundle exec guard -c

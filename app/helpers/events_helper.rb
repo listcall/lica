@@ -23,7 +23,7 @@ module EventsHelper
         "#{pluralize(count, name)}"
       end
     end
-    "(#{tmp.join(', ')})"
+    "#{tmp.join(', ')}"
   end
 
   def published_helper(event, type = 'new')

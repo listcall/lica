@@ -12,15 +12,15 @@
     .container.text-primary 
       .row
         .col-xs-6
-          b
-            = render :partial => 'pgr/team_title'
-            | > #{ truncate(@assig.short_body, length: 20) }
+          = render :partial => '/subhead_title',
+            :locals => {title: [ {label: "Paging Log", ref: "/paging"},
+                                 {label: "#{ truncate(@assig.short_body, length: 20) }"} ]}
         .col-xs-6.text-right
           small = Time.now.strftime("%a %b %d %H:%M")
 
 .container
   .row
-    .col-md-10
+    .col-xs-9
       b> Fm:
       => pgr_mem_link @assig.sender
       b> To:
@@ -28,12 +28,13 @@
       = @assig.via
       br
       = @assig.message_text
-    .col-md-2
+    .col-xs-3
       - if @assig.broadcast.sender == current_membership
         button.btn.btn-sm#followupBtn
+          .i.fa.fa-bullhorn>
           ' send followup
   .row
-    .col-md-12
+    .col-xs-12
       br
       = raw @assig.action_header
       table.table.table-condensed

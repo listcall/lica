@@ -27,8 +27,6 @@
 #= require bootstrap/button
 #= require bootstrap-switch
 #= require bootstrap3-editable/js/bootstrap-editable
-#= require jquery.tablesorter
-#= require jquery.tablesorter/jquery.tablesorter.widgets
 #= require sweetalert
 #= require react/react-with-addons
 #= require react-bootstrap

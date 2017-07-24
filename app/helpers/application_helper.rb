@@ -1,5 +1,9 @@
 module ApplicationHelper
 
+  def top_menu
+    render "layouts/application_top_menu"
+  end
+
   def feature_enabled(team, key)
     return false if current_membership.manager? && all_owner_features(key)
     return true if %w(Lica_Team Lica_Members).include? key.to_s

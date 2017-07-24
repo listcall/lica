@@ -5,6 +5,8 @@ xOpts = (title)-> { container: 'body', title: title }
 
 closeTooltips = -> $('.btn').blur()
 
+#XXX Duplicated in js/pgr/new_tooltips.coffee, js/events/show_tooltips.coffee
+#XXX and assets/javascripts/events/show_tooltips.js.coffee
 $(document).ready ->
   $('.pCount').tooltip(pOpts)
   $('.btnRSVP').tooltip   xOpts('send selected message to team')

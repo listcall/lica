@@ -1,8 +1,7 @@
 - content_for :page_js do
-  /FIXME remove extra js files
-  /FIXME add calendar picker for date range
+  /XXX add calendar picker for date range
   = javascript_include_tag 'reports/all_reports'
-  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
 
   javascript:
     $(document).ready(function() {
@@ -10,17 +9,20 @@
             "paging":   false,
             "info":     false,
             "order":    [[ 1, "asc" ]],
+            "responsive": true,
+            columnDefs: [
+              { responsivePriority: 1, targets: 2 },
+              { responsivePriority: 2, targets: 4 }
+            ]
         } );
     } );
 
-link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css" /
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
 
 .container
   .row
     .col-md-12
-      div style=("text-align: center;") width="100%" 
-        /FIXME: p is a hack
-        p
+      div style=('text-align: center; margin-top: 20px;') width="100%" 
         b.text-primary Current Reports
 
       table#myTable1.display cellspacing="0" width="100%" 
@@ -41,10 +43,7 @@ link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="s
               td= report_description(report)
               td
                 = download_link(report)
-      /FIXME: p is a hack, set width of action and view field to the same size
-      p
-      p
-      div style=("text-align: center;") width="100%" 
+      div style=('text-align: center; margin-top: 20px;') width="100%" 
         b.text-primary Historical Reports
 
       table#myTable2.display cellspacing="0" width="100%" 

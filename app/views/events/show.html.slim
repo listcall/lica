@@ -15,15 +15,14 @@
     .container.text-primary
       .row
         .col-xs-6
-          b
-            = render :partial => 'team_title'
-            | > #{@event.event_ref}
+          = render :partial => '/subhead_title',
+            :locals => {title: [{label: "Events", ref: "/events"}, {label: "#{@event.title}"} ]}
         .col-xs-6.text-right
           a.help-button href="/events/new"
-            span.glyphicon.glyphicon-plus
+            i.glyphicon.glyphicon-plus
             |  Create Event
           a.help-button href="/events/new?copy=#{@event.id}"
-            span.glyphicon.glyphicon-duplicate
+            i.glyphicon.glyphicon-duplicate
             |  Copy Event
           = raw event_delete_link(@event.event)
           = member_help_button('events')
@@ -42,11 +41,14 @@ css:
       table.table.table-condensed.table-bordered.table-hover
         thead
           th Period
-          th Paging
+          th
+            i.fa.fa-bullhorn>
+            ' Paging
           th.ar
             form action="/events/#{@event.event_ref}/periods" method="POST"
-              input name="authenticity_token" type="hidden" value=form_authenticity_token /
-              button#eventPeriodCreateBtn.btn.btn-xs.btn-primary Create
+              input name="authenticity_token" type="hidden" value=form_authenticity_token 
+                button#eventPeriodCreateBtn.btn.btn-xs.btn-primary 
+                  i.glyphicon.glyphicon-plus
         tbody#periodBody
           - @event.periods.sorted.each do |period|
             tr id="period_#{period.id}"
@@ -70,7 +72,8 @@ css:
                   = event_page_link(period, :Return)
               td.ar
                 = delete_event_period_button(period)
-      /small
+    /FIXME:XXX do we need this functionality, can we follow-up later
+      small
         div style=("margin-bottom: 8px;")
           b= participating_teams_title(@event.event)
           div style=("display: inline-block; float: right;")
@@ -94,8 +97,10 @@ css:
       .row
         .col-xs-12
           .panel-group#accordion
-            = render "event_description"
-            = render "callout_checklist"
-            = render "paging_log" 
+            = render :partial => 'event_description'
+            - unless @assignments.empty?
+              = render :partial => 'paging_log'
+            - if "Operation" == @event.event.typ_name
+              = render :partial => 'callout_checklist'
 
   = render 'geopicker_modal'

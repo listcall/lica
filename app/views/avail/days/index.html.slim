@@ -1,31 +1,37 @@
 - content_for :page_js do
-  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
 
   javascript:
     $(document).ready(function() {
         $('table.display').DataTable( {
-            "paging":   false,
-            "info":     false
+            "paging":     false,
+            "info":       false,
+            "responsive": true,
+            columnDefs: [
+              { responsivePriority: 1, targets: 1 },
+              { responsivePriority: 2, targets: 2 },
+              { responsivePriority: 3, targets: 7 }
+              ]
         } );
     } );
 
-link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css"
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
 
 - content_for :subhead do
   .subhead
     .container.text-primary
       .row
-        .col-xs-4
-          b #{current_team.acronym} Availability
-        .col-xs-8.text-right
+        .col-xs-6
+          = render :partial => '/subhead_title', :locals => {title: [{label: "Availability"}] }
+        .col-xs-6.text-right
           a.help-button href='/avail/days/#{current_membership.user_name}'
-            span.glyphicon.glyphicon-plus
+            i.glyphicon.glyphicon-plus
             |  Update Availability
           = member_help_button('avail_days')
 
 .container
   .row
-    table#myTable.display cellspacing="0" width="100%" 
+    table#myTable.display.dt-responsive.nowrap cellspacing="0" width="100%" 
       thead
         tr
           th Role

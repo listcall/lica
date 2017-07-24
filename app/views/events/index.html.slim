@@ -1,6 +1,5 @@
 - content_for :page_js do
-  script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"
-  script src="https://cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
 
   javascript:
     $(document).ready(function() {
@@ -8,14 +7,16 @@
             "paging":   false,
             "info":     false,
             "order": [[ 4, "desc" ]],
-            "fixedHeader": {
-              "header": true,
-              "footer": true,
-              }
-        } );
+            "responsive": true,
+            columnDefs: [
+              { responsivePriority: 1, targets: 0 },
+              { responsivePriority: 2, targets: 4 },
+              { responsivePriority: 3, targets: 1 }
+            ]
+      } );
     } );
 
-link href="https://cdn.datatables.net/v/dt/dt-1.10.15/datatables.min.css" rel="stylesheet" type="text/css"
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
 
 css:
   #timeBlock {
@@ -28,11 +29,10 @@ css:
     .container.text-primary
       .row
         .col-xs-6
-          b
-            = render :partial => 'team_title'
+          = render :partial => '/subhead_title', :locals => {title: [{label: "Events"} ]}
         .col-xs-6.text-right
           a.help-button href="/events/new"
-            span.glyphicon.glyphicon-plus
+            i.glyphicon.glyphicon-plus
             |  Create Event
           = member_help_button('events')
 
@@ -40,7 +40,7 @@ css:
   .row
     - if "all" == "#{@view}"
       - cache [current_team, "all_events"] do
-        /FIXME: presorted to current date but may want to reverse for upcoming
+        /XX: presorted to current date but may want to reverse for upcoming
         = render partial: 'event_table', locals: {events: @all_events, id: "allTbl"}
     - else
       - cache [current_team, "current_events"] do
@@ -55,8 +55,8 @@ css:
           title: "Recent Events (#{sdate(Event.recent_start)} to #{sdate(Time.now + 1.day)})"}
         p
     small
-      | There are <b>#{current_team.events.count}</b> #{current_team.acronym} events in the database
+      | <b>#{current_team.events.count}</b> #{current_team.acronym} events
       - if current_team.events.count > 0
-        |, from #{first_start} to #{last_finish}
+        |  from #{first_start} to #{last_finish}
       br
       = event_summary_stats

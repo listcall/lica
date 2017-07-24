@@ -8,9 +8,10 @@
   .subhead
     .container.text-primary
       .row
-        .col-xs-4
-          b #{current_team.acronym} Availability for #{current_user.full_name}
-        .col-xs-8.text-right
+        .col-xs-6
+          = render :partial => '/subhead_title',
+            :locals => {title: [{label: "Availability", ref: "/avail/days/"}, {label: "#{current_user.full_name}"}] }
+        .col-xs-6.text-right
           a.help-button href='/avail/days'
             span.fa.fa-users
             |  Team Availability

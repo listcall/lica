@@ -1,0 +1,44 @@
+doctype html
+html
+  head
+    meta content=("text/html; charset=UTF-8") http-equiv="Content-Type" /
+    meta charset="utf-8" /
+    meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport" /
+    title= @page_title || current_team.acronym
+    link href="#{current_team.icon_path}" rel=("shortcut icon") type="image/vnd.microsoft.icon" /
+    = stylesheet_link_tag "application"
+    script src="https://use.fontawesome.com/5fb07bfd2c.js" 
+    = csrf_meta_tags
+
+  body
+    #wrap
+      = raw top_menu
+
+      = yield :subhead
+
+      .container
+        - flash.each do |name, msg|
+          div class=("alert alert-#{name == :notice ? "success" : "error"}") 
+            a.close data-dismiss="alert"  x
+            = msg
+      .hdrGap
+      = yield
+
+  #footer
+    .container
+      small
+        table width="100%" 
+          tr
+            td align="left" width="20%" 
+              = current_team.try(:acronym)
+              | Confidential
+            td#footerNav.visible-sm-and-above align="center" width="60%" 
+              = raw NavBarSvc.footer_nav(current_user, current_team)
+            td align="right" width="20%" 
+              - if Rails.env.development?
+                = raw debug_text
+              - else
+                | Powered by ListCall
+  = javascript_include_tag "application"
+  = yield :page_js
+ 

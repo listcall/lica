@@ -13,12 +13,13 @@ css:
   .ctrls {
     float: right;
   }
-  i {
-    margin-left: 6px;
-  }
-  i:hover {
-    cursor: pointer;
-  }
+  /FIXME: Purpose?
+    i {
+      margin-left: 6px;
+    }
+    i:hover {
+      cursor: pointer;
+    }
   .fa-arrows, .fa-times  { color: darkgray; }
   .fa-arrows:hover { color: #26b0bc; }
   .fa-times:hover  { color: #ff8080; }
@@ -30,13 +31,26 @@ css:
   .btnAdd { margin-bottom: 4px; width: 100%; text-align: center; }
   #btnHdr { font-weight: bold; border-bottom: 1px solid lightgrey; }
 
+- content_for :subhead do
+  .subhead
+    .container.text-primary
+      .row
+        .col-xs-6
+          = render :partial => '/subhead_title', :locals => {title: [{label: "Dashboard"}] }
+        .col-ms-6.text-right
+          /a#addBtn.help-button href="/"
+            i.glyphicon.glyphicon-plus
+            |  Add Widget
+          button.btnToggle#addBtn
+            i.fa.fa-plus
+              ' Add Widget
+
 .container
   .row style=("margin-top: 15px;")
     .col-md-2
       ul.nav.nav-pills.nav-stacked
         = raw NavBarSvc.home_nav(current_user, current_team)
       #btnSection
-        button.btn.btnToggle#addBtn Add Widget
         #addButtons
           #btnHdr.btnAdd Add Widget
           = button_list(@tlist)

@@ -5,14 +5,16 @@ class ReportsController < ApplicationController
   def index
     @current_report_list    = current_report_list
     @historical_report_list = historical_report_list
+    @page_title             = "#{current_team.acronym} reports"
   end
 
   # router regex /creports/:title
   # invoke using /creports/BAMRU-roster.html
   def show_current_report
-    @members   = current_team.memberships.active.by_last_name
-    @reserves  = current_team.memberships.reserve.by_last_name
-    @guests    = current_team.memberships.guests_only.by_last_name
+    @members    = current_team.memberships.active.by_last_name
+    @reserves   = current_team.memberships.reserve.by_last_name
+    @guests     = current_team.memberships.guests_only.by_last_name
+    #/XXX@page_title = "#{current_team.acronym} #{params[:title]}"
     args = {:layout => nil, :formats => [params[:format]]}
     render "_c_#{params[:title]}", args
   end
@@ -26,6 +28,7 @@ class ReportsController < ApplicationController
     @title   = params[:title]
     @type    = params[:type]
     @rsvc    = eval("Report#{@title}Svc").new(current_team, @start, @finish, @type)
+    #/XXX@page_title = "#{current_team.acronym} #{params[:title]}"
     render "_h_#{@title}.#{params[:format]}", {:layout => nil}
   end
 

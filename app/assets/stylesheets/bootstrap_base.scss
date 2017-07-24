@@ -137,19 +137,19 @@ html, body { height: 100%; }
 
 .smAvatar {
   max-height: 24px;
-  max-width:  24px;
+  width:  24px; /* fixed column alignment for avatar and member name */
   vertical-align: middle;
 }
 
 .msAvatar {
   max-height: 16px;
-  max-width:  16px;
+  width:  16px;
   vertical-align: middle;
 }
 
 .xsAvatar {
   max-height: 12px;
-  max-width:  12px;
+  width:  12px;
   vertical-align: middle;
 }
 
@@ -162,19 +162,7 @@ html, body { height: 100%; }
 .memlink {
   display: inline-block;
   @media (min-width:$screen-md) {    // extra padding on md, lg
-    width: 140px;
-  }
-}
-
-.name-lbl {
-  @media (max-width: $screen-xs) {   // hide on xs
-    display: none;
-  }
-}
-
-.user-lbl {
-  @media (min-width: $screen-xs) {   // only show on xs
-    display: none;
+    width: 200px;
   }
 }
 

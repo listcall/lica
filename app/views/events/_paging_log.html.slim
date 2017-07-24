@@ -1,16 +1,39 @@
+- content_for :page_js do
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
+
+  javascript:
+    $(document).ready(function() {
+        $('table.display').DataTable( {
+            "paging":   false,
+            "info":     false,
+            "order": [[ 3, "desc" ]],
+            "responsive": true,
+            columnDefs: [
+              { responsivePriority: 1, targets: 2 },
+              { responsivePriority: 2, targets: 3 },
+              { responsivePriority: 3, targets: 6 },
+              { responsivePriority: 4, targets: 0 },
+              { responsivePriority: 5, targets: 4 },
+              { responsivePriority: 6, targets: 6 },
+              { responsivePriority: 7, targets: 1 }
+            ]
+      } );
+    } );
+
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
+
 .panel.panel-default
   .panel-heading
     h4.panel-title style="text-align:center"
       a data-toggle="collapse" data-parent="#accordion" href="#collapsePL"
-        span.glyphicon.glyphicon-align-justify.text-primary
-
-        |  Event Pager Log
+        i.glyphicon.glyphicon-align-justify.text-primary
+        |  Event Log
   .panel-collapse.collapse#collapsePL
     .panel-body
-      .container
+      .container style='padding-left: 0px; padding-right: 0px; width: 100%'
         .row
-          .col-md-12
-            table.table.table-compact
+          .col-xs-12
+            table.display.compact.table-bordered.dt-responsive.nowrap cellspacing="0" width='500'
               thead
                 th ID
                 th From

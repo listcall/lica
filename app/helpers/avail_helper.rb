@@ -8,7 +8,7 @@ module AvailHelper
     if @unavails.for(member).busy_on?(day)
       "<td align=center style='background-color: pink;'>No</td>"
     else
-      '<td></td>'
+      "<td></td>"
     end
   end
 

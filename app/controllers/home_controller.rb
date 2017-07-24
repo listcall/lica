@@ -6,6 +6,7 @@ class HomeController < ApplicationController
   def index
     base_dir = "#{Rails.root.to_s}/app/views/home/widgets"
     @member  = current_membership.becomes(Membership::AsHome)
+    @page_title = "#{current_team.acronym} dash"
     @col1 = @member.widget_col1.split(' ')
     @col2 = @member.widget_col2.split(' ')
     @tlist = Dir.glob("#{base_dir}/*.hbs").map {|x| File.basename(x, '.hbs')}.sort

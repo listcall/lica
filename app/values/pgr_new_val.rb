@@ -13,7 +13,7 @@ class PgrNewVal
       "base" => {
         "action_type" => @action_type,
         "action_opid" => @action_opid.to_i,
-        "recip_ids"   => recip_ids   ,
+        "recip_ids"   => recip_ids,
         "short_text"  => default_msg
       }
     }
@@ -64,41 +64,47 @@ class PgrNewVal
 
   def recip_ids
     case @action_type
-      when "RSVP"   then "ALL"
-      when "NOTIFY" then participant_ids
-      when "LEAVE"  then pending_leave_participant_ids
-      when "RETURN" then pending_return_participant_ids
+      when "RSVP"              then "ALL"
+      when "HEADS_UP"          then "ALL"
+      when "IMMEDIATE_CALLOUT" then "ALL"
+      when "DELAYED_CALLOUT"   then "ALL"
+      when "NOTIFY"            then participant_ids
+      when "LEAVE"             then pending_leave_participant_ids
+      when "RETURN"            then pending_return_participant_ids
       else []
     end
   end
 
   def default_msg
     case @action_type
-      when "HEADS_UP"   then "HEADS UP: #{event_title}/OP#{period_num} Would you be available?"
-      when "IMMEDIATE_CALLOUT"   then "IMMEDIATE CALLOUT: #{event_title}/OP#{period_num} "
-      when "DELAYED_CALLOUT"   then "DELAYED CALLOUT: #{event_title}/OP#{period_num} "
-      when "NOTIFY" then "TEAM NOTIFICATION: #{event_title}/OP#{period_num} "
+      when "HEADS_UP" then "HEADS UP: #{event_title}/OP#{period_num} Would you be available?"
+      when "IMMEDIATE_CALLOUT" then "IMMEDIATE CALLOUT: #{event_title}/OP#{period_num} Are you available? "
+      when "DELAYED_CALLOUT" then "DELAYED CALLOUT: #{event_title}/OP#{period_num} Are you available? "
+      when "RSVP"   then "IMMEDIATE CALLOUT: #{event_title}/OP#{period_num} "
+      when "NOTIFY" then "#{event_title}/OP#{period_num}: "
       when "LEAVE"  then "#{event_title}/OP#{period_num}: Have you left home? "
       when "RETURN" then "#{event_title}/OP#{period_num}: Have you returned home? "
-      else "#{event_title}/OP#{sid} "  #FIXME: Is sid defined?
+      else ""
     end
   end
 
   def overview_text
+    rsvpMsg = "#{period_links} > RSVP defaults to all #{team_name} team members"
     case @action_type
-      when "HEADS_UP"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
-      when "IMMEDIATE_CALLOUT"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
-      when "DELAYED_CALLOUT"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
-      when "NOTIFY" then "This notification is addressed to all event participants.#{period_links}"
-      when "LEAVE"  then "This 'Left Home' message is addressed to all pending participants.#{period_links}"
-      when "RETURN" then "This 'Return Home' message is addressed to all pending participants.#{period_links}"
-      else "#{event_title}/OP#{sid} "  #FIXME: Is sid defined?
+      when "HEADS_UP" then rsvpMsg
+      when "IMMEDIATE_CALLOUT" then rsvpMsg  #XXX decide proper list of participants: ALL or only available
+      when "DELAYED_CALLOUT" then rsvpMsg
+      when "RSVP"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
+      when "NOTIFY" then "#{period_links} > Notification defaults to all event participants"
+      when "LEAVE"  then "#{period_links} > 'Left Home' message defaults to all pending participants"
+      when "RETURN" then "#{period_links} > 'Return Home' message defaults to all pending participants"
+      else "#{period_links}"
     end
   end
 
   def period_links
     ev_link = "<a href='#{event_path}' target='_blank'>#{event_title}</a>"
     pd_link = "<a href='#{period_path}' target='_blank'>OP#{period_num}</a>"
-    " #{ev_link} | #{pd_link}"
+    " #{ev_link} > #{pd_link}"
   end
 end

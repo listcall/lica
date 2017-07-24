@@ -3,7 +3,6 @@
 window.Reflux = require("reflux");
 window.Hogan  = require("hogan.js");
 
-require("pgr/new_tablesorter")
 require("pgr/new_check_box")
 require("pgr/new_send_button")
 require("pgr/new_show_reserves")

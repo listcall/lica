@@ -47,7 +47,7 @@ link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1
         - @members.each do |mem|
           tr
             td = mem.rank
-            td = link_to mem.full_name, "/avail/days/#{mem.user_name}"
+            td data-sort=mem.last_name = link_to mem.full_name, "/avail/days/#{mem.user_name}"
             = raw day_helper(mem, 0)
             = raw day_helper(mem, 1)
             = raw day_helper(mem, 2)

@@ -1,23 +1,36 @@
-/#myModal.modal.fade role="dialog"
-  .modal-dialog
-
-    <!-- Modal content-->
-    .modal-content
-      .modal-header
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">New Event</h4>
-      .modal-body
-        <p>Event Name</p>
-        <p>Event Location</p>
-      .modal-footer
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-
 /XXX: Check various error cases, dup events, etc
+- content_for :page_js do
+  javascript:
+    $('#createEventAndPage').submit( function(e){
+      evtTitle = $('#eventTitle').val();
+      evtLocation = $('#eventLocation').val();
+      /* update the DO dashboard */
+      $('#evtTitle').text("New Event: Title=" + evtTitle);
+      $('#evtLocation').text(" Location=" + evtLocation);
+      $('#evtShow').show()
+
+      /* create event and redirect to new page */
+      $.ajax({
+        url:"/ajax/events", type: "POST",
+
+        data: {"title": evtTitle,
+          "location_name": evtLocation,
+          "typ": "O"},
+        success: function(result){
+          window.location = "/paging/new?pg_action=" + window.rsvp + "&pg_opid=" + result;
+          },
+        error: function(xhr,status,error){
+          alert("Event creation failed");
+          }
+        });
+      e.preventDefault();
+      });
+
 <!-- Modal -->
 .modal.fade#newEventModal tabindex="-1"
     .modal-dialog
         .modal-content
-          form.form-horizontal#createEvent
+          form.form-horizontal#createEventAndPage
             <!-- Modal Header -->
             .modal-header
                 h4.modal-title#newEventModalLabel Create Event

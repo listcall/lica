@@ -13,8 +13,8 @@ describe 'Session membership', :capy do
         page.find('#navDrop-user').click()
         expect(page).to     have_selector('ul#userDrop li:nth-child(1)')
         expect(page).to     have_selector('ul#userDrop li:nth-child(2)')
-        expect(page).not_to have_selector('ul#userDrop li:nth-child(3)')
-        expect(all('#userDrop li').count).to eq(2)
+        expect(page).not_to have_selector('ul#userDrop li:nth-child(6)')
+        expect(all('#userDrop li').count).to eq(5)
       end
     end
 
@@ -24,7 +24,7 @@ describe 'Session membership', :capy do
         page.find('#navDrop-user').click()
         expect(page).to     have_selector('ul#userDrop li:nth-child(1)')
         expect(page).to     have_selector('ul#userDrop li:nth-child(2)')
-        expect(all('#userDrop li').count).to eq(2)  # TODO fix (should be 3...)
+        expect(all('#userDrop li').count).to eq(5)
       end
     end
   end
@@ -33,8 +33,8 @@ describe 'Session membership', :capy do
     login_with mem1
     expect(page).to have_content usr1.user_name
     page.find('#navDrop-user').click()
-    expect(page).to have_content 'log out'
-    click_link 'log out'
+    expect(page).to have_content 'Log out'
+    click_link 'Log out'
     expect(page).to_not have_content usr1.user_name
   end
 end

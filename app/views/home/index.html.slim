@@ -7,27 +7,6 @@
     var wC2  = JSON.parse('#{ raw @col2.to_json }');
     var memId = #{current_membership.id};
 
-    $('#createEvent').submit( function(e){
-      evtTitle = $('#eventTitle').val();
-      evtLocation = $('#eventLocation').val();
-      $('#evtTitle').text("New Event: Title=" + evtTitle);
-      $('#evtLocation').text(" Location=" + evtLocation);
-      $('#evtShow').show()
-      $.ajax({
-        url:"/ajax/events", type: "POST",
-
-        data: {"title": evtTitle,
-          "location_name": evtLocation,
-          "typ": "O"},
-        success: function(result){
-          window.location = "/paging/new?pg_action=" + window.rsvp + "&pg_opid=" + result;
-          },
-        error: function(xhr,status,error){
-          alert("Event creation failed");
-          }
-        });
-      e.preventDefault();
-      });
     $(document).ready(function() {
         $('#memberTbl').DataTable( {
             "paging":   false,
@@ -65,9 +44,6 @@ css:
       margin-left: 15px;
   }
 
-
-
-
 - content_for :subhead do
   .subhead
     .container.text-primary
@@ -82,8 +58,6 @@ css:
               .span.caret
             ul.dropdown-menu
               = button_list(@tlist)
-
-= render "new_event_modal"
 
 .container
   .row style=("margin-top: 15px;")
@@ -108,3 +82,5 @@ css:
               i.fa.fa-times
           .panel-body id="c2-#{widget}-#{idx+1}"
             | Loading...
+
+= render "new_event_modal"

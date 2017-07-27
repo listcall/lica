@@ -29,7 +29,7 @@ describe Pgr::Action do
     it 'returns a value' do
       val = klas.option_list
       expect(val).to be_an(Array)
-      expect(val.length).to eq(4)
+      expect(val.length).to eq(6) #XXX was 4
       expect(val.to_json).to be_a(String)
     end
   end

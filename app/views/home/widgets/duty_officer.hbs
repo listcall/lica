@@ -1,3 +1,4 @@
+<!-- Simple dashboard to allow DOs to quickly assess the situation and intiate a callout -->
 Members available
 
 <table class="table table-condensed table-bordered">
@@ -6,13 +7,14 @@ Members available
 </table>
 
 <div class="hidden-xs">Create Event and Page Team:&nbsp</div>
+ <div class="btn-group">
   <button type="button" class=" btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
     onclick="window.rsvp='HEADS_UP'">Heads Up</button>
   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
     onclick="window.rsvp='IMMEDIATE_CALLOUT'">Immediate</button>
   <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
     onclick="window.rsvp='DELAYED_CALLOUT'">Delayed</button>
-
+ </div>
 
 <p><p>
 
@@ -23,9 +25,7 @@ Members available
 
 <p><p>
 
-<!-- XXX <table id="#memberTbl" class="display compact table-bordered dt-responsive nowrap"> -->
-{{#ifZero current_count }}
-{{else}}
+{{#if current_count}}
   Active events
   <table class="table table-condensed table-bordered">
     {{#each current_events}}
@@ -38,6 +38,6 @@ Members available
       </tr>
     {{/each}}
   </table>
-{{/ifZero}}
+{{/if}}
 
 <p></p>

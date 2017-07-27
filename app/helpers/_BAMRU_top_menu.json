@@ -1,0 +1,166 @@
+{
+    "topMenu": [
+        {
+            "label": "Home",
+            "icon": "fa fa-home",
+            "action": "/"
+        },
+        {
+            "label": "Event",
+            "icon": "fa fa-calendar-check-o",
+            "dropdown": [
+                {
+                    "label": "Create new event",
+                    "icon": "fa fa-pencil",
+                    "href": "/events/new"
+                },
+                {
+                    "label": "Current events",
+                    "icon": "fa fa-calendar",
+                    "href": "/events?view=current"
+                },
+                {
+                    "label": "All events",
+                    "icon": "fa fa-calendar",
+                    "href": "/events?view=all"
+                }
+            ]
+        },
+        {
+            "label": "Team",
+            "icon": "fa fa-users",
+            "dropdown": [
+                {
+                    "label": "Roster",
+                    "icon": "fa fa-address-book",
+                    "href": "/members"
+                },
+                {
+                    "label": "Availability",
+                    "icon": "fa fa-calendar",
+                    "href": "/avail/days"
+                },
+                {
+                    "label": "Certifications",
+                    "icon": "fa fa-certificate",
+                    "href": "/quals"
+                },
+                {
+                    "label": "Member photos",
+                    "icon": "fa fa-camera-retro",
+                    "href": "/wip"
+                },
+                {
+                    "label": "Page team",
+                    "icon": "fa fa-bullhorn",
+                    "href": "/paging/new"
+                }
+            ]
+        },
+        {
+            "label": "Library",
+            "icon": "fa fa-book",
+            "dropdown": [
+                {
+                    "label": "Reports",
+                    "icon": "fa fa-file-text",
+                    "href": "/reports"
+                },
+                {
+                    "label": "Wiki",
+                    "icon": "fa fa-wikipedia-w",
+                    "href": "http://wiki.bamru.net/?username=Craig.Taylor",
+                    "target":"_blank"
+                },
+                {
+                    "label": "Forum posts",
+                    "icon": "fa fa-yahoo",
+                    "href": "https://groups.yahoo.com/neo/groups/BAMRU/info"
+                    "target":"_blank"
+                },
+                {
+                    "label": "Files",
+                    "icon": "fa fa-upload",
+                    "href": "/wip"
+                },
+                {
+                    "label": "Quarterly DO schedule",
+                    "icon": "fa fa-calendar",
+                    "href": "/wip"
+                },
+                {
+                    "label": "Paging log",
+                    "icon": "fa fa-list",
+                    "href": "/paging"
+                }
+            ]
+        },
+        {
+            "label": "Action",
+            "icon": "fa fa-bolt",
+            "dropdown": [
+                {
+                    "label": "Initiate a callout",
+                    "icon": "fa fa-bolt",
+                    "href": "/zcst/initiate_callout"
+                },
+                {
+                    "label": "Becoming DO",
+                    "icon": "fa fa-bolt",
+                    "href": "/zcst/become_do"
+                },
+                {
+                    "label": "Temporary DO change",
+                    "icon": "fa fa-bolt",
+                    "href": "/wip"
+                },
+                {
+                    "label":"Perform admin tasks",
+                    "icon": "fa fa-edit",
+                    "href": "/admin",
+                    "permissions": ["teamEdit"]
+                }
+            ]
+        },
+        {
+            "special": "%UserName%",
+              "label": "%CurrentUser%",
+              "icon": "fa fa-user-circle",
+            "dropdown": [
+                {
+                    "special": "%UserInbox%",
+                      "label": "Inbox (n)",
+                      "icon": "fa fa-envelope-open-o",
+                      "href": "/wip"
+                },
+                {
+                    "special": "%UserAvailable%",
+                      "label": "Busy periods",
+                      "icon": "fa fa-calendar",
+                      "href": "/avail/days/<%= current_user.user_name %>"
+                },
+                {
+                    "special": "%UserCertifications%",
+                      "label": "Certifications",
+                      "icon": "fa fa-certificate",
+                      "href": "/members/<%= current_user.user_name %>"
+                },
+                {
+                    "special": "%UserSettings%",
+                      "label":  "Settings",
+                      "icon": "fa fa-cogs",
+                      "href": "/members/<%= current_user.user_name %>"
+                },
+                {
+                    "special": "%UserTeams%",
+                      "href": :<%= raw NavBarSvc.team_nav(current_user, current_team, request.env) %>"
+                },
+                {
+                    "label": "Log out",
+                    "icon": "fa fa-sign-out",
+                    "href": "/logout>"
+                }
+            ]
+        }
+    ]
+}

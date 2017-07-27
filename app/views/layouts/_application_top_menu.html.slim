@@ -1,0 +1,145 @@
+css:
+  i.dropIcon { width:17px; }
+  i.subIcon { width:20px; }
+
+.navbar.navbar-default.navbar-fixed-top role="navigation"
+  .container
+    .navbar-header width="100%" 
+      a.navbar-brand href="/"
+        = raw team_logo
+      button.navbar-toggle.collapsed data-target="#navbar" data-toggle="collapse" type="button" 
+        i.fa.fa-bars
+        i.fa.fa-bars
+    .navbar-collapse.collapse#navbar
+      - if user_signed_in?
+        ul#headerNav.nav.navbar-nav.navbar-right
+          li
+            a href="/" 
+              i.dropIcon.fa.fa-home
+              ' Dashboard
+          li.dropdown
+            a.dropdown-toggle#navDrop-event data-toggle="dropdown" href="#" role="button"
+              i.dropIcon.fa.fa-calendar-check-o
+              | Event
+              b.fa.fa-caret-down<
+            ul#eventDrop.dropdown-menu role="menu" 
+              li
+                a href="/events/new" 
+                  i.subIcon.fa.fa-pencil
+                  | Create new event
+              li
+                a href="/events?view=current" 
+                  i.subIcon.fa.fa-calendar
+                  | Current events
+              li
+                a href="/events?view=all" 
+                  i.subIcon.fa.fa-calendar
+                  | All events
+          li.dropdown
+            a.dropdown-toggle#navDrop-team data-toggle="dropdown" href="#" role="button"
+              i.dropIcon.fa.fa-users
+              | Team
+              b.fa.fa-caret-down<
+            ul#teamDrop.dropdown-menu role="menu" 
+              li
+                a href="/members" 
+                  i.subIcon.fa.fa-address-book
+                  | Roster
+              li
+                a href="/avail/days" 
+                  i.subIcon.fa.fa-calendar
+                  | Availability
+              li
+                a href="/quals" 
+                  i.subIcon.fa.fa-certificate
+                  | Certifications
+              li
+                a href="/wip" 
+                  i.subIcon.fa.fa-camera-retro
+                  | Member photos
+              li
+                a href="/paging/new" 
+                  i.subIcon.fa.fa-bullhorn
+                  | Page team
+          li.dropdown
+            a.dropdown-toggle#navDrop-library data-toggle="dropdown" href="#" role="button"
+              i.dropIcon.fa.fa-book
+              | Library
+              b.fa.fa-caret-down<
+            ul#libraryDrop.dropdown-menu role="menu" 
+              li
+                a href="/reports" 
+                  i.subIcon.fa.fa-file-text
+                  | Reports
+              li
+                a href="http://wiki.bamru.net/?username=Craig.Taylor" target="_blank" 
+                  i.subIcon.fa.fa-wikipedia-w
+                  | Wiki
+              li
+                a href="https://groups.yahoo.com/neo/groups/BAMRU/info" target="_blank" 
+                  i.subIcon.fa.fa-yahoo
+                  | Forum posts
+              li
+                a href="/wip" 
+                  i.subIcon.fa.fa-upload
+                  | Files
+              li
+                a href="/wip" 
+                  i.subIcon.fa.fa-calendar
+                  | Quarterly DO schedule
+              li
+                a href="/paging" 
+                  i.subIcon.fa.fa-list
+                  | Paging log
+          li.dropdown
+            a.dropdown-toggle#navDrop-action data-toggle="dropdown" href="#" role="button"
+              i.dropIcon.fa.fa-bolt
+              | Action
+              b.fa.fa-caret-down<
+            ul#actionDrop.dropdown-menu role="menu" 
+              li
+                a href="/zcst/initiate_callout" 
+                  i.subIcon.fa.fa-bolt
+                  | Initiate a callout
+              li
+                a href="/zcst/become_do" 
+                  i.subIcon.fa.fa-bolt
+                  | Becoming DO
+              li
+                a href="/wip" 
+                  i.subIcon.fa.fa-bolt
+                  | Temporary DO change
+              li
+                a href="/admin" 
+                  i.subIcon.fa.fa-edit
+                  | Perform admin tasks
+          li.dropdown
+            a.dropdown-toggle#navDrop-user data-toggle="dropdown" href="#" role="button"
+              i.dropIcon.fa.fa-user-circle
+              = current_user.user_name
+              b.fa.fa-caret-down<
+            ul#userDrop.dropdown-menu role="menu" 
+              li
+                a href="/wip" 
+                  i.subIcon.fa.fa-envelope-open-o
+                  | Inbox (n)
+              li
+                a href="/avail/days/#{current_user.user_name}" 
+                  i.subIcon.fa.fa-calendar
+                  | Busy periods
+              li
+                a href="/members/#{current_user.user_name}" 
+                  i.subIcon.fa.fa-certificate
+                  | Certifications
+              li
+                a href="/members/#{current_user.user_name}" 
+                  i.subIcon.fa.fa-cogs
+                  | Settings
+              = raw NavBarSvc.team_nav(current_user, current_team, request.env)
+              li
+                a href="/logout" 
+                  i.subIcon.fa.fa-sign-out
+                  | Log out
+      - else
+        - unless current_page?("/login")
+          = raw link_to("log in", "/login", style: 'margin-top: 15px;', class: "navbar-right")

@@ -9,6 +9,7 @@ class Pgr::AssignmentsController < ApplicationController
 
   def index
     @assignments = load_assignments
+    @page_title  = "#{current_team.acronym} page log"
   end
 
   def new
@@ -18,6 +19,7 @@ class Pgr::AssignmentsController < ApplicationController
     @partners    = PageBot.new(current_team)
     @memberships = membership_scope
     @events      = current_team.events
+    @page_title  = "#{current_team.acronym} new page"
   end
 
   # create a new page

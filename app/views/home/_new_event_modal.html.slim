@@ -1,0 +1,50 @@
+/XXX: Check various error cases, dup events, etc
+- content_for :page_js do
+  javascript:
+    $('#createEventAndPage').submit( function(e){
+      evtTitle = $('#eventTitle').val();
+      evtLocation = $('#eventLocation').val();
+      /* update the DO dashboard */
+      $('#evtTitle').text("New Event: Title=" + evtTitle);
+      $('#evtLocation').text(" Location=" + evtLocation);
+      $('#evtShow').show()
+
+      /* create event and redirect to new page */
+      $.ajax({
+        url:"/ajax/events", type: "POST",
+
+        data: {"title": evtTitle,
+          "location_name": evtLocation,
+          "typ": "O"},
+        success: function(result){
+          window.location = "/paging/new?pg_action=" + window.rsvp + "&pg_opid=" + result;
+          },
+        error: function(xhr,status,error){
+          alert("Event creation failed");
+          }
+        });
+      e.preventDefault();
+      });
+
+<!-- Modal -->
+.modal.fade#newEventModal tabindex="-1"
+    .modal-dialog
+        .modal-content
+          form.form-horizontal#createEventAndPage
+            <!-- Modal Header -->
+            .modal-header
+                h4.modal-title#newEventModalLabel Create Event
+            <!-- Modal Body -->
+            .modal-body
+              .form-group
+                <label  class="col-sm-2 control-label" for="eventTitle">Title</label>
+                .col-sm-10
+                  <input type="text" class="form-control" id="eventTitle" placeholder="Event title"/>
+              .form-group
+                <label class="col-sm-2 control-label" for="eventLocation" >Location</label>
+                .col-sm-10
+                  <input type="text" class="form-control" id="eventLocation" placeholder="Event location"/>
+            <!-- Modal Footer -->
+            .modal-footer
+              <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Page Team</button>

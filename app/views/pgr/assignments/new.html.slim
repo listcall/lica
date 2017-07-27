@@ -1,25 +1,45 @@
 - # integration_test: features/pgr/new
 
 - content_for :page_js do
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
+
   javascript:
     window.lclData = {};
     lclData.newParams  = '#{ raw @new_params.to_json }';
-    lclData.selectList = #{ raw @partners.select_list };
+    //FIXME:XXX: Lots of data in select_list.  Value?
+    //lclData.selectList = #{ raw @partners.select_list };
+
+    $(document).ready(function() {
+        $('table.display').DataTable( {
+            paging:   false,
+            info:     false,
+            order: [[ 2, "desc" ]],
+            responsive: true,
+            columnDefs: [
+              { targets: [3, 4], orderable: false, searchable: false},
+              { responsivePriority: 1, targets: 0 },
+              { responsivePriority: 2, targets: 4 },
+              { responsivePriority: 3, targets: 1 }
+            ]
+      } );
+    } );
   = javascript_pack_tag "pgr/new"
+
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
 
 css:
   .noPoint:hover { cursor: default; }
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
-        .col-xs-8
-          b
-            = render :partial => 'pgr/team_title'
-            | > Create New Page
-        .col-xs-4.text-right
-          small = link_to "Index", paging_path
+        .col-xs-6
+          = render :partial => '/subhead_title', :locals => {title: [{label: "Create New Page"} ]}
+        .col-xs-6.text-right
+          a.help-button href="/paging"
+            i.glyphicon.glyphicon-list
+            |  Page Log
           = member_help_button('paging')
 
 .container
@@ -36,14 +56,24 @@ css:
         .form-group
           label.checkbox-inline
             span#sendLabel
-              | send
-              span#labelCount
+              div style=("float: right")
+              small#memCount
+                .i.fa.fa-user-circle-o
+                '  Send to
+              span#selectCount style="color: red;"
+              '  of
+              span
+                ' #{@memberships.count}
+              '  members:
+              /span#labelCount
+          .br
           label.checkbox-inline style=("margin-left: 40px;")
             input#emailCheck checked="check" name="broadcast[email]" type="checkbox"
               | via eMail
           label.checkbox-inline style=("margin-left: 40px;")
             input#smsCheck checked="check" name="broadcast[sms]" type="checkbox"
               | via SMS
+        /XX Add margins around text boxes?
         .form-group
           label.control-label for="txtShort"  Short Text (email, sms)
           br
@@ -55,9 +85,10 @@ css:
             textarea#txtLong.pageTxt.form-control name="broadcast[long_body]"  type="email"
         .row
           .col-ms-8
-            #actionBtn.btn.btn-xs.btn-default> Select Action
-            p
-            #actionDisplay
+            - if @new_params.nil?
+                #actionBtn.btn.btn-xs.btn-default> Select Action
+                p
+                #actionDisplay
           .col-ms-4.ar
             button#sendButton.btn.btn-primary type="submit"  Send
       #leftCol.col-ms-6.col-ms-pull-6
@@ -72,29 +103,23 @@ css:
           div style=("float: left")
             - if false
               button#templateBtn.btn.btn-default.btn-xs> type="button" use template
-            /- if current_team.partners.length > 0
-            - if false
+            /FIXME:XXX- if current_team.partners.length > 0
               button#showPart.btn.btn-default.btn-xs> type="button" show partners
             button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button" reset
-          div style=("float: right")
-            small#memCount
-              ' selected
-              span#selectCount
-              '  of #{@memberships.count} members
-            button#selectAll.btn.btn-default.btn-xs> data-toggle="tooltip" title=("select all visible members") type="button"
-              i.fa.fa-check-square-o
-            button#clearAll.btn.btn-default.btn-xs data-toggle="tooltip" title=("clear all visible members") type="button"
-              i.fa.fa-square-o
+        = paging_new_reserve_checkbox(current_team)
         - cache ["page_new", @list_type, current_team] do
-          table#memTable.table.table-condensed.table-striped.table-hover
+          table#memTable.display.compact.table-bordered.dt-responsive.nowrap
             thead
               th : small Name
               th : small Rank
               th : small Roles
               th style=("text-align: center;")
                 small has
-              th style=("text-align: center;")
-                small style='color: lightgrey;' .
+              th style=("padding: 4px; text-align: center;")
+                button#selectAll.btn.btn-default.btn-xs> data-toggle="tooltip" title=("select all visible members") type="button"
+                  i.fa.fa-check-square-o
+                button#clearAll.btn.btn-default.btn-xs data-toggle="tooltip" title=("clear all visible members") type="button"
+                  i.fa.fa-square-o
             tbody
               - @memberships.each do |member|
                 - cache ["pager_row", member.user, current_team] do
@@ -103,16 +128,14 @@ css:
                       nobr
                         img.smAvatar> src =member.user.avatar.url(:icon)
                         a.memlink href="/members/#{member.user_name}" target="_blank"
-                          small.visible-lg-and-above = truncate member.full_name, length: 20
-                          small.visible-md-and-below @#{member.user_name}
+                          small = truncate member.full_name, length: 20
+                          /small.visible-lg-and-above = truncate member.full_name, length: 20
+                          /small.visible-md-and-below @#{member.user_name}
                     td data-sort=(raw member.rank_score) : small = member.rank
                     td data-sort=(raw member.role_score) : small = member.roles.join(', ')
                     td align="center" data-sort=(raw member.icon_score)
                       i class=member.email_icon style=("margin-right: 8px;")
                       i class=member.phone_icon
                     td align="center" = check_box("broadcast[member_recipients]", member.id, class: "checkBox")
-        = paging_new_reserve_checkbox(current_team)
-        br
-        p
 
 = render partial: "new_action_modal"

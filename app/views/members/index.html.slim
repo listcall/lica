@@ -1,49 +1,59 @@
 - content_for :page_js do
   = javascript_include_tag 'members/all_index'
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
+  script src="assets/members/index_reserves"
+
+  javascript:
+    $(document).ready(function() {
+        $('#memberTbl').DataTable( {
+            "paging":   false,
+            "info":     false,
+            "order": [[ 2, "desc" ]],
+            "responsive": true,
+            columnDefs: [
+              { responsivePriority: 1, targets: 0 },
+              { responsivePriority: 2, targets: 3 },
+              { responsivePriority: 3, targets: 4 }
+            ]
+        } );
+    } );
+
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
 
 - content_for :subhead do
-  div ng-app="memberApp"
-    .subhead
-      .container
-        .row style=("vertical-align: middle;")
-          .col-ms-8
-            b.vmid.visible-sm-and-above
-              => current_team.name
-              | Members
-            b.vmid.visible-ms-and-below
-              => current_team.acronym
-              | Members
-          .col-ms-4.text-right
-            button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button"  reset
+  .subhead
+    .container.text-primary
+      .row
+        .col-xs-6
+          = render :partial => '/subhead_title', :locals => {title: [{label: "Members"}] }
+        .col-xs-6.text-right
+          = members_reserve_checkbox(current_team)
 
 - cache ['members', current_team, @list_type, current_user] do
   .container
     .row
-      .table-responsive ng-controller="MemberController"
-        table.table.table-striped.table-hover
-          thead
-            th.hidden-xs
-              | Name
-            th.hidden-xs Rank
-            th.hidden-xs Role
-            th.hidden-xs Phone
-            th.hidden-xs eMail
-          tbody
-            - @members.each do |mem|
-              - cache ['mem_row_user', mem.user, current_team, current_user] do
-                tr
-                  td data-sort=mem.last_name
-                    img.smAvatar> src=mem.user.avatar.url(:icon)
-                    a.memlink href="/members/#{mem.user_name}" target="_blank"
-                      strong.name-lbl= mem.full_name
-                      strong.user-lbl
-                        | @#{mem.user_name}
-                    small.username
-                      | @#{mem.user_name}
-                  td.visible-ms-and-above data-sort=mem.rank_score = mem.rank
-                  td.hidden-xs data-sort=mem.role_score = mem.ordered_roles.join(', ')
-                  td.phoneDat data-number=phone_display(mem) data-sort=mem.user.phones.first.try(:number)
-                  td.emailDat data-address=email_display(mem) data-sort=mem.user.emails.first.try(:address)
-= members_reserve_checkbox(current_team)
-br
-p
+      table.display.compact.table-bordered.dt-responsive.nowrap#memberTbl
+        thead
+          th Name
+          th Rank
+          th Role
+          th Phone
+          th eMail
+        tbody
+          - @members.each do |mem|
+            - cache ['mem_row_user', mem.user, current_team, current_user] do
+              tr
+                td data-sort=mem.last_name
+                  img.smAvatar.hidden-xs> src=mem.user.avatar.url(:icon)
+                  a.memlink href="/members/#{mem.user_name}" target="_blank"
+                    strong.name-lbl = mem.full_name
+                td data-sort=mem.rank_score
+                  = mem.rank
+                td data-sort=mem.role_score
+                  = mem.ordered_roles.join(', ')
+                td.phoneDat data-number=phone_display(mem) data-sort=mem.user.phones.first.try(:number)
+                  = mem.user.phones.first.try(:number)
+                td.emailDat data-address=email_display(mem) data-sort=mem.user.emails.first.try(:address)
+                  = mem.user.emails.first.try(:address)
+    .row
+      small = "Membership: Technical: #{@rank_cnt['TM']}; Field: #{@rank_cnt['FM']}; Trainee: #{@rank_cnt['T']}"

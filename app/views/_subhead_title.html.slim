@@ -1,0 +1,17 @@
+b
+  span.visible-sm
+    a> href="/" #{current_team.acronym}
+    - title.each do | section |
+      - if section[:ref].nil?
+        = "> #{section[:label]}"
+      - else
+        | >  
+        a> href="#{section[:ref]}" #{section[:label]}
+  span.visible-md-and-above
+    a> href="/" #{current_team.name}
+    - title.each do | section |
+      - if section[:ref].nil?
+        = "> #{section[:label]}"
+      - else
+        | >  
+        a> href="#{section[:ref]}" #{section[:label]}

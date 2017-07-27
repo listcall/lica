@@ -1,21 +1,19 @@
 - # integration_test: features/events_new
 
 - content_for :page_js do
+  = javascript_include_tag 'events/all_new'
   script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD9knuWFHshMUw5f9Vv6eaFEaU2oX-MDXA" type="text/javascript"
   javascript:
     window.lclData = {};
     lclData.eTypes = '#{raw(@ev_times)}';
     lclData.isCopy = window.location.search.indexOf('copy') > -1
-  = javascript_include_tag 'events/all_new'
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-6
-          b
-            = raw link_to "#{current_team.acronym} Events", "/events"
-            |  > Create New Event
+          = render :partial => '/subhead_title', :locals => {title: [{label: "Create New Event"}] }
         .col-xs-6.text-right
           = member_help_button('events')
 

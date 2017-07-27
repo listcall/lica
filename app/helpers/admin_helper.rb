@@ -7,13 +7,13 @@ module AdminHelper
 
   def avatar_path(user, klas='smAvatar')
     return '' if user.nil?
-    raw "<img class='#{klas}' src='#{user.avatar.url(:icon)}'/>"
+    raw "<img class='#{klas} hidden-xs' src='#{user.avatar.url(:icon)}'/>"
   end
 
   def team_icon_path(member, klas='xsAvatar')
     user = member.try(:user)
     return '' if user.nil?
-    raw "<img class='#{klas}' src='#{member.team.icon_path}'/>"
+    raw "<img class='#{klas} hidden-xs' src='#{member.team.icon_path}'/>"
   end
 
   def rank_count(rank)

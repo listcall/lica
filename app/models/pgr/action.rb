@@ -1,6 +1,6 @@
 class Pgr::Action < ActiveRecord::Base
 
-  ENABLED_OPTIONS = %i(None OpRsvp OpLeftHome OpReturnHome)
+  ENABLED_OPTIONS = %i(None OpHeadsUp OpImmediateCallout OpDelayedCallout OpLeftHome OpReturnHome)
 
   # ----- Attributes -----
 

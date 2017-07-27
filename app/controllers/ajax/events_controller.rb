@@ -8,6 +8,20 @@ class Ajax::EventsController < ApplicationController
     respond_with current_team.events
   end
 
+  def create
+    @event  = EventForm.new.submit(valid_params(params).merge({team_id: current_team.id,
+                                                               start_date: sdate(Time.now),
+                                                               finish_date: sdate(Time.now + 3.day) }))
+    @event.save if @event.valid?
+    opts = [{:periods => :event}, {:team => :accepted_partners}]
+    event = current_team.events.includes(opts).find_by(:event_ref => @event.event_ref)
+    if event
+      render json: event.periods.ids[0]
+    else
+      render :json => { :error => "err"},  :status => 422
+    end
+  end    
+
   def update
     dev_log 'STARTING UPDATE'
     data_log params
@@ -37,6 +51,16 @@ class Ajax::EventsController < ApplicationController
   end
 
   private
+
+  KEYS = %i(all_day description published start_date start_time finish_date finish_time location_name location_address typ team_id title leaders lat lon)
+
+  def valid_params(params)
+    params.permit(*KEYS)
+  end
+
+  def sdate(time)
+    time.strftime('%Y-%m-%d')
+  end
 
   def validation_message(obj)
     count = obj.errors.count

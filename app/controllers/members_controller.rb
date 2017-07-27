@@ -7,9 +7,13 @@ class MembersController < ApplicationController
   def index
     @member_records = member_records(current_team).to_json
     @list_type      = cookie_val
+    @page_title     = "#{current_team.acronym} members"
     @members = Rails.cache.fetch([current_team, 'member_roster', @list_type]) do
       member_list
     end
+    @rank_cnt = Hash.new(0)
+    @members.each {|mem| @rank_cnt[mem.rank] += 1}
+
     # re-add this??
     #fresh_when etag: current_team, last_modified: current_team.updated_at, public: true
   end
@@ -20,7 +24,7 @@ class MembersController < ApplicationController
     if @member.nil?
       redirect_to('/members', notice: notice_message(params[:id]))
     else
-      @page_title    = "@#{@member.user_name}"
+      @page_title    = " #{current_team.acronym} @#{@member.user_name}"
       @memid         = @member.id
       @user          = @member.user
       @phones        = @user.phones.all
@@ -33,11 +37,13 @@ class MembersController < ApplicationController
   end
 
   def photos
-    @members = current_team.users.all
+    @members    = current_team.users.all
+    @page_title = "#{current_team.acronym} member photos"
   end
 
   def export
-    @members = current_team.users.all
+    @members    = current_team.users.all
+    @page_title = "#{current_team.acronym} member export"
   end
 
   def destroy

@@ -6,12 +6,14 @@ class EventPeriodsController < ApplicationController
   def index
     ctx = {user: current_user, env: request.env}
     @event  = Event.find_by(team_id: current_team.id, event_ref: params[:event_id]).decorate(context: ctx)
+    #/XXX when is this called? @page_title = "#{current_team.acronym} #{@event.title}/#{@period.position}"
   end
 
   def show
     @event  = Event.find_by(team_id: current_team.id, event_ref: params[:event_id])
     @period = @event.periods.find_by(position: params[:id])
     @perbot = PeriodBot.new(current_membership, @period)
+    @page_title = "#{current_team.acronym} #{@event.title}/#{@period.position}"
   end
 
   def new

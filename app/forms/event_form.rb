@@ -5,7 +5,7 @@ class EventForm
 
   # ----- attributes -----
 
-  BASE_KEYS = %i(id event_ref published? all_day? periods start finish all_day published location_name location_address typ team_id title leaders lat lon description tag_list)
+  BASE_KEYS = %i(id event_ref published? all_day? periods start finish all_day published location_name location_address typ team_id title leaders lat lon description tag_list updated_at)
   ALT_KEYS  = %i(start_date start_time finish_date finish_time)
 
   delegate      *BASE_KEYS, :to => :event

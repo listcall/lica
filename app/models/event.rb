@@ -45,10 +45,10 @@ class Event < ActiveRecord::Base
   scope :published,     -> { where(published: true).order(:start)     }
   scope :unpublished,   -> { where(published: false).order(:start)    }
 
-  scope :trainings      ,  -> { where(typ: 'T') }   # TODO: delete this
-  scope :operations     ,  -> { where(typ: 'O') }   # TODO: delete this
-  scope :meetings       ,  -> { where(typ: 'M') }   # TODO: delete this
-  scope :communities    ,  -> { where(typ: 'C') }   # TODO: delete this
+  scope :trainings      ,  -> { where(typ: 'T') }   # FIXME: delete this
+  scope :operations     ,  -> { where(typ: 'O') }   # FIXME: delete this
+  scope :meetings       ,  -> { where(typ: 'M') }   # FIXME: delete this
+  scope :communities    ,  -> { where(typ: 'C') }   # FIXME: delete this
 
   scope :ordered, -> { order('start') }
 
@@ -90,7 +90,7 @@ class Event < ActiveRecord::Base
   end
 
   def self.tag_uniq
-    where.not(tags: []).pluck(:tags).flatten.sort.uniq # TODO: use database
+    where.not(tags: []).pluck(:tags).flatten.sort.uniq # FIXME: use database
   end
 
   # ----- Instance Methods -----

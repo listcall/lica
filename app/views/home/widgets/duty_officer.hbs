@@ -1,0 +1,43 @@
+<!-- Simple dashboard to allow DOs to quickly assess the situation and intiate a callout -->
+Members available
+
+<table class="table table-condensed table-bordered">
+  <tr><td># Active</td><td>{{active_count}}</td></tr>
+  <tr><td># Likely</td><td>{{likely_count}}</td></tr>
+</table>
+
+<div class="hidden-xs">Create Event and Page Team:&nbsp</div>
+ <div class="btn-group">
+  <button type="button" class=" btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
+    onclick="window.rsvp='HEADS_UP'">Heads Up</button>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
+    onclick="window.rsvp='IMMEDIATE_CALLOUT'">Immediate</button>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
+    onclick="window.rsvp='DELAYED_CALLOUT'">Delayed</button>
+ </div>
+
+<p><p>
+
+<div id="evtShow" style="display: none;">
+  <span id="evtTitle"> Event: </span>
+  <span id="evtLocation"> Location: </span>
+</div>
+
+<p><p>
+
+{{#if current_count}}
+  Active events
+  <table class="table table-condensed table-bordered">
+    {{#each current_events}}
+      <tr>
+        <td>
+          <a href="/events/{{ref}}">{{title}}</a>
+        </td>
+        <td>{{type}}</td>
+        <td>{{start}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/if}}
+
+<p></p>

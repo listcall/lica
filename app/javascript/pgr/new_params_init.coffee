@@ -10,10 +10,11 @@ setAction = (data) ->
     return
   action = switch data.action_type
     when "RSVP" then "RSVP"
+    when "HEADS_UP" then "Heads Up"
+    when "IMMEDIATE_CALLOUT" then "Immediate Callout"
+    when "DELAYED_CALLOUT" then "Delayed Callout"
     when "LEAVE" then "Left Home"
     when "RETURN" then "Returned Home"
-  console.log data.action_type
-  console.log data.action
   LC.ra.optionSelect(action)
   LC.ra.periodSelect(data.action_opid)
   LC.ra.modalSave()

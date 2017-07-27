@@ -12,6 +12,10 @@ module EventsHelper
     current_team.events.ordered.last.try(:finish).try(:strftime, '%b-%Y')
   end
 
+  def sort_order(evt)
+    evt.start.strftime("%Y%m%d%H%M") + evt.updated_at.strftime("%Y%m%d%H%M")
+  end
+
   def event_summary_stats
     tmp = current_team.event_types.to_a.map do |type|
       name = type.name
@@ -23,7 +27,7 @@ module EventsHelper
         "#{pluralize(count, name)}"
       end
     end
-    "(#{tmp.join(', ')})"
+    "#{tmp.join(', ')}"
   end
 
   def published_helper(event, type = 'new')
@@ -54,10 +58,11 @@ module EventsHelper
 
   def event_delete_link(event)
     text, klas = if event.participants.count != 0
-                   ['<del>Delete This Event</del>', 'disabled']
+                   ['<del>Delete Event</del>', 'disabled']
                  else
-                   ['Delete This Event', '']
+                   ['Delete Event', '']
                  end
+    text = '<span class="glyphicon glyphicon-trash"></span>  ' + text
     url = "/events/#{event.id}"
     msg = {confirm: 'Are you sure?'}
     link_to raw(text), url, method: :delete, data: msg, class: "help-button #{klas}"
@@ -94,20 +99,22 @@ module EventsHelper
 
   def event_page_link(period, type)
 
-    lbl  = type.to_s.upcase
-    path = "/paging/new?pg_action=#{lbl}&pg_opid=#{period.id}"
+    lbl  = type.to_s
+    path = "/paging/new?pg_action=#{lbl.upcase}&pg_opid=#{period.id}"
     btyp = is_enabled?(period, type) ? "btn#{type.to_s.capitalize}" : ""
-    dopt = is_enabled?(period, type) ? "" : "disabled='disabled'"
+    dopt = is_enabled?(period, type) ? "" : "disabled=\"disabled\""
     clas = "btn btn-default #{btyp}"
-    raw "<a target='_blank' #{dopt} class='#{clas}' href='#{path}'>#{lbl}</a>"
+    raw "<a #{dopt} class='#{clas}' href='#{path}'>#{lbl.gsub('_'," ")}</a>"
   end
 
   def is_enabled?(period, type)
     case type
-      when :rsvp   then Time.now < period.event.finish && period.participants.has_left.count == 0
-      when :notify then period.participants.count > 0
-      when :leave  then period.participants.count > 0 && period.participants.has_not_left.count > 0
-      when :return then period.participants.has_not_left.count == 0 && period.participants.has_not_returned.count > 0
+      when :Heads_Up          then Time.now < period.event.finish && period.participants.has_left.count == 0
+      when :Immediate_Callout then Time.now < period.event.finish && period.participants.has_left.count == 0
+      when :Delayed_Callout   then Time.now < period.event.finish && period.participants.has_left.count == 0
+      when :Notify            then period.participants.count > 0
+      when :Leave             then period.participants.count > 0 && period.participants.has_not_left.count > 0
+      when :Return            then period.participants.has_not_left.count == 0 && period.participants.has_not_returned.count > 0
       else true
     end
   end
@@ -186,4 +193,13 @@ module EventsHelper
     ERB
   end
 
+  def show_checkbox(txt)
+    raw <<-CB
+      <div class="checkbox">
+        <input id="checkbox" type="checkbox">
+        <label for="checkbox">#{txt}</label>
+      </div>
+     CB
+  end
+  
 end

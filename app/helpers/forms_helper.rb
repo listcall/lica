@@ -1,6 +1,6 @@
 module FormsHelper
 
-  # ----- for builder invocations -----
+  # ----- form_for builder invocations -----
   def bs_horiz_single_form_for(object, options = {}, &block)
     options[:builder] = BsHorizSingleBuilder
     form_for(object, options, &block)

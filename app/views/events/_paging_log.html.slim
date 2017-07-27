@@ -1,0 +1,63 @@
+- content_for :page_js do
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
+
+  javascript:
+    $(document).ready(function() {
+        $('table.display').DataTable( {
+            "paging":   false,
+            "info":     false,
+            "order": [[ 3, "desc" ]],
+            "responsive": true,
+            columnDefs: [
+              { responsivePriority: 1, targets: 2 },
+              { responsivePriority: 2, targets: 3 },
+              { responsivePriority: 3, targets: 6 },
+              { responsivePriority: 4, targets: 0 },
+              { responsivePriority: 5, targets: 4 },
+              { responsivePriority: 6, targets: 6 },
+              { responsivePriority: 7, targets: 1 }
+            ]
+      } );
+    } );
+
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
+
+.panel.panel-default
+  .panel-heading
+    h4.panel-title style="text-align:center"
+      a data-toggle="collapse" data-parent="#accordion" href="#collapsePL"
+        i.glyphicon.glyphicon-align-justify.text-primary
+        |  Event Log
+  .panel-collapse.collapse#collapsePL
+    .panel-body
+      .container style='padding-left: 0px; padding-right: 0px; width: 100%'
+        .row
+          .col-xs-12
+            table.display.compact.table-bordered.dt-responsive.nowrap
+              thead
+                th ID
+                th From
+                th Message Text
+                th Sent
+                th Read
+                th Replies
+                th Action
+              tbody
+                - @assignments.each do |assig|
+                  tr
+                    td = assig.sequential_id
+                    td
+                      => avatar_path(assig.sender_user)
+                      => link_to assig.sender_name, assig.sender_path, target: "_blank"
+                      => team_icon_path(assig.sender)
+                    td = link_to truncate(assig.short_body), assig.broadcast_path
+                    td = assig.created_at.strftime("%m-%d %H:%M")
+                    td
+                      => assig.read_count
+                      ' of
+                      => assig.recipient_count
+                    td
+                      => raw assig.reply_count_link
+                      => raw assig.comment_icon_for(current_membership)
+                    td
+                      = raw assig.action_status

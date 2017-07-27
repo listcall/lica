@@ -1,0 +1,31 @@
+.panel.panel-default
+  .panel-heading
+    h4.panel-title style="text-align:center"
+      a data-toggle="collapse" data-parent="#accordion" href="#collapseCO"
+        i.glyphicon.glyphicon-list.text-primary
+        |  Callout Checklist
+  .panel-collapse.collapse#collapseCO
+    .panel-body
+      h2 Immediate Callout
+      ul
+        = show_checkbox "IMMEDIATELY PAGE THE UNIT, via \"invite\" on the event page. DO NOT WAIT. Text: \
+          \"Immediate callout. OL needed. Standby for details.\" Use RSVP"
+        = show_checkbox "Begin a log (example), consider a CAD (example). Share with UL, OL, AHC, OO, XO, Secretary, and timekeeper"
+        = show_checkbox "Log into instant messaging"
+        = show_checkbox "Determine CP location, callout purpose, deployment duration. Email to unit"
+        = show_checkbox "Check availability on bamru.net pages"
+        = show_checkbox "Update status line and check for messages: (650) 858-4618, then #, password BAMRUS"
+        = show_checkbox "Contact the OO"
+        = show_checkbox "If an OL is readily available, quickly discuss with the OO and (with OO's approval) appoint the OL"
+        = show_checkbox "Contact all members who you haven't heard from"
+        = show_checkbox "Recheck bamru.net availability and status line messages and determine the responding team with the OL and OO. \
+          If you still don't have an OL and AHC, appoint one in consultation with the OO. Page the team to the unit"
+        = show_checkbox "Report the number of responding members and the names of the OL and AHC to the OESL"
+        = show_checkbox "Arrange logistics. Consider: BAMRU truck, SO vehicle, technical gear, cache equipment, additional gas cards, \
+          drivers, cache keys, the satellite phone, if borrowing personal gear amongst the membership is needed, \
+          and other issues. Consider appointing a temporary logistics head"
+        = show_checkbox "Collect relevant data and email it to the responding team: weather, maps, terrain, avy forecast, \
+          expected equipment needs, contact information for the CP, news, and other information \
+          Resources: Google Maps, CalTopo, NOAA, SAC, and ESAC"
+        = show_checkbox "Create an event on bamru.net/events if you haven't already"
+        = show_checkbox "Talk to the OL and OO and see if further steps are necessary"

@@ -14,14 +14,13 @@ css:
 
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
         .col-xs-6
-          b
-            = raw link_to "#{current_team.acronym} Events", "/events"
-            '  >
-            = raw link_to @event.event_ref, "/events/#{@event.event_ref}"
-            '  > Period #{@period.position}
+          = render :partial => '/subhead_title',
+            :locals => {title: [{label: "Events", ref: "/events"},
+                                {label: "#{@event.event_ref}", ref: "/events/#{@event.event_ref}"},
+                                {label: "Period #{@period.position}"} ]}
         .col-xs-6.text-right
           = member_help_button('event_period')
 
@@ -47,9 +46,24 @@ css:
     .row
       #childTable.col-xs-12 style=("border: 1px solid gray; margin-top: 10px;")
         = render 'child_table'
+  .row style='margin-top: 15px; margin-bottom: 20px;'
+    | Page
+    i.subIcon.fa.fa-bullhorn<
+    .btn-group.btn-group-xs role="group"
+      .btn-group.btn-group-xs role="rsvp"
+        button.btn.btn-default.dropdown-toggle.btnRSVP type="button" data-toggle="dropdown"
+          | RSVP
+          span.caret<
+        ul.dropdown-menu role="rsvp"
+          li = event_page_link(@period, :Heads_Up)
+          li = event_page_link(@period, :Immediate_Callout)
+          li = event_page_link(@period, :Delayed_Callout)
+        = event_page_link(@period, :Notify)
+        = event_page_link(@period, :Leave)
+        = event_page_link(@period, :Return)
   .row style=("margin-top: 5px; ")
+    /FIXME:XXX: AAR per period or operation?
     small
      .col-xs-4    = raw aar_link_for(@period)
      .col-xs-4.ac #{@period.event.typ_name} - OP #{@period.position}
      .col-xs-4.ar participant stats
-  p

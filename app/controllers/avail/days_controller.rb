@@ -7,11 +7,13 @@ class Avail::DaysController < ApplicationController
   def index
     @members  = current_team.memberships.includes(:user).active.by_sort_score
     @unavails = UnAvails.new(@members, params[:start], params[:finish])
+    @page_title = "#{current_team.acronym} availabilty"
   end
 
   def show
     @member = current_team.memberships.by_user_name(params[:id]).to_a.first
     @avails = @member.avail_days.next_3_months
+    @page_title = "#{current_team.acronym} availabilty/#{@member.full_name}"
   end
 
   def create

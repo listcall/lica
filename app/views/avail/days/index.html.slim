@@ -1,24 +1,42 @@
+- content_for :page_js do
+  script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
+
+  javascript:
+    $(document).ready(function() {
+        $('table.display').DataTable( {
+            "paging":     false,
+            "info":       false,
+            "responsive": true,
+            columnDefs: [
+              { responsivePriority: 1, targets: 1 },
+              { responsivePriority: 2, targets: 2 },
+              { responsivePriority: 3, targets: 7 }
+              ]
+        } );
+    } );
+
+link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
+
 - content_for :subhead do
   .subhead
-    .container
+    .container.text-primary
       .row
-        .col-xs-4
-          b #{current_team.acronym} Availability
-        .col-xs-4.text-center
-          small
-            a href='/avail/days/#{current_membership.user_name}'
-              | update your availability
-        .col-xs-4.text-right
+        .col-xs-6
+          = render :partial => '/subhead_title', :locals => {title: [{label: "Availability"}] }
+        .col-xs-6.text-right
+          a.help-button href='/avail/days/#{current_membership.user_name}'
+            i.glyphicon.glyphicon-plus
+            |  Update Availability
           = member_help_button('avail_days')
 
 .container
   .row
-    table#myTable.tablesorter.table.table-condensed.table-bordered
+    table#myTable.display.dt-responsive.nowrap cellspacing="0" width="100%" 
       thead
         tr
           th Role
           th Name
-          th Available<br/>today?
+          th style=("text-align: center;") Available<br/>today?
           th = day_label(1)
           th = day_label(2)
           th = day_label(3)
@@ -29,7 +47,7 @@
         - @members.each do |mem|
           tr
             td = mem.rank
-            td = link_to mem.full_name, "/avail/days/#{mem.user_name}"
+            td data-sort=mem.last_name = link_to mem.full_name, "/avail/days/#{mem.user_name}"
             = raw day_helper(mem, 0)
             = raw day_helper(mem, 1)
             = raw day_helper(mem, 2)

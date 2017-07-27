@@ -7,4 +7,3 @@
 //= require ./show_remove_participant
 //= require ./show_date_picker
 //= require ./show_role_picker
-//= require events/show_tooltips

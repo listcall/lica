@@ -1,3 +1,43 @@
-This system is currently under active development.
+Members available
+
+<table class="table table-condensed table-bordered">
+  <tr><td># Active</td><td>{{active_count}}</td></tr>
+  <tr><td># Likely</td><td>{{likely_count}}</td></tr>
+</table>
+
+<div class="hidden-xs">Create Event and Page Team:&nbsp</div>
+  <button type="button" class=" btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
+    onclick="window.rsvp='HEADS_UP'">Heads Up</button>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
+    onclick="window.rsvp='IMMEDIATE_CALLOUT'">Immediate</button>
+  <button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#newEventModal" 
+    onclick="window.rsvp='DELAYED_CALLOUT'">Delayed</button>
+
+
+<p><p>
+
+<div id="evtShow" style="display: none;">
+  <span id="evtTitle"> Event: </span>
+  <span id="evtLocation"> Location: </span>
+</div>
+
+<p><p>
+
+<!-- XXX <table id="#memberTbl" class="display compact table-bordered dt-responsive nowrap"> -->
+{{#ifZero current_count }}
+{{else}}
+  Active events
+  <table class="table table-condensed table-bordered">
+    {{#each current_events}}
+      <tr>
+        <td>
+          <a href="/events/{{ref}}">{{title}}</a>
+        </td>
+        <td>{{type}}</td>
+        <td>{{start}}</td>
+      </tr>
+    {{/each}}
+  </table>
+{{/ifZero}}
+
 <p></p>
-Please report any issues/requests to Andy Leak at 650-823-0836 / andy@r210.com.

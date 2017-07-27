@@ -108,7 +108,7 @@ css:
             button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button" reset
         = paging_new_reserve_checkbox(current_team)
         - cache ["page_new", @list_type, current_team] do
-          table#memTable.display.compact.table-bordered.dt-responsive.nowrap cellspacing="0" width="100%"
+          table#memTable.display.compact.table-bordered.dt-responsive.nowrap
             thead
               th : small Name
               th : small Rank

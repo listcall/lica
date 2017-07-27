@@ -35,9 +35,16 @@ module Api
           title: ev.title,
           type:  ev.typ_name,
           start: ev.start.strftime('%a %b-%d'),
-          ref:   ev.event_ref
+          ref:   ev.event_ref,
+          sort_order: sort_order(ev)
         }
       end
+
+      # XX Duplicate of event_helper
+      def sort_order(evt)
+        evt.start.strftime("%Y%m%d%H%M") + evt.updated_at.strftime("%Y%m%d%H%M")
+      end
+
     end
 
     before do
@@ -132,6 +139,22 @@ module Api
           upcoming_events: current_team.events.upcoming.map {|ev| event_data(ev)}
         }
       end
+
+      desc 'DO callout'
+      get :duty_officer do
+        # return only "operation" events
+        evts = current_team.events.current.select {|ev| ev.typ == 'O'}.map {|ev| event_data(ev)};
+        {
+          title: 'Duty Officer Callout',
+          team_acronym:  current_team.acronym,
+          active_count:  current_team.members.active.count,
+          likely_count:  current_team.members.active.count/2,
+          current_count:   current_team.events.current.count,
+          # sort events by start_date and updated_at
+          current_events:  evts.sort {|a, b| b[:sort_order] <=> a[:sort_order]}
+        }
+      end
+      
     end
 
     add_swagger_documentation(

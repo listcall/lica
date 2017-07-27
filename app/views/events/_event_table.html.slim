@@ -17,6 +17,7 @@ table.display.compact.table-bordered.dt-responsive.nowrap cellspacing="0" width=
           td width="10%" = event.typ_name
           td = event.event_periods_count
           td = event.event_participants_count
-          td = event.start.strftime("%y-%m-%d")
+          / Sort by start_date and then updated_at time
+          td data-sort=sort_order(event) = event.start.strftime("%m-%d-%y")
           td = event.tags.join(', ')
           td = event.published

@@ -89,15 +89,15 @@ class PgrNewVal
   end
 
   def overview_text
-    rsvpMsg = "#{period_links} > RSVP defaults to all #{team_name} team members"
+    rsvpMsg = "#{period_links} > RSVP_defaults_to_all_#{team_name}_members".gsub('_','&nbsp')
     case @action_type
       when "HEADS_UP" then rsvpMsg
       when "IMMEDIATE_CALLOUT" then rsvpMsg  #XXX decide proper list of participants: ALL or only available
       when "DELAYED_CALLOUT" then rsvpMsg
-      when "RSVP"   then "This invite is addressed to all #{team_name} team members.#{period_links}"
-      when "NOTIFY" then "#{period_links} > Notification defaults to all event participants"
-      when "LEAVE"  then "#{period_links} > 'Left Home' message defaults to all pending participants"
-      when "RETURN" then "#{period_links} > 'Return Home' message defaults to all pending participants"
+      when "RSVP"   then "This invite is addressed to all #{team_name} members.#{period_links}"
+      when "NOTIFY" then "#{period_links} > Notification_defaults_to_all_event_participants".gsub('_','&nbsp')
+      when "LEAVE"  then "#{period_links} > 'Left_Home'_message_defaults_to_all_pending_participants".gsub('_','&nbsp')
+      when "RETURN" then "#{period_links} > 'Return_Home'_message_defaults_to_all_pending_participants".gsub('_','&nbsp').gsub('_',' ')
       else "#{period_links}"
     end
   end

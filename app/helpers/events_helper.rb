@@ -12,6 +12,10 @@ module EventsHelper
     current_team.events.ordered.last.try(:finish).try(:strftime, '%b-%Y')
   end
 
+  def sort_order(evt)
+    evt.start.strftime("%Y%m%d%H%M") + evt.updated_at.strftime("%Y%m%d%H%M")
+  end
+
   def event_summary_stats
     tmp = current_team.event_types.to_a.map do |type|
       name = type.name

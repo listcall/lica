@@ -39,6 +39,7 @@ end
 #
 #  id         :integer          not null, primary key
 #  team_id    :integer
+#  position   :integer
 #  name       :string
 #  xfields    :hstore           default({})
 #  jfields    :jsonb

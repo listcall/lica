@@ -32,16 +32,3 @@ describe Cert::SpecGroup do
   #   end
   # end
 end
-
-# == Schema Information
-#
-# Table name: cert_groups
-#
-#  id         :integer          not null, primary key
-#  team_id    :integer
-#  name       :string
-#  xfields    :hstore           default({})
-#  jfields    :jsonb
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#

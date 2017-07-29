@@ -63,20 +63,3 @@ class Cert::SpecGroup < ActiveRecord::Base
     self.sort_key    ||= 0
   end
 end
-
-# == Schema Information
-#
-# Table name: access_roles
-#
-#  id           :integer          not null, primary key
-#  team_id      :integer
-#  cert_spec_id :integer
-#  name         :string
-#  acronym      :string
-#  description  :string
-#  sort_key     :integer
-#  xfields      :hstore           default({})
-#  jfields      :jsonb
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#

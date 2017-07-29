@@ -34,9 +34,9 @@ end
 
 # == Schema Information
 #
-# Table name: access_permissions
+# Table name: cert_permissions
 #
-#  id             :integer          not null, primary key
-#  access_role_id :integer
-#  label          :string
+#  id           :integer          not null, primary key
+#  cert_spec_id :integer
+#  label        :string
 #

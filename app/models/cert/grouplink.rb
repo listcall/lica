@@ -1,6 +1,6 @@
-class Cert::SpecGroup < ActiveRecord::Base
+class Cert::Grouplink < ActiveRecord::Base
 
-  self.table_name = "cert_spec_group"
+  self.table_name = "cert_grouplinks"
 
   acts_as_list :scope => :team_id, :column => :sort_key
 

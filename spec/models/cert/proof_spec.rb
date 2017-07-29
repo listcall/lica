@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::SpecGroup do
+describe Cert::Proof do  #
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -16,8 +16,8 @@ describe Cert::SpecGroup do
   end
 
   describe 'Associations' do
-    it { should respond_to :cert_spec             }
-    # it { should respond_to :cert_specs       }
+    it { should respond_to :user             }
+    it { should respond_to :cert_prooflinks  }
   end
 
   # describe 'Object Creation' do

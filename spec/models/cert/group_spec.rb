@@ -1,5 +1,9 @@
 require 'rails_helper'
 
+def base_params
+  {}
+end
+
 describe Cert::Group do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
@@ -17,7 +21,7 @@ describe Cert::Group do
 
   describe 'Associations' do
     # it { should respond_to :team             }
-    # it { should respond_to :cert_specs       }
+    it { should respond_to :cert_grouplinks       }
   end
 
   # describe 'Object Creation' do

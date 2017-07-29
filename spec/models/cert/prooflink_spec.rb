@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Access::Role do
+describe Cert::Prooflink do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -16,9 +16,9 @@ describe Access::Role do
   end
 
   describe 'Associations' do
-    it { should respond_to :team                }
+    it { should respond_to :membership          }
+    it { should respond_to :cert_proof          }
     it { should respond_to :cert_spec           }
-    it { should respond_to :access_permissions  }
   end
 
   # describe 'Object Creation' do
@@ -33,20 +33,3 @@ describe Access::Role do
   #   end
   # end
 end
-
-# == Schema Information
-#
-# Table name: access_roles
-#
-#  id           :integer          not null, primary key
-#  team_id      :integer
-#  cert_spec_id :integer
-#  name         :string
-#  acronym      :string
-#  description  :string
-#  sort_key     :integer
-#  xfields      :hstore           default({})
-#  jfields      :jsonb
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Assignment do
+describe Cert::Grouplink do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -16,9 +16,9 @@ describe Cert::Assignment do
   end
 
   describe 'Associations' do
-    it { should respond_to :membership          }
-    it { should respond_to :cert_exhibit        }
-    it { should respond_to :cert_spec           }
+    it { should respond_to :cert_spec             }
+    it { should respond_to :cert_group            }
+    # it { should respond_to :cert_specs       }
   end
 
   # describe 'Object Creation' do
@@ -30,6 +30,6 @@ describe Cert::Assignment do
   #   it 'saves the object to the database' do
   #     subject.save
   #     expect(subject).to be_valid
-  #   end
+  #   end #
   # end
 end

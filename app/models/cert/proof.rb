@@ -1,8 +1,8 @@
 # require 'app_auth/methods'
 
-class Cert::Evidence < ActiveRecord::Base
+class Cert::Proof < ActiveRecord::Base
 
-  self.table_name = "cert_evidence"
+  self.table_name = "cert_proofs"
 
   # ----- Attributes -----
   # has_attached_file :attachment,
@@ -19,7 +19,7 @@ class Cert::Evidence < ActiveRecord::Base
 
   # ----- Associations -----
   belongs_to :user            , :touch => true
-  has_many   :cert_assignments, :class_name => 'Cert::Assignment', :dependent => :destroy
+  has_many   :cert_prooflinks , :class_name => 'Cert::Prooflink', :dependent => :destroy
 
   # ----- Validations -----
 

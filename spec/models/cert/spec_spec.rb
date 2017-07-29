@@ -16,9 +16,9 @@ describe Cert::Spec do
   end
 
   describe 'Associations' do
-    it { should respond_to :cert_assignments    }
+    it { should respond_to :cert_prooflinks     }
     it { should respond_to :team                }
-    it { should respond_to :cert_spec_groups    }
+    it { should respond_to :cert_grouplinks     }
     it { should respond_to :cert_groups         }
   end
 

@@ -16,6 +16,7 @@ class Cert::Group < ActiveRecord::Base
   # xfield_accessor :attendance_rule
 
   # ----- Associations -----
+  has_many   :cert_grouplinks, class_name: 'Cert::Grouplink'
   has_many   :cert_specs, class_name: 'Cert::Spec'
   belongs_to :team      , :touch => true
   # has_many   :quals             ,  :through   => :qual_assignments

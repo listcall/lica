@@ -33,3 +33,13 @@ describe Cert::Grouplink do
   #   end #
   # end
 end
+
+# == Schema Information
+#
+# Table name: cert_grouplinks
+#
+#  id            :integer          not null, primary key
+#  cert_spec_id  :integer
+#  cert_group_id :integer
+#  position      :integer
+#

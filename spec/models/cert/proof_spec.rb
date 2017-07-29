@@ -32,3 +32,24 @@ describe Cert::Proof do  #
   #   end
   # end
 end
+
+# == Schema Information
+#
+# Table name: cert_proofs
+#
+#  id                        :integer          not null, primary key
+#  user_id                   :integer
+#  comment                   :string
+#  link                      :string
+#  attachment_file_name      :string
+#  attachment_file_size      :string
+#  attachment_content_type   :string
+#  attachment_updated_at     :string
+#  expires_at                :datetime
+#  ninety_day_notice_sent_at :datetime
+#  thirty_day_notice_sent_at :datetime
+#  expired_notice_sent_at    :datetime
+#  xfields                   :hstore           default({})
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
+#

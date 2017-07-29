@@ -63,3 +63,13 @@ class Cert::Grouplink < ActiveRecord::Base
     self.sort_key    ||= 0
   end
 end
+
+# == Schema Information
+#
+# Table name: cert_grouplinks
+#
+#  id            :integer          not null, primary key
+#  cert_spec_id  :integer
+#  cert_group_id :integer
+#  position      :integer
+#

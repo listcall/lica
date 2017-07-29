@@ -33,3 +33,24 @@ describe Cert::Prooflink do
   #   end
   # end
 end
+
+# == Schema Information
+#
+# Table name: cert_prooflinks
+#
+#  id            :integer          not null, primary key
+#  membership_id :integer
+#  cert_spec_id  :integer
+#  cert_proof_id :integer
+#  title         :string
+#  position      :integer
+#  status        :string
+#  ev_type       :string
+#  reviewer_id   :integer
+#  reviewed_at   :string
+#  external_id   :string
+#  xfields       :hstore           default({})
+#  mc_expires_at :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#

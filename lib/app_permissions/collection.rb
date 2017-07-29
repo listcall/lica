@@ -1,4 +1,4 @@
-module MenuSet
+module AppPermissions
 
   class Collection
 

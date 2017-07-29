@@ -1,4 +1,4 @@
-module MenuSet
+module AppPermissions
 
   class Menu
     attr_accessor :label, :path, :owner, :manager, :active, :reserve, :guest

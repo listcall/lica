@@ -1,6 +1,6 @@
 class TableRename < ActiveRecord::Migration[5.1]
   def change
-    create_table 'cert_proof' do |t|
+    create_table 'cert_proofs' do |t|
       t.integer  'user_id'
       t.string   'comment'                 # for documentation
       t.string   'link'                    # for documentation
@@ -15,7 +15,7 @@ class TableRename < ActiveRecord::Migration[5.1]
       t.hstore   'xfields', default: {}    # for extended fields
       t.timestamps
     end
-    add_index :cert_proof, :user_id
+    add_index :cert_proofs, :user_id
 
     create_table 'cert_specs' do |t|
       t.integer 'team_id'

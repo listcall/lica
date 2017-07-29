@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Access::Permission do
+describe Cert::Permission do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -16,7 +16,7 @@ describe Access::Permission do
   end
 
   describe 'Associations' do
-    it { should respond_to :access_role  }
+    it { should respond_to :cert_specs  }
   end
 
   # describe 'Object Creation' do

@@ -1,6 +1,8 @@
-class Access::Permission < ActiveRecord::Base
+class Cert::SpecGroup < ActiveRecord::Base
 
-  self.table_name = "access_permissions"
+  self.table_name = "cert_spec_group"
+
+  acts_as_list :scope => :team_id, :column => :sort_key
 
   # ----- Attributes -----
 
@@ -8,9 +10,8 @@ class Access::Permission < ActiveRecord::Base
 
   # ----- Associations -----
 
-  belongs_to :access_role, class_name: 'Access::Role'
-  # has_many   :assignments, :foreign_key => 'team_role_id', :class_name => 'Team::RoleAssignment'
-  # has_one    :position   , :foreign_key => 'team_role_id', :class_name => 'Position', :dependent => :destroy
+  belongs_to :cert_spec         , class_name: 'Cert::Spec'
+  belongs_to :cert_group        , class_name: 'Cert::Group'
 
   # ----- Validations -----
   # VALID_RIGHTS = %w(owner manager active)
@@ -57,17 +58,25 @@ class Access::Permission < ActiveRecord::Base
   def set_defaults
     return unless self.new_record?
     self.description ||= 'TBD'
-    self.rights ||= 'active'
-    self.has ||= 'one'
-    self.sort_key ||= 0
+    self.rights      ||= 'active'
+    self.has         ||= 'one'
+    self.sort_key    ||= 0
   end
 end
 
 # == Schema Information
 #
-# Table name: access_permissions
+# Table name: access_roles
 #
-#  id             :integer          not null, primary key
-#  access_role_id :integer
-#  label          :string
+#  id           :integer          not null, primary key
+#  team_id      :integer
+#  cert_spec_id :integer
+#  name         :string
+#  acronym      :string
+#  description  :string
+#  sort_key     :integer
+#  xfields      :hstore           default({})
+#  jfields      :jsonb
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
 #

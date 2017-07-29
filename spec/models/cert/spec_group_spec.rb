@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Group do
+describe Cert::SpecGroup do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }

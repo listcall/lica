@@ -11,7 +11,7 @@ class Cert::Assignment < ActiveRecord::Base
   # ----- Associations -----
   with_options :touch => true do
     belongs_to :membership
-    belongs_to :cert_exhibit  , class_name: 'Cert::Exhibit'
+    belongs_to :cert_exhibit  , class_name: 'Evidence'
     belongs_to :cert_spec     , class_name: 'Cert::Spec'
   end
 

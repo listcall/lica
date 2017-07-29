@@ -13,7 +13,6 @@ describe Cert::Spec do
     it { should respond_to :commentable        }
     it { should respond_to :xfields            }
     it { should respond_to :ev_types           }
-    it { should respond_to :position           }
   end
 
   describe 'Associations' do
@@ -29,7 +28,7 @@ describe Cert::Spec do
 
     it 'saves the object to the database' do
       subject.save
-      expect(subject).to be_valid
+      expect(subject).to be_valid #
     end
   end
 end

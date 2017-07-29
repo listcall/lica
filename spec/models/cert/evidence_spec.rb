@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Exhibit do
+describe Cert::Evidence do  #
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }

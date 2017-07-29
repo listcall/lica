@@ -1,8 +1,8 @@
 # require 'app_auth/methods'
 
-class Cert::Exhibit < ActiveRecord::Base
+class Cert::Evidence < ActiveRecord::Base
 
-  self.table_name = "cert_exhibits"
+  self.table_name = "cert_evidence"
 
   # ----- Attributes -----
   # has_attached_file :attachment,

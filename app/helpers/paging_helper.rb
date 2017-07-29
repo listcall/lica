@@ -5,7 +5,6 @@ module PagingHelper
     " (#{member.roles.join(', ')})"
   end
 
-  #FIXME:XXX Appears broken on both listcall and devc
   def paging_new_reserve_checkbox(team)
     return '' if team.memberships.where(rights: 'reserve').count == 0
     raw <<-ERB
@@ -28,7 +27,7 @@ module PagingHelper
   end
 
   def paging_new_reserve_checkbox_html
-    check = cookies['paging_new_reserves'] == 'true' ? 'checked' : ''
+    check = cookies['paging_reserves'] == 'true' ? 'checked' : ''
     "<input style='vertical-align: -3px; cursor: pointer;' id='reserveCheckBox' type='checkbox' name='checkbox' value='value' #{check}>"
   end
 

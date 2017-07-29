@@ -126,7 +126,7 @@ class Pgr::AssignmentsController < ApplicationController
   # ----- membership list -----
 
   def cookie_list_type
-    cookies['paging_reserves'] == 'true' ? 'reserves' : 'active'
+    cookies['paging_reserves'] != 'true' ? 'active' : 'reserves'
   end
 
   def membership_scope

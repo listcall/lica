@@ -2,12 +2,15 @@
 
 - content_for :page_js do
   script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
+  /*FIXME:XXX replace with ajax auto load
+  /* using members asset because paging failed to route */
+  script src="/assets/members/paging_index_reserves" 
 
   javascript:
     window.lclData = {};
     lclData.newParams  = '#{ raw @new_params.to_json }';
-    //FIXME:XXX: Lots of data in select_list.  Value?
-    //lclData.selectList = #{ raw @partners.select_list };
+    /*FIXME:XXX: Lots of data in select_list.  Useful?*/
+    /*lclData.selectList = /remove #/{ raw @partners.select_list };*/
 
     $(document).ready(function() {
         $('table.display').DataTable( {

@@ -2,7 +2,8 @@
 
 table.display.compact.table-bordered.dt-responsive.nowrap cellspacing="0" width="100%" id="#{id}"
   thead
-    th = title
+    th.visible-xs = title
+    th.visible-sm-and-above = title
     th Type
     th Periods
     th Participants
@@ -13,8 +14,10 @@ table.display.compact.table-bordered.dt-responsive.nowrap cellspacing="0" width=
     - events.each do |event|
       - cache [event, "eventrow"] do
         tr
-          td width="40%" = raw link_to event.title, "/events/#{event.event_ref}"
-          td width="10%" = event.typ_name
+          / wierd side effect is this counts as two columns in the responsivePriority
+          td.visible-xs = raw link_to (truncate event.title, length: 20), "/events/#{event.event_ref}"
+          td.visible-sm-and-above = raw link_to event.title, "/events/#{event.event_ref}"
+          td = event.typ_name
           td = event.event_periods_count
           td = event.event_participants_count
           / Sort by start_date and then updated_at time

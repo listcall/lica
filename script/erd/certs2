@@ -5,7 +5,7 @@ puts "Loading Rails..."
 require './config/environment'
 Rails.application.eager_load!
 
-ARGS = [/Team$/, /^Cert/, /^Access/, /^Membership$/, /^User$/]
+ARGS = [/Team$/, /^Cert/, /^Membership$/, /^User$/]
 
 def klasses
   kn1 = ActiveRecord::Base.descendants.map {|x| x.name}.uniq

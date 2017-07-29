@@ -10,11 +10,11 @@ class Cert::SpecGroup < ActiveRecord::Base
 
   # ----- Associations -----
 
-  belongs_to :cert_spec         , class_name: 'Cert::Spec'
-  belongs_to :cert_group        , class_name: 'Cert::Group'
+  belongs_to :cert_spec    , class_name: 'Cert::Spec'
+  belongs_to :cert_group   , class_name: 'Cert::Group'
 
   # ----- Validations -----
-  # VALID_RIGHTS = %w(owner manager active)
+  # VALID_RIGHTS = %w(owner manager active) #
   # validates_presence_of  :rights
   # validates_inclusion_of :rights, in: VALID_RIGHTS
   # validates :name   , :presence => true, :uniqueness => {:scope => :team_id}

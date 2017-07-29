@@ -17,8 +17,9 @@ describe Cert::Spec do
 
   describe 'Associations' do
     it { should respond_to :cert_assignments    }
-    it { should respond_to :access_roles        }
     it { should respond_to :team                }
+    it { should respond_to :cert_spec_groups    }
+    it { should respond_to :cert_groups         }
   end
 
   describe 'Object Creation' do

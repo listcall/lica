@@ -1,6 +1,6 @@
 class TableRename < ActiveRecord::Migration[5.1]
   def change
-    create_table 'cert_evidence' do |t|
+    create_table 'cert_proof' do |t|
       t.integer  'user_id'
       t.string   'comment'                 # for documentation
       t.string   'link'                    # for documentation
@@ -15,7 +15,7 @@ class TableRename < ActiveRecord::Migration[5.1]
       t.hstore   'xfields', default: {}    # for extended fields
       t.timestamps
     end
-    add_index :cert_evidence, :user_id
+    add_index :cert_proof, :user_id
 
     create_table 'cert_specs' do |t|
       t.integer 'team_id'
@@ -34,10 +34,10 @@ class TableRename < ActiveRecord::Migration[5.1]
     add_index :cert_specs, :xfields , :using => :gin
     add_index :cert_specs, :ev_types, :using => :gin
 
-    create_table 'cert_assignments' do |t|
+    create_table 'cert_prooflinks' do |t|
       t.integer  'membership_id'
       t.integer  'cert_spec_id'
-      t.integer  'cert_evidence_id'
+      t.integer  'cert_proof_id'
       t.string   'title'
       t.integer  'position'              # scoped by membership and spec
       t.string   'status'
@@ -49,15 +49,15 @@ class TableRename < ActiveRecord::Migration[5.1]
       t.datetime 'mc_expires_at'
       t.timestamps
     end
-    add_index :cert_assignments, :membership_id
-    add_index :cert_assignments, :cert_spec_id
-    add_index :cert_assignments, :cert_evidence_id
-    add_index :cert_assignments, :title
-    add_index :cert_assignments, :position
-    add_index :cert_assignments, :external_id
-    add_index :cert_assignments, :mc_expires_at
-    add_index :cert_assignments, :ev_type
-    add_index :cert_assignments, :xfields, :using => :gin
+    add_index :cert_prooflinks, :membership_id
+    add_index :cert_prooflinks, :cert_spec_id
+    add_index :cert_prooflinks, :cert_proof_id
+    add_index :cert_prooflinks, :title
+    add_index :cert_prooflinks, :position
+    add_index :cert_prooflinks, :external_id
+    add_index :cert_prooflinks, :mc_expires_at
+    add_index :cert_prooflinks, :ev_type
+    add_index :cert_prooflinks, :xfields, :using => :gin
 
     create_table 'cert_groups' do |t|
       t.integer 'team_id'
@@ -72,14 +72,14 @@ class TableRename < ActiveRecord::Migration[5.1]
     add_index :cert_groups, :jfields , :using => :gin
     add_index :cert_groups, :team_id
 
-    create_table 'cert_spec_groups' do |t|
+    create_table 'cert_grouplinks' do |t|
       t.integer 'cert_spec_id'
       t.integer 'cert_group_id'
       t.integer 'position'                      # scoped by cert_group and cert_spec
     end
-    add_index :cert_spec_groups, :cert_spec_id
-    add_index :cert_spec_groups, :cert_group_id
-    add_index :cert_spec_groups, :position
+    add_index :cert_grouplinks, :cert_spec_id
+    add_index :cert_grouplinks, :cert_group_id
+    add_index :cert_grouplinks, :position
 
     create_table :cert_permissions do |t|
       t.integer 'cert_spec_id'

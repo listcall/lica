@@ -16,7 +16,7 @@ describe Cert::SpecGroup do
   end
 
   describe 'Associations' do
-    # it { should respond_to :team             }
+    it { should respond_to :cert_spec             }
     # it { should respond_to :cert_specs       }
   end
 

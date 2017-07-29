@@ -19,8 +19,10 @@ class Cert::Spec < ActiveRecord::Base
   with_options :dependent => :destroy do
     has_many   :cert_assignments, class_name: 'Cert::Assignment', foreign_key: "cert_spec_id"#, ->{ order(:position) }
   end
-  has_many   :access_roles, :class_name => 'Access::Role'
-  belongs_to :team        , :touch      => true
+  has_many   :cert_spec_groups  , :class_name => 'Cert::SpecGroup', foreign_key: 'spec_group_id'
+  has_many   :cert_groups       , :through    => :cert_spec_groups
+  belongs_to :team              , :touch      => true
+
   # has_many   :quals             ,  :through   => :qual_assignments
   #
   # alias_method :assignments      ,  :qual_assignments

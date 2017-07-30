@@ -2,10 +2,10 @@
 
 require './config/environment'
 
-Cert::Evidence.destroy_all
-Cert::Assignment.destroy_all
+Cert::Permission.destroy_all
 Cert::Spec.destroy_all
+Cert::Proof.destroy_all
+Cert::Prooflink.destroy_all
 Cert::Group.destroy_all
-Access::Role.destroy_all
-Access::Permission.destroy_all
+Cert::Grouplink.destroy_all
 

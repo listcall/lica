@@ -131,6 +131,7 @@ Rails.application.routes.draw do
     resource  :team_navs
     resources :team_owners
     resources :team_partners
+    resources :team_certs
     resources :data_import
     resources :event_types
     resources :event_roles

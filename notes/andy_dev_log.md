@@ -11,5 +11,23 @@ Actions:
 
 TODO: cleanup cert classes and specs
 
-NEXT STEPS:
-- 
+NEXT ACTIONS:
+- design the admin page for certs
+
+# Aug 30
+
+Learnings:
+- Table sorting
+-- Craig is using datatables.net for table sorting
+-- datatables.net support for NPM/Webpack is not great
+- Table responsive views
+-- Craig uses bootstrap responsive views
+-- it shows table values only - popup list is not configurable
+
+Design Decisions:
+- use datatables.net with a script tag for now
+- use a modal or inline form (react?) for cert editing
+
+Next Steps:
+- test datatables.net and list sorting
+- implement admin/team_certs

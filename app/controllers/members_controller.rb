@@ -6,14 +6,8 @@ class MembersController < ApplicationController
 
   def index
     @member_records = member_records(current_team).to_json
-    @list_type      = cookie_val
     @page_title     = "#{current_team.acronym} members"
-    @members = Rails.cache.fetch([current_team, 'member_roster', @list_type]) do
-      member_list
-    end
-    @rank_cnt = Hash.new(0)
-    @members.each {|mem| @rank_cnt[mem.rank] += 1}
-
+    
     # re-add this??
     #fresh_when etag: current_team, last_modified: current_team.updated_at, public: true
   end
@@ -67,14 +61,6 @@ class MembersController < ApplicationController
       'active_and_reserves'
     else
       'active_only'
-    end
-  end
-
-  def member_list
-    if cookie_val == 'active_and_reserves'
-      current_team.memberships.includes([:user]).reserve.by_sort_score
-    else
-      current_team.memberships.includes([:user]).active.by_sort_score
     end
   end
 

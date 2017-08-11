@@ -1,22 +1,60 @@
 - content_for :page_js do
   = javascript_include_tag 'members/all_index'
   script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
-  script src="assets/members/index_reserves"
 
   javascript:
-    $(document).ready(function() {
-        $('#memberTbl').DataTable( {
-            "paging":   false,
-            "info":     false,
-            "order": [[ 2, "desc" ]],
-            "responsive": true,
-            columnDefs: [
-              { responsivePriority: 1, targets: 0 },
-              { responsivePriority: 2, targets: 3 },
-              { responsivePriority: 3, targets: 4 }
-            ]
-        } );
-    } );
+    $(document).ready( function() {
+
+      $('#memberTbl').DataTable( {
+        paging:   false,
+        responsive: true,
+        info:     false,
+        order: [[ 2, "desc" ]],
+        columnDefs: [
+          { responsivePriority: 1, targets: 0 },
+          { responsivePriority: 2, targets: 3 },
+          { responsivePriority: 3, targets: 4}]
+      });
+
+      function AddMemberData(table, data) {
+		$.each(data, function(index, row) {
+          table.row.add(
+            $('<tr>'+
+              '<td data-sort="'+row.nameDS+'">'+
+                '<img class="smAvatar hidden-xs" src="'+row.avatar+'" />'+
+                '<a class="memLink" href="'+row.user+'" target="_blank">'+
+                '<strong class="name-lbl"> '+row.name+'</strong></a></td>'+
+              '<td data-sort="'+row.rankDS+'">'+row.rank+'</td>'+
+              '<td data-sort="'+row.roleDS+'">'+row.role+'</td>'+
+              '<td class="phoneDat">'+row.phone+'</td>'+
+              '<td class="emailDat" data-sort="'+row.emailDS+'">'+
+                '<a href="mailto:'+row.email+'">'+row.email+'</a></td>'+
+              '</tr>')[0]
+			);
+		});
+      };
+
+      function DisplayMemberData() {
+        $.get( "/api/m/members.json", function (data) {
+          var table = $('#memberTbl').DataTable();
+          table.clear();
+          AddMemberData(table, data);
+          table.draw();
+        });  
+      }; 
+
+      $('#handleCheckBox').click( function () {
+        var el = $('#handleCheckBox');
+        $.cookie('member_reserves', (el.prop('checked') ? 'true' : 'false'), { path: '/' });
+
+        DisplayMemberData();
+      });
+
+      // Intitalize table
+      DisplayMemberData();
+      $('#memberTbl').css('visibility', 'visible');
+
+    });
 
 link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
 
@@ -29,31 +67,19 @@ link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1
         .col-xs-6.text-right
           = members_reserve_checkbox(current_team)
 
-- cache ['members', current_team, @list_type, current_user] do
-  .container
-    .row
-      table.display.compact.table-bordered.dt-responsive.nowrap#memberTbl
-        thead
-          th Name
-          th Rank
-          th Role
-          th Phone
-          th eMail
-        tbody
-          - @members.each do |mem|
-            - cache ['mem_row_user', mem.user, current_team, current_user] do
-              tr
-                td data-sort=mem.last_name
-                  img.smAvatar.hidden-xs> src=mem.user.avatar.url(:icon)
-                  a.memlink href="/members/#{mem.user_name}" target="_blank"
-                    strong.name-lbl = mem.full_name
-                td data-sort=mem.rank_score
-                  = mem.rank
-                td data-sort=mem.role_score
-                  = mem.ordered_roles.join(', ')
-                td.phoneDat data-number=phone_display(mem) data-sort=mem.user.phones.first.try(:number)
-                  = mem.user.phones.first.try(:number)
-                td.emailDat data-address=email_display(mem) data-sort=mem.user.emails.first.try(:address)
-                  = mem.user.emails.first.try(:address)
-    .row
-      small = "Membership: Technical: #{@rank_cnt['TM']}; Field: #{@rank_cnt['FM']}; Trainee: #{@rank_cnt['T']}"
+.container
+  .row
+    table.display.table-bordered.dt-responsive.nowrap#memberTbl style="visibility: hidden"
+      thead
+        th Name
+        th Rank
+        th Role
+        th Phone
+        th eMail
+      tbody
+        tr
+          td data-sort="A"
+          td data-sort="1"
+          td data-sort="2"
+          td
+          td

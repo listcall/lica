@@ -41,7 +41,7 @@ css:
   .row
     - if "all" == "#{@view}"
       - cache [current_team, "all_events"] do
-        /XX: presorted to current date but may want to reverse for upcoming
+        /XX: presorted to current date but may want to reverse for upcoming events
         = render partial: 'event_table', locals: {events: @all_events, id: "allTbl"}
     - else
       - cache [current_team, "current_events"] do

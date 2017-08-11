@@ -22,23 +22,22 @@ window.setLabelCount = ->
   updateSendButton()
 
 selectAll = ->
-  $('.checkBox:visible:not(:checked)').each ->
-    $(this).prop('checked', true)
-    $("table").trigger("updateCell", [$(this).closest("td")[0], false])
+  if ($('#selectAll').prop('checked'))
+    $('.checkBox:visible:not(:checked)').each ->
+      $(this).prop('checked', true)
+      $('table').trigger('updateCell', [$(this).closest('td')[0], false])
+    $('#selectAll').prop('title', "clear all visible members")
+  else
+    $('.checkBox:visible:checked').each ->
+      $(this).prop('checked', false)
+      $('table').trigger('updateCell', [$(this).closest('td')[0], false])
+    $('#selectAll').prop('title', "select all visible members")
   updateSelectCount()
   $('#selectAll').blur()
 
-clearAll = ->
-  $('.checkBox:visible:checked').each ->
-    $(this).prop('checked', false)
-    $("table").trigger("updateCell", [$(this).closest("td")[0], false])
-  updateSelectCount()
-  $('#clearAll').blur()
-
 $(document).ready ->
   setSelectCount()
-  $('#selectAll').click selectAll
-  $('#clearAll').click  clearAll
+  $('#selectAll').change selectAll
   $('.checkBox').click  updateSelectCount
   $('#selectAll').tooltip()
-  $('#clearAll').tooltip()
+  $('#selectAll').prop('title', "select all visible members")

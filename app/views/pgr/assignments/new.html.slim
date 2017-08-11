@@ -1,16 +1,12 @@
 - # integration_test: features/pgr/new
 
 - content_for :page_js do
+  = javascript_pack_tag "pgr/new"
   script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.js">
-  /*FIXME:XXX replace with ajax auto load
-  /* using members asset because paging failed to route */
-  script src="/assets/members/paging_index_reserves" 
 
   javascript:
-    window.lclData = {};
-    lclData.newParams  = '#{ raw @new_params.to_json }';
-    /*FIXME:XXX: Lots of data in select_list.  Useful?*/
-    /*lclData.selectList = /remove #/{ raw @partners.select_list };*/
+    window.lclData = {}; //FIXME: Needed?
+    lclData.newParams  = '#{ raw @new_params.to_json }'; //FIXME: Needed?
 
     $(document).ready(function() {
         $('table.display').DataTable( {
@@ -19,14 +15,73 @@
             order: [[ 2, "desc" ]],
             responsive: true,
             columnDefs: [
-              { targets: [3, 4], orderable: false, searchable: false},
+              { targets: [4], orderable: false, searchable: false},
               { responsivePriority: 1, targets: 0 },
               { responsivePriority: 2, targets: 4 },
               { responsivePriority: 3, targets: 1 }
             ]
       } );
+
+      function AddMemberData(table, data) {
+		$.each(data, function(index, row) {
+          var icons;
+          switch (row.iconDS) {
+            case 1:
+              icons = '<i class="fa fa-envelope green" style="margin-right: 8px;" />'+
+              '<i class="fa fa-phone gray" />';
+              break;
+            case 2:
+              icons = '<i class="fa fa-envelope gray" style="margin-right: 8px;" />'+
+              '<i class="fa fa-phone green" />';
+              break;
+            case 3:
+              icons = '<i class="fa fa-envelope green" style="margin-right: 8px;" />'+
+              '<i class="fa fa-phone green" />';
+              break;
+            default:
+              icons = '<i class="fa fa-envelope gray" style="margin-right: 8px;" />'+
+              '<i class="fa fa-phone gray" />';
+          }
+
+          table.row.add(
+            $('<tr>'+
+              '<td data-sort="'+row.nameDS+'">'+
+                '<img class="smAvatar hidden-xs" src="'+row.avatar+'" />'+
+                '<a class="memLink" href="'+row.user+'" target="_blank">'+
+                '<strong class="name-lbl"> '+row.name+'</strong></a></td>'+
+              '<td data-sort="'+row.rankDS+'">'+row.rank+'</td>'+
+              '<td data-sort="'+row.roleDS+'">'+row.role+'</td>'+
+              '<td data-sort="'+row.iconDS+'" align="center">'+icons+
+              '<td align="center">'+
+                '<input class="checkBox" type="checkbox" value="1" '+
+                  'name="broadcast[member_recipients]['+row.id+']" id="broadcast_member_recipients_'+row.id+'">'+
+              '</tr>')[0]
+			);
+		});
+      };
+
+      function DisplayMemberData() {
+        $.get( "/api/m/members.json", function (data) {
+          var table = $('#memberTbl').DataTable();
+          table.clear();
+          AddMemberData(table, data);
+          table.draw();
+          $("#selectTotal").text(table.rows().count());
+          $('.checkBox').click(updateSelectCount);
+        });  
+      }; 
+
+      $('#handleCheckBox').click( function () {
+        var el = $('#handleCheckBox')
+        $.cookie('member_reserves', (el.prop('checked') ? 'true' : 'false'), { path: '/' });
+
+        DisplayMemberData();
+      });
+
+      DisplayMemberData();
+      $('#memberTbl').css('visibility', 'visible');
+
     } );
-  = javascript_pack_tag "pgr/new"
 
 link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.15/r-2.1.1/datatables.min.css"
 
@@ -43,12 +98,45 @@ css:
           a.help-button href="/paging"
             i.glyphicon.glyphicon-list
             |  Page Log
-          = member_help_button('paging')
 
 .container
   form.form-horizontal action="/paging" method="post" role="form"
     .row
-      #rightCol.col-ms-6.col-ms-push-6
+      /XX Needs some work on responsive UI; table and input boxes overlap
+      #leftCol.col-xs-8
+        #partnerTags style=("display: none; margin-bottom: 4px; border: 1px solid gray;")
+          div style=("width:100%; background: #e8e8e8; padding: 4px;")
+            button#hidePart.btn.btn-default.btn-xs type="button"  hide partners
+            button#clearPart.btn.btn-default.btn-xs style=("float: right; display: none;") type="button"  clear all partners
+          div style=("padding: 2px;")
+            input#partnerTagInput.tagInput placeholder=("add role or member...") type="text" /
+            input#partnerTagValue name="broadcast[partner_recipients]" type="hidden" value="" /
+        div style=("padding-bottom: 26px;")
+          /FIXME div style=("float: left")
+            - if false
+              button#templateBtn.btn.btn-default.btn-xs> type="button" use template
+            - if current_team.partners.length > 0
+              button#showPart.btn.btn-default.btn-xs> type="button" show partners
+            button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button" reset
+        /XX Bug doesn't initialize when reserve is true
+        = members_reserve_checkbox(current_team)
+        table.display.table-bordered.dt-responsive.nowrap#memberTbl style="visibility: hidden"
+          thead
+            th : small Name
+            th : small Rank
+            th : small Roles
+            th style=("text-align: center;")
+              small has
+            th style=("padding: 4px; text-align: center;")
+              input#selectAll type="checkbox"
+          tbody
+            tr
+              td data-sort='A'
+              td data-sort='1'
+              td data-sort='2'
+              td data-sort='3'
+              td
+      #rightCol.col-xs-4
         - if @overview
           <b>#{raw @overview}</b><br/>
         p
@@ -65,10 +153,8 @@ css:
                 '  Send to
               span#selectCount style="color: red;"
               '  of
-              span
-                ' #{@memberships.count}
+              span#selectTotal
               '  members:
-              /span#labelCount
           .br
           label.checkbox-inline style=("margin-left: 40px;")
             input#emailCheck checked="check" name="broadcast[email]" type="checkbox"
@@ -76,7 +162,7 @@ css:
           label.checkbox-inline style=("margin-left: 40px;")
             input#smsCheck checked="check" name="broadcast[sms]" type="checkbox"
               | via SMS
-        /XX Add margins around text boxes?
+        //XX Add margins around text boxes?
         .form-group
           label.control-label for="txtShort"  Short Text (email, sms)
           br
@@ -94,51 +180,5 @@ css:
                 #actionDisplay
           .col-ms-4.ar
             button#sendButton.btn.btn-primary type="submit"  Send
-      #leftCol.col-ms-6.col-ms-pull-6
-        #partnerTags style=("display: none; margin-bottom: 4px; border: 1px solid gray;")
-          div style=("width:100%; background: #e8e8e8; padding: 4px;")
-            button#hidePart.btn.btn-default.btn-xs type="button"  hide partners
-            button#clearPart.btn.btn-default.btn-xs style=("float: right; display: none;") type="button"  clear all partners
-          div style=("padding: 2px;")
-            input#partnerTagInput.tagInput placeholder=("add role or member...") type="text" /
-            input#partnerTagValue name="broadcast[partner_recipients]" type="hidden" value="" /
-        div style=("padding-bottom: 26px;")
-          div style=("float: left")
-            - if false
-              button#templateBtn.btn.btn-default.btn-xs> type="button" use template
-            /FIXME:XXX- if current_team.partners.length > 0
-              button#showPart.btn.btn-default.btn-xs> type="button" show partners
-            button#clearSort.btn.btn-default.btn-xs style=("display: none;") type="button" reset
-        = paging_new_reserve_checkbox(current_team)
-        - cache ["page_new", @list_type, current_team] do
-          table#memTable.display.compact.table-bordered.dt-responsive.nowrap
-            thead
-              th : small Name
-              th : small Rank
-              th : small Roles
-              th style=("text-align: center;")
-                small has
-              th style=("padding: 4px; text-align: center;")
-                button#selectAll.btn.btn-default.btn-xs> data-toggle="tooltip" title=("select all visible members") type="button"
-                  i.fa.fa-check-square-o
-                button#clearAll.btn.btn-default.btn-xs data-toggle="tooltip" title=("clear all visible members") type="button"
-                  i.fa.fa-square-o
-            tbody
-              - @memberships.each do |member|
-                - cache ["pager_row", member.user, current_team] do
-                  tr
-                    td data-sort=member.last_name
-                      nobr
-                        img.smAvatar> src =member.user.avatar.url(:icon)
-                        a.memlink href="/members/#{member.user_name}" target="_blank"
-                          small = truncate member.full_name, length: 20
-                          /small.visible-lg-and-above = truncate member.full_name, length: 20
-                          /small.visible-md-and-below @#{member.user_name}
-                    td data-sort=(raw member.rank_score) : small = member.rank
-                    td data-sort=(raw member.role_score) : small = member.roles.join(', ')
-                    td align="center" data-sort=(raw member.icon_score)
-                      i class=member.email_icon style=("margin-right: 8px;")
-                      i class=member.phone_icon
-                    td align="center" = check_box("broadcast[member_recipients]", member.id, class: "checkBox")
 
 = render partial: "new_action_modal"

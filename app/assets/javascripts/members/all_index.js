@@ -2,4 +2,3 @@
 //= require hogan
 //= require mobile_util
 //= require ./index_util
-//= require ./index_reserves

@@ -26,9 +26,4 @@ module PagingHelper
     team.ranks.reserve_rank_labels.join(', ')
   end
 
-  def paging_new_reserve_checkbox_html
-    check = cookies['paging_reserves'] == 'true' ? 'checked' : ''
-    "<input style='vertical-align: -3px; cursor: pointer;' id='reserveCheckBox' type='checkbox' name='checkbox' value='value' #{check}>"
-  end
-
 end

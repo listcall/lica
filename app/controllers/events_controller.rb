@@ -31,7 +31,6 @@ class EventsController < ApplicationController
       temp_assig = VwAssignments.new(current_team).assignments
       period_ids = @event.periods.map {|period| period.id}.flatten
       #FIXME:XXX: Convert to DB call
-      #XX: Is this working, wrong events are showing up, might be corrupt DB
       @assignments = temp_assig.select do |assig|
         pid = assig.broadcast.try(:action).try(:period_id).to_i
         period_ids.include?(pid)

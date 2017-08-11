@@ -62,7 +62,7 @@ css:
         = event_page_link(@period, :Leave)
         = event_page_link(@period, :Return)
   .row style=("margin-top: 5px; ")
-    /FIXME:XXX: AAR per period or operation?
+    /FIXME: AAR per period or operation?
     small
      .col-xs-4    = raw aar_link_for(@period)
      .col-xs-4.ac #{@period.event.typ_name} - OP #{@period.position}

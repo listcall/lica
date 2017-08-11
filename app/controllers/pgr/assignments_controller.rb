@@ -15,9 +15,7 @@ class Pgr::AssignmentsController < ApplicationController
   def new
     @overview    = new_params["overview"]
     @new_params  = new_params["base"]
-    @list_type   = cookie_list_type
     @partners    = PageBot.new(current_team)
-    @memberships = membership_scope
     @events      = current_team.events
     @page_title  = "#{current_team.acronym} new page"
   end
@@ -92,6 +90,7 @@ class Pgr::AssignmentsController < ApplicationController
 
   def assignment_params(params)
     dev_log params.to_s
+    
     team_ids = params[:partner_recipients].split(',').map do |x|
       x.split('_').first
     end.uniq
@@ -123,15 +122,4 @@ class Pgr::AssignmentsController < ApplicationController
     ids.map {|x| x.to_i}.uniq
   end
 
-  # ----- membership list -----
-
-  def cookie_list_type
-    cookies['paging_reserves'] != 'true' ? 'active' : 'reserves'
-  end
-
-  def membership_scope
-    select = Membership::AsPaging.where(team: current_team)
-    scoped = cookie_list_type == 'active' ? select.active : select.reserve
-    scoped.includes([:user, :team]).by_sort_score
-  end
 end

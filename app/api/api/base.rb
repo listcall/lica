@@ -40,9 +40,44 @@ module Api
         }
       end
 
-      # XX Duplicate of event_helper
+      # XX Duplicated_helpers
       def sort_order(evt)
         evt.start.strftime("%Y%m%d%H%M") + evt.updated_at.strftime("%Y%m%d%H%M")
+      end
+
+      def phone_display(mem)
+        phone = mem.user.phones.first
+        return '' if phone.blank?
+        phone.try(:number)
+      end
+
+      def email_display(mem)
+        email = mem.user.emails.first
+        return '' if email.blank?
+        email.try(:address)
+      end
+
+      def cookie_val
+        if cookies['member_reserves'] == 'true'
+          'active_and_reserves'
+        else
+          'active_only'
+        end
+      end
+
+      def member_list
+        if cookies['member_reserves'] == 'true'
+          current_team.memberships.includes([:user]).reserve.by_sort_score
+        else
+          current_team.memberships.includes([:user]).active.by_sort_score
+        end
+      end
+
+      def icon_score(mem)
+        score = 0
+        score += 1 if mem.emails.pagable.count > 0
+        score += 2 if mem.phones.pagable.count > 0
+        score
       end
 
     end
@@ -63,6 +98,35 @@ module Api
         valid_usr = user && user.authenticate(params[:pwd])
         valid_mem = valid_usr && mems.find_by(user_id: user.id)
         valid_mem ? 'OK' : 'FAIL'
+      end
+    end
+
+    resource :m do
+      desc 'Membership list'
+      get :members do
+        @m = members = Rails.cache.fetch([current_team, 'member_roster', cookie_val]) do
+          member_list
+        end
+        result = Array.new
+        members.each do |mem|
+          Rails.cache.fetch(['mem_row_user', mem.user, current_team, current_user]) do
+            row =  { id: mem.id,
+                name: mem.full_name,
+                nameDS: "#{mem.last_name}#{mem.first_name}",
+                avatar: mem.user.avatar.url(:icon),
+                user: "/members/#{mem.user_name}",
+                rank: mem.rank,
+                rankDS: mem.rank_score,
+                role: mem.ordered_roles.join(', '),
+                roleDS: mem.role_score,
+                phone: phone_display(mem),
+                email: email_display(mem),
+                emailDS: email_display(mem),
+                iconDS: icon_score(mem) }
+            result.push row
+          end
+        end
+        result
       end
     end
 

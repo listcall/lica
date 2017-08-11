@@ -73,27 +73,6 @@ module MembersHelper
     raw "<a href='#' class='editable-click visible'>#{icon_htm}</i></a>"
   end
 
-  def visible(element)
-    return true if element.visible?
-    return true if manager_rights?
-    return true if element.user == current_user
-    false
-  end
-
-  def phone_display(mem)
-    phone = mem.user.phones.first
-    return '' if phone.blank?
-    return '' unless visible(phone)
-    phone.try(:number)
-  end
-
-  def email_display(mem)
-    email = mem.user.emails.first
-    return '' if email.blank?
-    return '' unless visible(email)
-    email.try(:address)
-  end
-
   def can_see(current_member, tgt_member)
     return true if current_member == tgt_member
     return true if %w(inactive alum guest).include? tgt_member.rights
@@ -125,20 +104,6 @@ module MembersHelper
   def events_for(member, type)
     incl = {:period => :event}
     member.participations.includes(incl).by_event_type(type).ordered
-  end
-
-  def members_reserve_checkbox(team)
-    return '' if team.memberships.where(rights: 'reserve').count == 0
-    raw <<-ERB
-    <div style='width: 100%; text-align: right;'>
-      <small>show #{reserve_member_labels(team)} members #{members_reserve_checkbox_html}</small>
-    </div>
-    ERB
-  end
-
-  def members_reserve_checkbox_html
-    check = cookies['member_reserves'] == 'true' ? 'checked' : ''
-    "<input style='vertical-align: -3px; cursor: pointer;' id='reserveCheckBox' type='checkbox' name='checkbox' value='value' #{check}>"
   end
 
 end

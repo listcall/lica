@@ -92,4 +92,19 @@ module ApplicationHelper
     HTML
   end
 
+  def members_reserve_checkbox(team)
+    return '' if team.memberships.where(rights: 'reserve').count == 0
+    raw <<-ERB
+    <div style='width: 100%; text-align: right;'>
+      <small>show #{reserve_member_labels(team)} members #{members_reserve_checkbox_html}</small>
+    </div>
+    ERB
+  end
+
+  def members_reserve_checkbox_html
+    check = cookies[:member_reserves] == 'true' ? 'checked' : ''
+    #binding.pry
+    "<input style='vertical-align: -3px; cursor: pointer;' id='handleCheckBox' type='checkbox' name='checkbox' value='value' #{check}>"
+  end
+
 end

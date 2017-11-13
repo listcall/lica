@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Fact do  #
+describe Cert::Fact do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -17,7 +17,7 @@ describe Cert::Fact do  #
 
   describe 'Associations' do
     it { should respond_to :user             }
-    it { should respond_to :cert_prooflinks  }
+    it { should respond_to :cert_profiles    }
   end
 
   # describe 'Object Creation' do
@@ -35,7 +35,7 @@ end
 
 # == Schema Information
 #
-# Table name: cert_proofs
+# Table name: cert_facts
 #
 #  id                        :integer          not null, primary key
 #  user_id                   :integer

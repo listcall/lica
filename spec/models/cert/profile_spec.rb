@@ -17,8 +17,8 @@ describe Cert::Profile do
 
   describe 'Associations' do
     it { should respond_to :membership          }
-    it { should respond_to :cert_proof          }
-    it { should respond_to :cert_spec           }
+    it { should respond_to :cert_fact           }
+    it { should respond_to :cert_unit           }
   end
 
   # describe 'Object Creation' do
@@ -36,12 +36,12 @@ end
 
 # == Schema Information
 #
-# Table name: cert_prooflinks
+# Table name: cert_profiles
 #
 #  id            :integer          not null, primary key
 #  membership_id :integer
-#  cert_spec_id  :integer
-#  cert_proof_id :integer
+#  cert_unit_id  :integer
+#  cert_fact_id  :integer
 #  title         :string
 #  position      :integer
 #  status        :string

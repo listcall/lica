@@ -68,6 +68,6 @@ end
 # Table name: cert_permissions
 #
 #  id           :integer          not null, primary key
-#  cert_spec_id :integer
+#  cert_unit_id :integer
 #  label        :string
 #

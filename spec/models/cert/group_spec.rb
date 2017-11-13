@@ -21,7 +21,7 @@ describe Cert::Group do
 
   describe 'Associations' do
     # it { should respond_to :team             }
-    it { should respond_to :cert_grouplinks       }
+    it { should respond_to :cert_groupties     }
   end
 
   # describe 'Object Creation' do

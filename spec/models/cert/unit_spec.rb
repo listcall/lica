@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Spec do
+describe Cert::Unit do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -16,10 +16,10 @@ describe Cert::Spec do
   end
 
   describe 'Associations' do
-    it { should respond_to :cert_prooflinks     }
     it { should respond_to :team                }
-    it { should respond_to :cert_grouplinks     }
+    it { should respond_to :cert_profiles       }
     it { should respond_to :cert_groups         }
+    it { should respond_to :cert_groupties      }
   end
 
   describe 'Object Creation' do
@@ -36,7 +36,7 @@ end
 
 # == Schema Information
 #
-# Table name: cert_specs
+# Table name: cert_units
 #
 #  id          :integer          not null, primary key
 #  team_id     :integer

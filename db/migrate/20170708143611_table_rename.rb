@@ -17,7 +17,7 @@ class TableRename < ActiveRecord::Migration[5.1]
     end
     add_index :cert_facts, :user_id
 
-    create_table 'cert_specs' do |t|
+    create_table 'cert_units' do |t|
       t.integer 'team_id'
       t.string  'name'
       t.string  'rname'
@@ -27,16 +27,16 @@ class TableRename < ActiveRecord::Migration[5.1]
       t.text    'ev_types', default: [], array: true
       t.timestamps
     end
-    add_index :cert_specs, :team_id
-    add_index :cert_specs, :rname
-    add_index :cert_specs, :expirable
-    add_index :cert_specs, :commentable
-    add_index :cert_specs, :xfields , :using => :gin
-    add_index :cert_specs, :ev_types, :using => :gin
+    add_index :cert_units, :team_id
+    add_index :cert_units, :rname
+    add_index :cert_units, :expirable
+    add_index :cert_units, :commentable
+    add_index :cert_units, :xfields , :using => :gin
+    add_index :cert_units, :ev_types, :using => :gin
 
     create_table 'cert_profiles' do |t|
       t.integer  'membership_id'
-      t.integer  'cert_spec_id'
+      t.integer  'cert_unit_id'
       t.integer  'cert_fact_id'
       t.string   'title'
       t.integer  'position'              # scoped by membership and spec
@@ -50,7 +50,7 @@ class TableRename < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :cert_profiles, :membership_id
-    add_index :cert_profiles, :cert_spec_id
+    add_index :cert_profiles, :cert_unit_id
     add_index :cert_profiles, :cert_fact_id
     add_index :cert_profiles, :title
     add_index :cert_profiles, :position
@@ -73,18 +73,18 @@ class TableRename < ActiveRecord::Migration[5.1]
     add_index :cert_groups, :team_id
 
     create_table 'cert_grouptie' do |t|
-      t.integer 'cert_spec_id'
+      t.integer 'cert_unit_id'
       t.integer 'cert_group_id'
-      t.integer 'position'                      # scoped by cert_group and cert_spec
+      t.integer 'position'                      # scoped by cert_group and cert_unit
     end
-    add_index :cert_grouptie, :cert_spec_id
+    add_index :cert_grouptie, :cert_unit_id
     add_index :cert_grouptie, :cert_group_id
     add_index :cert_grouptie, :position
 
     create_table :cert_permissions do |t|
-      t.integer 'cert_spec_id'
+      t.integer 'cert_unit_id'
       t.string  'label'
     end
-    add_index :cert_permissions, :cert_spec_id
+    add_index :cert_permissions, :cert_unit_id
   end
 end

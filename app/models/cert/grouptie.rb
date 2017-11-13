@@ -66,10 +66,10 @@ end
 
 # == Schema Information
 #
-# Table name: cert_grouplinks
+# Table name: cert_grouptie
 #
 #  id            :integer          not null, primary key
-#  cert_spec_id  :integer
+#  cert_unit_id  :integer
 #  cert_group_id :integer
 #  position      :integer
 #

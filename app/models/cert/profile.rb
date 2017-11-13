@@ -12,7 +12,7 @@ class Cert::Profile < ActiveRecord::Base
   with_options :touch => true do
     belongs_to :membership
     belongs_to :cert_fact     , class_name: 'Cert::Fact'
-    belongs_to :cert_spec     , class_name: 'Cert::Spec'
+    belongs_to :cert_unit     , class_name: 'Cert::Unit'
   end
 
   # alias_method :ctype, :qual_ctype
@@ -56,12 +56,12 @@ end
 
 # == Schema Information
 #
-# Table name: cert_prooflinks
+# Table name: cert_profiles
 #
 #  id            :integer          not null, primary key
 #  membership_id :integer
-#  cert_spec_id  :integer
-#  cert_proof_id :integer
+#  cert_unit_id  :integer
+#  cert_fact_id  :integer
 #  title         :string
 #  position      :integer
 #  status        :string

@@ -42,7 +42,7 @@ end
 
 # == Schema Information
 #
-# Table name: cert_proofs
+# Table name: cert_facts
 #
 #  id                        :integer          not null, primary key
 #  user_id                   :integer

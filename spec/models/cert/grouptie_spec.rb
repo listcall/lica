@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Grouplink do
+describe Cert::Grouptie do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -36,10 +36,10 @@ end
 
 # == Schema Information
 #
-# Table name: cert_grouplinks
+# Table name: cert_grouptie
 #
 #  id            :integer          not null, primary key
-#  cert_spec_id  :integer
+#  cert_unit_id  :integer
 #  cert_group_id :integer
 #  position      :integer
 #

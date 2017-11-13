@@ -1,9 +1,9 @@
 # require 'forwardable'
 # require 'ext/fixnum'
 
-class Cert::Spec < ActiveRecord::Base
+class Cert::Unit < ActiveRecord::Base
 
-  self.table_name = "cert_specs"
+  self.table_name = "cert_units"
 
   # extend Forwardable
   # has_paper_trail
@@ -17,11 +17,11 @@ class Cert::Spec < ActiveRecord::Base
 
   # ----- Associations -----
   with_options :dependent => :destroy do
-    has_many :cert_prooflinks, :class_name => 'Profile', foreign_key: "cert_spec_id"#, ->{ order(:position) }
-    has_many :cert_grouplinks, :class_name => 'Cert::Grouplink', foreign_key: "cert_spec_id"
+    has_many :cert_profiles , :class_name => 'Cert::Profile'  , foreign_key: "cert_unit_id"#, ->{ order(:position) }
+    has_many :cert_groupties, :class_name => 'Cert::Grouplink', foreign_key: "cert_unit_id"
   end
-  has_many   :cert_groups      , :through    => :cert_grouplinks
-  belongs_to :team             , :touch      => true
+  has_many   :cert_groups  , :through    => :cert_groupties
+  belongs_to :team         , :touch      => true
 
   # has_many   :quals             ,  :through   => :qual_assignments
   #
@@ -130,7 +130,7 @@ end
 
 # == Schema Information
 #
-# Table name: cert_specs
+# Table name: cert_units
 #
 #  id          :integer          not null, primary key
 #  team_id     :integer

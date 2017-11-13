@@ -17,7 +17,7 @@ class Cert::Spec < ActiveRecord::Base
 
   # ----- Associations -----
   with_options :dependent => :destroy do
-    has_many :cert_prooflinks, :class_name => 'Cert::Prooflink', foreign_key: "cert_spec_id"#, ->{ order(:position) }
+    has_many :cert_prooflinks, :class_name => 'Profile', foreign_key: "cert_spec_id"#, ->{ order(:position) }
     has_many :cert_grouplinks, :class_name => 'Cert::Grouplink', foreign_key: "cert_spec_id"
   end
   has_many   :cert_groups      , :through    => :cert_grouplinks

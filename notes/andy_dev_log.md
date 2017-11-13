@@ -1,18 +1,12 @@
 # Aug 29
 
-Actions:
-- rewrote the migration for cert tables (see `db/migrate/*`)
-- restructured cert classes (see `models/certs*`)
-- ERD diagram generates properly (`script/erd/certs2`)
-- got all specs working
-- wrote a cert data-loading script (see `script/c2/*`)
-- added an `admin/team_certs` page
-- rendered the generated certs on the admin page
-
-TODO: cleanup cert classes and specs
-
-NEXT ACTIONS:
-- design the admin page for certs
+- [x] rewrote the migration for cert tables (see `db/migrate/*`)
+- [x] restructured cert classes (see `models/certs*`)
+- [x] ERD diagram generates properly (`script/erd/certs2`)
+- [x] got all specs working
+- [x] wrote a cert data-loading script (see `script/c2/*`)
+- [x] added an `admin/team_certs` page
+- [x] rendered the generated certs on the admin page
 
 # Aug 30
 
@@ -28,7 +22,8 @@ Design Decisions:
 - use datatables.net with a script tag for now
 - use a modal or inline form (react?) for cert editing
 
-Next Steps:
-- test datatables.net and list sorting
-- implement admin/team_certs
+# Mon Nov 13
 
+- [ ] design the admin pages for certs
+- [ ] cleanup cert classes and specs 
+- [ ] implement admin/team_certs

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Prooflink do
+describe Cert::Fact do  #
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -16,9 +16,8 @@ describe Cert::Prooflink do
   end
 
   describe 'Associations' do
-    it { should respond_to :membership          }
-    it { should respond_to :cert_proof          }
-    it { should respond_to :cert_spec           }
+    it { should respond_to :user             }
+    it { should respond_to :cert_prooflinks  }
   end
 
   # describe 'Object Creation' do
@@ -36,21 +35,21 @@ end
 
 # == Schema Information
 #
-# Table name: cert_prooflinks
+# Table name: cert_proofs
 #
-#  id            :integer          not null, primary key
-#  membership_id :integer
-#  cert_spec_id  :integer
-#  cert_proof_id :integer
-#  title         :string
-#  position      :integer
-#  status        :string
-#  ev_type       :string
-#  reviewer_id   :integer
-#  reviewed_at   :string
-#  external_id   :string
-#  xfields       :hstore           default({})
-#  mc_expires_at :datetime
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
+#  id                        :integer          not null, primary key
+#  user_id                   :integer
+#  comment                   :string
+#  link                      :string
+#  attachment_file_name      :string
+#  attachment_file_size      :string
+#  attachment_content_type   :string
+#  attachment_updated_at     :string
+#  expires_at                :datetime
+#  ninety_day_notice_sent_at :datetime
+#  thirty_day_notice_sent_at :datetime
+#  expired_notice_sent_at    :datetime
+#  xfields                   :hstore           default({})
+#  created_at                :datetime         not null
+#  updated_at                :datetime         not null
 #

@@ -1,8 +1,8 @@
 # require 'app_auth/methods'
 
-class Cert::Proof < ActiveRecord::Base
+class Cert::Fact < ActiveRecord::Base
 
-  self.table_name = "cert_proofs"
+  self.table_name = "cert_facts"
 
   # ----- Attributes -----
   # has_attached_file :attachment,
@@ -18,8 +18,8 @@ class Cert::Proof < ActiveRecord::Base
   # before_post_process :cleanup_attachment_file_name
 
   # ----- Associations -----
-  belongs_to :user            , :touch => true
-  has_many   :cert_prooflinks , :class_name => 'Cert::Prooflink', :dependent => :destroy
+  belongs_to :user          , :touch => true
+  has_many   :cert_profiles , :class_name => 'Cert::Profile', :dependent => :destroy
 
   # ----- Validations -----
 

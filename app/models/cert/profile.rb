@@ -1,8 +1,8 @@
 # require 'forwardable'
 
-class Cert::Prooflink < ActiveRecord::Base
+class Cert::Profile < ActiveRecord::Base
 
-  self.table_name = 'cert_prooflinks'
+  self.table_name = 'cert_profiles'
 
   # extend Forwardable
 
@@ -11,7 +11,7 @@ class Cert::Prooflink < ActiveRecord::Base
   # ----- Associations -----
   with_options :touch => true do
     belongs_to :membership
-    belongs_to :cert_proof    , class_name: 'Cert::Proof'
+    belongs_to :cert_fact     , class_name: 'Cert::Fact'
     belongs_to :cert_spec     , class_name: 'Cert::Spec'
   end
 

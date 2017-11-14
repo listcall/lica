@@ -27,11 +27,18 @@ Design Decisions:
 - [x] refactor cert classes
 - [x] design the admin pages for certs
 - [x] test x-editable with BootStrap4
+- [x] build out cert-loading scripts
+- [x] display cert-units and cert-groups on the admin page
 
-- [ ] build out cert-loading scripts
+# Tue Nov 14
 
-- [ ] display cert-units and cert-groups on the admin page
+- [ ] load-script: add more cert-groups and cert-units
+- [ ] load-script: assign users to cert-units
+- [ ] clean up admin page display
 
+- [ ] write page-level access predicates
+- [ ] write function-level access predicates
+
+- [ ] prototype React-based x-editable replacement
 - [ ] cleanup cert classes and specs 
 - [ ] implement admin/team_certs
-- [ ] prototype React-based x-editable replacement

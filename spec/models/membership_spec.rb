@@ -28,7 +28,7 @@ describe Membership do
     it { should respond_to :rank_score        }
     it { should respond_to :role_score        }
     it { should respond_to :rights_score      }
-    it { should respond_to :cert_assignments  }
+    it { should respond_to :cert_profiles     }
     it { should respond_to :xfields           }
   end
 

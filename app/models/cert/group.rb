@@ -25,6 +25,10 @@ class Cert::Group < ActiveRecord::Base
     def using_attendance
       where(evidence: 'attendance')
     end
+
+    def by_acronym(val)
+      where(acronym: val)
+    end
   end
 
   # ----- Instance Methods -----

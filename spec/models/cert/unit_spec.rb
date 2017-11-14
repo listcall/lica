@@ -8,7 +8,7 @@ describe Cert::Unit do
   describe 'Attributes' do
     it { should respond_to :team_id            }
     it { should respond_to :name               }
-    it { should respond_to :rname              }
+    it { should respond_to :acronym            }
     it { should respond_to :expirable          }
     it { should respond_to :commentable        }
     it { should respond_to :xfields            }

@@ -25,7 +25,9 @@ group_opts = [
   }
 ].map {|el| el.merge({team: team})}
 
-Cert::group.create group_opts
+Cert::Group.create group_opts
+
+role_group = Cert::Group.by_acronym("RO")
 
 unit_role_opts = [
   {
@@ -38,17 +40,48 @@ unit_role_opts = [
     name: "Executive Officer", acronym: "XO"
   },
   {
-    name: "asdf3"
+    name: "Secretary", acronym: "S"
   },
   {
-    name: "asdf5"
+    name: "Treasurer", acronym: "T"
   },
   {
-    name: "asdf6"
+    name: "Training Officer", acronym: "TO"
+  },
+  {
+    name: "Recruiting Officer", acronym: "RO"
   }
-].merge({team: team, cert_groups: [Cert::Group.by_acronym("RO")]})
+].map {|el| el.merge({team: team})}
 
 Cert::Unit.create unit_role_opts
 
-puts "CertGroups: " + Cert::Group.count
-puts "CertUnits: "  + Cert::Unit.count
+rank_group = Cert::Group.by_acronym("RO")
+
+unit_rank_opts = [
+  {
+    name: "Technical Member", acronym: "TM"
+  },
+  {
+    name: "Field Member", acronym: "FM"
+  },
+  {
+    name: "Trainee", acronym: "T"
+  },
+  {
+    name: "Reserve", acronym: "R"
+  },
+  {
+    name: "Support", acronym: "S"
+  },
+  {
+    name: "Associate", acronym: "A"
+  },
+  {
+    name: "Guest", acronym: "G"
+  },
+].map {|el| el.merge({team: team})}
+
+Cert::Unit.create unit_rank_opts
+
+puts "CertGroups: " + Cert::Group.count.to_s
+puts "CertUnits: "  + Cert::Unit.count.to_s

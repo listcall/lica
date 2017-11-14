@@ -19,8 +19,8 @@ class Cert::Unit < ActiveRecord::Base
 
   # ----- Delegated Methods -----
   # alias_attribute :rid     , :rname
-  alias_attribute :acronym , :rname
-  alias_attribute :abbrev  , :rname
+  # alias_attribute :acronym , :rname
+  # alias_attribute :abbrev  , :rname
 
   # ----- Validations -----
 

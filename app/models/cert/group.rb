@@ -5,37 +5,19 @@ class Cert::Group < ActiveRecord::Base
 
   self.table_name = "cert_groups"
 
-  # extend Forwardable
-  # has_paper_trail
-
-  # ----- Attributes -----
-  # xfield_accessor :description
-  # xfield_accessor :title_select_method   # 'free_text', 'distinct_list', 'fixed_list'
-  # xfield_accessor :title_fixed_options
-  # xfield_accessor :title_placeholder
-  # xfield_accessor :attendance_rule
-
   # ----- Associations -----
   has_many   :cert_groupties, class_name: 'Cert::Grouptie'
   has_many   :cert_specs    , class_name: 'Cert::Spec'
   belongs_to :team          , :touch => true
-  # has_many   :quals             ,  :through   => :qual_assignments
-  #
-  # alias_method :assignments      ,  :qual_assignments
-
-  # def certs_for(member)
-  #   membership_certs.includes([:user_cert, :qual_ctype]).where(membership_id: member.id)
-  # end
 
   # ----- Delegated Methods -----
-  # alias_attribute :rid     , :rname
-  # alias_attribute :acronym , :rname
-  # alias_attribute :abbrev  , :rname
+  alias_attribute :rname   , :acronym
+  alias_attribute :nym     , :acronym
+  alias_attribute :abbrev  , :acronym
 
   # ----- Validations -----
 
   # ----- Callbacks -----
-  # before_save :attendance_vals
 
   # ----- Scopes -----
 
@@ -48,7 +30,6 @@ class Cert::Group < ActiveRecord::Base
   # ----- Instance Methods -----
   def attendance_vals
     self.expirable   = true    if has_attendance?
-    # devlog "UPDATING ATTENDANCE VALS"
   end
 
   def attendance_val
@@ -132,6 +113,7 @@ end
 #  team_id    :integer
 #  position   :integer
 #  name       :string
+#  acronym    :string
 #  xfields    :hstore           default({})
 #  jfields    :jsonb
 #  created_at :datetime         not null

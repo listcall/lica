@@ -16,7 +16,7 @@ describe Cert::Grouptie do
   end
 
   describe 'Associations' do
-    it { should respond_to :cert_spec             }
+    it { should respond_to :cert_unit             }
     it { should respond_to :cert_group            }
     # it { should respond_to :cert_specs       }
   end

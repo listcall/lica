@@ -17,23 +17,6 @@ class TableRename < ActiveRecord::Migration[5.1]
     end
     add_index :cert_facts, :user_id
 
-    create_table 'cert_units' do |t|
-      t.integer 'team_id'
-      t.string  'name'
-      t.string  'rname'
-      t.boolean 'expirable'   , default: true
-      t.boolean 'commentable' , default: true
-      t.hstore  'xfields' , default: {}
-      t.text    'ev_types', default: [], array: true
-      t.timestamps
-    end
-    add_index :cert_units, :team_id
-    add_index :cert_units, :rname
-    add_index :cert_units, :expirable
-    add_index :cert_units, :commentable
-    add_index :cert_units, :xfields , :using => :gin
-    add_index :cert_units, :ev_types, :using => :gin
-
     create_table 'cert_profiles' do |t|
       t.integer  'membership_id'
       t.integer  'cert_unit_id'
@@ -59,15 +42,34 @@ class TableRename < ActiveRecord::Migration[5.1]
     add_index :cert_profiles, :ev_type
     add_index :cert_profiles, :xfields, :using => :gin
 
+    create_table 'cert_units' do |t|
+      t.integer 'team_id'
+      t.string  'name'
+      t.string  'acronym'
+      t.boolean 'expirable'   , default: true
+      t.boolean 'commentable' , default: true
+      t.hstore  'xfields' , default: {}
+      t.text    'ev_types', default: [], array: true
+      t.timestamps
+    end
+    add_index :cert_units, :team_id
+    add_index :cert_units, :acronym
+    add_index :cert_units, :expirable
+    add_index :cert_units, :commentable
+    add_index :cert_units, :xfields , :using => :gin
+    add_index :cert_units, :ev_types, :using => :gin
+
     create_table 'cert_groups' do |t|
       t.integer 'team_id'
       t.integer 'position'
       t.string  'name'
+      t.string  'acronym'
       t.hstore  'xfields', default: {}
       t.jsonb   'jfields', default: {}
       t.timestamps
     end
     add_index :cert_groups, :position
+    add_index :cert_groups, :acronym
     add_index :cert_groups, :xfields , :using => :gin
     add_index :cert_groups, :jfields , :using => :gin
     add_index :cert_groups, :team_id

@@ -16,7 +16,7 @@ describe Cert::Permission do
   end
 
   describe 'Associations' do
-    it { should respond_to :cert_specs  }
+    it { should respond_to :cert_units  }
   end
 
   # describe 'Object Creation' do

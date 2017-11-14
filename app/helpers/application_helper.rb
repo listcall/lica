@@ -2,7 +2,7 @@ module ApplicationHelper
 
   def feature_enabled(team, key)
     return false if current_membership.manager? && all_owner_features(key)
-    return true if %w(Lica_Team Lica_Members).include? key.to_s
+    return true if %w(Lica_Team Lica_Members Lica_Certs).include? key.to_s
     team.team_features[key.to_s].try(:status) == 'on'
   end
 

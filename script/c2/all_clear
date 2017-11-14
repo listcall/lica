@@ -3,9 +3,9 @@
 require './config/environment'
 
 Cert::Permission.destroy_all
-Cert::Spec.destroy_all
+Cert::Unit.destroy_all
 Cert::Fact.destroy_all
 Cert::Profile.destroy_all
 Cert::Group.destroy_all
-Cert::Grouplink.destroy_all
+Cert::Grouptie.destroy_all 
 

@@ -24,22 +24,20 @@ class Membership < ActiveRecord::Base
   xfield_accessor :editor_keystyle
   enumerize :editor_keystyle, in: %w(vim emacs notepad)  , default: 'notepad'
 
-  # upcase_fields :rank, :roles
-
   # ----- Associations -----
   belongs_to  :user, touch: true
   belongs_to  :team, touch: true
   with_options :dependent => :destroy do
-    # has_many    :forum_subscriptions
-    # has_many    :forum_topic_subscriptions
-    # has_many    :membership_certs
     has_many    :participations   , class_name: 'Event::Participant'
     has_many    :avail_days       , class_name: 'Avail::Day'
     has_many    :avail_weeks      , class_name: 'Avail::Week'
     has_many    :rank_assignments , class_name: 'Team::RankAssignment'
     has_many    :role_assignments , class_name: 'Team::RoleAssignment'
-    has_many    :cert_assignments
+    has_many    :cert_profiles    , class_name: 'Cert::Profile'
   end
+
+  has_many :cert_units, :through => :cert_profiles  , class_name: 'Cert::Unit'
+  has_many :cert_facts, :through => :cert_profiles  , class_name: 'Cert::Fact'
 
   has_many :zdays, ->(start, finish) { between(start, finish) }, class_name: 'Avail::Day'
 
@@ -51,7 +49,7 @@ class Membership < ActiveRecord::Base
   has_many    :created_topics  , :class_name => 'Topics'         , :foreign_key => 'creator_id'
   has_many    :assigned_topics , :class_name => 'Topics'         , :foreign_key => 'assignee_id'
 
-  # has_many    :svc_participations , :class_name => 'Svc::Participant', :foreign_key => 'membership_id', :dependent => :destroy
+  has_many :cert_profiles, :class_name => "Cert::Profile"
 
   # ----- Delegated Methods -----
   def_delegators :user, :user_name,  :full_name, :first_name, :last_name,

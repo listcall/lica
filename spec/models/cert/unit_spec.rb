@@ -41,7 +41,7 @@ end
 #  id          :integer          not null, primary key
 #  team_id     :integer
 #  name        :string
-#  rname       :string
+#  acronym     :string
 #  expirable   :boolean          default(TRUE)
 #  commentable :boolean          default(TRUE)
 #  xfields     :hstore           default({})

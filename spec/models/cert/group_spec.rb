@@ -45,6 +45,7 @@ end
 #  team_id    :integer
 #  position   :integer
 #  name       :string
+#  acronym    :string
 #  xfields    :hstore           default({})
 #  jfields    :jsonb
 #  created_at :datetime         not null

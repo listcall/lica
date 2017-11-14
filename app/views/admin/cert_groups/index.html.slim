@@ -1,0 +1,26 @@
+/- content_for :page_js do
+/  = javascript_include_tag 'admin/svc_partners/all_indx'
+
+- content_for :admin_header do
+  = admin_header :Lica_Certs, :groups
+
+css:
+  .xdiv { background: #f8f8f8; padding: 4px; }
+  .mt10 { margin-top: 10px;    }
+
+- content_for :admin_body do
+  .xdiv
+    table.table.table-bordered
+      thead
+        tr
+          th A
+          th B
+          th C
+      tbody
+        - @groups.each do |group|
+          tr
+            td = group.id
+            td = group.name
+            td ASDF
+
+= render :partial => 'admin/admin_layout'

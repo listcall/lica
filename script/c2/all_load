@@ -4,39 +4,51 @@ require './config/environment'
 
 team = Team.find_by_acronym("BAMRU")
 
-opts = [
+group_opts = [
   {
-    team: team,
-    name: "asdf1"
+    name: "Ranks", acronym: "RA"
   },
-
   {
-    team: team,
-    name: "asdf2"
+    name: "Roles", acronym: "RO"
   },
-
   {
-    team: team,
+    name: "Deployable", acronym: "DE"
+  },
+  {
+    name: "Base", acronym: "BA"
+  },
+  {
+    name: "Submittable", acronym: "SUB"
+  },
+  {
+    name: "Sworn", acronym: "SWORN"
+  }
+].map {|el| el.merge({team: team})}
+
+Cert::group.create group_opts
+
+unit_role_opts = [
+  {
+    name: "Unit Leader", acronym: "UL"
+  },
+  {
+    name: "Operations Officer", acronym: "OO"
+  },
+  {
+    name: "Executive Officer", acronym: "XO"
+  },
+  {
     name: "asdf3"
   },
-
   {
-    team: team,
-    name: "asdf3"
-  },
-
-  {
-    team: team,
     name: "asdf5"
   },
-
   {
-    team: team,
     name: "asdf6"
   }
+].merge({team: team, cert_groups: [Cert::Group.by_acronym("RO")]})
 
-]
+Cert::Unit.create unit_role_opts
 
-Cert::Spec.create opts
-
-puts Cert::Spec.count
+puts "CertGroups: " + Cert::Group.count
+puts "CertUnits: "  + Cert::Unit.count

@@ -10,7 +10,7 @@ class Cert::Grouptie < ActiveRecord::Base
 
   # ----- Associations -----
 
-  belongs_to :cert_spec    , class_name: 'Cert::Spec'
+  belongs_to :cert_unit    , class_name: 'Cert::Unit'
   belongs_to :cert_group   , class_name: 'Cert::Group'
 
   # ----- Validations -----

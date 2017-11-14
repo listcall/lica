@@ -139,6 +139,8 @@ Rails.application.routes.draw do
     resources :position_index
     resources :position_params    # transition day/time
     resources :position_partners
+    resources :cert_groups
+    resources :cert_units
     resources :quals
     resources :qual_ctypes
     resources :qual_assignments

@@ -1,10 +1,9 @@
-class Admin::TeamCertsController < ApplicationController
+class Admin::CertGroupsController < ApplicationController
 
   before_action :authenticate_owner!
 
   def index
-    # @partner_bot = PartnerBot.new(current_team)
-    @certs = current_team.cert_specs
+    @groups = current_team.cert_groups
   end
 
   def create

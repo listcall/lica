@@ -5,36 +5,22 @@ class Cert::Unit < ActiveRecord::Base
 
   self.table_name = "cert_units"
 
-  # extend Forwardable
-  # has_paper_trail
-
-  # ----- Attributes -----
-  # xfield_accessor :description
-  # xfield_accessor :title_select_method   # 'free_text', 'distinct_list', 'fixed_list'
-  # xfield_accessor :title_fixed_options
-  # xfield_accessor :title_placeholder
-  # xfield_accessor :attendance_rule
-
   # ----- Associations -----
   with_options :dependent => :destroy do
     has_many :cert_profiles , :class_name => 'Cert::Profile'  , foreign_key: "cert_unit_id"#, ->{ order(:position) }
-    has_many :cert_groupties, :class_name => 'Cert::Grouplink', foreign_key: "cert_unit_id"
+    has_many :cert_groupties, :class_name => 'Cert::Grouptie' , foreign_key: "cert_unit_id"
   end
-  has_many   :cert_groups  , :through    => :cert_groupties
+  has_many   :cert_groups  , :through    => :cert_groupties, class_name: 'Cert::Group'
   belongs_to :team         , :touch      => true
 
-  # has_many   :quals             ,  :through   => :qual_assignments
-  #
-  # alias_method :assignments      ,  :qual_assignments
-
-  # def certs_for(member)
-  #   membership_certs.includes([:user_cert, :qual_ctype]).where(membership_id: member.id)
-  # end
+  def certs_for(member)
+    membership_certs.includes([:user_cert, :qual_ctype]).where(membership_id: member.id)
+  end
 
   # ----- Delegated Methods -----
   # alias_attribute :rid     , :rname
-  # alias_attribute :acronym , :rname
-  # alias_attribute :abbrev  , :rname
+  alias_attribute :acronym , :rname
+  alias_attribute :abbrev  , :rname
 
   # ----- Validations -----
 
@@ -135,7 +121,7 @@ end
 #  id          :integer          not null, primary key
 #  team_id     :integer
 #  name        :string
-#  rname       :string
+#  acronym     :string
 #  expirable   :boolean          default(TRUE)
 #  commentable :boolean          default(TRUE)
 #  xfields     :hstore           default({})

@@ -66,9 +66,6 @@ gem 'paperclip'                   # file attachments
 gem 'mini_magick'                 # server-side image resizing & cropping
 
 # ----- asset packaging -----
-# gem 'sprockets'        , '3.6.3'
-# gem 'sprockets-rails'  , '~> 3.1'
-# gem 'sass-rails', github: "rails/sass-rails"  # sass processor based on libsass
 gem 'webpacker'                                 # webpack support
 
 # ----- asset management -----

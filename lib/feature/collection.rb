@@ -92,6 +92,7 @@ module Feature
       event_des = 'Team events with rosters, time-tracking, attachments and reporting'
       posit_des = 'Recurring positions: scheduling and execution'
       pagng_des = 'Team Paging via Email / SMS'
+      certs_des = 'Member Certifications'
       quals_des = 'Member Training Qualifications Tracking'
       repor_des = 'Database Reports'
       proto_des = 'Prototype: Under Construction'
@@ -101,6 +102,7 @@ module Feature
       event_men = [Feature::Menu.new('Events'          , '/events'                )]
       posit_men = [Feature::Menu.new('Positions'       , '/positions'             )]
       pagng_men = [Feature::Menu.new('Paging'          , '/paging'                )]
+      certs_men = [Feature::Menu.new('Certifications'  , '/certs'                 )]
       quals_men = [Feature::Menu.new('Qualifications'  , '/quals'                 )]
       repor_men = [Feature::Menu.new('Reports'         , '/reports'               )]
       proto_men = [Feature::Menu.new('Prototype'       , '/prototype'             )]
@@ -111,6 +113,7 @@ module Feature
       objs << Feature::Model.new( label: 'Lica_Paging'          , name: 'Paging'          , description: pagng_des , menus: pagng_men )
       objs << Feature::Model.new( label: 'Lica_Events'          , name: 'Events'          , description: event_des , menus: event_men )
       objs << Feature::Model.new( label: 'Lica_Positions'       , name: 'Positions'       , description: posit_des , menus: posit_men )
+      objs << Feature::Model.new( label: 'Lica_Certifications'  , name: 'Certifications'  , description: certs_des , menus: certs_men )
       objs << Feature::Model.new( label: 'Lica_Qualifications'  , name: 'Qualifications'  , description: quals_des , menus: quals_men )
       objs << Feature::Model.new( label: 'Lica_Reports'         , name: 'Reports'         , description: repor_des , menus: repor_men )
       objs << Feature::Model.new( label: 'Lica_Prototype'       , name: 'Prototype'       , description: proto_des , menus: proto_men )

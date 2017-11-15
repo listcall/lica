@@ -32,7 +32,16 @@ Design Decisions:
 
 # Tue Nov 14
 
-- [ ] load-script: add more cert-groups and cert-defs
+- [x] load-script: add more cert-groups and cert-defs
+
+# Wed Nov 15
+
+- [x] refactoring: Cert::Unit to Cert::Def
+
+# TBD
+
+- [ ] update BAMRU.org text
+
 - [ ] load-script: assign users to cert-defs
 - [ ] clean up admin page display
 

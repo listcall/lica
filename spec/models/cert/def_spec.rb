@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Cert::Description do
+describe Cert::Def do
   let(:klas)        { described_class          }
   let(:base_params) { {}                       }
   let(:subject)     { klas.new(base_params)    }
@@ -36,7 +36,7 @@ end
 
 # == Schema Information
 #
-# Table name: cert_descriptions
+# Table name: cert_defs
 #
 #  id          :integer          not null, primary key
 #  team_id     :integer

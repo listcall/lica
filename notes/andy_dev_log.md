@@ -28,12 +28,12 @@ Design Decisions:
 - [x] design the admin pages for certs
 - [x] test x-editable with BootStrap4
 - [x] build out cert-loading scripts
-- [x] display cert-units and cert-groups on the admin page
+- [x] display cert-defs and cert-groups on the admin page
 
 # Tue Nov 14
 
-- [ ] load-script: add more cert-groups and cert-units
-- [ ] load-script: assign users to cert-units
+- [ ] load-script: add more cert-groups and cert-defs
+- [ ] load-script: assign users to cert-defs
 - [ ] clean up admin page display
 
 - [ ] write page-level access predicates

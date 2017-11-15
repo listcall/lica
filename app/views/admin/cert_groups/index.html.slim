@@ -16,13 +16,13 @@ css:
           th ID
           th NAME
           th ACRONYM
-          th DESCRIPTIONS
+          th DEFINITIONS
       tbody
         - @groups.each do |group|
           tr
             td = group.id
             td = group.name
             td = group.acronym
-            td = group.cert_descriptions.pluck(:acronym).join(", ")
+            td = group.cert_defs.pluck(:acronym).join(", ")
 
 = render :partial => 'admin/admin_layout'

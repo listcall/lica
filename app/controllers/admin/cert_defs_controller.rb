@@ -1,9 +1,9 @@
-class Admin::CertDescriptionsController < ApplicationController
+class Admin::CertDefsController < ApplicationController
 
   before_action :authenticate_owner!
 
   def index
-    @descriptions = current_team.cert_descriptions
+    @defs = current_team.cert_defs
   end
 
   def create

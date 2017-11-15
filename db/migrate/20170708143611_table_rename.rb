@@ -19,7 +19,7 @@ class TableRename < ActiveRecord::Migration[5.1]
 
     create_table 'cert_profiles' do |t|
       t.integer  'membership_id'
-      t.integer  'cert_description_id'
+      t.integer  'cert_def_id'
       t.integer  'cert_fact_id'
       t.string   'title'
       t.integer  'position'              # scoped by membership and spec
@@ -33,7 +33,7 @@ class TableRename < ActiveRecord::Migration[5.1]
       t.timestamps
     end
     add_index :cert_profiles, :membership_id
-    add_index :cert_profiles, :cert_description_id
+    add_index :cert_profiles, :cert_def_id
     add_index :cert_profiles, :cert_fact_id
     add_index :cert_profiles, :title
     add_index :cert_profiles, :position
@@ -42,7 +42,7 @@ class TableRename < ActiveRecord::Migration[5.1]
     add_index :cert_profiles, :ev_type
     add_index :cert_profiles, :xfields, :using => :gin
 
-    create_table 'cert_descriptions' do |t|
+    create_table 'cert_defs' do |t|
       t.integer 'team_id'
       t.string  'name'
       t.string  'acronym'
@@ -52,12 +52,12 @@ class TableRename < ActiveRecord::Migration[5.1]
       t.text    'ev_types', default: [], array: true
       t.timestamps
     end
-    add_index :cert_descriptions, :team_id
-    add_index :cert_descriptions, :acronym
-    add_index :cert_descriptions, :expirable
-    add_index :cert_descriptions, :commentable
-    add_index :cert_descriptions, :xfields , :using => :gin
-    add_index :cert_descriptions, :ev_types, :using => :gin
+    add_index :cert_defs, :team_id
+    add_index :cert_defs, :acronym
+    add_index :cert_defs, :expirable
+    add_index :cert_defs, :commentable
+    add_index :cert_defs, :xfields , :using => :gin
+    add_index :cert_defs, :ev_types, :using => :gin
 
     create_table 'cert_groups' do |t|
       t.integer 'team_id'
@@ -75,18 +75,18 @@ class TableRename < ActiveRecord::Migration[5.1]
     add_index :cert_groups, :team_id
 
     create_table 'cert_grouptie' do |t|
-      t.integer 'cert_description_id'
+      t.integer 'cert_def_id'
       t.integer 'cert_group_id'
-      t.integer 'position'                      # scoped by cert_group and cert_description
+      t.integer 'position'                      # scoped by cert_group and cert_def
     end
-    add_index :cert_grouptie, :cert_description_id
+    add_index :cert_grouptie, :cert_def_id
     add_index :cert_grouptie, :cert_group_id
     add_index :cert_grouptie, :position
 
     create_table :cert_permissions do |t|
-      t.integer 'cert_description_id'
+      t.integer 'cert_def_id'
       t.string  'label'
     end
-    add_index :cert_permissions, :cert_description_id
+    add_index :cert_permissions, :cert_def_id
   end
 end

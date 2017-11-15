@@ -2,7 +2,7 @@
 /  = javascript_include_tag 'admin/svc_partners/all_indx'
 
 - content_for :admin_header do
-  = admin_header :Lica_Certs, :descriptions
+  = admin_header :Lica_Certs, :definitions
 
 css:
   .xdiv { background: #f8f8f8; padding: 4px; }
@@ -18,7 +18,7 @@ css:
           th ACRONYM
           th GROUPS
       tbody
-        - @descriptions.each do |desc|
+        - @defs.each do |desc|
           tr
             td = desc.id
             td = desc.name

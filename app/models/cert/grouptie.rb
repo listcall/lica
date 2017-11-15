@@ -10,7 +10,7 @@ class Cert::Grouptie < ActiveRecord::Base
 
   # ----- Associations -----
 
-  belongs_to :cert_description    , class_name: 'Cert::Description'
+  belongs_to :cert_def    , class_name: 'Cert::Def'
   belongs_to :cert_group          , class_name: 'Cert::Group'
 
   # ----- Validations -----
@@ -68,8 +68,8 @@ end
 #
 # Table name: cert_grouptie
 #
-#  id                  :integer          not null, primary key
-#  cert_description_id :integer
-#  cert_group_id       :integer
-#  position            :integer
+#  id            :integer          not null, primary key
+#  cert_def_id   :integer
+#  cert_group_id :integer
+#  position      :integer
 #

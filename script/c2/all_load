@@ -51,7 +51,7 @@ unit_role_opts = [
   }
 ].map {|el| el.merge({team: team})}
 
-Cert::Description.create unit_role_opts
+Cert::Def.create unit_role_opts
 
 unit_rank_opts = [
   {
@@ -77,21 +77,21 @@ unit_rank_opts = [
   },
 ].map {|el| el.merge({team: team})}
 
-Cert::Description.create unit_rank_opts
+Cert::Def.create unit_rank_opts
 
 rank_group = Cert::Group.by_acronym("RA").all.first
 role_group = Cert::Group.by_acronym("RO").all.first
 
 unit_rank_opts.each do |el|
-  desc = Cert::Description.where(name: el[:name]).all.first
-  Cert::Grouptie.create(cert_group: rank_group, cert_description: desc)
+  desc = Cert::Def.where(name: el[:name]).all.first
+  Cert::Grouptie.create(cert_group: rank_group, cert_def: desc)
 end
 
 unit_role_opts.each do |el|
-  desc = Cert::Description.where(name: el[:name]).all.first
-  Cert::Grouptie.create(cert_group: role_group, cert_description: desc)
+  desc = Cert::Def.where(name: el[:name]).all.first
+  Cert::Grouptie.create(cert_group: role_group, cert_def: desc)
 end
 
-puts "CertDescriptions: " + Cert::Description.count.to_s
+puts "CertDefs: " + Cert::Def.count.to_s
 puts "CertGroups:       " + Cert::Group.count.to_s
 puts "CertGroupties:    " + Cert::Grouptie.count.to_s

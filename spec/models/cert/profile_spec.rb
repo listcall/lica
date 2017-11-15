@@ -18,7 +18,7 @@ describe Cert::Profile do
   describe 'Associations' do
     it { should respond_to :membership          }
     it { should respond_to :cert_fact           }
-    it { should respond_to :cert_description    }
+    it { should respond_to :cert_def    }
   end
 
   # describe 'Object Creation' do
@@ -38,19 +38,19 @@ end
 #
 # Table name: cert_profiles
 #
-#  id                  :integer          not null, primary key
-#  membership_id       :integer
-#  cert_description_id :integer
-#  cert_fact_id        :integer
-#  title               :string
-#  position            :integer
-#  status              :string
-#  ev_type             :string
-#  reviewer_id         :integer
-#  reviewed_at         :string
-#  external_id         :string
-#  xfields             :hstore           default({})
-#  mc_expires_at       :datetime
-#  created_at          :datetime         not null
-#  updated_at          :datetime         not null
+#  id            :integer          not null, primary key
+#  membership_id :integer
+#  cert_def_id   :integer
+#  cert_fact_id  :integer
+#  title         :string
+#  position      :integer
+#  status        :string
+#  ev_type       :string
+#  reviewer_id   :integer
+#  reviewed_at   :string
+#  external_id   :string
+#  xfields       :hstore           default({})
+#  mc_expires_at :datetime
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
 #

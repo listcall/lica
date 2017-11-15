@@ -13,14 +13,16 @@ css:
     table.table.table-bordered
       thead
         tr
-          th A
-          th B
-          th C
+          th ID
+          th NAME
+          th ACRONYM
+          th DESCRIPTIONS
       tbody
         - @groups.each do |group|
           tr
             td = group.id
             td = group.name
-            td ASDF
+            td = group.acronym
+            td = group.cert_descriptions.pluck(:acronym).join(", ")
 
 = render :partial => 'admin/admin_layout'

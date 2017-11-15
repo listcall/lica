@@ -27,8 +27,6 @@ group_opts = [
 
 Cert::Group.create group_opts
 
-role_group = Cert::Group.by_acronym("RO")
-
 unit_role_opts = [
   {
     name: "Unit Leader", acronym: "UL"
@@ -53,9 +51,7 @@ unit_role_opts = [
   }
 ].map {|el| el.merge({team: team})}
 
-Cert::Unit.create unit_role_opts
-
-rank_group = Cert::Group.by_acronym("RO")
+Cert::Description.create unit_role_opts
 
 unit_rank_opts = [
   {
@@ -81,7 +77,21 @@ unit_rank_opts = [
   },
 ].map {|el| el.merge({team: team})}
 
-Cert::Unit.create unit_rank_opts
+Cert::Description.create unit_rank_opts
 
-puts "CertGroups: " + Cert::Group.count.to_s
-puts "CertUnits: "  + Cert::Unit.count.to_s
+rank_group = Cert::Group.by_acronym("RA").all.first
+role_group = Cert::Group.by_acronym("RO").all.first
+
+unit_rank_opts.each do |el|
+  desc = Cert::Description.where(name: el[:name]).all.first
+  Cert::Grouptie.create(cert_group: rank_group, cert_description: desc)
+end
+
+unit_role_opts.each do |el|
+  desc = Cert::Description.where(name: el[:name]).all.first
+  Cert::Grouptie.create(cert_group: role_group, cert_description: desc)
+end
+
+puts "CertDescriptions: " + Cert::Description.count.to_s
+puts "CertGroups:       " + Cert::Group.count.to_s
+puts "CertGroupties:    " + Cert::Grouptie.count.to_s

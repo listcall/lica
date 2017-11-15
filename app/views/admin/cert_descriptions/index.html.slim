@@ -2,7 +2,7 @@
 /  = javascript_include_tag 'admin/svc_partners/all_indx'
 
 - content_for :admin_header do
-  = admin_header :Lica_Certs, :units
+  = admin_header :Lica_Certs, :descriptions
 
 css:
   .xdiv { background: #f8f8f8; padding: 4px; }
@@ -13,14 +13,16 @@ css:
     table.table.table-bordered
       thead
         tr
-          th A
-          th B
-          th C
+          th ID
+          th NAME
+          th ACRONYM
+          th GROUPS
       tbody
-        - @units.each do |unit|
+        - @descriptions.each do |desc|
           tr
-            td = unit.id
-            td = unit.name
-            td ASDF
+            td = desc.id
+            td = desc.name
+            td = desc.acronym
+            td = desc.cert_groups.pluck(:acronym).join(", ")
 
 = render :partial => 'admin/admin_layout'

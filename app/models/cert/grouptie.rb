@@ -2,7 +2,7 @@ class Cert::Grouptie < ActiveRecord::Base
 
   self.table_name = "cert_grouptie"
 
-  acts_as_list :scope => :team_id, :column => :sort_key
+  acts_as_list :scope => :cert_group_id, :column => :position
 
   # ----- Attributes -----
 

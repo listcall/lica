@@ -36,8 +36,8 @@ class Membership < ActiveRecord::Base
     has_many    :cert_profiles    , class_name: 'Cert::Profile'
   end
 
-  has_many :cert_units, :through => :cert_profiles  , class_name: 'Cert::Unit'
-  has_many :cert_facts, :through => :cert_profiles  , class_name: 'Cert::Fact'
+  has_many :cert_descriptions, :through => :cert_profiles  , class_name: 'Cert::Description'
+  has_many :cert_facts       , :through => :cert_profiles  , class_name: 'Cert::Fact'
 
   has_many :zdays, ->(start, finish) { between(start, finish) }, class_name: 'Avail::Day'
 

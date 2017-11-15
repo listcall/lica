@@ -6,8 +6,8 @@ class Cert::Group < ActiveRecord::Base
   self.table_name = "cert_groups"
 
   # ----- Associations -----
-  has_many   :cert_groupties, class_name: 'Cert::Grouptie'
-  has_many   :cert_specs    , class_name: 'Cert::Spec', through: :cert_groupties
+  has_many   :cert_groupties    , class_name: 'Cert::Grouptie'   , foreign_key: "cert_group_id"
+  has_many   :cert_descriptions , class_name: 'Cert::Description', through: :cert_groupties
   belongs_to :team          , :touch => true
 
   # ----- Delegated Methods -----

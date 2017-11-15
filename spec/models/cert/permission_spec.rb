@@ -16,7 +16,7 @@ describe Cert::Permission do
   end
 
   describe 'Associations' do
-    it { should respond_to :cert_units  }
+    it { should respond_to :cert_descriptions  }
   end
 
   # describe 'Object Creation' do
@@ -36,7 +36,7 @@ end
 #
 # Table name: cert_permissions
 #
-#  id           :integer          not null, primary key
-#  cert_unit_id :integer
-#  label        :string
+#  id                  :integer          not null, primary key
+#  cert_description_id :integer
+#  label               :string
 #

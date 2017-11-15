@@ -1,14 +1,14 @@
 # require 'forwardable'
 # require 'ext/fixnum'
 
-class Cert::Unit < ActiveRecord::Base
+class Cert::Description < ActiveRecord::Base
 
-  self.table_name = "cert_units"
+  self.table_name = "cert_descriptions"
 
   # ----- Associations -----
   with_options :dependent => :destroy do
-    has_many :cert_profiles , :class_name => 'Cert::Profile'  , foreign_key: "cert_unit_id"#, ->{ order(:position) }
-    has_many :cert_groupties, :class_name => 'Cert::Grouptie' , foreign_key: "cert_unit_id"
+    has_many :cert_profiles , :class_name => 'Cert::Profile'  , foreign_key: "cert_description_id"#, ->{ order(:position) }
+    has_many :cert_groupties, :class_name => 'Cert::Grouptie' , foreign_key: "cert_description_id"
   end
   has_many   :cert_groups  , :through    => :cert_groupties, class_name: 'Cert::Group'
   belongs_to :team         , :touch      => true
@@ -111,12 +111,11 @@ class Cert::Unit < ActiveRecord::Base
     end
   end
 
-
 end
 
 # == Schema Information
 #
-# Table name: cert_units
+# Table name: cert_descriptions
 #
 #  id          :integer          not null, primary key
 #  team_id     :integer

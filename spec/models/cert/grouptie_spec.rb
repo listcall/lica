@@ -16,7 +16,7 @@ describe Cert::Grouptie do
   end
 
   describe 'Associations' do
-    it { should respond_to :cert_unit             }
+    it { should respond_to :cert_description      }
     it { should respond_to :cert_group            }
     # it { should respond_to :cert_specs       }
   end
@@ -38,8 +38,8 @@ end
 #
 # Table name: cert_grouptie
 #
-#  id            :integer          not null, primary key
-#  cert_unit_id  :integer
-#  cert_group_id :integer
-#  position      :integer
+#  id                  :integer          not null, primary key
+#  cert_description_id :integer
+#  cert_group_id       :integer
+#  position            :integer
 #

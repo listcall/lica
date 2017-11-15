@@ -8,7 +8,7 @@ class Cert::Permission < ActiveRecord::Base
 
   # ----- Associations -----
 
-  has_many :cert_units, class_name: 'Cert::Unit'
+  has_many :cert_descriptions, class_name: 'Cert::Description'
   # has_many   :assignments, :foreign_key => 'team_role_id', :class_name => 'Team::RoleAssignment'
   # has_one    :position   , :foreign_key => 'team_role_id', :class_name => 'Position', :dependent => :destroy
 
@@ -67,7 +67,7 @@ end
 #
 # Table name: cert_permissions
 #
-#  id           :integer          not null, primary key
-#  cert_unit_id :integer
-#  label        :string
+#  id                  :integer          not null, primary key
+#  cert_description_id :integer
+#  label               :string
 #

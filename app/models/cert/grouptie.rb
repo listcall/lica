@@ -10,8 +10,8 @@ class Cert::Grouptie < ActiveRecord::Base
 
   # ----- Associations -----
 
-  belongs_to :cert_unit    , class_name: 'Cert::Unit'
-  belongs_to :cert_group   , class_name: 'Cert::Group'
+  belongs_to :cert_description    , class_name: 'Cert::Description'
+  belongs_to :cert_group          , class_name: 'Cert::Group'
 
   # ----- Validations -----
   # VALID_RIGHTS = %w(owner manager active) #
@@ -68,8 +68,8 @@ end
 #
 # Table name: cert_grouptie
 #
-#  id            :integer          not null, primary key
-#  cert_unit_id  :integer
-#  cert_group_id :integer
-#  position      :integer
+#  id                  :integer          not null, primary key
+#  cert_description_id :integer
+#  cert_group_id       :integer
+#  position            :integer
 #

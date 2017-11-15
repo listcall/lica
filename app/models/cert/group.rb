@@ -7,7 +7,7 @@ class Cert::Group < ActiveRecord::Base
 
   # ----- Associations -----
   has_many   :cert_groupties, class_name: 'Cert::Grouptie'
-  has_many   :cert_specs    , class_name: 'Cert::Spec'
+  has_many   :cert_specs    , class_name: 'Cert::Spec', through: :cert_groupties
   belongs_to :team          , :touch => true
 
   # ----- Delegated Methods -----

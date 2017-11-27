@@ -2,6 +2,8 @@ class TableRename < ActiveRecord::Migration[5.1]
   def change
     create_table 'cert_facts' do |t|
       t.integer  'user_id'
+      t.string   'evidence'                # null|attachment|link|assignment
+      t.integer  'assigner_id'             #
       t.string   'comment'                 # for documentation
       t.string   'link'                    # for documentation
       t.string   'attachment_file_name'    # for documentation

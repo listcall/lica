@@ -46,6 +46,8 @@ end
 #
 #  id                        :integer          not null, primary key
 #  user_id                   :integer
+#  evidence                  :string
+#  assigner_id               :integer
 #  comment                   :string
 #  link                      :string
 #  attachment_file_name      :string

@@ -92,6 +92,9 @@ unit_role_opts.each do |el|
   Cert::Grouptie.create(cert_group: role_group, cert_def: desc)
 end
 
+andy  = User.where(user_name: "andyl").first
+craig = User.where(user_name: "ctaylor").first
+
 puts "CertDefs: " + Cert::Def.count.to_s
 puts "CertGroups:       " + Cert::Group.count.to_s
 puts "CertGroupties:    " + Cert::Grouptie.count.to_s

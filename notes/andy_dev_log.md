@@ -37,10 +37,9 @@ Design Decisions:
 # Wed Nov 15
 
 - [x] refactoring: Cert::Unit to Cert::Def
+- [x] update BAMRU.org text
 
-# TBD
-
-- [ ] update BAMRU.org text
+# Mon Nov 27
 
 - [ ] load-script: assign users to cert-defs
 - [ ] clean up admin page display

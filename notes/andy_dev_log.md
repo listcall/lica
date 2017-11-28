@@ -41,7 +41,7 @@ Design Decisions:
 
 # Mon Nov 27
 
-- [ ] load-script: assign users to cert-defs
+- [x] load-script: assign users to cert-defs
 - [ ] clean up admin page display
 
 - [ ] write page-level access predicates

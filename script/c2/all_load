@@ -29,6 +29,9 @@ Cert::Group.create group_opts
 
 unit_role_opts = [
   {
+    name: "Board of Directors", acronym: "BD"
+  },
+  {
     name: "Unit Leader", acronym: "UL"
   },
   {
@@ -92,9 +95,33 @@ unit_role_opts.each do |el|
   Cert::Grouptie.create(cert_group: role_group, cert_def: desc)
 end
 
-andy  = User.where(user_name: "andyl").first
-craig = User.where(user_name: "ctaylor").first
+def assign(uname, aname, acronym)
+  team = Team.find_by_acronym("BAMRU")
+  uusr = User.where(user_name: uname).first
+  ausr = User.where(user_name: aname).first
+  umem = team.memberships.where(user_id: uusr.id).first
+  amem = team.memberships.where(user_id: ausr.id).first
+  
+  Cert::Profile.create({
+    membership_id: umem.id                                     ,
+    cert_def_id:   Cert::Def.where(acronym: acronym).first.id  ,
+    cert_fact_id:  Cert::Fact.create({
+      user_id:     uusr.id       ,
+      assigner_id: amem.id       ,
+      comment:     "assign #{uusr.first_name} to #{acronym}"
+    }).id
+  })
+end
 
-puts "CertDefs: " + Cert::Def.count.to_s
-puts "CertGroups:       " + Cert::Group.count.to_s
-puts "CertGroupties:    " + Cert::Grouptie.count.to_s
+assign "johnc"  , "craigt" , "UL"
+assign "johnc"  , "craigt" , "TM"
+assign "andyl"  , "craigt" , "FM"
+assign "craigt" , "johnc"  , "BD"
+assign "craigt" , "johnc"  , "FM"
+
+puts "CertDefs:      " + Cert::Def.count.to_s
+puts "CertGroups:    " + Cert::Group.count.to_s
+puts "CertGroupties: " + Cert::Grouptie.count.to_s
+puts "CertGroupties: " + Cert::Grouptie.count.to_s
+puts "CertProfiles:  " + Cert::Profile.count.to_s
+puts "CertFacts:     " + Cert::Fact.count.to_s

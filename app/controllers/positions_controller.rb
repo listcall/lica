@@ -1,6 +1,6 @@
 class PositionsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     @positions = current_team.positions  #.includes([:team, :qual_ctypes])

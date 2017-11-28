@@ -17,12 +17,14 @@ css:
           th NAME
           th ACRONYM
           th GROUPS
+          th MEMBERS
       tbody
-        - @defs.each do |desc|
+        - @defs.each do |cdef|
           tr
-            td = desc.id
-            td = desc.name
-            td = desc.acronym
-            td = desc.cert_groups.pluck(:acronym).join(", ")
+            td = cdef.id
+            td = cdef.name
+            td = cdef.acronym
+            td = cdef.cert_groups.pluck(:acronym).join(", ")
+            td = cdef.cert_profiles.count
 
 = render :partial => 'admin/admin_layout'

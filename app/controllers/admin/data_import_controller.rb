@@ -1,6 +1,6 @@
 class Admin::DataImportController < ApplicationController
 
-  before_action      :authenticate_owner!
+  before_action      :authenticate_member!
 
   def index
     @importers = [

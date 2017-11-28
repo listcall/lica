@@ -1,6 +1,6 @@
 class CertsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     @members = Rails.cache.fetch([current_team, 'teamCert']) do

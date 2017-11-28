@@ -1,6 +1,6 @@
 class Admin::TeamPartnersController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @partner_bot = PartnerBot.new(current_team)

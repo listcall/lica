@@ -1,6 +1,6 @@
 class RepsController < ApplicationController
 
-  before_action :authenticate_active!
+  before_action :authenticate_member!
 
   def show
     base_opts  = {team: current_team, member: current_membership}

@@ -1,6 +1,6 @@
 class MemberCertsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     @member = current_team.memberships.by_id_or_user_name(params[:id]).first.becomes(Membership::AsQuals)

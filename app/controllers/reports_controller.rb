@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     @current_report_list    = current_report_list

@@ -3,7 +3,7 @@ require 'fileutils'
 
 class Ajax::Mems::UserAvatarsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     memid  = params[:membership_id]

@@ -1,6 +1,6 @@
 class QualCertsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     @quals  = current_team.quals.includes([:qual_ctypes, :team])

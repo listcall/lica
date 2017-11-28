@@ -1,6 +1,6 @@
 class ZtstController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   skip_around_action :scope_current_team
 

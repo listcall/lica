@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
 
   skip_around_action :scope_current_team
-  before_action      :authenticate_reserve!
+  before_action      :authenticate_member!
 
   def index
     base_dir = "#{Rails.root.to_s}/app/views/home/widgets"

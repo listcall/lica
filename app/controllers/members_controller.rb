@@ -1,6 +1,6 @@
 class MembersController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   include MemberQry
 

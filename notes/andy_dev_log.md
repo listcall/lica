@@ -42,7 +42,9 @@ Design Decisions:
 # Mon Nov 27
 
 - [x] load-script: assign users to cert-defs
-- [ ] clean up admin page display
+- [x] clean up admin page display
+
+# Tue Nov 28
 
 - [ ] write page-level access predicates
 - [ ] write function-level access predicates

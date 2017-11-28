@@ -1,6 +1,6 @@
 class Ajax::ActionOpRsvpController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
   layout false
 
   def show

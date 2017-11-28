@@ -1,6 +1,6 @@
 class Admin::CertDefsController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @defs = current_team.cert_defs
@@ -20,5 +20,4 @@ class Admin::CertDefsController < ApplicationController
     TeamPartnership.reject(current_team.id, params[:id])
     redirect_to '/admin/team_partners'
   end
-
 end

@@ -1,6 +1,6 @@
 class Org::MembersController < ApplicationController
 
-  before_action   :authenticate_owner!
+  before_action   :authenticate_member!
   before_action   :validate_enterprise_org!
   before_action   :validate_support_team!
 

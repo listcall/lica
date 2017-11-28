@@ -2,7 +2,7 @@
 
 class Admin::PositionIndexController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @title     = 'Positions'

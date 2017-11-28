@@ -1,6 +1,6 @@
 class Admin::DriveIndexController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @title = 'Drive Index'

@@ -1,6 +1,6 @@
 class AvailsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     @members  = current_team.memberships.active

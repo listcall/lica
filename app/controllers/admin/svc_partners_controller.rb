@@ -1,6 +1,6 @@
 class Admin::SvcPartnersController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @svc_partners = Svc::Partner.where(team_id: current_team.id)

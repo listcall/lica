@@ -1,6 +1,6 @@
 class Admin::SvcIndexController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @services = current_team.svcs

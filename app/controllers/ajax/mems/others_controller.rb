@@ -1,6 +1,6 @@
 class Ajax::Mems::OthersController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   respond_to :json
 

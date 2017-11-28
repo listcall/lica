@@ -1,6 +1,6 @@
 class Admin::TeamNavsController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def show
     @title = 'Team Navbars'

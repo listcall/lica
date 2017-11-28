@@ -2,7 +2,7 @@
 
 class Admin::PositionPartnersController < ApplicationController
 
-before_action :authenticate_owner!
+before_action :authenticate_member!
 
   def index
     @pos_partners = current_team.position_partners.sorted

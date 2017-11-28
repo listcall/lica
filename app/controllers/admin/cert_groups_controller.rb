@@ -1,6 +1,6 @@
 class Admin::CertGroupsController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @groups = current_team.cert_groups

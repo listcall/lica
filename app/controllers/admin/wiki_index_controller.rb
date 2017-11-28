@@ -1,6 +1,6 @@
 class Admin::WikiIndexController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @title = 'Wiki Index'

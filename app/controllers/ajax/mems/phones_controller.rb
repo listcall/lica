@@ -1,6 +1,6 @@
 class Ajax::Mems::PhonesController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   respond_to :json, :html
   layout false

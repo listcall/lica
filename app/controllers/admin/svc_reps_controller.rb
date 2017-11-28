@@ -1,6 +1,6 @@
 class Admin::SvcRepsController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   def index
     @reports          = current_team.reps.service.sorted

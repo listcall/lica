@@ -1,6 +1,6 @@
 class Admin::EventRolesController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   respond_to :html, :json
 

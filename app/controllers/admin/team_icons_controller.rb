@@ -1,7 +1,7 @@
 class Admin::TeamIconsController < ApplicationController
 
   skip_around_action :scope_current_team
-  before_action      :authenticate_owner!
+  before_action      :authenticate_member!
 
   def show
     @team = current_team

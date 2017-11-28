@@ -123,6 +123,12 @@ class ActionController::Base
 
   # ----- authentication - member types -----
 
+  def authenticate_member!
+    return unless authenticate_user!
+    return if     valid_membership?
+    redirect_to('/info/no_access')
+  end
+
   def _authenticate_member(role_test)
     return unless authenticate_user!
     redirect_to('/info/inactive') and return  if inactive_rights?

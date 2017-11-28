@@ -3,7 +3,7 @@
 # all the posts for a dialog...
 class Pgr::PostsController < ApplicationController
 
-  before_action :authenticate_reserve!, :except => :pixel
+  before_action :authenticate_member!, :except => :pixel
   before_action :set_no_cache
 
   def index

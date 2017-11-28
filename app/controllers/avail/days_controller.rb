@@ -2,7 +2,7 @@ require "un_avails"
 
 class Avail::DaysController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     @members  = current_team.memberships.includes(:user).active.by_sort_score

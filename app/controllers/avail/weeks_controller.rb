@@ -1,7 +1,7 @@
 class Avail::WeeksController < ApplicationController
 
   # include ServiceCtrlUtil
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   # all team members - availability view
   def index

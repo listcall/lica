@@ -1,6 +1,6 @@
 class Admin::MemberRanksController < ApplicationController
 
-  before_action :authenticate_owner!
+  before_action :authenticate_member!
 
   respond_to :html, :json
 

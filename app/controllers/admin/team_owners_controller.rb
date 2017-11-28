@@ -1,6 +1,6 @@
 class Admin::TeamOwnersController < ApplicationController
   skip_around_action :scope_current_team
-  before_action      :authenticate_owner!
+  before_action      :authenticate_member!
 
   def index
     @team = current_team

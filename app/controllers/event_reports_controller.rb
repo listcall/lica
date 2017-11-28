@@ -1,6 +1,6 @@
 class EventReportsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
 
   def index
     #@reports = EventReport.all

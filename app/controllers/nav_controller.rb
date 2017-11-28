@@ -1,6 +1,6 @@
 class NavController < ApplicationController
 
-  before_action :authenticate_guest!
+  before_action :authenticate_member!
 
   def header
     render :layout => false

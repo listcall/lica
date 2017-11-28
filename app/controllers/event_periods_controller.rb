@@ -1,6 +1,6 @@
 class EventPeriodsController < ApplicationController
 
-  before_action :authenticate_reserve!
+  before_action :authenticate_member!
   before_action :set_no_cache
 
   def index

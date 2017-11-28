@@ -5,7 +5,7 @@ require 'ext/ar_proxy'
 
 class Pgr::AssignmentsController < ApplicationController
 
-  before_action :authenticate_reserve!, :set_no_cache
+  before_action :authenticate_member!, :set_no_cache
 
   def index
     @assignments = load_assignments

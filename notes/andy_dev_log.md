@@ -43,12 +43,16 @@ Design Decisions:
 
 - [x] load-script: assign users to cert-defs
 - [x] clean up admin page display
+- [x] write page-level access predicates
 
 # Tue Nov 28
 
-- [ ] write page-level access predicates
-- [ ] write function-level access predicates
+- [ ] define development process
+- [ ] define next-steps
+- [ ] cleanup - remove old code and database tables
+- [ ] deploy to production
 
+- [ ] write function-level access predicates
 - [ ] prototype React-based x-editable replacement
 - [ ] cleanup cert classes and specs 
 - [ ] implement admin/team_certs

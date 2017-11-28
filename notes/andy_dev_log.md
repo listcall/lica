@@ -45,7 +45,7 @@ Design Decisions:
 - [x] clean up admin page display
 - [x] write page-level access predicates
 
-# Tue Nov 28
+# TBD
 
 - [ ] define development process
 - [ ] define next-steps

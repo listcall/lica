@@ -45,9 +45,15 @@ Design Decisions:
 - [x] clean up admin page display
 - [x] write page-level access predicates
 
+# Tue Jan 09
+
+- [x] define development process
+
 # TBD
 
-- [ ] define development process
+- [ ] setup staging server
+- [ ] fix kevin database problems
+
 - [ ] define next-steps
 - [ ] cleanup - remove old code and database tables
 - [ ] deploy to production

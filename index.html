@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>BAMRU</title>
+  <link href='/system/teams/icons/000/000/004/original/bamru_border.ico?1389129714' rel='shortcut icon' type='image/vnd.microsoft.icon'/>
+  <link rel="stylesheet" media="screen" href="/assets/application.self-55f23a130ec305fc22ecf4942a08f3115edce9fa744afdf1d22c9881a1743be8.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/bootstrap_base.self-700cf8ee936dda994300b88abd5b3b675c91446793a292aae2bac4df2f70ff7c.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/bootstrap_ms.self-b3b033f4894d709cdb00fabbffe10f3808bcd7779f9ecdbc1395481517292a1d.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/custom_base.self-655e37c9effee03d6d9569b83e81bd4591484b1ade4ab1a5b0432986149c1385.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/report.self-52b0254767b76c8cbe22a3ac83dbde9e1ba238699f2630d0c87f056457eb4443.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/nvd3/nv.d3.self-019348cd61aac3cf20d707abf026ea9d173d8f4b16668b84ed4e6f2ab334b1b2.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/slider/css/slider.self-0bd1b12975cf07868c4c6727e0fbf7728731f024b07eee46b4fa24249c8730d7.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/bootstrap-switch.self-fd062e02280788a160ac78ff4b1868d7a2d1a81a25f36352d46eab3fd573ecc8.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/bootstrap3-editable/css/bootstrap-editable.self-81b0af110f767d5945d1b02207aed54ecfd60088da0f9bcfbcb231287190d584.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/bootstrap-typeahead/bootstrap-typeahead.self-b9084584469de52b4bdf49c26b4c49ae73700c1bb71da8731142dd839498f8e9.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/bootstrap-datepicker/css/datepicker3.self-b2b3c1c515b6c87eeaf19d5c58a51e6104ce7b803a8c3086343d899f20c47adc.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/select2/select2.self-2c0aaa879018db63adc962843cf257bcb611a3c64f40e3dd724519d5a5c2f6a1.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/select2/select2-bootstrap.self-f1961d7fa53f51b63fa4116f67411b4a7181d51ca275dd31c1852465cfa8288d.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.core.self-b64b49a46fb681b81ee0a63c0c6c481b8cdcf651eceae9abfc111f2819401d70.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.theme.self-d50cdd60996033c441d5e7c089850a7316ee5b9c58eed1ed2a84025cd1b9164d.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.accordion.self-6720f5ec7cc7dcf959a06b50b0812f7d49766cba215f61af2ca4dbfc5b22c132.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.menu.self-ac59dd7675e82c1a4375e663dcd4876134ed2be64248fa70c2b5e35a25bbc764.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.autocomplete.self-d38393c00d82ee984c6c097a8220175971c81c0a5a69f26845cce861d00991dc.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.button.self-afa703f141e6447ff8e4973d24af30db097dace3515ec53bd2ffa4ec13b42bac.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.datepicker.self-0f5613d58b1a890ba7cf8c66421066845ac4b7b56b97b4caafb5c9770b54f996.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.resizable.self-eb31d3492c2e7d1ba5afbbc7b678513b28eb04d360bb69dbf024b943ad592780.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.dialog.self-3e2a9e90c6c9c8615c39ef2fdd44869db0fb2ce1b8bb334a33e4d05393f3032f.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.progressbar.self-9d174726e07d4620cc57846989ebca40df2c27dfc0e1fc6978cf40ffbb36bf83.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.selectable.self-063181ab14c2467d15c155317282c916a04084d0b227fb25a90c291124d3a7c4.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.slider.self-ae97f3249cf6f8d848cf4d235dd3e4be0b64a6207c836e489acae5cd1c098477.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.spinner.self-6c1e506f3e2bea8faa460d10f6fe70ae04494c3467f3084d6bdee6ecfdcbee53.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.tabs.self-8f28805af876adcce2d2f560271e2f7e5cef949bc442208528e8c188f0d8ada5.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.tooltip.self-6b0244931edccdda84deb147d08fcaa8ff35a9e25738197b466eb9156288a660.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.base.self-1ef575d792b46fd8c59354430cfcd3ddbb89e9f3c1780a09eac31fdbf8bc0069.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.ui.all.self-b8acdccc4e16da5da0b0378190071977dac2103d59e77837484d512a0aedc37d.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/jquery.tablesorter/css/theme.bootstrap.self-f2e206e5fbe81d5005075ea9aee59b4db3eb260bedbab56c2ed335562f7600ea.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/fullcalendar/fullcalendar.self-d559140f3d98bc014af85c24e484716960b4764a7040dcaa7b4421d2538fae3a.css?body=1" />
+<link rel="stylesheet" media="screen" href="/assets/sweetalert/sweet-alert.self-cc90e3e27376f1aab9eae54c70cba8adef7c29c899b6d2e4a5920b04bb0173bc.css?body=1" />
+  <script src="https://use.fontawesome.com/5fb07bfd2c.js"></script>
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="6ppOJrn03WtZhf57n5z7bWr8mmhIQNVAWBVnAEaIvHrexzyqP14GtoS5yv8ccMEdcfsiNGo0v06geD7GTqXPgw==" />
+</head>
+
+<body>
+<div id="wrap">
+  <div class='navbar navbar-default navbar-fixed-top' role="navigation">
+    <div class='container'>
+      <div class="navbar-header" width="100%">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+          <col-md- class='fa fa-bar'></col-md->
+          <col-md- class='fa fa-bar'></col-md->
+          <col-md- class='fa fa-bar'></col-md->
+        </button>
+        <a class='navbar-brand' href='/'><img class='icon' style='display: inline;' src='/system/teams/icons/000/000/004/original/bamru_border.ico?1389129714'/> BAMRU.net</a>
+      </div>
+      <div class="navbar-collapse collapse">
+      </div>
+    </div>
+  </div>
+
+  
+
+  <div class="container">
+      <div class="alert alert-error">
+        <a class="close" data-dismiss="alert">x</a>
+        You must log in to access this page
+      </div>
+  </div>
+
+  <div class='hdrGap'></div>
+
+  <script src="/assets/jquery/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1"></script>
+<script src="/assets/jquery.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/sessions/form_focus.self-7e16697fbc66d4377aaa2eafe07669bf7b4b58a0eee5f80d5e167a540b28825b.js?body=1"></script>
+<script src="/assets/sessions/all_sessions.self-75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070.js?body=1"></script>
+
+<div class='container'>
+  <div class="row">
+    <div class="col-sm-offset-1">
+      <h2>Please Log In</h2>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-sm-offset-1 col-sm-4">
+
+      <form class="simple_form user form-horizontal" id="new_user" action="/sessions" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="HNl4odbuWy/WKAkmSvWic1xP/6tdR9x3Bz8vggDvhB0ohAotUESA8gsUPaLJGZgDR0hH938ztnn/UnZECML35A==" />
+        <div class="input string optional user_user_name">
+          <label class="string optional" for="user_user_name">Username or Email</label><br/>
+          <input class="string optional" type="text" name="user[user_name]" id="user_user_name"/>
+        </div>
+        <p></p>
+        <div class="input password optional user_password">
+          <label class="string optional" for="user_password">Password</label><br/>
+          <input class="password optional" type="password" name="user[password]" id="user_password"/>
+        </div>
+        <p></p>
+        <div class="input string optional">
+          <label>
+          <span style='vertical-align: 2px; margin-right: 8px;'>Remember me?</span>
+          <input id='user_remember_me' name='user[remember_me]' type='checkbox' value='1'/>
+          </label>
+</div>        <p></p>
+        <div class='form-actions'>
+          <input type="submit" name="commit" value="Log In" class="button" data-disable-with="Log In" />
+          <div style='display: inline-block; float: right; padding-top: 8px;'>
+            <small>
+            <a href="/password/forgot">forgot your password?</a>
+            </small>
+          </div>
+        </div>
+</form>
+
+      </class>
+
+    </div>
+
+  </div>
+
+</div>
+
+</div>
+
+<div id='footer'>
+  <div class='container'>
+    <small>
+      <table width=100%>
+        <tr>
+          <td align='left' width=20%>BAMRU Confidential</td>
+          <td id='footerNav' align='center' width=60% class="visible-sm-and-above">
+            
+          </td>
+          <td align='right' width=20%>
+              <b>sessions#new</b>
+          </td>
+        </tr>
+      </table>
+    </small>
+  </div>
+</div>
+
+<script src="/assets/jquery/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1"></script>
+<script src="/assets/jquery.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/jquery_ujs.self-784a997f6726036b1993eb2217c9cb558e1cbb801c6da88105588c56f13b466a.js?body=1"></script>
+<script src="/assets/jquery.ui.core.self-968fb543604e03165e74ea02f67236875ccbdb58e7aa0be06ee1e432961bd9e2.js?body=1"></script>
+<script src="/assets/jquery.ui.widget.self-5c084871ada1c9a0c49ad4aa97bc0e73b1624cf60bfaeb024a40a41cc7b1f754.js?body=1"></script>
+<script src="/assets/jquery.ui.accordion.self-0d89e6bb2f7b6a7aca1d5036ded77fb6230596ce8edbc239fd76513840e85fcb.js?body=1"></script>
+<script src="/assets/jquery.ui.position.self-743d82391738468b7e62ccdbe54d2d49757f30f233639ef9aa72a76fc4a35707.js?body=1"></script>
+<script src="/assets/jquery.ui.menu.self-9c123caed7efb5e6a3430733e37568c2452d1d8209ca84cb870f15796e766361.js?body=1"></script>
+<script src="/assets/jquery.ui.autocomplete.self-978bd07070a7a61f97dacf43364c2ca76a0d947c4c4a012fe875af3defe4bcdb.js?body=1"></script>
+<script src="/assets/jquery.ui.button.self-b940d41a2e45df62d9974224eebd957324aa89e5916778d281c51681c361720b.js?body=1"></script>
+<script src="/assets/jquery.ui.datepicker.self-02a4cdfbe7753462c9d7a7bf3679a246fc492f8d13b29d72bf240d6a49763f7e.js?body=1"></script>
+<script src="/assets/jquery.ui.mouse.self-1745fd3441b1c395230abd4e06636b57b0953000bad218815e61a16a2aa311aa.js?body=1"></script>
+<script src="/assets/jquery.ui.draggable.self-12df81adfccfafb77f774d0b2340f25158d1a393d3acd6f6c380720541d97ee5.js?body=1"></script>
+<script src="/assets/jquery.ui.resizable.self-f6f17bfde34ca7c034ccdf725835f0946025189ad0be818b3934b24e7006fc50.js?body=1"></script>
+<script src="/assets/jquery.ui.dialog.self-0317436fe124361ced780c23c4a667998bab59831876898f7da602b4401e48c7.js?body=1"></script>
+<script src="/assets/jquery.ui.droppable.self-5d08b71d578ae1fabb8e453ed5c82646c30a16576209e9a67c2a247a85343b73.js?body=1"></script>
+<script src="/assets/jquery.ui.effect.self-febac90f6986b480a8dd00d6bfb6a560516a1610269faa285b9bde10bea826d9.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-blind.self-0ce9741ad0c3e944a6d85c9244ab538f2f5e73aa89b4d9ea8317b37848fc787e.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-bounce.self-808bfcd296c1d10f574733cdc6e23900505190aad158eb8d36e2fbf18e6492aa.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-clip.self-fbd274b2a5f54b06066ef5d1f17e4894065e0f2515d3ba261b4e834bc96b39e1.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-drop.self-cc0bb58389356e6e808cd3d0bd2637fff17c06dff29213e548de0a90c4301cc8.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-explode.self-54a2d6fec754c65c898087190bea34847b91d524aaccd1dd987d0fd60bb05e57.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-fade.self-842b0b75c2a59e4021b207cd17fd3abadd53dadc74205c0a96ef824b0470fbc7.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-fold.self-899b59538c7b72f58c0bf4ae9c1b76e940228109f2a9d5d73604592f2b2d6abe.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-highlight.self-09f6f0983af5c26c41e5c48c6189e462d23c7837d3b8b35cd248e2cf5b348b85.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-pulsate.self-d39544bb6470bdb6293feb5ac242d2db4d0de397788dbba22a8641fb49faf109.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-scale.self-92fc35a84f2784aa302913b6c4d5291e529c66fdd661592e73b37d2d74438173.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-shake.self-1fbe10d7d37ee801590e3b6606ed66ad91a833e87ff781fcda507729638216c4.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-slide.self-10070b0d2ecb31483a85682e7dcb26c3b439a49cc1bdb34e845018ac5875b58c.js?body=1"></script>
+<script src="/assets/jquery.ui.effect-transfer.self-3d7e730d7c7a02eacaff545cf7a82f158b18af2e876414dec83a17bbdd262249.js?body=1"></script>
+<script src="/assets/jquery.ui.progressbar.self-1e917c958b4ccd2e2ad42b2a98f745d30e16a697736fb7b9938853b327bf9682.js?body=1"></script>
+<script src="/assets/jquery.ui.selectable.self-f551fba33463c7b5c371513960feefbef5e99eb96d7375ee34555024904187ba.js?body=1"></script>
+<script src="/assets/jquery.ui.slider.self-9aa36f001ea4beb049426721d5f69a3b3f0c87cddb8c8633e357cb6173a0c438.js?body=1"></script>
+<script src="/assets/jquery.ui.sortable.self-147272ded945fd0c4f2fe7b23b1821ece787f477f10735203921c7adcb7684b8.js?body=1"></script>
+<script src="/assets/jquery.ui.spinner.self-18c5adcd6013f78bd8cee39297e5da6d757e545912f3f2805eee914bb9b2a100.js?body=1"></script>
+<script src="/assets/jquery.ui.tabs.self-53c2310eeec2247ed26ade1d13c512e1652fc3e4d46a0a859ccb7dcb285dffc7.js?body=1"></script>
+<script src="/assets/jquery.ui.tooltip.self-3727527a64ca02641d10994922b36a8eee6716aae3614f52e02cb780db4f309d.js?body=1"></script>
+<script src="/assets/jquery.ui.all.self-ed8f7f43ac99c57d0ec1b06d959937003c242f6cd7405b050ae47d73bf0cc662.js?body=1"></script>
+<script src="/assets/jquery-cookie/jquery.cookie.self-ab2c546089c54b96e0bf71dc2de05bffc5ec2b65aa853339b11bde5b3141d46d.js?body=1"></script>
+<script src="/assets/jquery-cookie.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/modernizr/modernizr.self-74da3245def7569da28115667be6a85a2ad97464abe707c9829c46d8975597bc.js?body=1"></script>
+<script src="/assets/modernizr.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/lodash/lodash.self-1700580d36df557255ba6a9c2de41bd7d93fde86ad8759a69f3bc217e923e881.js?body=1"></script>
+<script src="/assets/lodash.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/select2/select2.self-1c5f606a53ee7fae6f11ffa522c8ccf8076493d9d5b5ae25564bd853679f48d2.js?body=1"></script>
+<script src="/assets/select2.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/bootstrap/collapse.self-2eb697f62b587bb786ff940d82dd4be88cdeeaf13ca128e3da3850c5fcaec301.js?body=1"></script>
+<script src="/assets/bootstrap/tooltip.self-05afb177e08f98997ccfc84fa08a215e4b27d48d5fe4d049080675e9dffd8199.js?body=1"></script>
+<script src="/assets/bootstrap/popover.self-0aa93860b59fe7393f1dd490f54b3cb994f9d6155adffce034d4e14ae361b041.js?body=1"></script>
+<script src="/assets/bootstrap/modal.self-3e78617ade5663314b7ee0ea10375a5b34d59ffbade44939e3f2a4e4ef2019b3.js?body=1"></script>
+<script src="/assets/bootstrap/dropdown.self-561cca1cbaf67474e01e9536f106bad541594860a6df997004591c1c1957a147.js?body=1"></script>
+<script src="/assets/bootstrap/alert.self-742145c5bb847aafdadc6e339be795628f8bc25f177e851f03a8c42278eb0312.js?body=1"></script>
+<script src="/assets/bootstrap/tab.self-5bf7078b682f8b131332eefa46b45fa5eff2eca745fc0d03e2991450888f7c28.js?body=1"></script>
+<script src="/assets/bootstrap/button.self-126ac9bf0e7f2d8568f8da3a00fd5f0fac6eae0946331003370161fbf8d7975e.js?body=1"></script>
+<script src="/assets/bootstrap-switch.self-0c2e63b2afbc77b92a58f9d5ccc36b8554ae4fac509b86073f0c4f5a427aa584.js?body=1"></script>
+<script src="/assets/bootstrap3-editable/js/bootstrap-editable.self-77cb6e5ffb0df1e223bbbb797e1f976ab119736f7969061f3093dbb70933c396.js?body=1"></script>
+<script src="/assets/jquery.tablesorter/jquery.tablesorter.self-7340b1577311583eb0b04cd51fb330cfedb425fc35497d17c05cf76011ec1fb7.js?body=1"></script>
+<script src="/assets/jquery.tablesorter/jquery.tablesorter.widgets.self-58b308444f329b02651339491eb34f0b81d081277bb3f4db4eef18ef0fa6b71e.js?body=1"></script>
+<script src="/assets/jquery.tablesorter.self-75a11da44c802486bc6f65640aa48a730f0f684c5c07a42ba3cd1735eb3fb070.js?body=1"></script>
+<script src="/assets/sweetalert/sweet-alert.self-4e01602e252d160c642bd360f573536aaef4e97deb01b72cb289462f17d1c34c.js?body=1"></script>
+<script src="/assets/sweetalert.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/react/react-with-addons.self-54d02a73cf68f1cb4e6f6b5c642451ac581cc16e3f52b355a9162c38c406250a.js?body=1"></script>
+<script src="/assets/react-bootstrap/react-bootstrap.self-5c90082d81085e837f20c0d428563c58136a06c2c19299e3dd6c82d1101b15b1.js?body=1"></script>
+<script src="/assets/react-bootstrap.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.js?body=1"></script>
+<script src="/assets/radium.self-c063bf09124f8c62eef1ba7dfdffa534997f6758c522851896d0df3a93a7425f.js?body=1"></script>
+<script src="/assets/util/react_popover.self-0e7a4c19d94f0563ee2e537f74bf2bac3134954fe6fc76565fa4993813d2a8cb.js?body=1"></script>
+<script src="/assets/simulate-drag-sort.self-24353f35ae5ac597d9a38afec8bc4a2993b305da3334cbd2ee360e40be3f0df4.js?body=1"></script>
+<script src="/assets/jsn_bundle.self-09045e9f28a27b3d31932939dcd9685f1f1c38e64c319645cf9e51cacb155088.js?body=1"></script>
+<script src="/assets/application.self-db4896311ff7e34819bbc2f3e5b1b3a47e862a917b2a5a3070283429789763f6.js?body=1"></script>
+
+
+</body>
+</html>

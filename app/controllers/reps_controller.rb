@@ -9,4 +9,3 @@ class RepsController < ApplicationController
     render plain: @report.template_content, layout: 'report'
   end
 end
-

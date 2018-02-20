@@ -19,5 +19,3 @@ install_plugin Capistrano::SCM::Git
 
 # custom tasks from `lib/capistrano/tasks'
 Dir.glob('lib/capistrano/tasks/*.cap').each { |r| import r }
-
-
